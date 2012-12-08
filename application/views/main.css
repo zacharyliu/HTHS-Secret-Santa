@@ -1,0 +1,29 @@
+td, tr {
+  -moz-user-select: none;
+  -khtml-user-select: none; 	/*disable select*/
+  -webkit-user-select: none;
+  user-select: none;
+}
+body{
+font-family: Verdana, Arial, Sans-serif;
+}
+
+a.title{font-size:24px;font-style:italic;}
+a.title:link {text-decoration:none;color:#000000}
+a.title:visited {text-decoration:none;color:#000000}
+a.title:hover {text-decoration:underline;color:#000000}
+a.title:active {text-decoration:underline;color:#000000}
+
+a.subheader{font-size:14x;}
+
+p {
+font-size:14px;
+line-height:140%;
+}
+
+/*footer stuff*/
+.footer {font-size: 10px;color:#757575;}
+a.footer:link {text-decoration:none;}
+a.footer:visited {text-decoration:none;}
+a.footer:hover {text-decoration:underline;}
+a.footer:active {text-decoration:underline;}
