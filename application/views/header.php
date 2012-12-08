@@ -21,7 +21,7 @@
 <body>
 <div style="width:100%;height:50px;margin:0;padding:0;">
 
-	<a class="title" href="<?php echo base_url("calendar")?>">Don't Break the Chain</a> 
+	<a class="title" href="<?php echo base_url("index")?>">2012 HTHS Secret Santa</a> 
 
 	<span style="width:auto;margin:0px;padding:0px;float:right;">
 		<a href="<?php echo base_url("calendar/login-register")?>">login/register</a>&nbsp;
