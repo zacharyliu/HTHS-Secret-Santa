@@ -26,8 +26,15 @@ class Secretsanta extends CI_Controller {
 		$this->load->view('header');
 		$this->load->view('index');
 		$this->load->view('footer');
+	
+		$version = 0;
+		$vars['app_disp'] = 1; 
+		$vars['version'] = 'v'.($version/1000).'a';
+		$this->load->view('footer',$vars);	
 	}
 }
+
+
 
 /* End of file secretsanta.php */
 /* Location: ./application/controllers/welcome.php */
