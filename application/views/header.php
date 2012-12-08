@@ -15,7 +15,7 @@
 
 </script>
 
-<link rel="stylesheet" type="text/css" href="/application/views/main.css">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('/css/main.css')?>">
 </head>
 
 <body>
@@ -24,11 +24,11 @@
 	<a class="title" href="<?php echo base_url("index")?>">2012 HTHS Secret Santa</a> 
 
 	<span style="width:auto;margin:0px;padding:0px;float:right;">
-		<a href="<?php echo base_url("calendar/login-register")?>">login/register</a>&nbsp;
+		<a href="<?php echo base_url("login")?>">login/register</a>&nbsp;
 	</span>
 		
 	</br>
-	<a class="subheader" href="<?php echo base_url("calendar/about")?>">About</a> 
+	<a class="subheader" href="<?php echo base_url("about")?>">About</a> 
 	
 </div>
 </body>
