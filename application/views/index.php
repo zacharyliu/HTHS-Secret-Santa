@@ -1,3 +1,1 @@
-<?php
-echo $content;
-?>
+Insert content here

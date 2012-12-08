@@ -1,6 +1,6 @@
 <?php
 
-function render($view, $data = array(), $title = '') {
+function render($view, $data = null, $title = null) {
     $CI = &get_instance();
     
     $CI->load->view('header', array('title' => $title));
