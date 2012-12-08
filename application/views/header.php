@@ -1,5 +1,9 @@
 <html>
 <head>
+<title><?php
+$string = 'HTHS Secret Santa';
+echo (isset($title) && $title != '') ? ($title . ' - ' . $string) : $string;
+?></title>
 
 <script type="text/javascript">
 
