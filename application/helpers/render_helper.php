@@ -1,13 +1,13 @@
 <?php
 
-function render($content, $title = '') {
+function render($view, $data = array(), $title = '') {
     $CI = &get_instance();
     
     $CI->load->view('header', array('title' => $title));
-    $CI->load->view('index', array('content' => $content));
+    $CI->load->view($view, $data);
     
-    $version = 0;
+    file_exists('version.php') && include 'version.php';
     $vars['app_disp'] = 1; 
-    $vars['version'] = 'v'.($version/1000).'a';
+    $vars['version'] = isset($version) ? ('v'.($version/1000).'a') : ('v0000a');
     $CI->load->view('footer',$vars);	
 }

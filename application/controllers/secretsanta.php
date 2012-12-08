@@ -21,7 +21,7 @@ class Secretsanta extends CI_Controller {
 	 */
 	public function index()
 	{
-		render('');
+		render('home');
 	}
 }
 

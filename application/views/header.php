@@ -6,9 +6,8 @@ echo (isset($title) && $title != '') ? ($title . ' - ' . $string) : $string;
 ?></title>
 
 <script type="text/javascript">
-
   var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-36741494-1']);
+  _gaq.push(['_setAccount', 'UA-36741494-2']);
   _gaq.push(['_trackPageview']);
 
   (function() {
@@ -16,7 +15,6 @@ echo (isset($title) && $title != '') ? ($title . ' - ' . $string) : $string;
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
-
 </script>
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('/css/main.css')?>">
