@@ -13,7 +13,8 @@
 }
 
 .dash .digit {
-	font-size: 55pt;
+	padding-top:10px; /*0px*/
+	font-size: 40pt; /*55px*/
 	font-weight: bold;
 	float: left;
 	width: 55px;

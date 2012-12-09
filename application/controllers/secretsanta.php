@@ -26,6 +26,23 @@ class Secretsanta extends CI_Controller {
 		$vars['timer'] = $this->countdown->generate(array('day'=> 21,'month'=> 12,'year'=> 2012,'hour'=> 7,'minute'=> 40,'second'=> 0), 'light'); //target date, light or dark
 		render('index', $vars);
 	}
+	public function survey()
+	{
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+		
+		$this->form_validation->set_rules('pin', 'Pin', 'required|min_length[4]|max_length[4]|matches[pinconf]');
+		$this->form_validation->set_rules('pinconf', 'Pin Confirmation', 'required');
+
+		if ($this->form_validation->run() == FALSE)
+		{
+			render('survey');
+		}
+		else
+		{
+			render('survey_success');
+		}
+	}
 }
 
 
