@@ -1,7 +1,7 @@
 <html>
 
 <head>
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('/css/main.css')?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('/css/main.css')?>"></link>
 <script src="<?php echo base_url('/js/jquery.js')?>"></script>
 <script src="<?php echo base_url('/js/jquery.quovolver.js')?>"></script>
 <script>
@@ -53,10 +53,14 @@
 </div>
 <p>Welcome to the signup page for the 2012 HTHS Secret Santa gift exchange. To register, click <a href="<?php echo base_url('login')?>"> here</a>. Exchange partners will be assigned randomly, and encrypted using an asymetric RSA encryption scheme for privacy, making it impossible for anyone but yourself to know your partner.  To avoid disappointment, please be sure that you are committed to giving a gift before signing up. poopy.</p>
 
+
 <p>Registration ends:</p>
 <p>Partner Assignments:</p>
 <p>Gift Exchange:</p>
 <p>There are currently x santas.</p>
+
+<h1 style="text-align:center;">Time Until Gift Exchange</h1>
+<div style="margin:0 auto 0 auto;"><?php echo $timer;?></div>
 </div>
 </body>
 

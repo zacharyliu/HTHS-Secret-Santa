@@ -11,3 +11,4 @@ function render($view, $data = null, $title = null) {
     $vars['version'] = isset($version) ? ('v'.($version/1000).'a') : ('v0000a');
     $CI->load->view('footer',$vars);	
 }
+?>

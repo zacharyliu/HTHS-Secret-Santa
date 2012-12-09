@@ -48,3 +48,5 @@
     ErrorDocument 404 /index.php
  
 </IfModule>
+
+AddType text/css .css 
