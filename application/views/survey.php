@@ -14,16 +14,26 @@ function validate(evt) {
 </script>
 </head>
 <body>
-<?php echo validation_errors('<p style="color:red;">', '</p>'); ?>
+<?php //echo validation_errors('<p style="color:red;">', '</p>'); ?>
 
 <?php echo form_open('secretsanta/survey'); ?>
 
 <div style="margin: 50px 10px 10px">
-<p>Define a <b>4 digit numerical</b> pin to be used in encrypting your private key.  This ensures you are the only one who can view your partner. </p>
-<form>
-Pin: <input type="text" maxlength="4" name="pin" onkeypress="validate(event)"> <br />
-Pin (Confirm): <input type="text" maxlength="4" name="pinconf" onkeypress="validate(event)"> <br />
+<p><b>Almost there!</b> Just a few steps left.</p>
 <br />
+<p>1. Define a <b>4 digit numerical</b> pin to be used in encrypting your private key.  This ensures you are the only one who can view your partner. </p>
+<form>
+<?php echo form_error('pin'); ?>
+Pin (*): <input type="text" maxlength="4" size="4"name="pin" value="<?php echo set_value('pin');?>" onkeypress="validate(event)"  /> <br />
+<?php echo form_error('pinconf'); ?>
+Confirm Pin (*): <input type="text" maxlength="4" size="4" name="pinconf" onkeypress="validate(event)" /> <br />
+<br />
+<p>2. If you were provided with a group code, enter it below. Groups allow you to exchange gifts with other members of the same group.  Leave this field blank if you don't have a group code or wish to add one later.</p>
+<?php echo form_error('group'); ?>
+Group Code: <input type="text" maxlength="4" size="4" name="group" /> <br />
+<br />
+<br />
+ 
 <input type="submit">
 
 </form>

@@ -31,15 +31,27 @@ class Secretsanta extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		
-		$this->form_validation->set_rules('pin', 'Pin', 'required|min_length[4]|max_length[4]|matches[pinconf]');
-		$this->form_validation->set_rules('pinconf', 'Pin Confirmation', 'required');
-
+		$this->form_validation->set_error_delimiters('<div style="color:red;margin-top:10px;font-size:12px;text-indent:5px">', '</div>');
+		
+		$this->form_validation->set_rules('pin', 'Pin', 'trim|required|min_length[4]|max_length[4]|numeric');
+		$this->form_validation->set_rules('pinconf', 'Pin Confirmation', 'trim|required|min_length[4]|max_length[4]|numeric|matches[pin]');
+		$this->form_validation->set_rules('group', 'Group Code', 'trim|min_length[4]|max_length[4]|alpha_numeric|!is_unique[groups.code]');
+	
 		if ($this->form_validation->run() == FALSE)
 		{
 			render('survey');
 		}
 		else
 		{
+			$this->load->library('crypt');
+			$keys = $this->crypt->create_key(md5($this->session->userdata('email').set_value('pin'))); //[private, public]
+			//var_dump($keys);
+			
+			$id = $this->session->userdata('id');
+			
+			$this->load->model('datamod');
+			$this->datamod->storeKeyPair($id, $keys);
+			
 			render('survey_success');
 		}
 	}

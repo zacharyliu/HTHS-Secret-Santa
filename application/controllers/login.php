@@ -33,16 +33,17 @@ class Login extends CI_Controller {
                     
                     // Load user ID if it exists
                     $this->load->model('datamod');
-                    $user_id = $this->datamod->getPersonId($name, $email);
-                    
+                    $user_id = $this->datamod->getUserId($name, $email);
                     if ($user_id == false) {
-                        $this->datamod->addPerson($name, $email);
-                        $user_id = $this->datamod->getPersonId($name, $email);
+                        $this->datamod->addUser($name, $email);
+                        $user_id = $this->datamod->getUserId($name, $email);
                     }
                     
                     $this->session->set_userdata(array('auth' => 'true', 'name' => $name, 'email' => $email, 'id' => $user_id));
                     
-                    redirect('/');
+					if ($this->datamod->getPrivKey == false)
+						redirect(base_url('secretsanta/survey'));
+					else redirect('/');
                 } else {
                     $this->login_failure('Please log in using a @ctemc.org account.');
                 }
