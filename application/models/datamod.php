@@ -64,7 +64,7 @@ class Datamod extends CI_Model {
 		else return false;
 	}
 	
-	public function checkGroup($code) {
+	public function checkGroup($code) { //checks if the group code exists
 		$this->db->where('code',$code);
 		$query = $this->db->get('groups');
 		if ($query->num_rows() > 0)
