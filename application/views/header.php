@@ -26,7 +26,7 @@ echo (isset($title) && $title != '') ? ($title . ' - ' . $string) : $string;
 
 	<?php
 	$link = 'index'; // url link
-	$src = '/img/secretsanta.jpg'; // image url
+	$src = '/img/secretsanta.png'; // image url
 	echo '<a href="'. $link .'"><img style="border:none;" src="'. $src .'" /></a>';
 	?>
 
