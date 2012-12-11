@@ -30,7 +30,7 @@ echo (isset($title) && $title != '') ? ($title . ' - ' . $string) : $string;
 	echo '<a href="'. $link .'"><img style="border:none;" src="'. $src .'" /></a>';
 	?>
 
-	<span style="width:auto;margin:0px;padding:0px;float:right;">
+	<span style="width:auto;margin:20px;padding:0px;float:right;">
 	<?php 
 	if ($this->session->userdata('auth') == 'true')
 	echo $this->session->userdata('name').'&nbsp;|&nbsp';
@@ -42,10 +42,13 @@ echo (isset($title) && $title != '') ? ($title . ' - ' . $string) : $string;
 	else {
 	echo '<a href="'.base_url("login").'">login/register</a>&nbsp';
     }?>
+	
+	</br>
+	<a class="subheader" href="<?php echo base_url("about")?>">How do I Secret Santa?</a> 
+	
 	</span>
 		
-	</br>
-	<a class="subheader" href="<?php echo base_url("about")?>">About</a> 
+
 	
 </div>
 </body>
