@@ -20,7 +20,7 @@ class Secretsanta extends CI_Controller {
 	public function index()
 	{
 		$this->load->library('countdown');
-		
+		$this->load->model('datamod');
 		$vars['timer'] = $this->countdown->generate(array('day'=> 21,'month'=> 12,'year'=> 2012,'hour'=> 7,'minute'=> 40,'second'=> 0), 'light'); //target date, light or dark
 		render('index', $vars);
 	}
@@ -49,7 +49,7 @@ class Secretsanta extends CI_Controller {
 			
 			$this->load->model('datamod');
 			$this->datamod->storeKeyPair($id, $keys);
-			
+			$this->datamod->addgroup($this->session->userdata('name'),'hths');
 			render('survey_success');
 		}
 	}

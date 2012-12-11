@@ -165,11 +165,14 @@ class Datamod extends CI_Model {
 	
 	public function  drawMemberGroups($person) { //outputs a table of groups a person is part of
 		$groups = $this->getPersonGroups($person); //get all the group codes
-		foreach ($groups as $i) {
-			echo '<tr><td>'.$this->getGroupName($i).'</td>';
-			echo '<td>'.$i.'</td>';
-			echo '<td>'.$this->getNumberMembers($i).'</td></tr>';
+		if ($groups != false) {
+			foreach ($groups as $i) {
+				echo '<tr><td>'.$this->getGroupName($i).'</td>';
+				echo '<td>'.$i.'</td>';
+				echo '<td>'.$this->getNumberMembers($i).'</td></tr>';
+			}
 		}
+		else echo "<tr><td>there doesnt seem to be anything here...</td></tr>";
 	}
 			
 	public function addGroup($person, $code, $name = null) { //add a new group to the master record OR add a person to the group

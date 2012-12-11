@@ -40,7 +40,7 @@ class Profile extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->form_validation->set_error_delimiters('<div style="color:red;margin-top:10px;font-size:12px;text-indent:5px">', '</div>');
-		$this->form_validation->set_rules('group_name', 'Group Name', 'trim|min_length[4]|max_length[50]|alpha_numeric|callback_checkGroupName');
+		$this->form_validation->set_rules('group_name', 'Group Name', 'trim|min_length[4]|max_length[50]|callback_checkGroupName|xss_clean');
 		
 		if ($this->form_validation->run() == FALSE)
 		{

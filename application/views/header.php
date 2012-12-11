@@ -28,11 +28,12 @@ echo (isset($title) && $title != '') ? ($title . ' - ' . $string) : $string;
 
 	<span style="width:auto;margin:0px;padding:0px;float:right;">
 	<?php 
+	if ($this->session->userdata('auth') == 'true')
 	echo $this->session->userdata('name').'&nbsp;|&nbsp';
 	if ($this->session->userdata('admin') == 'true')
 	echo '<a href="'.base_url("admin").'">admin panel</a>&nbsp|&nbsp;';
 	if ($this->session->userdata('auth') == 'true') {
-    echo '<a href="'.base_url("profile").'">profile</a>&nbsp'.'&nbsp;|&nbsp;'.'<a href="'.base_url('login/logout').'">logout</a>';
+    echo '<a href="'.base_url("profile").'">profile</a>'.'&nbsp;|&nbsp;'.'<a href="'.base_url('login/logout').'">logout</a>';
 	}
 	else {
 	echo '<a href="'.base_url("login").'">login/register</a>&nbsp';
