@@ -24,7 +24,11 @@ echo (isset($title) && $title != '') ? ($title . ' - ' . $string) : $string;
 <body>
 <div style="width:100%;height:50px;margin:0;padding:0;">
 
-	<a class="title" href="<?php echo base_url("index")?>">2012 HTHS Secret Santa</a> 
+	<?php
+	$link = 'index'; // url link
+	$src = '/img/secretsanta.png'; // image url
+	echo '<a href="'. $link .'"><img style="border:none;" src="'. $src .'" /></a>';
+	?>
 
 	<span style="width:auto;margin:0px;padding:0px;float:right;">
 	<?php 
