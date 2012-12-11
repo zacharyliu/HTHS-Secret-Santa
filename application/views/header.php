@@ -44,7 +44,7 @@ echo (isset($title) && $title != '') ? ($title . ' - ' . $string) : $string;
     }?>
 	
 	</br>
-	<a class="subheader" href="<?php echo base_url("about")?>">How do I Secret Santa?</a> 
+	<a class="subheader" href="<?php echo base_url("/secretsanta/about")?>">How do I Secret Santa?</a> 
 	
 	</span>
 		

@@ -6,12 +6,19 @@
 
 <body>
 
-<div style="margin-top:25px;margin-left:120px;margin-right:120px;">
+<div style="margin-top:50px;margin-left:30px;margin-right:30px;">
+	<h2> Frequently Asked Questions </h2>
 	
-	
-	<p> 
-	<b>Test</b> 
-	</br>
+	<p> <b> What is HTHS Secret Santa? </b> </br>
+	HTHS Secret Santa is a web app built by and for HTHS students. By using technology to simplify the 
+	<a href="http://www.wikihow.com/Do-a-Secret-Santa"> Secret Santa</a> 
+	process, we are able to ensure that the activity runs smoothly. :)</p>
+
+	<p> <b> What if I want to have a Secret Santa among my own friends? </b> </br>
+	We implemented a unique "groups" feature that allows you to participate in multiple Secret Santas.
+	After you login/register, you are given to option to create your own group that is matched with a
+	generated code. Share this code with your friends. If all of you input the same code, you'll be in the
+	same Secret Santa group. </p>
 	
 </div>
 
