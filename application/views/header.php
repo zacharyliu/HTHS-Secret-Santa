@@ -8,6 +8,7 @@ echo (isset($title) && $title != '') ? ($title . ' - ' . $string) : $string;
 <script type="text/javascript">
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-36741494-2']);
+  _gaq.push(['_setDomainName', 'secretsanta.tk']);
   _gaq.push(['_trackPageview']);
 
   (function() {
@@ -26,7 +27,16 @@ echo (isset($title) && $title != '') ? ($title . ' - ' . $string) : $string;
 	<a class="title" href="<?php echo base_url("index")?>">2012 HTHS Secret Santa</a> 
 
 	<span style="width:auto;margin:0px;padding:0px;float:right;">
-		<a href="<?php echo base_url("login")?>">login/register</a>&nbsp;
+	<?php 
+	echo $this->session->userdata('name').'&nbsp;|&nbsp';
+	if ($this->session->userdata('admin') == 'true')
+	echo '<a href="'.base_url("admin").'">admin panel</a>&nbsp|&nbsp;';
+	if ($this->session->userdata('auth') == 'true') {
+    echo '<a href="'.base_url("profile").'">profile</a>&nbsp'.'&nbsp;|&nbsp;'.'<a href="'.base_url('login/logout').'">logout</a>';
+	}
+	else {
+	echo '<a href="'.base_url("login").'">login/register</a>&nbsp';
+    }?>
 	</span>
 		
 	</br>

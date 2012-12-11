@@ -1,12 +1,12 @@
 <html>
 <head>
-<title>My Form</title>
+<title>Success!</title>
 </head>
 <body>
 
-<h3>Your form was successfully submitted!</h3>
+<h3>Success! Stay tuned for partner drawings!</h3>
 
-<p><?php //echo anchor('secretsanta/survey', 'Try it again!'); ?></p>
+<p><?php echo anchor('profile', 'Profile'); ?></p>
 
 </body>
 </html>

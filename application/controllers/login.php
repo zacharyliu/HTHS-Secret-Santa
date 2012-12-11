@@ -38,10 +38,16 @@ class Login extends CI_Controller {
                         $this->datamod->addUser($name, $email);
                         $user_id = $this->datamod->getUserId($name, $email);
                     }
+					//check for admin permissions
+                    if ($user_data['contact/email'] == 'zliu@ctemc.org' || $user_data['contact/email'] == 'mhsu@ctemc.org' || $user_data['contact/email'] == 'vchen@ctemc.org')
+						$admin = 'true';
+					else
+						$admin = 'false';
+					
+					//set session info
+                    $this->session->set_userdata(array('auth' => 'true', 'admin' => $admin, 'name' => $name, 'email' => $email, 'id' => $user_id));
                     
-                    $this->session->set_userdata(array('auth' => 'true', 'name' => $name, 'email' => $email, 'id' => $user_id));
-                    
-					if ($this->datamod->getPrivKey == false)
+					if ($this->datamod->getPrivKey($user_id) == false)
 						redirect(base_url('secretsanta/survey'));
 					else redirect('/');
                 } else {
@@ -58,8 +64,8 @@ class Login extends CI_Controller {
     }
     
     public function logout() {
-        $this->session->sess_destroy();
-        redirect('/');
+        
+        redirect(base_url('secretsanta/logout'));
     }
     
 }

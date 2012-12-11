@@ -1,5 +1,3 @@
-
-
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Secretsanta extends CI_Controller {
@@ -54,6 +52,11 @@ class Secretsanta extends CI_Controller {
 			
 			render('survey_success');
 		}
+	}
+	
+	public function logout() {
+	$this->session->sess_destroy();
+	render('logout_success');
 	}
 }
 
