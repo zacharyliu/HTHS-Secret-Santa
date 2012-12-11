@@ -20,6 +20,10 @@
 	generated code. Share this code with your friends. If all of you input the same code, you'll be in the
 	same Secret Santa group. </p>
 	
+	<p> <b> What is the price range for gifts? </b> </br>
+	$10-$20. Be thoughtful! Don't get anything too big, or awkwardness ensues. </p>
+	
+	
 </div>
 
 </body>

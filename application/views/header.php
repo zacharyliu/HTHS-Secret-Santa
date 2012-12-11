@@ -30,7 +30,7 @@ echo (isset($title) && $title != '') ? ($title . ' - ' . $string) : $string;
 	echo '<a href="'. $link .'"><img style="border:none;" src="'. $src .'" /></a>';
 	?>
 
-	<span style="width:auto;margin:20px;padding:0px;float:right;">
+	<span style="width:auto;margin:20px;padding:0px;float:right;";text-align:right>
 	<?php 
 	if ($this->session->userdata('auth') == 'true')
 	echo $this->session->userdata('name').'&nbsp;|&nbsp';
