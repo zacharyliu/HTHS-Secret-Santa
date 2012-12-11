@@ -6,7 +6,7 @@
 
 <body>
 
-<div style="margin-top:50px;margin-left:30px;margin-right:30px;">
+<div style="margin-top:auto;margin-left:30px;margin-right:30px;">
 	<h2> Frequently Asked Questions </h2>
 	
 	<p> <b> What is HTHS Secret Santa? </b> </br>
