@@ -7,7 +7,9 @@ class Datamod extends CI_Model {
         // Call the Model constructor
         parent::__construct();
     }
-
+	///
+	//USER FUNCTIONS
+	///
     public function addUser($name, $email) {
         $data = array('name' => $name, 'email' => $email);
         // Check if the user is already in the database
@@ -21,7 +23,9 @@ class Datamod extends CI_Model {
             return false;
         }
     }
-    
+    ///
+	//KEY FUNCTIONS
+	///
     public function getUserId($name, $email) {
         $data = array('name' => $name, 'email' => $email);
         $this->db->where($data);
@@ -36,15 +40,14 @@ class Datamod extends CI_Model {
 		$query = $this->db->get('users');
         $row = $query->row();
 		$privkey = $row->privkey;
-        if ($privkey != "")
+        if ($privkey != '')
 			return $privkey;
 		else
 			return false;
 	}
 	
 	public function getPubKey($id) {
-		$this->db->select('pubkey');
-		$this->db->where('id',$id);
+		$this->db->select('pubkey')->$this->db->where('id',$id);
 		$query = $this->db->get('users');
         $row = $query->row();
 		$pubkey = $row->pubkey;
@@ -58,12 +61,13 @@ class Datamod extends CI_Model {
 	    $data = array('privkey' => $keys[0], 'pubkey' => $keys[1]);
         // Check if privkey is in db
 		if ($this->getPrivKey($id) == false) {
-			$this->db->where('id',$id);
-            $this->db->update('users', $data);
+			$this->db->where('id',$id)->update('users', $data);
 		}
 		else return false;
 	}
-	
+	///
+	//GROUP FUNCTIONS
+	///
 	public function checkGroup($code) { //checks if the group code exists
 		$this->db->where('code',$code);
 		$query = $this->db->get('groups');
@@ -159,21 +163,21 @@ class Datamod extends CI_Model {
 			return false;
 	}
 	
-	public function getNumberMembers($code) {//returns the number of members in a group based on code
+	public function countMembers($code) {//returns the number of members in a group based on code
 		$members = $this->getMembers($code);
 		if ($members)
 			return count($members);
 		else return 0;
 	}
 	
-	public function getNumberPersonGroups($person) { //returns the number of groups a person is currently a part of
+	public function countPersonGroups($person) { //returns the number of groups a person is currently a part of
 		$groups = $this->getPersonGroups($person);
 		if ($groups)
 			return count($groups);
 		else return 0;
 	}
 	
-	public function getNumberUsers() { //returns the number of registered users
+	public function countUsers() { //returns the number of registered users
 		$query = $this->db->get('users');
 		return $query->num_rows();
 	}
@@ -184,7 +188,7 @@ class Datamod extends CI_Model {
 			foreach ($groups as $i) {
 				echo '<tr><td>'.$this->getGroupName($i).'</td>';
 				echo '<td>'.$i.'</td>';
-				echo '<td>'.$this->getNumberMembers($i).'</td>';
+				echo '<td>'.$this->countMembers($i).'</td>';
 				echo '<td>**********</td>';
 				echo '<td><a href="'.base_url('profile').'/rm/'.$i.'">[leave]</a>&nbsp;';
 				echo '</tr>';

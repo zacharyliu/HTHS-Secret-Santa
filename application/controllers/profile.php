@@ -8,7 +8,11 @@ class Profile extends CI_Controller {
             header('HTTP/1.1 403 Forbidden');
             exit();
         }
-        $this->load->model('datamod');
+		$this->load->model('datamod');//load the database model
+		
+		if (!$this->datamod->getPrivKey($this->session->userdata('id')))
+			redirect('secretsanta/survey');
+        
     }
 	
 	public function index()
@@ -18,7 +22,7 @@ class Profile extends CI_Controller {
 		render('profile');
 	}
 	
-	public function groupcode() {
+	public function groupcode() { //form helper for adding group by code
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		
@@ -36,7 +40,7 @@ class Profile extends CI_Controller {
 			render('profile',$vars);
 		}
 	}
-	public function addgroup() {
+	public function addgroup() { //form helper for creating new group
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->form_validation->set_error_delimiters('<div style="color:red;margin-top:10px;font-size:12px;text-indent:5px">', '</div>');
@@ -61,7 +65,30 @@ class Profile extends CI_Controller {
 		}
 		else $this->session->set_flashdata('result','<div style="color:red;margin:10px 0 10px 0;font-size:12px;text-indent:5px">Poopy. Something went wrong. :( </div>');
 		redirect('profile');
+	}
+	
+	public function resetPin() { //reset pin form
+		$this->load->helper('form');
+		$this->load->library('form_validation');
 		
+		$this->form_validation->set_error_delimiters('<div style="color:red;margin-top:10px;font-size:12px;text-indent:5px">', '</div>');
+		
+		$this->form_validation->set_rules('pin', 'Pin', 'trim|required|min_length[4]|max_length[4]|numeric');
+		$this->form_validation->set_rules('pinconf', 'Pin Confirmation', 'trim|required|min_length[4]|max_length[4]|numeric|matches[pin]');
+	
+		if ($this->form_validation->run() == FALSE)
+		{
+			render('survey',array('reset'=>1));
+		}
+		else
+		{
+			$this->load->library('crypt');
+			$keys = $this->crypt->create_key(md5($this->session->userdata('email').set_value('pin'))); //key array: [private, public]
+			
+			$this->datamod->storeKeyPair($this->session->userdata('id'), $keys);
+			$this->session->set_flashdata('result','<div style="color:green;margin:10px 0 10px 0;font-size:12px;text-indent:5px">Pin reset to <b>'.set_value('pin').'</b>. Don\'t forget it again!</div>');
+			redirect('profile');
+		}
 	}
 		
 	//
@@ -94,7 +121,7 @@ class Profile extends CI_Controller {
 	}
 	
 	public function numGroups() {
-		$num = $this->datamod->getNumberPersonGroups($this->session->userdata('name'));
+		$num = $this->datamod->countPersonGroups($this->session->userdata('name'));
 		if ($num <5)
 			return true;
 		else {

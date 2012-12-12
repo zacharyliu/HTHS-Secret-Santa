@@ -16,12 +16,19 @@ function validate(evt) {
 <body>
 <?php //echo validation_errors('<p style="color:red;">', '</p>'); ?>
 
-<?php echo form_open('secretsanta/survey'); ?>
+
 
 <div style="margin: 50px 10px 10px">
-<p><b>Almost there!</b> Just a few steps left.</p>
-<br />
-<p>1. Define a <b>4 digit numerical</b> pin to be used in encrypting your private key.  This ensures you are the only one who can view your partner. <b>DO NOT</b> forget this. There is no way to recover your pin.</p>
+<?php if (isset($reset) && $reset == 1 ) { //if reset pin
+		echo form_open('profile/resetPin');
+		echo '<h3>Reset my Pin</h3><p>Fill out this form to reset your encryption pin.  <b>DO NOT</b> forget this, since it is required to view your partner name. You can reset your pin until the day registration closes.</p>';
+	}
+	else { 
+		echo form_open('secretsanta/survey');
+		echo '<h3>Almost there!</h3><p>Just a few steps left.</p>
+		<br />
+				<p>1. Define a <b>4 digit numerical</b> pin to be used in encryption.  This must be set to participate and ensures you are the only one who can view your partner. <b>DO NOT</b> forget this. We do not store your pin, so it cannot be recovered.</p>';
+		}?>
 <form>
 <?php echo form_error('pin'); ?>
 Pin (*): <input type="text" maxlength="4" size="4"name="pin" value="<?php echo set_value('pin');?>" onkeypress="validate(event)"  /> <br />
