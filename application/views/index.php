@@ -51,12 +51,16 @@
 	<p>Sometimes a small thing you do can mean everything in another person's life."</p>
 </blockquote>
 </div>
-<p>Welcome to the signup page for the 2012 HTHS Secret Santa gift exchange. To register, click <a href="<?php echo base_url('login')?>"> here</a>. Exchange partners will be assigned randomly, and encrypted using an asymetric RSA encryption scheme for privacy, making it impossible for anyone but yourself to know your partner.  To avoid disappointment, please be sure that you are committed to giving a gift before signing up. poopy.</p>
+<p>Welcome to the signup page for the 2012 HTHS Secret Santa gift exchange. To register, 
+click <a href="<?php echo base_url('login')?>"> here</a>. Exchange partners will be assigned 
+randomly, and encrypted using an asymetric RSA encryption scheme for privacy, making it impossible 
+for anyone but yourself to know your partner.  To avoid disappointment, please be sure that you are 
+committed to giving a gift before signing up.</p>
 
 
-<p>Registration ends: Friday, 12/14</p>
-<p>Partner Assignments: Friday, 12/14</p>
-<p>Gift Exchange:</p> Friday, 12/21
+<p>Registration ends: <i> Friday, 12/14 </i> </p>
+<p>Partner Assignments: <i> Friday, 12/14 </i> </p>
+<p>Gift Exchange: <i> Friday, 12/21 </i> </p>
 <p>There are currently xxxxxxx</p>
 
 <h1 style="text-align:center;">Time Until Gift Exchange</h1>
