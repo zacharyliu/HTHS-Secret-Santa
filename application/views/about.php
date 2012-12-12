@@ -39,11 +39,15 @@
 	ends). </i> Otherwise, don't back out of your commitments, or there will be repercussions. Don't be that guy.
 	</p> 
 
-	
 	<span style="text-align:center">
 	<h3> <i> Enjoy! </i> </h3>
 	</span>
 
+	<h2> Special thanks... </h2>
+	<p>
+	<li> <b> Web Dev: </b> Matt Hsu; Zachary Liu; Vincent Chen </li>
+	<li> <b> Logo Design: </b> Kevin Herviou 
+	</p>
 	
 </div>
 
