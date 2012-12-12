@@ -15,7 +15,10 @@ a.title:hover {text-decoration:underline;color:#000000}
 a.title:active {text-decoration:underline;color:#000000}
 
 a.subheader{font-size:14x;}
-
+a.subheader:link {text-decoration:none;color:#000000}
+a.subheader:visited {text-decoration:none;color:#000000}
+a.subheader:hover {text-decoration:underline;color:#000000}
+a.subheader:active {text-decoration:underline;color:#000000}
 p {
 font-size:14px;
 line-height:140%;

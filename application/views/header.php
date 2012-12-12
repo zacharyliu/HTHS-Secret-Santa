@@ -40,7 +40,7 @@ echo (isset($title) && $title != '') ? ($title . ' - ' . $string) : $string;
     echo '<a href="'.base_url("profile").'">profile</a>'.'&nbsp;|&nbsp;'.'<a href="'.base_url('login/logout').'">logout</a>';
 	}
 	else {
-	echo '<a href="'.base_url("login").'">login/register</a>&nbsp';
+	echo '<a class="subheader" href="'.base_url("login").'">login/register</a>&nbsp';
     }?>
 	
 	</br>
