@@ -3,11 +3,15 @@
 <?php //echo validation_errors('<p style="color:red;">', '</p>'); ?>
 <div style="margin: 50px 10px 10px">
 <h3>My groups </h3>
+<?php if (($this->session->flashdata('result'))) echo $this->session->flashdata('result');?>
+<p>You are currently in <?php echo $this->datamod->getNumberPersonGroups($this->session->userdata('name'));?>/5 groups.</p>
 <table style="font-size:12px;" border="1" cellpadding="5">
 	<tr style="font-weight:bold;">
 		<th>Group Name</th>
 		<th>Group Code</th>
 		<th># of Members</th>
+		<th>Partner</th>
+		<th>Options</th>
 	</tr>
 	<?php echo $this->datamod->drawMemberGroups($this->session->userdata('name'));?>
 </table>

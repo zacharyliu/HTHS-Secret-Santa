@@ -39,7 +39,7 @@ class Secretsanta extends CI_Controller {
 		
 		$this->form_validation->set_rules('pin', 'Pin', 'trim|required|min_length[4]|max_length[4]|numeric');
 		$this->form_validation->set_rules('pinconf', 'Pin Confirmation', 'trim|required|min_length[4]|max_length[4]|numeric|matches[pin]');
-		$this->form_validation->set_rules('group', 'Group Code', 'trim|min_length[4]|max_length[4]|alpha_numeric|!is_unique[groups.code]');
+		//$this->form_validation->set_rules('group', 'Group Code', 'trim|min_length[4]|max_length[4]|alpha_numeric');
 	
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -65,7 +65,6 @@ class Secretsanta extends CI_Controller {
 	render('logout_success');
 	}
 }
-
 
 
 /* End of file secretsanta.php */

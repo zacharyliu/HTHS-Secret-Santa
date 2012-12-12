@@ -61,7 +61,7 @@ committed to giving a gift before signing up.</p>
 <p>Registration ends: <i> Friday, 12/14 </i> </p>
 <p>Partner Assignments: <i> Friday, 12/14 </i> </p>
 <p>Gift Exchange: <i> Friday, 12/21 </i> </p>
-<p>There are currently xxxxxxx</p>
+<p>There are currently <?php echo $this->datamod->getNumberUsers();?> secret santas.</p>
 
 <h1 style="text-align:center;">Time Until Gift Exchange</h1>
 <div style="margin:0 auto 0 auto;"><?php echo $timer;?></div>

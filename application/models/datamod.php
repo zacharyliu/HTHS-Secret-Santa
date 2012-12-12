@@ -158,9 +158,24 @@ class Datamod extends CI_Model {
 		else
 			return false;
 	}
+	
 	public function getNumberMembers($code) {//returns the number of members in a group based on code
 		$members = $this->getMembers($code);
-		return count($members);
+		if ($members)
+			return count($members);
+		else return 0;
+	}
+	
+	public function getNumberPersonGroups($person) { //returns the number of groups a person is currently a part of
+		$groups = $this->getPersonGroups($person);
+		if ($groups)
+			return count($groups);
+		else return 0;
+	}
+	
+	public function getNumberUsers() { //returns the number of registered users
+		$query = $this->db->get('users');
+		return $query->num_rows();
 	}
 	
 	public function  drawMemberGroups($person) { //outputs a table of groups a person is part of
@@ -169,7 +184,10 @@ class Datamod extends CI_Model {
 			foreach ($groups as $i) {
 				echo '<tr><td>'.$this->getGroupName($i).'</td>';
 				echo '<td>'.$i.'</td>';
-				echo '<td>'.$this->getNumberMembers($i).'</td></tr>';
+				echo '<td>'.$this->getNumberMembers($i).'</td>';
+				echo '<td>**********</td>';
+				echo '<td><a href="'.base_url('profile').'/rm/'.$i.'">[leave]</a>&nbsp;';
+				echo '</tr>';
 			}
 		}
 		else echo "<tr><td>there doesnt seem to be anything here...</td></tr>";
@@ -198,5 +216,47 @@ class Datamod extends CI_Model {
 		$this->db->where('name',$person);
         $this->db->update('users', array('groups'=>$groups));
 		$query = $this->db->get('users');//clear select query
+	}
+	
+	public function removeFromGroup($person,$code) { //removes a person from a group based on group code
+		//remove membership on person's group list
+		$groups = $this->getPersonGroups($person); //get list of groups
+		$index = array_search($code,$groups);
+		if ($index !== false){
+			unset($groups[$index]);//rm
+			$groups= array_values($groups); //fix the index
+			//send stuff to the database
+			$groups = implode(',',$groups);
+			$this->db->where('name',$person)->update('users', array('groups'=>$groups));
+			//remove membership on master groups table
+			$members = $this->getMembers($code);
+			$index = array_search($person,$members);
+
+			if ($index !== false){
+				unset($members[$index]);//rm
+				if(!empty($members))
+					$members = array_values($members); //fix the index
+				//send stuff to the database
+				$members = implode(',',$members);
+				$this->db->where('code',$code)->update('groups', array('members'=>$members));
+			}
+			else return false;
+			//delete group if empty
+			$this->deleteGroup($code);
+			return true;
+		}
+		else return false;
+	}
+	
+	public function deleteGroup($code) { //deletes a group from the master group table based on code
+		if ($this->checkGroup($code)) {
+		//check if the group is empty
+		$this->db->select('members')->where('code',$code);
+		$query = $this->db->get('groups');
+        $row = $query->row();
+		$members = $row->members;
+		if ($members == '')
+			$this->db->where('code',$code)->delete('groups');
+		}
 	}
 }
