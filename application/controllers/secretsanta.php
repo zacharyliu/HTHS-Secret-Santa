@@ -24,6 +24,12 @@ class Secretsanta extends CI_Controller {
 		$vars['timer'] = $this->countdown->generate(array('day'=> 21,'month'=> 12,'year'=> 2012,'hour'=> 7,'minute'=> 40,'second'=> 0), 'light'); //target date, light or dark
 		render('index', $vars);
 	}
+	
+	public function about()
+	{
+		render('about');
+	}
+	
 	public function survey()
 	{
 		$this->load->helper('form');

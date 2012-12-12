@@ -4,7 +4,7 @@
 $string = 'HTHS Secret Santa';
 echo (isset($title) && $title != '') ? ($title . ' - ' . $string) : $string;
 ?></title>
-
+<script src="<?php echo base_url('/js/jquery.js')?>"></script>
 <script type="text/javascript">
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-36741494-2']);
@@ -16,6 +16,31 @@ echo (isset($title) && $title != '') ? ($title . ' - ' . $string) : $string;
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
+  
+  
+$(document).ready(function(){
+   // Change the image of hoverable images
+   $(".imgHoverable").hover( function() {
+       var hoverImg = HoverImgOf($(this).attr("src"));
+       $(this).attr("src", hoverImg);
+     }, function() {
+       var normalImg = NormalImgOf($(this).attr("src"));
+       $(this).attr("src", normalImg);
+     }
+   );
+});
+
+function HoverImgOf(filename)
+{
+   var re = new RegExp("(.+)\\.(gif|png|jpg)", "g");
+   return filename.replace(re, "$1_hover.$2");
+}
+function NormalImgOf(filename)
+{
+   var re = new RegExp("(.+)_hover\\.(gif|png|jpg)", "g");
+   return filename.replace(re, "$1.$2");
+}
+	
 </script>
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('/css/main.css')?>">
@@ -24,24 +49,30 @@ echo (isset($title) && $title != '') ? ($title . ' - ' . $string) : $string;
 <body>
 <div style="width:100%;height:50px;margin:0;padding:0;">
 
-	<a class="title" href="<?php echo base_url("index")?>">2012 HTHS Secret Santa</a> 
+	<?php
+	$link = 'index'; // url link
+	$src = '/img/secretsanta.png'; // image url
+	echo '<a  href="'. $link .'"><img class=imgHoverable style="border:none;" src="'. $src .'" /></a>';
+	?>
 
-	<span style="width:auto;margin:0px;padding:0px;float:right;">
+	<span style="width:auto;margin:20px;padding:0px;float:right;text-align:right">
 	<?php 
 	if ($this->session->userdata('auth') == 'true')
-	echo $this->session->userdata('name').'&nbsp;|&nbsp';
+	echo '<span class="subheader">'.$this->session->userdata('name').'&nbsp;|&nbsp</span>';
 	if ($this->session->userdata('admin') == 'true')
-	echo '<a href="'.base_url("admin").'">admin panel</a>&nbsp|&nbsp;';
+	echo '<a class="subheader" href="'.base_url("admin").'">admin panel</a>&nbsp|&nbsp;';
 	if ($this->session->userdata('auth') == 'true') {
-    echo '<a href="'.base_url("profile").'">profile</a>'.'&nbsp;|&nbsp;'.'<a href="'.base_url('login/logout').'">logout</a>';
+    echo '<a class="subheader" href="'.base_url("profile").'">profile</a>'.'&nbsp;|&nbsp;'.'<a class="subheader" href="'.base_url('login/logout').'">logout</a>';
 	}
 	else {
-	echo '<a href="'.base_url("login").'">login/register</a>&nbsp';
+	echo '<a class="subheader" href="'.base_url("login").'">Login/Register</a>&nbsp';
     }?>
-	</span>
-		
-	</br>
-	<a class="subheader" href="<?php echo base_url("about")?>">About</a> 
 	
+	</br>
+	<a class="subheader" href="<?php echo base_url("/secretsanta/about")?>">How do I Secret Santa?</a> 
+	
+	</span>
 </div>
+</br> </br>  </br>
+<hr>
 </body>
