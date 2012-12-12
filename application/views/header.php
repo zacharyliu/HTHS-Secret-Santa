@@ -58,7 +58,7 @@ function NormalImgOf(filename)
 	<span style="width:auto;margin:20px;padding:0px;float:right;text-align:right">
 	<?php 
 	if ($this->session->userdata('auth') == 'true')
-	echo $this->session->userdata('name').'&nbsp;|&nbsp';
+	echo '<span class="subheader"'.$this->session->userdata('name').'&nbsp;|&nbsp</span>';
 	if ($this->session->userdata('admin') == 'true')
 	echo '<a class=subheader href="'.base_url("admin").'">admin panel</a>&nbsp|&nbsp;';
 	if ($this->session->userdata('auth') == 'true') {
