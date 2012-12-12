@@ -14,7 +14,7 @@ a.title:visited {text-decoration:none;color:#000000}
 a.title:hover {text-decoration:underline;color:#000000}
 a.title:active {text-decoration:underline;color:#000000}
 
-a.subheader{font-size:14x;}
+a.subheader{font-size:20px;font-family:Adobe Caslon Pro}
 a.subheader:link {text-decoration:none;color:#000000}
 a.subheader:visited {text-decoration:none;color:#000000}
 a.subheader:hover {text-decoration:underline;color:#000000}
