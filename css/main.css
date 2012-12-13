@@ -4,6 +4,14 @@
   -webkit-user-select: none;
   user-select: none;
 }*/
+table{
+border-collapse:collapse;
+}
+
+table, th, td{
+border: 1px solid black;
+}
+
 body{
 font-family: Verdana, Arial, Sans-serif;
 }

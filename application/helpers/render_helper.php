@@ -7,7 +7,7 @@ function render($view, $data = null, $title = null) {
     $CI->load->view($view, $data);
     
     file_exists('version.php') && include 'version.php';
-    $vars['app_disp'] = 1; 
+    //$vars['app_disp'] = 1; 
     $vars['version'] = isset($version) ? ('v'.($version/1000).'a') : ('v0000a');
     $CI->load->view('footer',$vars);	
 }

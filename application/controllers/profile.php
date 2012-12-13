@@ -35,9 +35,9 @@ class Profile extends CI_Controller {
 		}
 		else
 		{
-			$vars['success_code'] = true;
 			$this->datamod->addGroup($this->session->userdata('name'), set_value('group'));
-			render('profile',$vars);
+			$this->session->set_flashdata('result','<div style="color:green;margin:10px 0 10px 0;font-size:12px;text-indent:5px">You have successfully joined the group <b>'.$this->datamod->getGroupName(set_value('group')).'</b>!</div>');//groupCode
+			redirect('profile');
 		}
 	}
 	public function addgroup() { //form helper for creating new group
@@ -52,19 +52,23 @@ class Profile extends CI_Controller {
 		}
 		else
 		{
-			$vars['success_name'] = true;
 			$this->datamod->genGroup($this->session->userdata('name'), set_value('group_name'));
-			render('profile',$vars);
+			$this->session->set_flashdata('result','<div style="color:green;margin:10px 0 10px;font-size:12px;text-indent:5px">You have successfully created the group <b>'.set_value('group_name').'</b>! Your group code is <b>'.$this->datamod->getGroupCode(set_value('group_name')).'</b>. Keep this in a safe place.</div>');//groupcreate
+			redirect('profile');
 		}
 	}
 	public function rm($code) { //remove membership from group
 		$groupname=$this->datamod->getGroupName($code);
 		
-		if ($this->datamod->removeFromGroup($this->session->userdata('name'),$this->uri->segment(3))) {
+		if ($this->datamod->leaveable($code)) {
+			if ($this->datamod->removeFromGroup($this->session->userdata('name'),$this->uri->segment(3)))
 			$this->session->set_flashdata('result','<div style="color:green;margin:10px 0 10px 0;font-size:12px;text-indent:5px">Successfully left the group <b>'.$groupname.'</b>.</div>');
+			
+			else $this->session->set_flashdata('result','<div style="color:red;margin:10px 0 10px 0;font-size:12px;text-indent:5px">Poopy. Something went wrong. :( </div>');
 		}
-		else $this->session->set_flashdata('result','<div style="color:red;margin:10px 0 10px 0;font-size:12px;text-indent:5px">Poopy. Something went wrong. :( </div>');
+		else $this->session->set_flashdata('result','<div style="color:red;margin:10px 0 10px 0;font-size:12px;text-indent:5px">Error: You can\'t leave this group! </div>');
 		redirect('profile');
+		
 	}
 	
 	public function resetPin() { //reset pin form

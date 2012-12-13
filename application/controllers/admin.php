@@ -9,6 +9,7 @@ class Admin extends CI_Controller {
 			echo '<p>You must be logged in as an admin to view this page.</p> <br />';
 			echo anchor('/', 'Bye bye.');
             //redirect('/');
+			exit;
         }
     }
     

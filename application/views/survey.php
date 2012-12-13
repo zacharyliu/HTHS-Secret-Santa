@@ -31,9 +31,9 @@ function validate(evt) {
 		}?>
 <form>
 <?php echo form_error('pin'); ?>
-Pin (*): <input type="text" maxlength="4" size="4"name="pin" value="<?php echo set_value('pin');?>" onkeypress="validate(event)"  /> <br />
+Pin (*): <input type="password" maxlength="4" size="4"name="pin" value="<?php echo set_value('pin');?>" onkeypress="validate(event)"  /> <br />
 <?php echo form_error('pinconf'); ?>
-Confirm Pin (*): <input type="text" maxlength="4" size="4" name="pinconf" onkeypress="validate(event)" /> <br />
+Confirm Pin (*): <input type="password" maxlength="4" size="4" name="pinconf" onkeypress="validate(event)" /> <br />
 <br />
 <!--<p>2. If you were provided with a group code, enter it below. Groups allow you to exchange gifts with other members of the same group.  Leave this field blank if you don't have a group code or wish to add one later.</p>
 <?php //echo form_error('group'); ?>

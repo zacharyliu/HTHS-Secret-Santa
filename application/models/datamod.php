@@ -7,9 +7,9 @@ class Datamod extends CI_Model {
         // Call the Model constructor
         parent::__construct();
     }
-	///
+	/////////////////////////
 	//USER FUNCTIONS
-	///
+	/////////////////////////
     public function addUser($name, $email) {
         $data = array('name' => $name, 'email' => $email);
         // Check if the user is already in the database
@@ -23,9 +23,15 @@ class Datamod extends CI_Model {
             return false;
         }
     }
-    ///
+	
+	public function countUsers() { //returns the number of registered users
+		$query = $this->db->get('users');
+		return $query->num_rows();
+	}
+	
+    ////////////////////////////
 	//KEY FUNCTIONS
-	///
+	////////////////////////////////
     public function getUserId($name, $email) {
         $data = array('name' => $name, 'email' => $email);
         $this->db->where($data);
@@ -65,9 +71,10 @@ class Datamod extends CI_Model {
 		}
 		else return false;
 	}
-	///
+
+	///////////////////////////////////////
 	//GROUP FUNCTIONS
-	///
+	/////////////////////////////////////
 	public function checkGroup($code) { //checks if the group code exists
 		$this->db->where('code',$code);
 		$query = $this->db->get('groups');
@@ -107,6 +114,13 @@ class Datamod extends CI_Model {
 			return $code;
 		else return false;
 	}
+	
+	public function getGroupDescription($code) { //gets description of the group by code
+		$this->db->select('description')->where('code',$code);
+		$query = $this->db->get('groups');
+        $row = $query->row();
+		return $row->description;
+		}
 
 	public function inGroup($person, $code) { //checks if a person is already in group
 		$this->db->select('groups')->where('name',$person);
@@ -140,6 +154,7 @@ class Datamod extends CI_Model {
 			$str .= $charset[mt_rand(0, $count-1)];
 		return $str;
 	}
+	
 	public function getMembers($code) {//get array of members who belong to a group
 		$this->db->select('members');
 		$this->db->where('code',$code);
@@ -152,8 +167,7 @@ class Datamod extends CI_Model {
 			return false;
 	}
 	public function getPersonGroups($person) {//get array of groups a person belongs to (input: persons name)
-		$this->db->select('groups');
-		$this->db->where('name',$person);
+		$this->db->select('groups')->where('name',$person);
 		$query = $this->db->get('users');
         $row = $query->row();
 		$groups = $row->groups;
@@ -177,20 +191,37 @@ class Datamod extends CI_Model {
 		else return 0;
 	}
 	
-	public function countUsers() { //returns the number of registered users
-		$query = $this->db->get('users');
-		return $query->num_rows();
+	public function deleteable($code) {//returns if a group is deleteable or 'special'
+		$this->db->select('deleteable')->where('code',$code);
+		$query = $this->db->get('groups');
+        $row = $query->row();
+		$delete = $row->deleteable;
+        if ($delete)
+			return true;
+		else
+			return false;
 	}
 	
+	public function leaveable($code) {//returns if a group is leaveable
+		$this->db->select('leaveable')->where('code',$code);
+		$query = $this->db->get('groups');
+        $row = $query->row();
+		$leave = $row->leaveable;
+        if ($leave)
+			return true;
+		else
+			return false;
+	}
 	public function  drawMemberGroups($person) { //outputs a table of groups a person is part of
 		$groups = $this->getPersonGroups($person); //get all the group codes
 		if ($groups != false) {
 			foreach ($groups as $i) {
-				echo '<tr><td>'.$this->getGroupName($i).'</td>';
+				echo '<tr><td><i>'.$this->getGroupName($i).'</i></td>';
 				echo '<td>'.$i.'</td>';
 				echo '<td>'.$this->countMembers($i).'</td>';
 				echo '<td>**********</td>';
-				echo '<td><a href="'.base_url('profile').'/rm/'.$i.'">[leave]</a>&nbsp;';
+				echo '<td>'.$this->getGroupDescription($i).'</td>';
+				echo ($this->leaveable($i) ? '<td><a href="'.base_url('profile').'/rm/'.$i.'">[leave]</a>&nbsp;</td>' : "<td></td>");
 				echo '</tr>';
 			}
 		}
@@ -223,38 +254,42 @@ class Datamod extends CI_Model {
 	}
 	
 	public function removeFromGroup($person,$code) { //removes a person from a group based on group code
-		//remove membership on person's group list
-		$groups = $this->getPersonGroups($person); //get list of groups
-		$index = array_search($code,$groups);
-		if ($index !== false){
-			unset($groups[$index]);//rm
-			$groups= array_values($groups); //fix the index
-			//send stuff to the database
-			$groups = implode(',',$groups);
-			$this->db->where('name',$person)->update('users', array('groups'=>$groups));
-			//remove membership on master groups table
-			$members = $this->getMembers($code);
-			$index = array_search($person,$members);
-
+		//check if the group is leaveable
+		if ($this->leaveable($code)) {
+			//remove membership on person's group list
+			$groups = $this->getPersonGroups($person); //get list of groups
+			$index = array_search($code,$groups);
 			if ($index !== false){
-				unset($members[$index]);//rm
-				if(!empty($members))
-					$members = array_values($members); //fix the index
+				unset($groups[$index]);//rm
+				$groups= array_values($groups); //fix the index
 				//send stuff to the database
-				$members = implode(',',$members);
-				$this->db->where('code',$code)->update('groups', array('members'=>$members));
+				$groups = implode(',',$groups);
+				$this->db->where('name',$person)->update('users', array('groups'=>$groups));
+				//remove membership on master groups table
+				$members = $this->getMembers($code);
+				$index = array_search($person,$members);
+
+				if ($index !== false){
+					unset($members[$index]);//rm
+					if(!empty($members))
+						$members = array_values($members); //fix the index
+					//send stuff to the database
+					$members = implode(',',$members);
+					$this->db->where('code',$code)->update('groups', array('members'=>$members));
+				}
+				else return false;
+				//delete group if empty
+				$this->deleteGroup($code);
+				return true;
 			}
 			else return false;
-			//delete group if empty
-			$this->deleteGroup($code);
-			return true;
 		}
 		else return false;
 	}
 	
 	public function deleteGroup($code) { //deletes a group from the master group table based on code
-		if ($this->checkGroup($code)) {
-		//check if the group is empty
+		if ($this->checkGroup($code) && $this->deleteable($code)) {
+		//check if the group is empty and not a special group
 		$this->db->select('members')->where('code',$code);
 		$query = $this->db->get('groups');
         $row = $query->row();
