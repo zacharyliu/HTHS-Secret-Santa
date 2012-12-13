@@ -45,7 +45,7 @@ class Datamod extends CI_Model {
 		$this->db->where('id',$id);
 		$query = $this->db->get('users');
         $row = $query->row();
-		$privkey = $row->privkey;
+		$privkey = (isset($row->privkey) ? $row->privkey : '');
         if ($privkey != '')
 			return $privkey;
 		else
@@ -56,7 +56,7 @@ class Datamod extends CI_Model {
 		$this->db->select('pubkey')->$this->db->where('id',$id);
 		$query = $this->db->get('users');
         $row = $query->row();
-		$pubkey = $row->pubkey;
+		$pubkey = (isset($row->pubkey) ? $row->pubkey : '');
         if ($pubkey != "")
 			return $pubkey;
 		else

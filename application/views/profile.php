@@ -6,7 +6,7 @@
 <?php if (($this->session->flashdata('result'))) echo $this->session->flashdata('result'); //if there's a result message, show it?>
 <br />
 <h3>My groups </h3>
-<p>You are currently in <?php echo $this->datamod->countPersonGroups($this->session->userdata('name'));?>/5 groups.</p>
+<p>You are currently in <?php echo ($this->datamod->countPersonGroups($this->session->userdata('name')));?>/5 groups.</p>
 <table style="font-size:12px;" border="1" cellpadding="5">
 	<tr style="font-weight:bold;">
 		<th>Group Name</th>

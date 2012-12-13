@@ -5,16 +5,19 @@ class Admin extends CI_Controller {
     public function __construct() {
         parent::__construct();
         if (!$this->session->userdata('admin')) {
-            //$this->session->set_flashdata('notice', 'You must be logged in as an admin to view this page.');
-			echo '<p>You must be logged in as an admin to view this page.</p> <br />';
-			echo anchor('/', 'Bye bye.');
-            //redirect('/');
-			exit;
+        header('HTTP/1.1 403 Forbidden');
+        exit();
         }
+		$this->load->model('datamod');//load the data model
+		$this->load->model('adminmod');//load the admin model
     }
     
     public function index() {
 	echo 'lol. good one';
     }
-    
+	
+	public function addHTHS() {
+	$this->adminmod->addGroupHTHS();
+    }
 }
+?>
