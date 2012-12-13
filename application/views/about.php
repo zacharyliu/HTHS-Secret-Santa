@@ -25,7 +25,7 @@
 	same Secret Santa group. </p>
 	
 	<p> <b> What is the price range for gifts? </b> </br>
-	$10-$20. Be thoughtful! Don't get anything too expensive or it will be awkward. </p>
+	For the school-wide HTHS group, the limit is $5. Be creative! For any private group, the recommended limit is $5-$15. Be thoughtful! Don't get anything too expensive or it will be awkward. </p>
 	
 	<p> <b> What kinds of gifts should I  buy? </b> </br> 
 	You can buy anything that you think that your exchange partner would enjoy! Just make sure that it's
