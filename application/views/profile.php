@@ -14,7 +14,20 @@
 		<th>Description</th>
 		<th>Options</th>
 	</tr>
-	<?php echo $this->datamod->drawMemberGroups($this->session->userdata('name')); //draw group and partner data?>
+	<?php
+        if ($groups != false) {
+            foreach ($groups as $group) {
+                echo '<tr><td><i>'.$group->name.'</i></td>';
+                echo '<td>'.$group->code.'</td>';
+                echo '<td>'.$this->datamod->countMembers($group->code).'</td>';
+                echo '<td>'.$this->datamod->getPair($group->code,$this->session->userdata('name')).'</td>';
+                echo '<td>'.$group->description.'</td>';
+                echo ($group->leaveable ? '<td><a href="'.base_url('profile').'/rm/'.$group->code.'">[leave]</a>&nbsp;</td>' : "<td></td>");
+                echo '</tr>';
+            }
+        }
+        else echo "<tr><td colspan='4'>there doesnt seem to be anything here...</td></tr>";
+    ?>
 </table>
 <div style="padding: 3px 0 0 0;font-size:9px">*Groups must have at least 5 members to be valid.</div></div>
 

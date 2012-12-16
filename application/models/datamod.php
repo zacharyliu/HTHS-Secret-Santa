@@ -222,21 +222,6 @@ class Datamod extends CI_Model {
 		else
 			return false;
 	}
-	public function  drawMemberGroups($person) { //outputs a table of groups a person is part of
-		$groups = $this->getPersonGroups($person); //get all the group codes
-		if ($groups != false) {
-			foreach ($groups as $i) {
-				echo '<tr><td><i>'.$this->getGroupName($i).'</i></td>';
-				echo '<td>'.$i.'</td>';
-				echo '<td>'.$this->countMembers($i).'</td>';
-				echo '<td>'.$this->getPair($i,$person).'</td>';
-				echo '<td>'.$this->getGroupDescription($i).'</td>';
-				echo ($this->leaveable($i) ? '<td><a href="'.base_url('profile').'/rm/'.$i.'">[leave]</a>&nbsp;</td>' : "<td></td>");
-				echo '</tr>';
-			}
-		}
-		else echo "<tr><td>there doesnt seem to be anything here...</td></tr>";
-	}
 			
 	public function addGroup($person, $code, $name = null) { //add a new group to the master record OR add a person to the group
 		//if the group doesnt exist in master table, add it
@@ -322,5 +307,21 @@ class Datamod extends CI_Model {
         } else {
             return true;
         }
+    }
+    
+    public function groupInfo($code) {
+        return $this->db->from('groups')->where('code', $code)->get()->result();
+    }
+    
+    public function groupInfoMultiple($codeArray) {
+        foreach ($codeArray as $code) {
+            $this->db->or_where('code', $code);
+        }
+        $groups = $this->db->from('groups')->get()->result();
+        $output = array();
+        foreach ($groups as $group) {
+            $output[$group->code] = $group; 
+        }
+        return $output;
     }
 }

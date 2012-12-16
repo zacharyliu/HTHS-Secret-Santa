@@ -19,7 +19,9 @@ class Profile extends CI_Controller {
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-		render('profile');
+		$groups = $this->datamod->getPersonGroups($this->session->userdata('name')); //get all the group codes
+		$groupsInfo = $this->datamod->groupInfoMultiple($groups);
+		render('profile', array('groups' => $groupsInfo));
 	}
 	
 	public function groupcode() { //form helper for adding group by code
