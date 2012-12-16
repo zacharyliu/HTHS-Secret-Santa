@@ -14,14 +14,20 @@ class Profile extends CI_Controller {
 			redirect('secretsanta/survey');
         
     }
+    
+    private function render($data = array()) {
+        $groups = $this->datamod->getPersonGroups($this->session->userdata('name')); //get all the group codes
+        $groupsInfo = $this->datamod->groupInfoMultiple($groups);
+        $data = array_merge(array('groups' => $groupsInfo), $data);
+        render('profile', $data);
+        
+    }
 	
 	public function index()
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-		$groups = $this->datamod->getPersonGroups($this->session->userdata('name')); //get all the group codes
-		$groupsInfo = $this->datamod->groupInfoMultiple($groups);
-		render('profile', array('groups' => $groupsInfo));
+		$this->render();
 	}
 	
 	public function groupcode() { //form helper for adding group by code
@@ -33,7 +39,7 @@ class Profile extends CI_Controller {
 		
 		if ($this->form_validation->run() == FALSE)
 		{
-			render('profile');
+			$this->render();
 		}
 		else
 		{
@@ -50,7 +56,7 @@ class Profile extends CI_Controller {
 		
 		if ($this->form_validation->run() == FALSE)
 		{
-			render('profile');
+			$this->render();
 		}
 		else
 		{
