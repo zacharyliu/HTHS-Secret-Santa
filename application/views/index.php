@@ -53,13 +53,11 @@
 </div>
 <p>Welcome to the signup page for the 2012 HTHS Secret Santa gift exchange. To register, 
 click <a href="<?php echo base_url('login')?>"> here</a>. Exchange partners will be assigned 
-randomly, and encrypted using an asymetric RSA encryption scheme for privacy, making it impossible 
-for anyone but yourself to know your partner.  To avoid disappointment, please be sure that you are 
-committed to giving a gift before signing up.</p>
+randomly. To avoid disappointment, please be sure that you are committed to giving a gift before signing up.</p>
 
 <br />
-<p>Registration ends: <i> Friday, 12/14 </i> </p>
-<p>Partner Assignments: <i> Saturday, 12/15 </i> </p>
+<p>Registration ends: <i> Saturday, 12/15 (11:59)</i> </p>
+<p>Partner Assignments: <i> Sunday, 12/16 (12-9AM) </i> </p>
 <p>Gift Exchange: <i> Friday, 12/21 </i> </p>
 <p>There are currently <?php echo $this->datamod->countUsers();?> secret santas.</p>
 
