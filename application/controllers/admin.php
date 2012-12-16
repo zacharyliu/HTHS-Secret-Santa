@@ -13,7 +13,13 @@ class Admin extends CI_Controller {
     }
     
     public function index() {
-        render('admin/index');
+        $groups = $this->datamod->listGroups();
+        foreach ($groups as &$group) {
+            $group->memberCount = $this->datamod->countMembers($group->code);
+            $group->paired = $this->datamod->paired($group->code);
+        }
+        $data = array('groups' => $groups);
+        render('admin/index', $data);
     }
 	
 	public function addHTHS() {
