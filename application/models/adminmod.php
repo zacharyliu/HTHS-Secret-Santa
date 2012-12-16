@@ -21,20 +21,26 @@ class Adminmod extends CI_Model {
 	}
 	
 	public function pairCustom($code) {
-		if ($this->datamod->countMembers($code) >= 5)
-		{
-			$members = $this->datamod->getMembers($code);
-			shuffle($members); //randomize array
-			$total = count($members);
-			var_dump($members);
-			for ($i=0; $i<$total; $i++) {
-				$give = $members[$i];
-				$receive = ($i+1<$total ? $members[$i+1] : $members[0]); //loop back to first element if i+1 > total # of members
-				$this->addPair($code,$give,$receive);
-			}
-			return true;
-		}
-		else return false;
+	    $this->db->from('pairs');
+        $this->db->where('group', $code);
+        $query = $this->db->get();
+        if ($query->num_rows() == 0) {
+    		if ($this->datamod->countMembers($code) >= 5)
+    		{
+    			$members = $this->datamod->getMembers($code);
+    			shuffle($members); //randomize array
+    			$total = count($members);
+    			//var_dump($members);
+    			for ($i=0; $i<$total; $i++) {
+    				$give = $members[$i];
+    				$receive = ($i+1<$total ? $members[$i+1] : $members[0]); //loop back to first element if i+1 > total # of members
+    				$this->addPair($code,$give,$receive);
+    			}
+    			return $total;
+    		}
+		  else return false;
+        }
+        else return false;
 	}
 
 	public function addPair($code,$give,$receive) {

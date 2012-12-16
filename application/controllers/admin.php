@@ -13,15 +13,27 @@ class Admin extends CI_Controller {
     }
     
     public function index() {
-	echo 'lol. good one';
+        render('admin/index');
     }
 	
 	public function addHTHS() {
-	$this->adminmod->addGroupHTHS();
+        $this->adminmod->addGroupHTHS();
     }
 	
-	public function pairCustom($code) {
-	$this->adminmod->pairCustom($code);
+	public function pairCustom() {
+        if (isset($_POST['code']) && $_POST['code'] != '') {
+            $result = $this->adminmod->pairCustom($_POST['code']);
+            if ($result) {
+                $this->session->set_flashdata('admin', 'Successfully ran pairing on code ' . $_POST['code'] . ' with ' . $result . ' members');
+                redirect('admin');
+            } else {
+                $this->session->set_flashdata('admin', 'Error: pairing failed. Perhaps the code is invalid, or pairing was already run.');
+                redirect('admin');
+            }
+        } else {
+            $this->session->set_flashdata('admin', 'Error: no code specified');
+        }
+        //
 	}
 }
 ?>
