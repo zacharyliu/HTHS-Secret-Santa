@@ -1,5 +1,3 @@
-<html>
-<body>
 <?php //echo validation_errors('<p style="color:red;">', '</p>'); ?>
 
 <div style="margin: 50px 10px 10px">
@@ -57,4 +55,4 @@ Group Name: <input type="text" maxlength="50" size="50" name="group_name" /> <sp
 <h3>Settings</h3>
 <p><a href="<?php echo base_url('profile/resetPin');?>">Reset</a> my pin.</p>
 <br />
-</html>
+
