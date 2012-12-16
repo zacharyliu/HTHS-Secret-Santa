@@ -53,7 +53,7 @@ class Datamod extends CI_Model {
 	}
 	
 	public function getPubKey($id) {
-		$this->db->select('pubkey')->$this->db->where('id',$id);
+		$this->db->select('pubkey')->where('id',$id);
 		$query = $this->db->get('users');
         $row = $query->row();
 		$pubkey = (isset($row->pubkey) ? $row->pubkey : '');
@@ -156,8 +156,7 @@ class Datamod extends CI_Model {
 	}
 	
 	public function getMembers($code) {//get array of members who belong to a group
-		$this->db->select('members');
-		$this->db->where('code',$code);
+		$this->db->select('members')->where('code',$code);
 		$query = $this->db->get('groups');
         $row = $query->row();
 		$members = $row->members;
@@ -175,6 +174,17 @@ class Datamod extends CI_Model {
 			return explode(",",$groups);
 		else
 			return false;
+	}
+	
+	public function getPair($code,$person) { //get a person's partner for a group
+		$this->db->select('receive');
+		$query = $this->db->get_where('pairs',array('group' => $code, 'give' => $person));
+		if ($query->num_rows() > 0) {
+			$row = $query->row();
+			$receive = $row->receive;
+			return $receive;
+		}
+		else return '[pending]';
 	}
 	
 	public function countMembers($code) {//returns the number of members in a group based on code
@@ -202,7 +212,7 @@ class Datamod extends CI_Model {
 			return false;
 	}
 	
-	public function leaveable($code) {//returns if a group is leaveable
+	public function leaveable($code) {//returns if a group is leaveable (combine, redundant)
 		$this->db->select('leaveable')->where('code',$code);
 		$query = $this->db->get('groups');
         $row = $query->row();
@@ -219,7 +229,7 @@ class Datamod extends CI_Model {
 				echo '<tr><td><i>'.$this->getGroupName($i).'</i></td>';
 				echo '<td>'.$i.'</td>';
 				echo '<td>'.$this->countMembers($i).'</td>';
-				echo '<td>**********</td>';
+				echo '<td>'.$this->getPair($i,$person).'</td>';
 				echo '<td>'.$this->getGroupDescription($i).'</td>';
 				echo ($this->leaveable($i) ? '<td><a href="'.base_url('profile').'/rm/'.$i.'">[leave]</a>&nbsp;</td>' : "<td></td>");
 				echo '</tr>';
@@ -247,8 +257,7 @@ class Datamod extends CI_Model {
 			$groups[]=$code; //add person to array
 		}
 		$groups = implode(',',$groups);
-		$this->db->select('groups');
-		$this->db->where('name',$person);
+		$this->db->select('groups')->where('name',$person);
         $this->db->update('users', array('groups'=>$groups));
 		$query = $this->db->get('users');//clear select query
 	}
@@ -256,6 +265,7 @@ class Datamod extends CI_Model {
 	public function removeFromGroup($person,$code) { //removes a person from a group based on group code
 		//check if the group is leaveable
 		if ($this->leaveable($code)) {
+			
 			//remove membership on person's group list
 			$groups = $this->getPersonGroups($person); //get list of groups
 			$index = array_search($code,$groups);
@@ -265,10 +275,10 @@ class Datamod extends CI_Model {
 				//send stuff to the database
 				$groups = implode(',',$groups);
 				$this->db->where('name',$person)->update('users', array('groups'=>$groups));
+				
 				//remove membership on master groups table
 				$members = $this->getMembers($code);
 				$index = array_search($person,$members);
-
 				if ($index !== false){
 					unset($members[$index]);//rm
 					if(!empty($members))

@@ -19,5 +19,9 @@ class Admin extends CI_Controller {
 	public function addHTHS() {
 	$this->adminmod->addGroupHTHS();
     }
+	
+	public function pairCustom($code) {
+	$this->adminmod->pairCustom($code);
+	}
 }
 ?>

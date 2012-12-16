@@ -98,7 +98,7 @@ class Profile extends CI_Controller {
 	//
 	//form validation callback functions
 	//
-	public function checkGroup($str) {
+	public function checkGroup($str) { //checks entered group code to make sure it exists
 		if ($this->datamod->checkGroup($str) == true) {//if exists
 			return true;
 		}
@@ -108,7 +108,7 @@ class Profile extends CI_Controller {
 		}
 	}
 	
-	public function checkGroupName($str) {
+	public function checkGroupName($str) { //checks entered group name to make sure it exists
 		if ($this->datamod->checkGroupName($str) == true) {//if exists
 			$this->form_validation->set_message('checkGroupName', 'The %s you entered already exists. :(');
 			return false;//unusable
@@ -116,7 +116,7 @@ class Profile extends CI_Controller {
 		else return true;
 	}
 	
-	public function inGroup($str) {
+	public function inGroup($str) { //checks if user is in inputted group
 		if ($this->datamod->inGroup($this->session->userdata('name'),$str) == true) {//if ingroup
 			$this->form_validation->set_message('inGroup', 'You are already in the group <b>'.$this->datamod->getGroupName(set_value('group')).'</b>.');
 			return false;
@@ -124,7 +124,7 @@ class Profile extends CI_Controller {
 		else return true;
 	}
 	
-	public function numGroups() {
+	public function numGroups() { //verifies that user is in less than threshold groups
 		$num = $this->datamod->countPersonGroups($this->session->userdata('name'));
 		if ($num <5)
 			return true;
