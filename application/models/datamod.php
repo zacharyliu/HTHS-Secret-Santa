@@ -308,4 +308,19 @@ class Datamod extends CI_Model {
 			$this->db->where('code',$code)->delete('groups');
 		}
 	}
+    
+    public function listGroups() {
+        $this->db->from('groups');
+        return $this->db->get()->result();
+    }
+    
+    public function paired($code) {
+        $this->db->from('pairs');
+        $query = $this->db->where('group', $code);
+        if ($query->get()->num_rows() == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
