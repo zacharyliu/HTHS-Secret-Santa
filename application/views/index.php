@@ -53,7 +53,8 @@
 </div>
 <p>Welcome to the signup page for the 2012 HTHS Secret Santa gift exchange. To register, 
 click <a href="<?php echo base_url('login')?>"> here</a>. Exchange partners will be assigned 
-randomly. To avoid disappointment, please be sure that you are committed to giving a gift before signing up.</p>
+randomly, and encrypted using the industry-standard ROT-26 encryption scheme (alternately known as the 2-ROT-13) for privacy.  To avoid disappointment, please be sure that you are 
+committed to giving a gift before signing up.</p>
 
 <br />
 <p>Registration ends: <i> Saturday, 12/15 (11:59)</i> </p>
