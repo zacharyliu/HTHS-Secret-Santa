@@ -33,7 +33,7 @@ class Admin extends CI_Controller {
                 $this->session->set_flashdata('admin', 'Successfully ran pairing on code ' . $_POST['code'] . ' with ' . $result . ' members');
                 redirect('admin');
             } else {
-                $this->session->set_flashdata('admin', 'Error: pairing failed. Perhaps the code is invalid, or pairing was already run.');
+                $this->session->set_flashdata('admin', 'Error: pairing failed. Invalid code, group does not meet rquirements, or pairing was already run.');
                 redirect('admin');
             }
         } else {

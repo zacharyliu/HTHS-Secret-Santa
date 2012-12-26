@@ -73,7 +73,7 @@ class Datamod extends CI_Model {
 	}
 
 	///////////////////////////////////////
-	//GROUP FUNCTIONS
+	//GROUP FUNCTIONS - Counting and Checking
 	/////////////////////////////////////
 	public function checkGroup($code) { //checks if the group code exists
 		$this->db->where('code',$code);
@@ -93,35 +93,6 @@ class Datamod extends CI_Model {
 			return false;
 	}
 	
-	public function getGroupName($code) { //gets a group name from code
-		$this->db->select('name')->where('code',$code);
-		$query = $this->db->get('groups');
-        $row = $query->row();
-		$name= $row->name;
-		//echo $this->db->last_query();
-		if ($name != '')
-			return $name;
-		else return false;
-	}
-	
-	public function getGroupCode($name) { //gets a group code from name
-		$this->db->select('code')->where('name',$name);
-		$query = $this->db->get('groups');
-        $row = $query->row();
-		$code = $row->code;
-		//echo $this->db->last_query();
-		if ($code != '')
-			return $code;
-		else return false;
-	}
-	
-	public function getGroupDescription($code) { //gets description of the group by code
-		$this->db->select('description')->where('code',$code);
-		$query = $this->db->get('groups');
-        $row = $query->row();
-		return $row->description;
-		}
-
 	public function inGroup($person, $code) { //checks if a person is already in group
 		$this->db->select('groups')->where('name',$person);
 		$query = $this->db->get('users');
@@ -135,57 +106,6 @@ class Datamod extends CI_Model {
 		}
 		else return false;
     }
-	public function genGroup($person, $name) { //generates a group code and pushes it to the addgroup function
-		$code = $this->randstring(4);
-		$this->db->where('code',$code);
-		$query = $this->db->get('groups');
-		while ($query->num_rows() > 0) {
-			$code = $this->randstring(4);
-			$this->db->where('code',$str);
-			$query = $this->db->get('groups');
-		}
-		$this->addGroup($person, $code, $name);
-	}
-	
-	public function randstring($len, $charset='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789') {
-	    $str = '';
-		$count = strlen($charset);
-		while ($len--)
-			$str .= $charset[mt_rand(0, $count-1)];
-		return $str;
-	}
-	
-	public function getMembers($code) {//get array of members who belong to a group
-		$this->db->select('members')->where('code',$code);
-		$query = $this->db->get('groups');
-        $row = $query->row();
-		$members = $row->members;
-        if ($members != "")
-			return explode(",",$members);
-		else
-			return false;
-	}
-	public function getPersonGroups($person) {//get array of groups a person belongs to (input: persons name)
-		$this->db->select('groups')->where('name',$person);
-		$query = $this->db->get('users');
-        $row = $query->row();
-		$groups = $row->groups;
-        if ($groups != "")
-			return explode(",",$groups);
-		else
-			return false;
-	}
-	
-	public function getPair($code,$person) { //get a person's partner for a group
-		$this->db->select('receive');
-		$query = $this->db->get_where('pairs',array('group' => $code, 'give' => $person));
-		if ($query->num_rows() > 0) {
-			$row = $query->row();
-			$receive = $row->receive;
-			return $receive;
-		}
-		else return '[pending]';
-	}
 	
 	public function countMembers($code) {//returns the number of members in a group based on code
 		$members = $this->getMembers($code);
@@ -221,6 +141,93 @@ class Datamod extends CI_Model {
 			return true;
 		else
 			return false;
+	}
+	
+	///////////////////////////////////////
+	//GROUP FUNCTIONS - Info Retrieval
+	/////////////////////////////////////
+	public function getGroupName($code) { //gets a group name from code
+		$this->db->select('name')->where('code',$code);
+		$query = $this->db->get('groups');
+        $row = $query->row();
+		$name= $row->name;
+		//echo $this->db->last_query();
+		if ($name != '')
+			return $name;
+		else return false;
+	}
+	
+	public function getGroupCode($name) { //gets a group code from name
+		$this->db->select('code')->where('name',$name);
+		$query = $this->db->get('groups');
+        $row = $query->row();
+		$code = $row->code;
+		//echo $this->db->last_query();
+		if ($code != '')
+			return $code;
+		else return false;
+	}
+	
+	public function getGroupDescription($code) { //gets description of the group by code
+		$this->db->select('description')->where('code',$code);
+		$query = $this->db->get('groups');
+        $row = $query->row();
+		return $row->description;
+	}
+
+	public function getMembers($code) {//get array of members who belong to a group
+		$this->db->select('members')->where('code',$code);
+		$query = $this->db->get('groups');
+        $row = $query->row();
+		$members = $row->members;
+        if ($members != "")
+			return explode(",",$members);
+		else
+			return false;
+	}
+	public function getPersonGroups($person) {//get array of groups a person belongs to (input: persons name)
+		$this->db->select('groups')->where('name',$person);
+		$query = $this->db->get('users');
+        $row = $query->row();
+		$groups = $row->groups;
+        if ($groups != "")
+			return explode(",",$groups);
+		else
+			return false;
+	}
+	
+	public function getPair($code,$person) { //get a person's partner for a group
+		$this->db->select('receive');
+		$query = $this->db->get_where('pairs',array('group' => $code, 'give' => $person));
+		if ($query->num_rows() > 0) {
+			$row = $query->row();
+			$receive = $row->receive;
+			return $receive;
+		}
+		else return '[pending]';
+	}
+	
+	///////////////////////////////////////
+	//GROUP FUNCTIONS - Group  Creation
+	/////////////////////////////////////
+	public function genGroup($person, $name) { //generates a group code and pushes it to the addgroup function
+		$code = $this->randstring(4);
+		$this->db->where('code',$code);
+		$query = $this->db->get('groups');
+		while ($query->num_rows() > 0) {
+			$code = $this->randstring(4);
+			$this->db->where('code',$str);
+			$query = $this->db->get('groups');
+		}
+		$this->addGroup($person, $code, $name);
+	}
+	
+	public function randstring($len, $charset='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789') {
+	    $str = '';
+		$count = strlen($charset);
+		while ($len--)
+			$str .= $charset[mt_rand(0, $count-1)];
+		return $str;
 	}
 			
 	public function addGroup($person, $code, $name = null) { //add a new group to the master record OR add a person to the group
@@ -294,12 +301,12 @@ class Datamod extends CI_Model {
 		}
 	}
     
-    public function listGroups() {
+    public function listGroups() {//returns all groups
         $this->db->from('groups');
         return $this->db->get()->result();
     }
     
-    public function paired($code) {
+    public function paired($code) {//checks if pairing was already run for a group
         $this->db->from('pairs');
         $query = $this->db->where('group', $code);
         if ($query->get()->num_rows() == 0) {
@@ -309,11 +316,11 @@ class Datamod extends CI_Model {
         }
     }
     
-    public function groupInfo($code) {
+    public function groupInfo($code) {//gets a row in the table groups
         return $this->db->from('groups')->where('code', $code)->get()->result();
     }
     
-    public function groupInfoMultiple($codeArray) {
+    public function groupInfoMultiple($codeArray) {//gets multiple rows in the table groups
         foreach ($codeArray as $code) {
             $this->db->or_where('code', $code);
         }

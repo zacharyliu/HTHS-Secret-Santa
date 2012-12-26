@@ -21,7 +21,7 @@ class Secretsanta extends CI_Controller {
 	{
 		$this->load->library('countdown');
 		$this->load->model('datamod');
-		$vars['timer'] = $this->countdown->generate(array('day'=> 21,'month'=> 12,'year'=> 2012,'hour'=> 7,'minute'=> 40,'second'=> 0), 'light'); //target date, light or dark
+		$vars['timer'] = $this->countdown->generate(array('day'=> 20,'month'=> 12,'year'=> 2013,'hour'=> 7,'minute'=> 40,'second'=> 0), 'light'); //target date, light or dark
 		render('index', $vars);
 	}
 	

@@ -45,7 +45,7 @@
 
 	<h2> Special thanks... </h2>
 	<p>
-	<li> <b> Web Dev: </b> Matt Hsu; Zachary Liu; Vincent Chen </li>
+	<li> <b> Web Dev: </b> Vincent Chen; Matt Hsu; Zachary Liu </li>
 	<li> <b> Logo Design: </b> Kevin Herviou 
 	</p>
 	

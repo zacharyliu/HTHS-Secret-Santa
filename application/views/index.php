@@ -51,15 +51,17 @@
 	<p>Sometimes a small thing you do can mean everything in another person's life."</p>
 </blockquote>
 </div>
+<p><b>Thanks to everyone for making the 2012 HTHS Secret Santa so successful! Please take the time to fill out this brief <a href="https://docs.google.com/a/ctemc.org/spreadsheet/viewform?formkey=dF9sRUlSUm1mdFdnV3VEWFE3YUhEeXc6MQ#gid=0">survey</a>, so that we know what to improve for next year!</b></p>
+<br />
 <p>Welcome to the signup page for the 2012 HTHS Secret Santa gift exchange. To register, 
 click <a href="<?php echo base_url('login')?>"> here</a>. Exchange partners will be assigned 
 randomly, and encrypted using the industry-standard ROT-26 encryption scheme (alternately known as the 2-ROT-13) for privacy.  To avoid disappointment, please be sure that you are 
 committed to giving a gift before signing up.</p>
 
 <br />
-<p>Registration ends: <i> Saturday, 12/15 (11:59)</i> </p>
-<p>Partner Assignments: <i> Sunday, 12/16 (12-9AM) </i> </p>
-<p>Gift Exchange: <i> Friday, 12/21 </i> </p>
+<p>Registration ends: <i> TBD</i> </p>
+<p>Partner Assignments: <i> TBD </i> </p>
+<p>Gift Exchange: <i> Friday, 12/20 </i> </p>
 <p>There are currently <?php echo $this->datamod->countUsers();?> secret santas.</p>
 
 <h1 style="text-align:center;">Time Until Gift Exchange</h1>
