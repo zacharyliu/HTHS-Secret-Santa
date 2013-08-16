@@ -1,8 +1,12 @@
-<?php if (!defined('BASEPATH')) {exit('No direct script access allowed');}
+<?php if (!defined('BASEPATH')) {
+    exit('No direct script access allowed');
+}
 
-class Login extends CI_Controller {
-    
-    public function index() {
+class Login extends CI_Controller
+{
+
+    public function index()
+    {
         require(APPPATH . 'classes/openid.php');
         $openid = new LightOpenID($_SERVER['HTTP_HOST']);
         if (!$openid->mode) {
@@ -20,17 +24,17 @@ class Login extends CI_Controller {
                 $this->login_failure('Authentication failed, try logging in again.');
             } else {
                 // Authentication was successful
-                
+
                 // Get user attributes:
                 $user_data = $openid->getAttributes();
-                
+
                 // Check to make sure that the user is logging in using a @ctemc.org account:
                 if (preg_match('/^[^@]+@ctemc\.org$/', $user_data['contact/email'])) {
                     //echo "Welcome, " . " " . $user_data['namePerson/first'] . ' ' . $user_data['namePerson/last'];
-                    
+
                     $name = $user_data['namePerson/first'] . ' ' . $user_data['namePerson/last'];
                     $email = $user_data['contact/email'];
-                    
+
                     // Load user ID if it exists
                     $this->load->model('datamod');
                     $user_id = $this->datamod->getUserId($name, $email);
@@ -38,34 +42,36 @@ class Login extends CI_Controller {
                         $this->datamod->addUser($name, $email);
                         $user_id = $this->datamod->getUserId($name, $email);
                     }
-					//check for admin permissions
+                    //check for admin permissions
                     if ($user_data['contact/email'] == 'zliu@ctemc.org' || $user_data['contact/email'] == 'mhsu@ctemc.org' || $user_data['contact/email'] == 'vchen@ctemc.org')
-						$admin = 'true';
-					else
-						$admin = 'false';
-					
-					//set session info
+                        $admin = 'true';
+                    else
+                        $admin = 'false';
+
+                    //set session info
                     $this->session->set_userdata(array('auth' => 'true', 'admin' => $admin, 'name' => $name, 'email' => $email, 'id' => $user_id));
-                    
-					if ($this->datamod->getPrivKey($user_id) == false)
-						redirect(base_url('secretsanta/survey'));
-					else redirect('/');
+
+                    if ($this->datamod->getPrivKey($user_id) == false)
+                        redirect(base_url('secretsanta/survey'));
+                    else redirect('/');
                 } else {
                     $this->login_failure('Please log in using a @ctemc.org account.');
                 }
-                
+
             }
         }
     }
-    
-    private function login_failure($message = 'Login failure') {
+
+    private function login_failure($message = 'Login failure')
+    {
         echo $message;
         exit();
     }
-    
-    public function logout() {
-        
+
+    public function logout()
+    {
+
         redirect(base_url('secretsanta/logout'));
     }
-    
+
 }

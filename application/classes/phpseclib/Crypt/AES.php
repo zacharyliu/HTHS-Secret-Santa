@@ -42,10 +42,10 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -131,7 +131,8 @@ define('CRYPT_AES_MODE_MCRYPT', 2);
  * @access  public
  * @package Crypt_AES
  */
-class Crypt_AES extends Crypt_Rijndael {
+class Crypt_AES extends Crypt_Rijndael
+{
     /**
      * mcrypt resource for encryption
      *
@@ -178,7 +179,7 @@ class Crypt_AES extends Crypt_Rijndael {
      */
     function Crypt_AES($mode = CRYPT_AES_MODE_CBC)
     {
-        if ( !defined('CRYPT_AES_MODE') ) {
+        if (!defined('CRYPT_AES_MODE')) {
             switch (true) {
                 case extension_loaded('mcrypt') && in_array('rijndael-128', mcrypt_list_algorithms()):
                     define('CRYPT_AES_MODE', CRYPT_AES_MODE_MCRYPT);
@@ -188,7 +189,7 @@ class Crypt_AES extends Crypt_Rijndael {
             }
         }
 
-        switch ( CRYPT_AES_MODE ) {
+        switch (CRYPT_AES_MODE) {
             case CRYPT_AES_MODE_MCRYPT:
                 switch ($mode) {
                     case CRYPT_AES_MODE_ECB:
@@ -270,7 +271,7 @@ class Crypt_AES extends Crypt_Rijndael {
     function setIV($iv)
     {
         parent::setIV($iv);
-        if ( CRYPT_AES_MODE == CRYPT_AES_MODE_MCRYPT ) {
+        if (CRYPT_AES_MODE == CRYPT_AES_MODE_MCRYPT) {
             $this->changed = true;
         }
     }
@@ -294,7 +295,7 @@ class Crypt_AES extends Crypt_Rijndael {
      */
     function encrypt($plaintext)
     {
-        if ( CRYPT_AES_MODE == CRYPT_AES_MODE_MCRYPT ) {
+        if (CRYPT_AES_MODE == CRYPT_AES_MODE_MCRYPT) {
             $changed = $this->changed;
             $this->_mcryptSetup();
             /*
@@ -319,7 +320,7 @@ class Crypt_AES extends Crypt_Rijndael {
 
                 if (strlen($this->enbuffer)) {
                     $ciphertext = $plaintext ^ substr($this->encryptIV, strlen($this->enbuffer));
-                    $this->enbuffer.= $ciphertext;
+                    $this->enbuffer .= $ciphertext;
                     if (strlen($this->enbuffer) == 16) {
                         $this->encryptIV = $this->enbuffer;
                         $this->enbuffer = '';
@@ -331,7 +332,7 @@ class Crypt_AES extends Crypt_Rijndael {
                 }
 
                 $last_pos = strlen($plaintext) & 0xFFFFFFF0;
-                $ciphertext.= $last_pos ? mcrypt_generic($this->enmcrypt, substr($plaintext, 0, $last_pos)) : '';
+                $ciphertext .= $last_pos ? mcrypt_generic($this->enmcrypt, substr($plaintext, 0, $last_pos)) : '';
 
                 if (strlen($plaintext) & 0xF) {
                     if (strlen($ciphertext)) {
@@ -339,7 +340,7 @@ class Crypt_AES extends Crypt_Rijndael {
                     }
                     $this->encryptIV = mcrypt_generic($this->ecb, $this->encryptIV);
                     $this->enbuffer = substr($plaintext, $last_pos) ^ $this->encryptIV;
-                    $ciphertext.= $this->enbuffer;
+                    $ciphertext .= $this->enbuffer;
                 }
 
                 return $ciphertext;
@@ -372,7 +373,7 @@ class Crypt_AES extends Crypt_Rijndael {
      */
     function decrypt($ciphertext)
     {
-        if ( CRYPT_AES_MODE == CRYPT_AES_MODE_MCRYPT ) {
+        if (CRYPT_AES_MODE == CRYPT_AES_MODE_MCRYPT) {
             $changed = $this->changed;
             $this->_mcryptSetup();
             /*
@@ -395,7 +396,7 @@ class Crypt_AES extends Crypt_Rijndael {
                 if (strlen($this->debuffer)) {
                     $plaintext = $ciphertext ^ substr($this->decryptIV, strlen($this->debuffer));
 
-                    $this->debuffer.= substr($ciphertext, 0, strlen($plaintext));
+                    $this->debuffer .= substr($ciphertext, 0, strlen($plaintext));
                     if (strlen($this->debuffer) == 16) {
                         $this->decryptIV = $this->debuffer;
                         $this->debuffer = '';
@@ -407,7 +408,7 @@ class Crypt_AES extends Crypt_Rijndael {
                 }
 
                 $last_pos = strlen($ciphertext) & 0xFFFFFFF0;
-                $plaintext.= $last_pos ? mdecrypt_generic($this->demcrypt, substr($ciphertext, 0, $last_pos)) : '';
+                $plaintext .= $last_pos ? mdecrypt_generic($this->demcrypt, substr($ciphertext, 0, $last_pos)) : '';
 
                 if (strlen($ciphertext) & 0xF) {
                     if (strlen($plaintext)) {
@@ -415,7 +416,7 @@ class Crypt_AES extends Crypt_Rijndael {
                     }
                     $this->decryptIV = mcrypt_generic($this->ecb, $this->decryptIV);
                     $this->debuffer = substr($ciphertext, $last_pos);
-                    $plaintext.= $this->debuffer ^ $this->decryptIV;
+                    $plaintext .= $this->debuffer ^ $this->decryptIV;
                 }
 
                 return $plaintext;

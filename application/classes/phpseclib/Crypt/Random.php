@@ -21,10 +21,10 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -69,7 +69,7 @@ function crypt_random($min = 0, $max = 0x7FFFFFFF)
         if ((PHP_OS & "\xDF\xDF\xDF") !== 'WIN') { // PHP_OS & "\xDF\xDF\xDF" == strtoupper(substr(PHP_OS, 0, 3)), but a lot faster
             extract(unpack('Nrandom', openssl_random_pseudo_bytes(4)));
 
-            return abs($random) % ($max - $min) + $min; 
+            return abs($random) % ($max - $min) + $min;
         }
     }
 
@@ -96,7 +96,7 @@ function crypt_random($min = 0, $max = 0x7FFFFFFF)
        The seeding routine is pretty much ripped from PHP's own internal GENERATE_SEED() macro:
 
        http://svn.php.net/viewvc/php/php-src/tags/php_5_3_2/ext/standard/php_rand.h?view=markup */
-    if (version_compare(PHP_VERSION, '5.2.5', '<=')) { 
+    if (version_compare(PHP_VERSION, '5.2.5', '<=')) {
         static $seeded;
         if (!isset($seeded)) {
             $seeded = true;
@@ -112,7 +112,7 @@ function crypt_random($min = 0, $max = 0x7FFFFFFF)
     if (!isset($crypto)) {
         $key = $iv = '';
         for ($i = 0; $i < 8; $i++) {
-            $key.= pack('n', mt_rand(0, 0xFFFF));
+            $key .= pack('n', mt_rand(0, 0xFFFF));
             $iv .= pack('n', mt_rand(0, 0xFFFF));
         }
         switch (true) {

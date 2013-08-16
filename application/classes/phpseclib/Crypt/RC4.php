@@ -41,10 +41,10 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -92,7 +92,8 @@ define('CRYPT_RC4_DECRYPT', 1);
  * @access  public
  * @package Crypt_RC4
  */
-class Crypt_RC4 {
+class Crypt_RC4
+{
     /**
      * The Key
      *
@@ -173,7 +174,7 @@ class Crypt_RC4 {
      */
     function Crypt_RC4()
     {
-        if ( !defined('CRYPT_RC4_MODE') ) {
+        if (!defined('CRYPT_RC4_MODE')) {
             switch (true) {
                 case extension_loaded('mcrypt') && (defined('MCRYPT_ARCFOUR') || defined('MCRYPT_RC4')) && in_array('arcfour', mcrypt_list_algorithms()):
                     define('CRYPT_RC4_MODE', CRYPT_RC4_MODE_MCRYPT);
@@ -183,7 +184,7 @@ class Crypt_RC4 {
             }
         }
 
-        switch ( CRYPT_RC4_MODE ) {
+        switch (CRYPT_RC4_MODE) {
             case CRYPT_RC4_MODE_MCRYPT:
                 switch (true) {
                     case defined('MCRYPT_ARCFOUR'):
@@ -208,7 +209,7 @@ class Crypt_RC4 {
     {
         $this->key = $key;
 
-        if ( CRYPT_RC4_MODE == CRYPT_RC4_MODE_MCRYPT ) {
+        if (CRYPT_RC4_MODE == CRYPT_RC4_MODE_MCRYPT) {
             return;
         }
 
@@ -276,9 +277,9 @@ class Crypt_RC4 {
                     $f = $u = $hmac->hash($salt . pack('N', $i++));
                     for ($j = 2; $j <= $count; $j++) {
                         $u = $hmac->hash($u);
-                        $f^= $u;
+                        $f ^= $u;
                     }
-                    $key.= $f;
+                    $key .= $f;
                 }
         }
 
@@ -346,7 +347,7 @@ class Crypt_RC4 {
      */
     function _crypt($text, $mode)
     {
-        if ( CRYPT_RC4_MODE == CRYPT_RC4_MODE_MCRYPT ) {
+        if (CRYPT_RC4_MODE == CRYPT_RC4_MODE_MCRYPT) {
             $keyStream = $mode == CRYPT_RC4_ENCRYPT ? 'encryptStream' : 'decryptStream';
 
             if ($this->$keyStream === false) {
@@ -385,7 +386,7 @@ class Crypt_RC4 {
             $keyStream[$i] = $keyStream[$j];
             $keyStream[$j] = $temp;
             $temp = $keyStream[($keyStream[$i] + $keyStream[$j]) & 255];
-            $newText.= chr(ord($text[$k]) ^ $temp);
+            $newText .= chr(ord($text[$k]) ^ $temp);
         }
 
         if ($this->continuousBuffer) {
@@ -455,7 +456,7 @@ class Crypt_RC4 {
      */
     function disableContinuousBuffer()
     {
-        if ( CRYPT_RC4_MODE == CRYPT_RC4_MODE_INTERNAL ) {
+        if (CRYPT_RC4_MODE == CRYPT_RC4_MODE_INTERNAL) {
             $this->encryptIndex = $this->decryptIndex = array(0, 0);
             $this->setKey($this->key);
         }
@@ -496,7 +497,7 @@ class Crypt_RC4 {
      */
     function __destruct()
     {
-        if ( CRYPT_RC4_MODE == CRYPT_RC4_MODE_MCRYPT ) {
+        if (CRYPT_RC4_MODE == CRYPT_RC4_MODE_MCRYPT) {
             $this->_closeMCrypt();
         }
     }
@@ -508,8 +509,8 @@ class Crypt_RC4 {
      */
     function _closeMCrypt()
     {
-        if ( $this->encryptStream !== false ) {
-            if ( $this->continuousBuffer ) {
+        if ($this->encryptStream !== false) {
+            if ($this->continuousBuffer) {
                 mcrypt_generic_deinit($this->encryptStream);
             }
 
@@ -518,8 +519,8 @@ class Crypt_RC4 {
             $this->encryptStream = false;
         }
 
-        if ( $this->decryptStream !== false ) {
-            if ( $this->continuousBuffer ) {
+        if ($this->decryptStream !== false) {
+            if ($this->continuousBuffer) {
                 mcrypt_generic_deinit($this->decryptStream);
             }
 
