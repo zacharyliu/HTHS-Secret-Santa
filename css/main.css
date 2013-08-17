@@ -1,62 +1,147 @@
-/*td, tr {
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
-}*/
-table{
-border-collapse:collapse;
+@import url(http://fonts.googleapis.com/css?family=Armata);
+body {
+  padding-top: 60px;
+  /*background-color:#ebebeb;*/
+
+  /*font-family: NewNeue;*/
+
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
+/* ----------NAVBAR ELEMENTS---------- */
+.navbar,
+.navbar-inverse,
+.navbar-fixed-top,
+.nav-collapse {
+  background-color: #27ae60;
+  padding-left: 10px;
+  padding-right: 10px;
+  /*background-image: url("../img/mooning.png");*/
 
-table, th, td{
-border: 1px solid black;
 }
-
-body{
-font-family: Verdana, Arial, Sans-serif;
+.navbar {
+  min-height: 60px;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+  -webkit-transition: background 0.2s linear;
+  -moz-transition: background 0.2s linear;
+  -ms-transition: background 0.2s linear;
+  -o-transition: background 0.2s linear;
+  transition: background 0.2s linear;
 }
-
-a.title{font-size:24px;font-style:italic;}
-a.title:link {text-decoration:none;color:#000000}
-a.title:visited {text-decoration:none;color:#000000}
-a.title:hover {text-decoration:underline;color:#000000}
-a.title:active {text-decoration:underline;color:#000000}
-
-a.subheader{font-size:20px;font-family:Adobe Caslon Pro}
-a.subheader:link {text-decoration:none;color:#000000}
-a.subheader:visited {text-decoration:none;color:#000000}
-a.subheader:hover {text-decoration:underline;color:#000000}
-a.subheader:active {text-decoration:underline;color:#000000}
-p {
-font-size:14px;
-line-height:140%;
+/*collapse button*/
+.navbar .navbar-toggle {
+  border: none;
+  border-radius: 0px;
+  margin-top: -9px;
+  margin-right: -10px;
+  height: 60px;
+  width: 60px;
+  padding-left: 19px;
+  z-index: 10;
+  -webkit-transition: background 0.2s linear;
+  -moz-transition: background 0.2s linear;
+  -ms-transition: background 0.2s linear;
+  -o-transition: background 0.2s linear;
+  transition: background 0.2s linear;
 }
-
-/*footer stuff*/
-.footer {font-size: 10px;color:#757575;}
-a.footer:link {text-decoration:none;}
-a.footer:visited {text-decoration:none;}
-a.footer:hover {text-decoration:underline;}
-a.footer:active {text-decoration:underline;}
-
-/*Blockquotes*/
-blockquote p { margin-bottom: 10px; font-style: italic; font-size: 16px }
-blockquote cite { font-style: normal; display: block; text-align: right; text-transform: uppercase; font-size: 12px; font-weight: bold; letter-spacing: 1px; font-family: Helvetica, Arial, sans-serif; }
-
-blockquote {
-	font-family: Georgia, Times, serif;
-	width: 400px; /* required */
-	margin: 0 auto;
-	}
-	
-/*
- |	The #quote_wrap div is created
- |	by Quovolver to wrap the quotes
-*/
-
-#quote_wrap { 
-	background: #fbffec url(
-	http://sandbox.sebnitu.com/jquery/quovolver/demo/images/quote-mark.png
-	) no-repeat 20px 20px;
-	margin: 40px 0; padding: 20px 0 20px 20px; border: 1px solid #edffaf;
-	}
+.navbar .navbar-toggle:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.navbar-toggle .icon-bar {
+  height: 7px;
+  width: 7px;
+  margin-left: 8px;
+  border-radius: 0;
+}
+.navbar .nav.navbar-nav > li > a,
+.navbar .nav.navbar-nav > li > p {
+  padding: 5px 25px;
+  color: #ffffff;
+  height: 60px;
+  line-height: 50px;
+  font-size: 17px;
+  border-radius: 0px;
+  vertical-align: middle;
+  -webkit-transition: background 0.2s linear;
+  -moz-transition: background 0.2s linear;
+  -ms-transition: background 0.2s linear;
+  -o-transition: background 0.2s linear;
+  transition: background 0.2s linear;
+}
+.navbar .navbar-collapse .nav.navbar-nav > li > a:hover,
+.navbar .navbar-collapse .nav.navbar-nav > li > a:focus {
+  background-color: #aeaeae;
+}
+.navbar .navbar-brand {
+  font-size: 25px;
+  margin-top: 3px;
+  font-family: Armata;
+  color: #ffffff;
+  max-width: none;
+}
+.navbar .navbar-brand img {
+  margin-top: -15px;
+  margin-bottom: -10px;
+}
+.navbar-icon {
+  font-family: FontAwesome;
+  font-size: 45px;
+  line-height: 50px;
+  text-align: center;
+  margin-right: 15px;
+}
+.picture-icon {
+  height: 40px;
+  width: 40px;
+  margin-top: -3px;
+  margin-right: 17px;
+  vertical-align: middle;
+}
+/*padding from the top of screen from navbar*/
+.home-nav {
+  margin-top: 50px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+/*custom navtab navigation*/
+.tabbar {
+  background-color: #34495e;
+  border-radius: 6px 6px 0 0;
+  margin-bottom: 10px;
+  padding-left: 0;
+  padding-right: 0;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+.nav-tabs {
+  border: 0;
+  height: 60px;
+}
+.nav-tabs > li {
+  width: 50%;
+}
+.nav-tabs > li > a,
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+  border: 0;
+  color: #ffffff;
+  border-radius: 6px 6px 0 0;
+  margin: 0;
+  -webkit-transition: background 0.2s linear;
+  -moz-transition: background 0.2s linear;
+  -ms-transition: background 0.2s linear;
+  -o-transition: background 0.2s linear;
+  transition: background 0.2s linear;
+}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover {
+  background-color: #aeaeae;
+}
+.nav-tabs > li > a {
+  line-height: 20px;
+  font-size: 16px;
+  padding: 20px;
+}
+.nav-tabs > li > a:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
