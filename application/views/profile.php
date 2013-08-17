@@ -10,6 +10,7 @@
 
             <div class="col-md-3">
                 <h3><?php echo $this->session->userdata("name"); ?></h3>
+
                 <div class="row">
                     <h4>Medals</h4>
                 </div>
@@ -45,35 +46,41 @@
                         } else echo "<tr><td colspan='4'>there doesnt seem to be anything here...</td></tr>";
                         ?>
                     </table>
-                    <div style="padding: 3px 0 0 0;font-size:9px">*Groups must have at least 5 members to be valid.</div>
+                    <div style="padding: 3px 0 0 0;font-size:9px">*Groups must have at least 5 members to be valid.
+                    </div>
                 </div>
 
                 <br/>
 
-                <?php echo form_open('profile/groupcode'); ?>
-                <div class="row">
-                    <h3>Join a group</h3>
+                <h3>Join a group</h3>
 
+                <form role="form" method="post"
+                      action="<?php echo base_url('profile/groupcode'); // @todo base is needed since persistent forms?>">
                     <p>Enter a group code below to join a group.</p>
+                    <label for="inputGroupCode">Group Code: </label>
+                    <input type="text" class="form-custom" maxlength="4" size="4" name="group" id="inputGroupCode"
+                           placeholder="">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-default" type="submit">Add Group</button>
+                </form>
 
-                        Group Code: <input type="text" maxlength="4" size="4" name="group"/> <span>&nbsp;&nbsp;&nbsp;
-<input value="add group" type="submit">
-                </div>
-                <?php echo form_close(); ?>
 
                 <br/>
                 <br/>
 
-                <?php echo form_open('profile/addgroup'); ?>
-                <div class="row">
-                    <h3>Create a group</h3>
 
+                <h3>Create a group</h3>
+
+                <form method="post"
+                      action="<?php echo base_url('profile/addgroup'); //@todo base is needed since persistent form?>">
                     <p>Create a group to gift exchange with some friends.</p>
-
-                        Group Name: <input type="text" maxlength="50" size="50" name="group_name"/> <span>&nbsp;&nbsp;&nbsp;
-<input value="create group" type="submit">
-                </div>
-                <?php echo form_close(); ?>
+                    <label for="inputGroupName">Group Code: </label>
+                    <input type="text" class="form-custom" maxlength="50" size="50" name="group_name"
+                           id="inputGroupName"
+                           placeholder="">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-default" type="submit">Create Group</button>
+                </form>
                 <br/>
 
                 <div class="row">

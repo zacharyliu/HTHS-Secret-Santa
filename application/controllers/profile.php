@@ -23,7 +23,7 @@ class Profile extends CI_Controller
         }
         $this->load->model('datamod'); //load the database model
         $this->load->helper('message');//helps in generating bootstrap alerts
-        $this->load->helper('form');//form helper
+        //$this->load->helper('form');//form helper
         $this->load->library('form_validation');//form validation helper
 
         if (!$this->datamod->getPrivKey($this->session->userdata('id'))) //if key is not set, set key
@@ -56,7 +56,7 @@ class Profile extends CI_Controller
     { //form helper for adding group by code
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
-        $this->form_validation->set_rules('group', 'Group Code', 'trim|min_length[4]|max_length[4]|alpha_numeric|callback_checkGroup|callback_inGroup|callback_numGroups');
+        $this->form_validation->set_rules('group', 'Group Code', 'trim|required|min_length[4]|max_length[4]|alpha_numeric|callback_checkGroup|callback_inGroup|callback_numGroups');
 
         if ($this->form_validation->run() == FALSE) {
             $this->_render();
@@ -70,7 +70,7 @@ class Profile extends CI_Controller
     public function addgroup()
     { //form helper for creating new group
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
-        $this->form_validation->set_rules('group_name', 'Group Name', 'trim|min_length[4]|max_length[50]|callback_numGroups|callback_checkGroupName|xss_clean');
+        $this->form_validation->set_rules('group_name', 'Group Name', 'trim|required|min_length[4]|max_length[50]|callback_numGroups|callback_checkGroupName|xss_clean');
 
         if ($this->form_validation->run() == FALSE) {
             $this->_render();
@@ -87,7 +87,7 @@ class Profile extends CI_Controller
 
         if ($this->datamod->leaveable($code)) {
             if ($this->datamod->removeFromGroup($this->session->userdata('name'), $this->uri->segment(3)))
-                $this->session->set_flashdata('result', message('Successfully left the group <strong>' . $groupname . '</strong>.',1));
+                $this->session->set_flashdata('result', message('Successfully left the group <strong>' . $groupname . '</strong>.',0));
 
             else $this->session->set_flashdata('result', message('Poopy. Something went wrong. :( ',3));
         } else $this->session->set_flashdata('result', message('<strong>Error!</strong> You can\'t leave this group! </div>',3));

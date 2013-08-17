@@ -79,7 +79,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="section-header register-header">There are currently <?php $total = $this->datamod->countUsers(); echo $total ?> secret santas.</div>
-                <div class="section-subheader register-subheader">Why not make it <?php echo $total+1?>?</div>
+                <div class="section-subheader register-subheader">You're one click away from making it <?php echo $total+1?>.</div>
             </div>
         </div>
 
