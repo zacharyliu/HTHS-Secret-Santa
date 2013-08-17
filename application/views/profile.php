@@ -4,6 +4,8 @@
     <div class="col-md-10 col-md-offset-1">
         <div class="row">
             <?php if (($this->session->flashdata('result'))) echo $this->session->flashdata('result'); //if there's a result message, show it?>
+            <?php echo form_error('group'); ?>
+            <?php echo form_error('group_name'); ?>
             <br/>
 
             <div class="col-md-3">
@@ -43,8 +45,7 @@
                         } else echo "<tr><td colspan='4'>there doesnt seem to be anything here...</td></tr>";
                         ?>
                     </table>
-                    <div style="padding: 3px 0 0 0;font-size:9px">*Groups must have at least 5 members to be valid.
-                    </div>
+                    <div style="padding: 3px 0 0 0;font-size:9px">*Groups must have at least 5 members to be valid.</div>
                 </div>
 
                 <br/>
@@ -55,11 +56,8 @@
 
                     <p>Enter a group code below to join a group.</p>
 
-                    <form>
-                        <?php echo form_error('group'); ?>
                         Group Code: <input type="text" maxlength="4" size="4" name="group"/> <span>&nbsp;&nbsp;&nbsp;
 <input value="add group" type="submit">
-                    </form>
                 </div>
                 <?php echo form_close(); ?>
 
@@ -72,12 +70,8 @@
 
                     <p>Create a group to gift exchange with some friends.</p>
 
-                    <form>
-
-                        <?php echo form_error('group_name'); ?>
                         Group Name: <input type="text" maxlength="50" size="50" name="group_name"/> <span>&nbsp;&nbsp;&nbsp;
 <input value="create group" type="submit">
-                    </form>
                 </div>
                 <?php echo form_close(); ?>
                 <br/>
