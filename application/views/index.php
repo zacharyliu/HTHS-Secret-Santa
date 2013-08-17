@@ -7,6 +7,7 @@
 
         });
     </script>
+<div class="home-container">
 <div class="row">
     <div class="logo-container"></div>
 </div>
@@ -22,7 +23,7 @@
             <cite>&ndash; Maya Angelou</cite>
         </blockquote>
         <blockquote>
-            <p>If you wait until you can do everything for everybody, instead of something for somebody, you�ll end up
+            <p>If you wait until you can do everything for everybody, instead of something for somebody, you'll end up
                 not doing nothing for nobody."</p>
             <cite>&ndash; Malcom Bane</cite>
         </blockquote>
@@ -70,8 +71,25 @@
 
     <p>Gift Exchange: <i> Friday, 12/20 </i></p>
 
-    <p>There are currently <?php echo $this->datamod->countUsers(); ?> secret santas.</p>
-
     <h1 style="text-align:center;">Time Until Gift Exchange</h1>
-
     <div style="margin:0 auto 0 auto;"><?php echo $timer; ?></div>
+    
+    <div class="home-footer">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-header register-header">There are currently <?php $total = $this->datamod->countUsers(); echo $total ?> secret santas.</div>
+                <div class="section-subheader register-subheader">Why not make it <?php echo $total+1?>?</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <a href="login">
+                    <button type="button" class="btn register-btn">Sign up for the secret santa.</button>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -43,7 +43,7 @@
 .section-header {
   font-size:44px;
   line-height:44px;
-  color:#e74c3c;
+  color:@main;
   margin-bottom:10px;
   margin-top:150px;
 }
@@ -75,7 +75,7 @@
 
 .subsection-icon {
   font-family:FontAwesome;
-  color:#c0392b;
+  color:@main;
   font-size:38px;
   line-height:38px;
   margin-bottom:10px;
@@ -84,7 +84,7 @@
 .subsection-header {
   font-size:24px;
   line-height:44px;
-  color:#e74c3c;
+  color:@main;
 }
 
 .subsection-subheader {
@@ -95,96 +95,27 @@
 
 }
 
-.feature-row {
-  margin-bottom:100px;
-}
-
-.feature-text {
-  vertical-align:middle;
-}
-
-.taskDemo, .reminderDemo {
-  width:100%;
-  list-style-type: none;
-  padding: 0px;
-  margin: 0px;
-}
-
-.taskDemo {
-  height:232px;
-}
-
-.reminderDemo {
-  height:172px;
-}
-
-ul.taskDemo > li, ul.reminderDemo > li {
-
-  background:url(../img/checkbox-off.png) no-repeat;
-  background-position-y: 4px;
-  background-size: 12px 12px;
-
-}
-
-ul.taskDemo > li.check, ul.reminderDemo > li.check {
-  background:url(../img/checkbox-on.png) no-repeat;
-  background-position-y: 1px;
-  background-size: 15px 15px;
-
-}
-
-.feature-row input:disabled {
-  background-color:#ffffff;
-
-}
-
-.youtube-video {
-  font-family:FontAwesome;
-  font-size:120px;
-  line-height:120px;
-  color:#e74c3c;
-  margin-bottom:150px;
-  text-decoration:none;
-
-  -webkit-transition: color 0.2s linear;
-  -moz-transition: color 0.2s linear;
-  -ms-transition: color 0.2s linear;
-  -o-transition: color 0.2s linear;
-  transition: color 0.2s linear;
-}
-
-.youtube-video:hover, .youtube-video:active {
-  color:#c0392b;
-  text-decoration:none;
-
-  -webkit-transition: color 0.2s linear;
-  -moz-transition: color 0.2s linear;
-  -ms-transition: color 0.2s linear;
-  -o-transition: color 0.2s linear;
-  transition: color 0.2s linear;
-}
-
-.beta-header {
+.register-header {
   color:#ffffff;
   margin-top:50px;
 }
 
-.beta-subheader {
+.register-subheader {
   color:#ffffff;
   margin-bottom:150px;
 }
 
-.beta-btn {
+.register-btn {
   background-color:#aeaeae;
 }
 
-.beta-btn:hover {
+.register-btn:hover {
   background-color:#c0c0c0;
 }
 
 .home-footer {
   height:400px;
-  background-color:#e74c3c;
+  background-color:@main;
   margin-left:-20px;
   margin-right:-20px;
   margin-bottom:-40px;

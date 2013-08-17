@@ -8,6 +8,9 @@
 
             <div class="col-md-3">
                 <h3><?php echo $this->session->userdata("name"); ?></h3>
+                <div class="row">
+                    <h4>Medals</h4>
+                </div>
             </div>
 
             <div class="col-md-9">
@@ -77,7 +80,6 @@
                     </form>
                 </div>
                 <?php echo form_close(); ?>
-
                 <br/>
 
                 <div class="row">
