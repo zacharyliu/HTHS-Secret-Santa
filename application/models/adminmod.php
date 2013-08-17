@@ -25,7 +25,7 @@ class Adminmod extends CI_Model
     public function pairCustom($code)
     {
         $this->db->from('pairs');
-        $this->db->where('group', $code);
+        $this->db->where('code', $code);
         $query = $this->db->get();
         if ($query->num_rows() == 0) {
             if ($this->datamod->countMembers($code) >= 5) {

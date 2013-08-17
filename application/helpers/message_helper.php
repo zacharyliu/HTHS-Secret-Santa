@@ -21,6 +21,6 @@ function message($message = '', $warninglevel = 0)
         case 2:
             return '<div class="alert">' . $dismiss . $message . '</div>';
         case 3:
-            return '<div class="alert alert-error">' . $dismiss . $message . '</div>';
+            return '<div class="alert alert-danger">' . $dismiss . $message . '</div>';
     }
 }

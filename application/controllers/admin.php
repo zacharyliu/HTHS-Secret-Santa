@@ -14,6 +14,7 @@ class Admin extends CI_Controller
         }
         $this->load->model('datamod'); //load the data model
         $this->load->model('adminmod'); //load the admin model
+        $this->load->helper('message'); //load the bootstrap message helper
     }
 
     public function index()
@@ -37,17 +38,15 @@ class Admin extends CI_Controller
         if (isset($_POST['code']) && $_POST['code'] != '') {
             $result = $this->adminmod->pairCustom($_POST['code']);
             if ($result) {
-                $this->session->set_flashdata('admin', 'Successfully ran pairing on code ' . $_POST['code'] . ' with ' . $result . ' members');
+                $this->session->set_flashdata('admin', message('<strong>Success!</strong> Successfully ran pairing on code ' . $_POST['code'] . ' with ' . $result . ' members',1));
                 redirect('admin');
             } else {
-                $this->session->set_flashdata('admin', 'Error: pairing failed. Invalid code, group does not meet rquirements, or pairing was already run.');
+                $this->session->set_flashdata('admin', message('<strong>Error!</strong> Pairing failed. Invalid code, group does not meet requirements, or pairing was already run.',3));
                 redirect('admin');
             }
         } else {
-            $this->session->set_flashdata('admin', 'Error: no code specified');
+            $this->session->set_flashdata('admin', message('<strong>Error!</strong> No code specified',3));
+            redirect('admin');
         }
-        //
     }
 }
-
-?>

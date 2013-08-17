@@ -73,7 +73,7 @@
 
     <h1 style="text-align:center;">Time Until Gift Exchange</h1>
     <div style="margin:0 auto 0 auto;"><?php echo $timer; ?></div>
-    
+
     <div class="home-footer">
 
         <div class="row">
