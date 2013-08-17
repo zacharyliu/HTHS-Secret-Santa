@@ -58,4 +58,28 @@ class Adminmod extends CI_Model
         }
     }
 
+    /**
+     * lock groups from previous year:
+     * sets leaveable = 0 in the groups table
+     * advances current_year global variable to this year
+     */
+    public function lockold(){
+        $this->db->where('year', getPrevYear())->update("groups",array("leaveable",0));
+    }
+
+    /**
+     * gets the previous year based on whether christmas has passed or not
+     * Returns previous year if (current year) < x < (christmas)
+     * Returns current year if (christmas) < x < (end of current year)
+     */
+    public function getPrevYear() {
+        $month = intval(date('n'));
+        $day = intval(date('j'));
+        $year = intval(date('Y'));
+        if ($month == 12)
+            if ($day <= 25) //before or on christmas
+                return $year-1;
+            else return $year;
+        else return $year-1;
+    }
 }

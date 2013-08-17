@@ -218,7 +218,7 @@ class Datamod extends CI_Model
     public function getPair($code, $person)
     { //get a person's partner for a group
         $this->db->select('receive');
-        $query = $this->db->get_where('pairs', array('group' => $code, 'give' => $person));
+        $query = $this->db->get_where('pairs', array('code' => $code, 'give' => $person));
         if ($query->num_rows() > 0) {
             $row = $query->row();
             $receive = $row->receive;
@@ -331,7 +331,7 @@ class Datamod extends CI_Model
     public function paired($code)
     { //checks if pairing was already run for a group
         $this->db->from('pairs');
-        $query = $this->db->where('group', $code);
+        $query = $this->db->where('code', $code);
         if ($query->get()->num_rows() == 0) {
             return false;
         } else {

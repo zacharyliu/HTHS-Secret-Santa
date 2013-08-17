@@ -8,8 +8,8 @@
 
     <p>You are currently in <?php echo($this->datamod->countPersonGroups($this->session->userdata('name'))); ?>/5
         groups.</p>
-    <table style="font-size:12px;" border="1" cellpadding="5">
-        <tr style="font-weight:bold;">
+    <table class="table table-hover table-bordered">
+        <tr >
             <th>Group Name</th>
             <th>Group Code</th>
             <th># of Members</th>

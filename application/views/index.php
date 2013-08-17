@@ -1,9 +1,5 @@
-<html>
-
-<head>
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('/css/main.css') ?>"></link>
-    <script src="<?php echo base_url('/js/jquery.js') ?>"></script>
-    <script src="<?php echo base_url('/js/jquery.quovolver.js') ?>"></script>
+<link href="/css/home.css" rel="stylesheet">
+<script src="<?php echo base_url('/js/jquery.quovolver.js') ?>"></script>
     <script>
         $(document).ready(function () {
 
@@ -11,8 +7,9 @@
 
         });
     </script>
-</head>
-<body>
+<div class="row">
+    <div class="logo-container"></div>
+</div>
 <div style="margin:0px 30px 0px 30px;">
     <div style="width:550px;height:100px;margin-top:20px;margin-bottom:75px;margin-left:auto;margin-right:auto;">
         <blockquote>
@@ -78,7 +75,3 @@
     <h1 style="text-align:center;">Time Until Gift Exchange</h1>
 
     <div style="margin:0 auto 0 auto;"><?php echo $timer; ?></div>
-</div>
-</body>
-
-</html>
