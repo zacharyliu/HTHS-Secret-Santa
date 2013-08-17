@@ -15,7 +15,7 @@
         <ul class="nav navbar-nav navbar-right">
             <?php
             if ($this->session->userdata('auth') == 'true') {
-                echo '<li><p>Welcome back, ' . $this->session->userdata('name') . '.</p></li>';
+                echo '<li><a style="background: rgba(0,0,0,0)">Welcome back, ' . $this->session->userdata('name') . '.</a></li>';
                 if ($this->session->userdata('admin') == 'true')
                     echo '<li><a href="' . base_url("admin") . '">Admin Panel</a>';
                 echo '<li><a href="/profile">Profile</a></li>' . '<li><a href="/login/logout">Logout</a>';

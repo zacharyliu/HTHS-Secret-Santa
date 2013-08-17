@@ -18,6 +18,7 @@
             padding-bottom: 40px;
         }
     </style>
+    <link href="/css/main.css" rel="stylesheet">
 
     <!-- Fav and touch icons -->
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/ico/apple-touch-icon-144-precomposed.png">
@@ -56,8 +57,6 @@
         }
 
     </script>
-
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('/css/main.css') ?>">
 </head>
 
 <body>
