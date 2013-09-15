@@ -10,7 +10,7 @@
                 $year = $first_year; //don't override first_year variable
                 while ($year <= $current_year) {
                     if ($year != $current_year) //only add the active class to the most recent year
-                    echo '<li><a href="#' . $year . '" data-toggle="tab">' . $year . '</a></li>';
+                        echo '<li><a href="#' . $year . '" data-toggle="tab">' . $year . '</a></li>';
                     else echo '<li class="active"><a href="#' . $year . '" data-toggle="tab">' . $year . '</a></li>';
                     $year++;
                 }?>
@@ -19,10 +19,10 @@
                 <?php
                 $year = $first_year; //reset year variable
                 while ($year <= $current_year){
-                $count = false; //whether groups exist for the curent year
-                if ($year != $current_year) //only add the active class to the most recent year
-                echo '<div class="tab-pane fade" id="' . $year . '">';
-                else echo '<div class="tab-pane fade active in" id="' . $year . '">';?>
+                    $count = false; //whether groups exist for the curent year
+                    if ($year != $current_year) //only add the active class to the most recent year
+                        echo '<div class="tab-pane fade" id="' . $year . '">';
+                    else echo '<div class="tab-pane fade active in" id="' . $year . '">';?>
                 <table class="table table-bordered table-striped" id="groups">
                     <tr>
                         <th>Name</th>

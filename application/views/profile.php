@@ -23,27 +23,51 @@
                     <p>You are currently
                         in <?php echo($this->datamod->countPersonGroups($this->session->userdata('name'))); ?>/5
                         groups.</p>
-                    <table class="table table-hover table-bordered">
-                        <tr>
-                            <th>Group Name</th>
-                            <th>Group Code</th>
-                            <th># of Members</th>
-                            <th>Partner</th>
-                            <th>Description</th>
-                            <th>Options</th>
-                        </tr>
+                    <ul id="years" class="nav nav-tabs">
                         <?php
-                        if ($groups != false) {
+                        $year = $first_year; //don't override first_year variable
+                        while ($year <= $current_year) {
+                            if ($year != $current_year) //only add the active class to the most recent year
+                                echo '<li><a href="#' . $year . '" data-toggle="tab">' . $year . '</a></li>';
+                            else echo '<li class="active"><a href="#' . $year . '" data-toggle="tab">' . $year . '</a></li>';
+                            $year++;
+                        }?>
+                    </ul>
+                    <div class="tab-content">
+                        <?php
+                        $year = $first_year; //reset year variable
+                        while ($year <= $current_year){
+                            $count = false; //whether groups exist for the curent year
+                            if ($year != $current_year) //only add the active class to the most recent year
+                                echo '<div class="tab-pane fade" id="' . $year . '">';
+                            else echo '<div class="tab-pane fade active in" id="' . $year . '">';?>
+                        <table class="table table-hover table-bordered">
+                            <tr>
+                                <th>Group Name</th>
+                                <th>Group Code</th>
+                                <th># of Members</th>
+                                <th>Partner</th>
+                                <th>Description</th>
+                                <th>Options</th>
+                            </tr>
+                        <?php
                             foreach ($groups as $group) {
-                                echo '<tr><td><i>' . $group->name . '</i></td>';
-                                echo '<td>' . $group->code . '</td>';
-                                echo '<td>' . $this->datamod->countMembers($group->code) . '</td>';
-                                echo '<td>' . $this->datamod->getPair($group->code, $this->session->userdata('name')) . '</td>';
-                                echo '<td>' . $group->description . '</td>';
-                                echo($group->leaveable ? '<td><a href="' . base_url('profile') . '/rm/' . $group->code . '">[leave]</a>&nbsp;</td>' : "<td></td>");
-                                echo '</tr>';
+                                if ($group->year == $year){
+                                    $count = true;
+                                    echo '<tr><td><i>' . $group->name . '</i></td>';
+                                    echo '<td>' . $group->code . '</td>';
+                                    echo '<td>' . $this->datamod->countMembers($group->code) . '</td>';
+                                    echo '<td>' . $this->datamod->getPair($group->code, $this->session->userdata('name')) . '</td>';
+                                    echo '<td>' . $group->description . '</td>';
+                                    echo($group->leaveable ? '<td><a href="' . base_url('profile') . '/rm/' . $group->code . '">[leave]</a>&nbsp;</td>' : "<td></td>");
+                                    echo '</tr>';
                             }
-                        } else echo "<tr><td colspan='4'>there doesnt seem to be anything here...</td></tr>";
+                            }
+                            if ($count == false) //if no groups exist
+                                echo "<tr><td colspan='6'>there doesnt seem to be anything here...</td></tr>";
+                        echo '</table></div>';
+                        $year++;
+                        }
                         ?>
                     </table>
                     <div style="padding: 3px 0 0 0;font-size:9px">*Groups must have at least 5 members to be valid.

@@ -53,6 +53,16 @@ class Datamod extends CI_Model
         return $query->num_rows();
     }
 
+    /**
+    * get the user's join year based on user id
+     * @return int;
+    */
+    public function getJoinYear($id) {
+        $query = $this->db->select('year_join')->where('id',$id)->get('users');
+        $row = $query->row();
+        return $row->year_join;
+    }
+
     ////////////////////////////
     //KEY FUNCTIONS
     ////////////////////////////////
@@ -321,7 +331,7 @@ class Datamod extends CI_Model
      */
     public function getPersonGroups($person)
     { //get array of groups a person belongs to (input: persons name)
-        $this->db->select('groups')->where(array('name' => $person, 'year' =>$this->current_year));
+        $this->db->select('groups')->where(array('name' => $person));
         $query = $this->db->get('users');
         $row = $query->row();
         $groups = $row->groups;

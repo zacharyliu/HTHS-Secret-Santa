@@ -41,6 +41,7 @@ class Profile extends CI_Controller
         $groups = $this->datamod->getPersonGroups($this->session->userdata('name')); //get all the group codes
         $groupsInfo = $this->datamod->groupInfoMultiple($groups); //get all relevant group info
         $data = array_merge(array('groups' => $groupsInfo), $data); //inject it into data array
+
         render('profile', $data);
     }
 
@@ -49,7 +50,7 @@ class Profile extends CI_Controller
      */
     public function index()
     {
-        $this->_render();
+        $this->_render(array('first_year'=>$this->datamod->getJoinYear($this->session->userdata('id')),'current_year'=>intval(date('Y'))));
     }
 
     public function groupcode()
