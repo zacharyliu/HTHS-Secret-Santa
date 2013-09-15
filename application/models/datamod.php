@@ -300,14 +300,17 @@ class Datamod extends CI_Model
      */
     public function getMembers($code)
     { //get array of members who belong to a group
-        $this->db->select('members')->where(array('code' => $code, 'year' =>$this->current_year));
+        $this->db->select('members')->where(array('code' => $code, 'year' => $this->current_year));
         $query = $this->db->get('groups');
-        $row = $query->row();
-        $members = $row->members;
-        if ($members != "")
-            return explode(",", $members);
-        else
-            return false;
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            $members = $row->members;
+            if ($members != "")
+                return explode(",", $members);
+            else
+                return false;
+        }
+        else return false;
     }
 
     /**
@@ -478,12 +481,22 @@ class Datamod extends CI_Model
 
     /**
      * returns all groups
-     * @todo year implementation
+     * @deprecated
      * @return mixed
      */
-    public function listGroups()
+    public function listAllGroups()
     { //returns all groups
         $this->db->from('groups');
+        return $this->db->get()->result();
+    }
+
+    /**
+     * returns groups based on inputted year
+     */
+    public function listYearGroups($year = null){
+        if ($year== NULL)
+            $year = $this->current_year;//@todo is there a better way of doing this?
+        $this->db->from('groups')->where('year',$year);
         return $this->db->get()->result();
     }
 
@@ -530,4 +543,6 @@ class Datamod extends CI_Model
         }
         return $output;
     }
+
+    ////SETTINGS
 }

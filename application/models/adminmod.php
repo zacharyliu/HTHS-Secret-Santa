@@ -7,6 +7,7 @@ class Adminmod extends CI_Model
     {
         // Call the Model constructor
         parent::__construct();
+        $this->current_year = intval(date('Y'));
     }
 
     public function addGroupHTHS()
@@ -25,7 +26,7 @@ class Adminmod extends CI_Model
     public function pairCustom($code)
     {
         $this->db->from('pairs');
-        $this->db->where('code', $code);
+        $this->db->where(array('code'=>$code, 'year'=> $this->current_year));
         $query = $this->db->get();
         if ($query->num_rows() == 0) {
             if ($this->datamod->countMembers($code) >= 5) {
@@ -81,5 +82,14 @@ class Adminmod extends CI_Model
                 return $year-1;
             else return $year;
         else return $year-1;
+    }
+
+    /**
+     * get oldest year of data
+     */
+    public function getFirstYear() {
+        $query = $this->db->get('globalvars');
+        $row = $query->row();
+        return $row->firstyear;
     }
 }
