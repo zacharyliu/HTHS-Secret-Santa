@@ -9,8 +9,19 @@
             <br/>
 
             <div class="col-md-3">
-                <h3><?php echo $this->session->userdata("name"); ?></h3>
-
+                <div class="row">
+                    <h3><?php echo $this->session->userdata("name"); ?></h3>
+                    <span><?php echo $this->session->userdata("email"); ?></span><br />
+                    <span>Class of <?php echo "class"?></span><br/>
+                    <br />
+                    <p style="word-wrap:break-word;">bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio</p>
+                        <br/>
+                    <span><strong>Santa since:</strong> <?php echo "meow";?></span><br/>
+                    <span><strong>Gifts Exchanged:</strong> <?php echo "moo";?></span><br/>
+                    <span><strong>Medals Earned:</strong> <?php echo "quack";?></span><br />
+                    <span><strong>Easter Eggs Discovered:</strong> <?php echo "ribbet";?></span>
+                    <span><strong></strong></span>
+                </div>
                 <div class="row">
                     <h4>Medals</h4>
                 </div>
@@ -65,7 +76,7 @@
                             }
                             }
                             if ($count == false) //if no groups exist
-                                echo "<tr><td colspan='6'>there doesnt seem to be anything here...</td></tr>";
+                                echo "<tr><td colspan='6'>there doesn't seem to be anything here...</td></tr>";
                         echo '</table></div>';
                         $year++;
                         }
@@ -79,27 +90,28 @@
                 <br/>
 
                 <h3>Join a group</h3>
-
+                    <p>Enter a group code below to join a group.</p>
+                <div class="container">
                 <form role="form" method="post"
                       action="<?php echo base_url('profile/groupcode'); // @todo base is needed since persistent forms?>">
-                    <p>Enter a group code below to join a group.</p>
+
                     <label for="inputGroupCode">Group Code: </label>
                     <input type="text" class="form-custom" maxlength="4" size="4" name="group" id="inputGroupCode"
                            placeholder="">
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <button class="btn btn-default" type="submit">Add Group</button>
                 </form>
-
+                </div>
 
                 <br/>
                 <br/>
 
 
                 <h3>Create a group</h3>
-
+                    <p>Create a group to gift exchange with some friends.</p>
+                <div class="container">
                 <form method="post"
                       action="<?php echo base_url('profile/addgroup'); //@todo base is needed since persistent form?>">
-                    <p>Create a group to gift exchange with some friends.</p>
                     <label for="inputGroupName">Group Name: </label>
                     <input type="text" class="form-custom" maxlength="50" size="50" name="group_name"
                            id="inputGroupName"
@@ -108,13 +120,15 @@
                     <button class="btn btn-default" type="submit">Create Group</button>
                 </form>
                 <br/>
-
+                </div>
                 <div class="row">
                     <h3>Settings</h3>
+                    <div class="container">
 
                     <p><a href="<?php echo base_url('profile/resetPin'); ?>">Reset</a> my pin.</p>
                     <br/>
                 </div>
+                    </div>
             </div>
         </div>
     </div>
