@@ -23,6 +23,7 @@
                     <p>You are currently
                         in <?php echo($this->datamod->countPersonGroups($this->session->userdata('id'))); ?>/5
                         groups.</p>
+                    <div class="container">
                     <ul id="years" class="nav nav-tabs">
                         <?php
                         $year = $first_year; //don't override first_year variable
@@ -73,6 +74,7 @@
                     <div style="padding: 3px 0 0 0;font-size:9px">*Groups must have at least 5 members to be valid.
                     </div>
                 </div>
+                        </div>
 
                 <br/>
 
@@ -98,7 +100,7 @@
                 <form method="post"
                       action="<?php echo base_url('profile/addgroup'); //@todo base is needed since persistent form?>">
                     <p>Create a group to gift exchange with some friends.</p>
-                    <label for="inputGroupName">Group Code: </label>
+                    <label for="inputGroupName">Group Name: </label>
                     <input type="text" class="form-custom" maxlength="50" size="50" name="group_name"
                            id="inputGroupName"
                            placeholder="">

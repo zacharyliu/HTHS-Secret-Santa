@@ -37,10 +37,10 @@ class Login extends CI_Controller
 
                     // Load user ID if it exists
                     $this->load->model('datamod');
-                    $user_id = $this->datamod->getUserId($name, $email);
+                    $user_id = $this->datamod->getUserId($email);
                     if ($user_id == false) {
                         $this->datamod->addUser($name, $email);
-                        $user_id = $this->datamod->getUserId($name, $email);
+                        $user_id = $this->datamod->getUserId($email);//@todo addUser should return id
                     }
                     //check for admin permissions
                     if ($user_data['contact/email'] == 'zliu@ctemc.org' || $user_data['contact/email'] == 'mhsu@ctemc.org' || $user_data['contact/email'] == 'vchen@ctemc.org')

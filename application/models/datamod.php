@@ -74,9 +74,9 @@ class Datamod extends CI_Model
      * @param string $email    email to check
      * @return int             user id
      */
-    public function getUserId($name, $email)
+    public function getUserId($email)
     {
-        $this->db->where(array('name' => $name, 'email' => $email));
+        $this->db->where(array('email' => $email));
         $query = $this->db->get('users');
         $row = $query->row();
         return $row->id;
@@ -174,7 +174,6 @@ class Datamod extends CI_Model
      * @param string $person        person to check
      * @param string $code          group code to check
      * @return bool                 true on success, false on failure
-     * @todo year implementation
      */
     public function inGroup($id, $code, $year = NULL)
     { //checks if a person is already in group
@@ -189,7 +188,6 @@ class Datamod extends CI_Model
     /**
      * count the number of members in a group
      * @todo simplified implementation
-     * @todo year implementation
      * @param string $code      group code
      * @return int              number of members
      */
@@ -204,7 +202,6 @@ class Datamod extends CI_Model
     /**
      * count number of groups user is in
      * @todo simplified implementation
-     * @todo year implementation
      * @param string $person    person to check against
      * @return int              number of groups
      */
@@ -310,8 +307,6 @@ class Datamod extends CI_Model
 
     /**
      * get an array of members that belong to a group
-     * @todo year implementation
-     * @todo name implementation
      * @param $code
      * @return array|bool
      */
@@ -331,7 +326,6 @@ class Datamod extends CI_Model
 
     /**
      * get an array of groups a person belongs to
-     * @todo year implementation
      * @param string $person           user's id
      * @return string[]|bool           false on failure
      */
@@ -351,7 +345,6 @@ class Datamod extends CI_Model
 
     /**
      * get a person's partner for a group(assuming person is "give")
-     * @todo id implementation**
      * @param $code         group code
      * @param $person       person's name
      * @return string       person's partner
@@ -407,7 +400,6 @@ class Datamod extends CI_Model
 
     /**
      * add a new group to the master record OR add a person to the group
-     * @todo id implementation
      * @param string $person        person's name
      * @param string $code          group code
      * @param null $name            group name
@@ -426,7 +418,6 @@ class Datamod extends CI_Model
 
     /**
      * removes a person from a group based on group code
-     * @todo id implementation
      * @param string $person        name of user
      * @param string $code          group code
      * @return bool
