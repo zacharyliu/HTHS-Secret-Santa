@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 /**
- * Migrations from old database schema
+ * Migrations from old database schemas
  */
 
 
@@ -46,7 +46,6 @@ class Migrations extends CI_Model
      * migration year: 2013
      * migrates group members as comma separated names in group code to id,code,year in separate table
      */
-
     public function migrateGroupMembers(){
         $this->db->select(array('code','members'));
         $query = $this->db->get('groups');
@@ -59,6 +58,22 @@ class Migrations extends CI_Model
                 $this->db->insert('groups_members',array('code'=>$code,'member'=>$id,"year"=>'2012'));
                 }
             }
+        }
+        echo "Success!";
+    }
+
+    /**
+     * migration year: 2013
+     * migrates pairs table to use user id in give/receive fields, rather than user name
+     */
+    public function migrateUserPairs() {
+        $this->db->select(array('code','give','receive'));
+        $query = $this->db->get('pairs_old');
+        foreach ($query->result() as $row){
+            $code = $row->code;
+            $give = $this->_lookupname($row->give);
+            $receive = $this->_lookupname($row->receive);
+            $this->db->insert('pairs',array('code'=>$code,'give'=>$give,'receive'=>$receive,'year'=>'2012'));
         }
         echo "Success!";
     }
