@@ -168,51 +168,46 @@ class Datamod extends CI_Model
 
     /**
      * checks whether a user is already in a group
-     * @todo id implementation
      * @param string $person        person to check
      * @param string $code          group code to check
      * @return bool                 true on success, false on failure
+     * @todo year implementation
      */
-    public function inGroup($person, $code)
+    public function inGroup($id, $code, $year)
     { //checks if a person is already in group
-        $this->db->select('groups')->where('name', $person);
-        $query = $this->db->get('users');
-        $row = $query->row();
-        $groups = $row->groups;
-        if ($groups != "") {
-            $groups = explode(",", $groups);
-            if (in_array($code, $groups))
-                return true;
-            else return false;
-        } else return false;
+        $this->db->select('code')->where(array('member'=>$id,'code'=>$code,'year'=>$this->current_year));
+        $query = $this->db->get('users_groups');
+        if ($query->num_rows() > 0)
+            return true;
+        else return false;
     }
 
     /**
      * count the number of members in a group
      * @todo simplified implementation
+     * @todo year implementation
      * @param string $code      group code
      * @return int              number of members
      */
-    public function countMembers($code)
+    public function countMembers($code,$year)
     { //returns the number of members in a group based on code
-        $members = $this->getMembers($code);
-        if ($members)
-            return count($members);
-        else return 0;
+        $this->db->select("id")->where(array("code"=>$code,'year'=>$this->current_year));
+        $query=$this->db->get('users_groups');
+        return $query->num_rows();
     }
 
     /**
      * count number of groups user is in
-     * @todo id implementation
+     * @todo simplified implementation
+     * @todo year implementation
      * @param string $person    person to check against
      * @return int              number of groups
      */
     public function countPersonGroups($person)
     { //returns the number of groups a person is currently a part of
-        $groups = $this->getPersonGroups($person);
-        if ($groups)
-            return count($groups);
-        else return 0;
+        $this->db->select("code")->where(array("id"=>$id,'year'=>$this->current_year));
+        $query=$this->db->get('users_groups');
+        return $query->num_rows();
     }
 
     /**
@@ -304,46 +299,48 @@ class Datamod extends CI_Model
 
     /**
      * get an array of members that belong to a group
-     * @todo id implementation
+     * @todo year implementation
+     * @todo name implementation
      * @param $code
      * @return array|bool
      */
     public function getMembers($code)
     { //get array of members who belong to a group
-        $this->db->select('members')->where(array('code' => $code, 'year' => $this->current_year));
-        $query = $this->db->get('groups');
+        $this->db->select('id')->where(array('code' => $code, 'year' => $this->current_year));
+        $query = $this->db->get('users_groups');
         if ($query->num_rows() > 0) {
-            $row = $query->row();
-            $members = $row->members;
-            if ($members != "")
-                return explode(",", $members);
-            else
-                return false;
+            $members=array();
+            foreach ($query->result() as $row) {
+                $members[]=$row->id;
+            }
+            return $members;
         }
         else return false;
     }
 
     /**
      * get an array of groups a person belongs to
-     * @todo id implementation
-     * @param string $person           user's name
+     * @todo year implementation
+     * @param string $person           user's id
      * @return string[]|bool           false on failure
      */
-    public function getPersonGroups($person)
-    { //get array of groups a person belongs to (input: persons name)
-        $this->db->select('groups')->where(array('name' => $person));
-        $query = $this->db->get('users');
-        $row = $query->row();
-        $groups = $row->groups;
-        if ($groups != "")
-            return explode(",", $groups);
-        else
-            return false;
+    public function getPersonGroups($id,$year)
+    { //get array of groups a person belongs to (input: persons id)
+        $this->db->select('code')->where(array('id' => $id,'year'=>$this->current_year));
+        $query = $this->db->get('users_groups');
+        if ($query->num_rows() > 0) {
+            $groups=array();
+            foreach ($query->result() as $row) {
+                $groups[]=$row->id;
+            }
+            return $groups;
+        }
+        else return false;
     }
 
     /**
      * get a person's partner for a group(assuming person is "give")
-     * @todo id implementation
+     * @todo id implementation**
      * @param $code         group code
      * @param $person       person's name
      * @return string       person's partner
@@ -365,11 +362,10 @@ class Datamod extends CI_Model
     /**
      * generates a group code and pushes it to the addgroup function
      * @todo let addGroup handle gengroup
-     * @todo id implementation
      * @param string $person        user's name
      * @param string $name          group name
      */
-    public function genGroup($person, $name)
+    public function genGroup($id, $name)
     {
         $code = $this->randstring(4);//generate a unique code
         $this->db->where('code', $code);
@@ -379,7 +375,7 @@ class Datamod extends CI_Model
             $this->db->where('code', $code);
             $query = $this->db->get('groups');
         }
-        $this->addGroup($person, $code, $name);
+        $this->addGroup($id, $code, $name);
     }
 
     /**
@@ -398,36 +394,22 @@ class Datamod extends CI_Model
     }
 
     /**
-     * //add a new group to the master record OR add a person to the group
+     * add a new group to the master record OR add a person to the group
      * @todo id implementation
      * @param string $person        person's name
      * @param string $code          group code
      * @param null $name            group name
      * @return void
      */
-    public function addGroup($person, $code, $name = null)
+    public function addGroup($id, $code, $name = null)
     {
         //if the group doesnt exist in master table, add it
         if (!$this->checkGroup($code))
-            $this->db->insert('groups', array('code' => $code, 'name' => $name, 'members' => $person, 'year' =>$this->current_year));
+            $this->db->insert('groups', array('code' => $code, 'name' => $name, 'year' =>$this->current_year));
         else {
             //update new member to list under group master table
-            $members = $this->getMembers($code);
-            $members[] = $person; //add person to array
-            $members = implode(',', $members);
-            $this->db->where(array('code' => $code, 'year' => $this->current_year))->update('groups', array('members' => $members));
+            $this->db->insert('users_groups', array('id' => $id,'code' => $code,'year' => $this->current_year));
         }
-        //update person's group list
-        if ($this->getPersonGroups($person) == false) //if the string is still empty
-        $groups = array($code);
-        else {
-            $groups = $this->getPersonGroups($person);
-            $groups[] = $code; //add person to array
-        }
-        $groups = implode(',', $groups);
-        $this->db->select('groups')->where('name', $person);
-        $this->db->update('users', array('groups' => $groups));
-        $query = $this->db->get('users'); //clear previous select query to prevent future errors
     }
 
     /**
@@ -437,36 +419,13 @@ class Datamod extends CI_Model
      * @param string $code          group code
      * @return bool
      */
-    public function removeFromGroup($person, $code)
+    public function removeFromGroup($id, $code, $year)
     {
         //check if the group is leaveable
         if ($this->leaveable($code)) {
-
-            //remove membership on person's group list
-            $groups = $this->getPersonGroups($person); //get list of groups
-            $index = array_search($code, $groups);
-            if ($index !== false) {
-                unset($groups[$index]); //rm
-                $groups = array_values($groups); //fix the index
-                //send stuff to the database
-                $groups = implode(',', $groups);
-                $this->db->where('name', $person)->update('users', array('groups' => $groups));
-
-                //remove membership on master groups table
-                $members = $this->getMembers($code);
-                $index = array_search($person, $members);
-                if ($index !== false) {
-                    unset($members[$index]); //rm
-                    if (!empty($members))
-                        $members = array_values($members); //fix the index
-                    //send stuff to the database
-                    $members = implode(',', $members);
-                    $this->db->where(array('code' => $code, 'year' => $this->current_year))->update('groups', array('members' => $members));
-                } else return false;
-                //delete group if empty
-                $this->deleteGroup($code);
-                return true;
-            } else return false;
+            $this->db->delete('users_groups', array('id' => $id, 'code'=>$code, 'year'=>$this->current_year));
+            if ($this->countMembers($code,$year) == 0)
+                $this->deleteGroup($code,$year);
         } else return false;
     }
 
@@ -476,16 +435,12 @@ class Datamod extends CI_Model
      * @param $code     group code
      * @return void
      */
-    public function deleteGroup($code)
+    public function deleteGroup($code,$year)
     {
         if ($this->checkGroup($code) && $this->deleteable($code)) {
             //check if the group is empty and not a special group
-            $this->db->select('members')->where(array('code' => $code, 'year' =>$this->current_year));
-            $query = $this->db->get('groups');
-            $row = $query->row();
-            $members = $row->members;
-            if ($members == '')
-                $this->db->where('code', $code)->delete('groups');
+            if ($this->countMembers($code,$year) == 0)
+                $this->db->delete('groups',array('code'=>$code,'year'=>$this->current_year));
         }
     }
 
@@ -504,8 +459,7 @@ class Datamod extends CI_Model
      * returns groups based on inputted year
      */
     public function listYearGroups($year = null){
-        if ($year== NULL)
-            $year = $this->current_year;//@todo is there a better way of doing this?
+        if ($year== NULL) $year = $this->current_year;//@todo is there a better way of doing this?
         $this->db->from('groups')->where('year',$year);
         return $this->db->get()->result();
     }
@@ -515,7 +469,7 @@ class Datamod extends CI_Model
      * @param $code         group code
      * @return bool
      */
-    public function paired($code)
+    public function paired($code,$year)
     {
         $this->db->from('pairs');
         $query = $this->db->where(array('code' => $code, 'year' =>$this->current_year));
@@ -531,7 +485,7 @@ class Datamod extends CI_Model
      * @param $code
      * @return mixed
      */
-    public function groupInfo($code)
+    public function groupInfo($code,$year)
     {
         return $this->db->from('groups')->where(array('code' => $code, $this->current_year))->get()->result();
     }
@@ -541,7 +495,7 @@ class Datamod extends CI_Model
      * @param $codeArray
      * @return array
      */
-    public function groupInfoMultiple($codeArray)
+    public function groupInfoMultiple($codeArray,$year)
     {
         foreach ($codeArray as $code) {
             $this->db->or_where('code', $code);
