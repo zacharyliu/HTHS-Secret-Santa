@@ -22,16 +22,12 @@ class Admin extends CI_Controller
     {
         $groups = $this->datamod->listAllGroups();
         foreach ($groups as &$group) {
-            $group->memberCount = $this->datamod->countMembers($group->code);
-            $group->paired = $this->datamod->paired($group->code);
+            $year = $group->year;//get the year of the group
+            $group->memberCount = $this->datamod->countMembers($group->code,$year);
+            $group->paired = $this->datamod->paired($group->code,$year);
         }
         $data = array('groups' => $groups, 'first_year'=>$this->adminmod->getFirstYear(),'current_year'=>intval(date('Y')));
         render('admin/index', $data);
-    }
-
-    public function addHTHS()
-    {
-        $this->adminmod->addGroupHTHS();
     }
 
     public function pairCustom()

@@ -57,8 +57,8 @@
                                     $count = true;
                                     echo '<tr><td><i>' . $group->name . '</i></td>';
                                     echo '<td>' . $group->code . '</td>';
-                                    echo '<td>' . $this->datamod->countMembers($group->code) . '</td>';
-                                    echo '<td>' . $this->datamod->getPair($group->code, $this->session->userdata('name')) . '</td>';
+                                    echo '<td>' . $this->datamod->countMembers($group->code,$group->year) . '</td>';
+                                    echo '<td>' . $this->datamod->getPair($group->code, $this->session->userdata('id'),$group->year) . '</td>';
                                     echo '<td>' . $group->description . '</td>';
                                     echo($group->leaveable ? '<td><a href="' . base_url('profile') . '/rm/' . $group->code . '">[leave]</a>&nbsp;</td>' : "<td></td>");
                                     echo '</tr>';

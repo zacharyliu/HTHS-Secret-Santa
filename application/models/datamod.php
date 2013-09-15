@@ -68,18 +68,30 @@ class Datamod extends CI_Model
     //KEY FUNCTIONS
     ////////////////////////////////
     /**
-     * get user id based on name and email
-     * @todo email is enough to determine condition of uniqueness
-     * @param string $name     name to check
+     * get user id based on email
      * @param string $email    email to check
      * @return int             user id
      */
     public function getUserId($email)
     {
-        $this->db->where(array('email' => $email));
+        $this->db->select('id')->where(array('email' => $email));
         $query = $this->db->get('users');
         $row = $query->row();
         return $row->id;
+    }
+
+    /**
+     * get user name based on id
+     * @param int $id           id to check
+     * @return string $name     user name
+     * @todo combine with getUserId
+     */
+    public function getUserName($id)
+    {
+        $this->db->select('name')->where(array('id' => $id));
+        $query = $this->db->get('users');
+        $row = $query->row();
+        return $row->name;
     }
 
     /**
@@ -208,9 +220,9 @@ class Datamod extends CI_Model
     public function countPersonGroups($id, $year = NULL)
     { //returns the number of groups a person is currently a part of
         if ($year == NULL) $year = $this->current_year;
-        $this->db->select("code")->where(array("id" => $id, 'year' => $year));
-        $query = $this->db->get('users_groups');
-        return $query->num_rows();
+        $this->db->where(array("id" => $id, 'year' => $year));
+        //$query = $this->db->get('users_groups');
+        return $this->db->count_all_results('users_groups');
     }
 
     /**
@@ -349,15 +361,14 @@ class Datamod extends CI_Model
      * @param $person       person's name
      * @return string       person's partner
      */
-    public function getPair($code, $person, $year = NULL)
+    public function getPair($code, $id, $year = NULL)
     { //get a person's partner for a group
         if ($year == NULL) $year = $this->current_year;
         $this->db->select('receive');
-        $query = $this->db->get_where('pairs', array('code' => $code, 'give' => $person, 'year' => $year));
+        $query = $this->db->get_where('pairs', array('code' => $code, 'give' => $id, 'year' => $year));
         if ($query->num_rows() > 0) {
             $row = $query->row();
-            $receive = $row->receive;
-            return $receive;
+            return $this->getUserName($row->receive);
         } else return '[pending]';
     }
 
@@ -439,7 +450,7 @@ class Datamod extends CI_Model
      * @param $code     group code
      * @return void
      */
-    public function deleteGroup($code, $year)
+    public function deleteGroup($code, $year = NULL)
     {
         if ($year == NULL) $year = $this->current_year;
         if ($this->checkGroup($code) && $this->deleteable($code)) {
