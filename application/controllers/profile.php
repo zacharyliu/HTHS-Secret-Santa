@@ -70,7 +70,7 @@ class Profile extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->_render(array('first_year'=>$this->datamod->getJoinYear($this->session->userdata('id')),'current_year'=>intval(date('Y'))));
         } else {
-            $this->datamod->addGroup($this->session->userdata('name'), set_value('group'));
+            $this->datamod->addGroup($this->session->userdata('id'), set_value('group'));
             $this->session->set_flashdata('result', message('You have successfully joined the group <strong>' . $this->datamod->getGroupName(set_value('group')) . '</strong>!',1)); //groupCode
             redirect('profile');
         }
@@ -84,7 +84,7 @@ class Profile extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->_render(array('first_year'=>$this->datamod->getJoinYear($this->session->userdata('id')),'current_year'=>intval(date('Y'))));
         } else {
-            $this->datamod->genGroup($this->session->userdata('name'), set_value('group_name'));
+            $this->datamod->genGroup($this->session->userdata('id'), set_value('group_name'));
             $this->session->set_flashdata('result', message('You have successfully created the group <strong>' . set_value('group_name') . '</strong>! Your group code is <strong>' . $this->datamod->getGroupCode(set_value('group_name')) . '</strong>. Keep this in a safe place.',1)); //groupcreate
             redirect('profile');
         }
@@ -95,7 +95,7 @@ class Profile extends CI_Controller
         $groupname = $this->datamod->getGroupName($code);
 
         if ($this->datamod->leaveable($code)) {
-            if ($this->datamod->removeFromGroup($this->session->userdata('name'), $this->uri->segment(3)))
+            if ($this->datamod->removeFromGroup($this->session->userdata('id'), $this->uri->segment(3)))
                 $this->session->set_flashdata('result', message('Successfully left the group <strong>' . $groupname . '</strong>.',0));
 
             else $this->session->set_flashdata('result', message('Poopy. Something went wrong. :( ',3));

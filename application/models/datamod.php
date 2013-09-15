@@ -257,11 +257,9 @@ class Datamod extends CI_Model
         $this->db->select('leaveable')->where(array('code' => $code, 'year' => $year));
         $query = $this->db->get('groups');
         $row = $query->row();
-        $leave = $row->leaveable;
-        if ($leave)
+        if ($row->leaveable)
             return true;
-        else
-            return false;
+        else return false;
     }
 
     ///////////////////////////////////////
@@ -419,12 +417,11 @@ class Datamod extends CI_Model
     public function addGroup($id, $code, $name = null)
     {
         //if the group doesnt exist in master table, add it
-        if (!$this->checkGroup($code))
+        if (!$this->checkGroup($code)){
             $this->db->insert('groups', array('code' => $code, 'name' => $name, 'year' => $this->current_year));
-        else {
-            //update new member to list under group master table
+        //add a new membership entry as well
             $this->db->insert('users_groups', array('id' => $id, 'code' => $code, 'year' => $this->current_year));
-        }
+    }
     }
 
     /**
@@ -441,6 +438,7 @@ class Datamod extends CI_Model
             $this->db->delete('users_groups', array('id' => $id, 'code' => $code, 'year' => $year));
             if ($this->countMembers($code, $year) == 0)
                 $this->deleteGroup($code, $year);
+            return true;
         } else return false;
     }
 
