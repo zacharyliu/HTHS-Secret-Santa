@@ -14,6 +14,7 @@ class Admin extends CI_Controller
         }
         $this->load->model('datamod'); //load the data model
         $this->load->model('adminmod'); //load the admin model
+        //$this->load->model('migrations');//load the migrations model
         $this->load->helper('message'); //load the bootstrap message helper
     }
 
