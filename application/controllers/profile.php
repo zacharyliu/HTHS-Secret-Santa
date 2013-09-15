@@ -38,8 +38,14 @@ class Profile extends CI_Controller
      */
     private function _render($data = array())
     {
-        $groups = $this->datamod->getPersonGroups($this->session->userdata('name')); //get all the group codes
-        $groupsInfo = $this->datamod->groupInfoMultiple($groups); //get all relevant group info
+        $join_year = $this->datamod->getJoinYear($this->session->userdata('id'));
+        $current_year = intval(date('Y'));
+        $groupsInfo = array();
+        while ($join_year<=$current_year){
+            $groups = $this->datamod->getPersonGroups($this->session->userdata('id'),$join_year); //get all the group codes for a certain year
+            $groupsInfo=array_merge($groupsInfo,$this->datamod->groupInfoMultiple($groups,$join_year)); //get all relevant group info
+            $join_year+=1;
+        }
         $data = array_merge(array('groups' => $groupsInfo), $data); //inject it into data array
 
         render('profile', $data);

@@ -21,7 +21,7 @@
                     <h3>My groups </h3>
 
                     <p>You are currently
-                        in <?php echo($this->datamod->countPersonGroups($this->session->userdata('name'))); ?>/5
+                        in <?php echo($this->datamod->countPersonGroups($this->session->userdata('id'))); ?>/5
                         groups.</p>
                     <ul id="years" class="nav nav-tabs">
                         <?php
