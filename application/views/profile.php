@@ -1,14 +1,14 @@
 <?php //echo validation_errors('<p style="color:red;">', '</p>'); ?>
 
 <div class="row">
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-10 col-md-offset-1 col-sm-12">
         <div class="row">
             <?php if (($this->session->flashdata('result'))) echo $this->session->flashdata('result'); //if there's a result message, show it?>
             <?php echo form_error('group'); ?>
             <?php echo form_error('group_name'); ?>
             <br/>
 
-            <div class="col-md-3">
+            <div class="col-md-3 col-sm-12">
                 <div class="row">
                     <h3><?php echo $this->session->userdata("name"); ?></h3>
                     <span><?php echo $this->session->userdata("email"); ?></span><br />
@@ -27,7 +27,7 @@
                 </div>
             </div>
 
-            <div class="col-md-9">
+            <div class="col-md-9 col-sm-12">
                 <div class="row">
                     <h3>My groups </h3>
 
