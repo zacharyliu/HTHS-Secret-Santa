@@ -13,7 +13,7 @@
     </div>-->
     <div class="spotlight">
         <div class="row">
-            <div id="carousel-example-captions" class="carousel slide bs-docs-carousel-example">
+            <div id="carousel-example-captions" class="carousel slide">
                 <ol class="carousel-indicators">
                     <li data-target="#carousel-example-captions" data-slide-to="0" class="active"></li>
                     <li data-target="#carousel-example-captions" data-slide-to="1"></li>
@@ -60,14 +60,14 @@
     <div style="margin:0px 30px 0px 30px;">
         <div class="subsection-icon">&#xF06B;</div>
         <div class="section-header">Everybody likes gifts... right?</div>
-        <div class="">HTHS Secret Santa is a fully fledged, feature filled application that makes it easy to exchange
+        <div class="subsection-text">HTHS Secret Santa is a fully fledged, feature filled application that makes it easy to exchange
             gifts with your friends and enemies.
         </div>
         <div class="row">
             <div class="col-md-8">
                 <div class="subsection-icon">&#xF004;</div>
                 <div class="subsection-header">Spread the love!</div>
-                <div>Studies show that generosity can help reduce stress. Make a difference in someone's day while
+                <div class="subsection-text">Studies show that generosity can help reduce stress. Make a difference in someone's day while
                     keeping the
                     holiday spirit alive.
                 </div>
@@ -123,7 +123,7 @@
             <div class="col-md-4">
                 <div class="subsection-icon">&#xF066;</div>
                 <div class="subsection-header">Keep it small!</div>
-                <div>Personalized, inexpensive gifts are preferred over super expensive ones, so you won't have to break
+                <div class="subsection-text">Personalized, inexpensive gifts are preferred over super expensive ones, so you won't have to break
                     out
                     your life savings.
                 </div>
@@ -131,7 +131,7 @@
             <div class="col-md-4">
                 <div class="subsection-icon">&#xF0EB;</div>
                 <div class="subsection-header">Freedom to decide.</div>
-                <div>Our unique group system enables you to join a pool with the whole school, or just with a few of
+                <div class="subsection-text">Our unique group system enables you to join a pool with the whole school, or just with a few of
                     your
                     friends.
                 </div>
@@ -139,7 +139,7 @@
             <div class="col-md-4">
                 <div class="subsection-icon">&#xF0C3;</div>
                 <div class="subsection-header">Built by High Tech, for High Tech.</div>
-                <div>This year we're back better than ever, with added functionality that will make your Secret Santa
+                <div class="subsection-text">This year we're back better than ever, with added functionality that will make your Secret Santa
                     experience even more enjoyable.
                 </div>
             </div>

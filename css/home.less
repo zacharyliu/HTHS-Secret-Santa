@@ -1,9 +1,9 @@
 @main: #27ae60;
+@main-complement: #c0392b;
 
-@font-face
-{
-  font-family: FontAwesome;
-src: url('/font/fontawesome.woff'),
+
+body{
+  font-family: Roboto;
 }
 
 .home-container {
@@ -51,7 +51,7 @@ src: url('/font/fontawesome.woff'),
   line-height:44px;
   color:@main;
   margin-bottom:10px;
-  margin-top:150px;
+  //margin-top:150px;
 }
 
 .section-subheader {
@@ -60,16 +60,16 @@ src: url('/font/fontawesome.woff'),
   color:#aeaeae;
 }
 
-.h-line {
+.section-space {
   height:2px;
   width:100%;
-  background-color:#dddddd;
+  //background-color:#dddddd;
   /*background-image: url(../img/horizontal-chain.png);
   background-repeat: no-repeat;
   background-size:40px 40px;
   background-position:center;*/
   margin-top:60px;
-  margin-bottom:60px;
+  margin-bottom:120px;
 }
 
 .h-chain {
@@ -81,7 +81,7 @@ src: url('/font/fontawesome.woff'),
 
 .subsection-icon {
   font-family:FontAwesome;
-  color:@main;
+  color:@main-complement;
   font-size:38px;
   line-height:38px;
   margin-bottom:10px;
@@ -93,7 +93,7 @@ src: url('/font/fontawesome.woff'),
   color:@main;
 }
 
-.subsection-subheader {
+.subsection-text {
   font-size:16px;
   line-height:20px;
   color:#aeaeae;
