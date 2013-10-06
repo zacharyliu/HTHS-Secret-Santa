@@ -1,13 +1,16 @@
 <link href="/css/home.css" rel="stylesheet">
 <script src="<?php echo base_url('/js/jquery.quovolver.js') ?>"></script>
+<script type="text/javascript" src="/js/jquery.stellar.min.js"></script>
 <script>
     $(document).ready(function () {
 
         $('blockquote').quovolver(500, 6000);
-
+        $.stellar();
     });
 </script>
-<div class="home-container">
+
+<div class="home-container slide" data-slide="1" data-stellar-background-ratio="0.5">
+
     <!--<div class="row">
         <div class="logo-container"></div>
     </div>-->
@@ -137,12 +140,25 @@
                 </div>
             </div>
             <div class="col-md-4">
+                <div class="subsection-icon">&#xF074;</div>
+                <div class="subsection-header">Flexibility First</div>
+                <div class="subsection-text">Commit as much or as little as you would like. Join and leave as many groups at your discretion until partners are assigned.</div>
+            </div>
+            </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="subsection-icon">&#xF091;</div>
+                <div class="subsection-header">Everybody Wins!</div>
+                <div class="subsection-text">Partners are assigned randomly, so you'll learn something new about someone and make new friends, all while exchanging gifts.</div>
+            </div>
+            <div class="col-md-4">
                 <div class="subsection-icon">&#xF0C3;</div>
                 <div class="subsection-header">Built by High Tech, for High Tech.</div>
-                <div class="subsection-text">This year we're back better than ever, with added functionality that will make your Secret Santa
+                <div class="subsection-text">We've redesigned the look and feel, with added functionality that will make your Secret Santa
                     experience even more enjoyable.
                 </div>
             </div>
+
         </div>
         <p><b>Thanks to everyone for making the 2012 HTHS Secret Santa so successful! Please take the time to fill out
                 this
@@ -150,13 +166,6 @@
                     href="https://docs.google.com/a/ctemc.org/spreadsheet/viewform?formkey=dF9sRUlSUm1mdFdnV3VEWFE3YUhEeXc6MQ#gid=0">survey</a>,
                 so that we know what to improve for next year!</b></p>
         <br/>
-
-        <p>Welcome to the signup page for the 2012 HTHS Secret Santa gift exchange. To register,
-            click <a href="<?php echo base_url('login') ?>"> here</a>. Exchange partners will be assigned
-            randomly, and encrypted using the industry-standard ROT-26 encryption scheme (alternately known as the
-            2-ROT-13)
-            for privacy. To avoid disappointment, please be sure that you are
-            committed to giving a gift before signing up.</p>
 
         <br/>
 
@@ -166,15 +175,16 @@
 
         <p>Gift Exchange: <i> Friday, 12/20 </i></p>
 
-        <h1 style="text-align:center;">Time Until Gift Exchange</h1>
 
-        <div style="margin:0 auto 0 auto;"><?php echo $timer; ?></div>
     </div>
-
-    <div class="home-footer">
+</div>
+    <div class="home-footer slide" data-slide="2" data-stellar-background-ratio="0.5">
 
         <div class="row">
             <div class="col-md-12">
+                <h1 style="text-align:center;">Time Until Gift Exchange</h1>
+
+                <div style="margin:0 auto 0 auto;"><?php echo $timer; ?></div>
                 <div class="section-header register-header">There are
                     currently <?php $total = $this->datamod->countUsers();
                     echo $total ?> secret santas.
@@ -184,7 +194,6 @@
                 </div>
             </div>
         </div>
-
         <div class="row">
             <div class="col-md-12">
                 <a href="login">
@@ -193,4 +202,8 @@
             </div>
         </div>
 
-    </div>
+
+
+
+        </div>
+

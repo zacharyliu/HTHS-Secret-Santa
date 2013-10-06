@@ -2,39 +2,22 @@ body {
   font-family: Roboto;
 }
 .home-container {
+  height: 100%;
   text-align: center;
-}
-.logo-container {
-  height: 400px;
-  background-color: #27ae60;
-  margin: -20px -20px 0 -20px;
-  background-image: url(/img/secretsanta.png);
-  background-repeat: no-repeat;
-  background-size: 70%;
-  background-position: center;
-}
-@media (min-width: 1265px) {
-  .logo-container {
-    background-size: 890px;
-  }
-}
-@media (min-width: 634px) and (max-width: 848px) {
-  .logo-container {
-    height: 300px;
-  }
-}
-@media (max-width: 634px) {
-  .logo-container {
-    height: 200px;
-  }
-}
-.logo {
-  max-width: 955px;
+  background: url(/img/tree-gn.svg) no-repeat fixed;
+  /*-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;*/
+
+  background-size: 130% 1500px;
+  background-color: #3498db;
+  background-position: left;
 }
 .section-header {
   font-size: 44px;
   line-height: 44px;
-  color: #27ae60;
+  color: #ff615f;
   margin-bottom: 10px;
 }
 .section-subheader {
@@ -60,7 +43,7 @@ body {
 }
 .subsection-icon {
   font-family: FontAwesome;
-  color: #c0392b;
+  color: #ff615f;
   font-size: 38px;
   line-height: 38px;
   margin-bottom: 10px;
@@ -68,13 +51,13 @@ body {
 .subsection-header {
   font-size: 24px;
   line-height: 44px;
-  color: #27ae60;
+  color: #ff615f;
 }
 .subsection-text {
   font-size: 16px;
   line-height: 20px;
-  color: #aeaeae;
-  margin-bottom: 150px;
+  color: #ffffff;
+  margin-bottom: 250px;
 }
 .register-header {
   color: #ffffff;
@@ -91,12 +74,7 @@ body {
   background-color: #c0c0c0;
 }
 .home-footer {
-  height: 400px;
   background-color: #27ae60;
-  margin-left: -20px;
-  margin-right: -20px;
-  margin-bottom: -40px;
-  padding-left: 20px;
-  padding-right: 20px;
+  text-align: center;
   padding-bottom: 60px;
 }
