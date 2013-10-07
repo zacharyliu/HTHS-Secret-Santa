@@ -24,7 +24,7 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="item active">
-                        <img src="img/secretsanta.png" alt="First slide image">
+                        <img class="carousel" src="img/secretsanta.png" alt="First slide image">
 
                         <div class="carousel-caption">
                             <h3>First slide label</h3>
@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <div class="item">
-                        <img src="img/secretsanta.png" alt="First slide image">
+                        <img class="carousel" src="img/secretsanta.png" alt="First slide image">
 
                         <div class="carousel-caption">
                             <h3>Second slide label</h3>
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     <div class="item">
-                        <img src="img/secretsanta.png" alt="First slide image">
+                        <img class="carousel" src="img/secretsanta.png" alt="First slide image">
 
                         <div class="carousel-caption">
                             <h3>Third slide label</h3>
@@ -82,39 +82,39 @@
                         <p>Kindness in words creates confidence. Kindness in thinking creates profoundness. Kindness in
                             giving
                             creates love."</p>
-                        <cite>&ndash; Lao Tzu</cite>
+                        <small> Lao Tzu</small>
                     </blockquote>
                     <blockquote>
                         <p>I have found that among its other benefits, giving liberates the soul of the giver."</p>
-                        <cite>&ndash; Maya Angelou</cite>
+                        <small> Maya Angelou</small>
                     </blockquote>
                     <blockquote>
                         <p>If you wait until you can do everything for everybody, instead of something for somebody,
                             you'll end
                             up
                             not doing nothing for nobody."</p>
-                        <cite>&ndash; Malcom Bane</cite>
+                        <small> Malcom Bane</small>
                     </blockquote>
                     <blockquote>
                         <p>To know even one life has breathed easier because you have lived. This is to have
                             succeeded."</p>
-                        <cite>&ndash; Ralph Waldo Emerson</cite>
+                        <small> Ralph Waldo Emerson</small>
                     </blockquote>
                     <blockquote>
                         <p>The best way to find yourself is to lose yourself in the service of others."</p>
-                        <cite>&ndash; Ralph Waldo Emerson</cite>
+                        <small> Ralph Waldo Emerson</small>
                     </blockquote>
                     <blockquote>
                         <p>The value of a man resides in what he gives and not in what he is capable of receiving."</p>
-                        <cite>&ndash; Albert Einstein</cite>
+                        <small> Albert Einstein</small>
                     </blockquote>
                     <blockquote>
                         <p>Make all you can, save all you can, give all you can."</p>
-                        <cite>&ndash; John Wesley</cite>
+                        <small> John Wesley</small>
                     </blockquote>
                     <blockquote>
                         <p>No person was ever honored for what he received. He was honored for what he gave."</p>
-                        <cite>&ndash; Calvin Coolidge</cite>
+                        <small> Calvin Coolidge</small>
                     </blockquote>
                     <blockquote>
                         <p>Sometimes a small thing you do can mean everything in another person's life."</p>
@@ -141,14 +141,14 @@
             </div>
             <div class="col-md-4">
                 <div class="subsection-icon">&#xF074;</div>
-                <div class="subsection-header">Flexibility First</div>
+                <div class="subsection-header">Flexibility first.</div>
                 <div class="subsection-text">Commit as much or as little as you would like. Join and leave as many groups at your discretion until partners are assigned.</div>
             </div>
             </div>
         <div class="row">
             <div class="col-md-4">
                 <div class="subsection-icon">&#xF091;</div>
-                <div class="subsection-header">Everybody Wins!</div>
+                <div class="subsection-header">Everybody wins!</div>
                 <div class="subsection-text">Partners are assigned randomly, so you'll learn something new about someone and make new friends, all while exchanging gifts.</div>
             </div>
             <div class="col-md-4">
