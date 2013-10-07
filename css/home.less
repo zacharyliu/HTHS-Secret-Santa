@@ -1,6 +1,7 @@
 @main: #27ae60;
 @main-complement: #d15050;
 @main-bgd: #6ccfff;
+@main-text:#ffffff;
 
 
 .home-container {
@@ -79,7 +80,7 @@ img.carousel{
 .subsection-text {
   font-size:16px;
   line-height:20px;
-  color:#ffffff;//#aeaeae;
+  color:@main-text;//#aeaeae;
   margin-bottom:200px;
 
 }
@@ -111,4 +112,10 @@ img.carousel{
   //padding-left:20px;
   //padding-right:20px;
   padding-bottom:60px;
+}
+
+blockquote {
+  border-left: none;
+  p {color: @main-text;}
+  small {color: #4f4f4f;}
 }
