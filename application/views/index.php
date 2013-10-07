@@ -135,7 +135,7 @@
             <div class="col-md-4">
                 <div class="subsection-icon">&#xF0EB;</div>
                 <div class="subsection-header">Freedom to decide.</div>
-                <div class="subsection-text">Our unique group system enables you to join a pool with the whole school, or just with a few of
+                <div class="subsection-text">Our unique group system enables you to join a group with the whole school, or just with a few of
                     your
                     friends.
                 </div>
@@ -147,34 +147,28 @@
             </div>
             </div>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="subsection-icon">&#xF091;</div>
                 <div class="subsection-header">Everybody wins!</div>
                 <div class="subsection-text">Partners are assigned randomly, so you'll learn something new about someone and make new friends, all while exchanging gifts.</div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="subsection-icon">&#xF0C3;</div>
                 <div class="subsection-header">Built by High Tech, for High Tech.</div>
                 <div class="subsection-text">We've redesigned the look and feel with added functionality that will make your Secret Santa
                     experience even more enjoyable.
                 </div>
             </div>
-
         </div>
-        <p><b>Thanks to everyone for making the 2012 HTHS Secret Santa so successful! Please take the time to fill out
-                this
-                brief <a
-                    href="https://docs.google.com/a/ctemc.org/spreadsheet/viewform?formkey=dF9sRUlSUm1mdFdnV3VEWFE3YUhEeXc6MQ#gid=0">survey</a>,
-                so that we know what to improve for next year!</b></p>
-        <br/>
-
-        <br/>
-
-        <p>Registration ends: <i> TBD</i></p>
-
-        <p>Partner Assignments: <i> TBD </i></p>
-
-        <p>Gift Exchange: <i> Friday, 12/20 </i></p>
+        <div class="row">
+            <div class="subsection-icon">&#xF017;</div>
+            <div class="subsection-header">Important Dates are coming up.</div>
+            <div class="subsection-text">
+                Registration ends: <i> TBD</i><br />
+                Partner Assignments: <i> TBD </i><br/>
+                Gift Exchange: <i> Friday, 12/20 </i><br/>
+            </div>
+        </div>
 
 
     </div>
