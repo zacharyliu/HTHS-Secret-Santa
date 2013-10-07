@@ -1,6 +1,7 @@
 <link href="/css/home.css" rel="stylesheet">
 <script src="<?php echo base_url('/js/jquery.quovolver.js') ?>"></script>
 <script type="text/javascript" src="/js/jquery.stellar.min.js"></script>
+<script type="text/javascript" src="/js/snowstorm-min.js"></script>
 <script>
     $(document).ready(function () {
 
@@ -142,7 +143,7 @@
             <div class="col-md-4">
                 <div class="subsection-icon">&#xF074;</div>
                 <div class="subsection-header">Flexibility first.</div>
-                <div class="subsection-text">Commit as much or as little as you would like. Join and leave as many groups at your discretion until partners are assigned.</div>
+                <div class="subsection-text">Commit as much or as little as you would like. Join and leave groups at your discretion until partners are assigned.</div>
             </div>
             </div>
         <div class="row">
@@ -154,7 +155,7 @@
             <div class="col-md-4">
                 <div class="subsection-icon">&#xF0C3;</div>
                 <div class="subsection-header">Built by High Tech, for High Tech.</div>
-                <div class="subsection-text">We've redesigned the look and feel, with added functionality that will make your Secret Santa
+                <div class="subsection-text">We've redesigned the look and feel with added functionality that will make your Secret Santa
                     experience even more enjoyable.
                 </div>
             </div>
