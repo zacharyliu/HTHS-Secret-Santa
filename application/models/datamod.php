@@ -190,7 +190,7 @@ class Datamod extends CI_Model
     public function inGroup($id, $code, $year = NULL)
     { //checks if a person is already in group
         if ($year == NULL) $year = $this->current_year;
-        $this->db->select('code')->where(array('member' => $id, 'code' => $code, 'year' => $year));
+        $this->db->select('code')->where(array('id' => $id, 'code' => $code, 'year' => $year));
         $query = $this->db->get('users_groups');
         if ($query->num_rows() > 0)
             return true;

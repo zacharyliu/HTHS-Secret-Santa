@@ -62,7 +62,7 @@
         </div>
     </div>
     <div style="margin:0px 30px 0px 30px;">
-        <div class="subsection-icon">&#xF06B;</div>
+        <div class="subsection-icon" style="font-size:65px;line-height:65px;">&#xF06B;</div>
         <div class="section-header">Everybody likes gifts... right?</div>
         <div class="subsection-text">HTHS Secret Santa is a fully fledged, feature filled application that makes it easy to exchange
             gifts with your friends and enemies.
@@ -177,7 +177,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <h1 style="text-align:center;">Time Until Gift Exchange</h1>
+                <h1 style="text-align:center;color:#FFFFFF;">Time Until Gift Exchange</h1>
 
                 <div style="margin:0 auto 0 auto;"><?php echo $timer; ?></div>
                 <div class="section-header register-header">There are
