@@ -170,7 +170,6 @@
             </div>
         </div>
 
-
     </div>
 </div>
     <div class="home-footer slide" data-slide="2" data-stellar-background-ratio="0.5">
@@ -190,11 +189,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
                 <a href="login">
-                    <button type="button" class="btn register-btn">Sign up for the secret santa.</button>
-                </a>
-            </div>
+                    <button type="submit" class="btn register-btn">Sign up for the secret santa.</button>
+                    </a>
         </div>
 
 
