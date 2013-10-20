@@ -125,7 +125,7 @@
                     <h3>Settings</h3>
                     <div class="container">
 
-                    <p><a href="<?php echo base_url('profile/resetPin'); ?>">Reset</a> my pin.</p>
+                    <!--settings here-->
                     <br/>
                 </div>
                     </div>
