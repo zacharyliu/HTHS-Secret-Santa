@@ -7,7 +7,7 @@
 <body>
 
 <div style="margin-top:auto;margin-left:30px;margin-right:30px;">
-    <h2> Frequently Asked Questions </h2>
+    <h2> Frequently Asked Questions! </h2>
 
     <p><b> What is HTHS Secret Santa? </b> </br/>
         HTHS Secret Santa is a web app built by and for HTHS students. By using technology to simplify the
