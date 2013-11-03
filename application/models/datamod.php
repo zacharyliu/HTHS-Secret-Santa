@@ -530,4 +530,23 @@ class Datamod extends CI_Model
     }
 
     ////SETTINGS
+
+    ////PROFILE RETRIEVAL
+    /**
+     * get year user joined
+     * @param $id
+     * @return mixed
+     */
+    public function userStats($id) {
+        $this->db->select(array('year_join','class'))->where(array('id' => $id));
+        $query = $this->db->get('users');
+        $row = $query->row();
+        return $row;
+    }
+
+
+    public function giftsExchanged($id) {
+        $query = $this->db->select('give')->where(array('give' => $id))->get("pairs");
+        return $query->num_rows();
+    }
 }
