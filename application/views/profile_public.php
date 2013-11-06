@@ -1,0 +1,5 @@
+<?
+/**
+ * external profile view
+ */
+?>

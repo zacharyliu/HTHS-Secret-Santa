@@ -21,12 +21,7 @@ $userStats = $this->datamod->userStats($id);//get user stats
                         <br/>
                     <span><strong>Santa since:</strong> <?php echo($userStats->year_join)?></span><br/>
                     <span><strong>Gifts Exchanged:</strong> <?php echo($this->datamod->giftsExchanged($id));?></span><br/>
-                    <span><strong>Medals Earned:</strong> <?php echo "quack";?></span><br />
-                    <span><strong>Easter Eggs Discovered:</strong> <?php echo "ribbet";?></span>
                     <span><strong></strong></span>
-                </div>
-                <div class="row">
-                    <h4>Medals</h4>
                 </div>
             </div>
 

@@ -64,7 +64,7 @@
             </div>
         </div>
         <div class="row">
-            <h2>Garbage Collection</h2>
+            <h2>Template Groups</h2>
 
             <div><a href="/admin/lockold">Lock</a> last year's groups. This will make all groups
                 from <?php echo $this->adminmod->getPrevYear() ?> unleaveable.
