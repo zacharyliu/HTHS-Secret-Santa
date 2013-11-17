@@ -5,9 +5,10 @@
         <br />
         <dl>
             <dt> What is HTHS Secret Santa?</dt>
-            <dd>HTHS Secret Santa is a web app built by and for HTHS students. By using technology to simplify the
+            <dd>Currently in its second year of operations, <i>HTHS Secret Santa</i> is a web app built by and for HTHS students.
+                Our goal is to foster community and giving in the high tech community by organizing an intuitive
                 <a href="http://www.wikihow.com/Do-a-Secret-Santa"> Secret Santa</a>
-                process, we are able to ensure that the activity runs smoothly. :)
+                through a web application. We'd love for you to participate in this year's festivities!
             </dd>
 
             <dt> How do I register?</dt>
@@ -16,31 +17,26 @@
             </dd>
 
             <dt> What if I want to have a Secret Santa among my own friends?</dt>
-            <dd>We implemented a unique "groups" feature that allows you to participate in multiple Secret Santas.
-                After you login/register, you are given to option to create your own group that is matched with a
-                generated code. Share this code with your friends. If all of you input the same code, you'll be in the
-                same Secret Santa group.
+            <dd><i>You can!</i> We implemented a unique "groups" feature that allows you to participate in multiple <i> Secret Santas </i>.
+                After you login/register, you are given to option to create your own group that has a specifically
+                generated code. Once you share this code with your friends, you'll be able to be matched with your friends in that
+                same group. It's as simple as that!
             </dd>
 
             <dt> What is the price range for gifts?</dt>
-            <dd>For the school-wide HTHS group, the limit is $5. Be creative! For any private group, the recommended
-                limit is
-                $5-$15. Be thoughtful! Don't get anything too expensive or it will be awkward.
+            <dd>For the school-wide HTHS group, try to keep your budgets around $10. Remember that creative and thoughtful gifts
+                are more valuable than excessively pricey gifts!
             </dd>
 
             <dt> What kinds of gifts should I buy?</dt>
-            <dd>You can buy anything that you think that your exchange partner would enjoy! Just make sure that it's
-                appropriate to bring into school. Don't be dumb.
+            <dd>You can buy anything that you think that your exchange partner would enjoy! Please make sure it's school appropriate,
+                because you will probably be bringing your gifts into school.
             </dd>
-
-            <dt> What if I get myself?</dt>
-            <dd>You won't. Believe in Matt Hsu.</dd>
 
             <dt>What do I do if I don't want to participate anymore?</dt>
             <dd>You can remove yourself from any group as long as you do so before <i> Friday, 12/14 (when registration
                     ends). </i> Otherwise, don't back out of your commitments, or there will be repercussions. Don't be
-                that
-                guy.
+                <i> that </i> guy.
             </dd>
         </dl>
 	<span style="text-align:center">
@@ -50,8 +46,7 @@
         <h2> Special thanks... </h2>
 
         <p>
-        <li><b> Web Dev: </b> Vincent Chen; Matt Hsu; Zachary Liu</li>
-        <li><b> Logo Design: </b> Kevin Herviou</li>
+        <li><b> Developers:</b> Vincent Chen (Sr.); Matt Hsu (Sr.); Zachary Liu(Sr.)</li>
 
     </div>
 
