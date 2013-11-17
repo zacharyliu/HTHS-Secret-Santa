@@ -2,7 +2,7 @@
 $id=$this->session->userdata('id'); //set id for use
 $userStats = $this->datamod->userStats($id);//get user stats
 ?>
-
+<div class="container">
 <div class="row">
     <div class="col-md-10 col-md-offset-1 col-sm-12">
         <div class="row">
@@ -11,13 +11,13 @@ $userStats = $this->datamod->userStats($id);//get user stats
             <?php echo form_error('group_name'); ?>
             <br/>
 
-            <div class="col-md-3 col-sm-12">
+            <div class="col-md-2 col-sm-12">
                 <div class="row">
                     <h3><?php echo $this->session->userdata("name"); ?></h3>
                     <span><?php echo $this->session->userdata("email"); ?></span><br />
                     <span>Class of <?php echo($userStats->class ? $userStats->class!=null : "???");?></span><br/>
                     <br />
-                    <p style="word-wrap:break-word;">bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio</p>
+                    <!--<p style="word-wrap:break-word;">bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio</p>-->
                         <br/>
                     <span><strong>Santa since:</strong> <?php echo($userStats->year_join)?></span><br/>
                     <span><strong>Gifts Exchanged:</strong> <?php echo($this->datamod->giftsExchanged($id));?></span><br/>
@@ -25,7 +25,7 @@ $userStats = $this->datamod->userStats($id);//get user stats
                 </div>
             </div>
 
-            <div class="col-md-9 col-sm-12">
+            <div class="col-md-10 col-sm-12">
                 <div class="row">
                     <h3>My groups </h3>
 
@@ -131,3 +131,4 @@ $userStats = $this->datamod->userStats($id);//get user stats
         </div>
     </div>
 </div>
+    </div>

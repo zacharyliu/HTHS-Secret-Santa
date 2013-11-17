@@ -36,7 +36,6 @@
                         if ($group->year == $year) { //only echo if matching year
                             $count = true;
                             ?>
-
                             <tr>
                                 <td><?php echo $group->name ?></td>
                                 <td><?php echo $group->memberCount ?></td>
@@ -65,7 +64,43 @@
         </div>
         <div class="row">
             <h2>Template Groups</h2>
-
+            <table class="table table-bordered table-striped" id="groups">
+                <tr>
+                    <th>Group Name</th>
+                    <th>Group Code</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+                <?php
+                if ($templates != false) {//template groups present
+                    foreach ($templates as $template) {
+                        var_dump($template->name);
+                ?>
+                    <tr>
+                        <td><?php echo $template->name ?></td>
+                        <td><?php echo $template->code ?></td>
+                        <td><?php echo $template->description ?></td>
+                    </tr>
+                <?php    }
+                }
+                else echo '<tr><td colspan=4>Nothing to show here...</td></tr>';
+                ?>
+            </table>
+            <form class="form-inline" role="form">
+                <div class="form-group">
+                    <label class="sr-only" for="groupName">Name</label>
+                    <input type="text" class="form-control" id="groupName" placeholder="Group Name">
+                </div>
+                <div class="form-group">
+                    <label class="sr-only" for="groupCode">Code</label>
+                    <input type="text" class="form-control" id="groupCode" placeholder="Code">
+                </div>
+                <div class="form-group">
+                    <label class="sr-only" for="groupDescrip">Description</label>
+                    <input type="text" class="form-control" id="groupDescrip" placeholder="Description">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
             <div><a href="/admin/lockold">Lock</a> last year's groups. This will make all groups
                 from <?php echo $this->adminmod->getPrevYear() ?> unleaveable.
             </div>
