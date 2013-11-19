@@ -59,7 +59,12 @@ class Adminmod extends CI_Model
         }
     }
 
+    public function listTemplateGroups(){
+        return $this->db->get('groups_template')->result();
+    }
+
     /**
+     * @deprecated
      * lock groups from previous year:
      * sets leaveable = 0 in the groups table
      * advances current_year global variable to this year
@@ -69,6 +74,7 @@ class Adminmod extends CI_Model
     }
 
     /**
+     * @deprecated
      * gets the previous year based on whether christmas has passed or not
      * Returns previous year if (current year) < x < (christmas)
      * Returns current year if (christmas) < x < (end of current year)

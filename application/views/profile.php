@@ -1,5 +1,8 @@
-<?php //echo validation_errors('<p style="color:red;">', '</p>'); ?>
-
+<?php //echo validation_errors('<p style="color:red;">', '</p>');
+$id=$this->session->userdata('id'); //set id for use
+$userStats = $this->datamod->userStats($id);//get user stats
+?>
+<div class="container">
 <div class="row">
     <div class="col-md-10 col-md-offset-1 col-sm-12">
         <div class="row">
@@ -8,31 +11,26 @@
             <?php echo form_error('group_name'); ?>
             <br/>
 
-            <div class="col-md-3 col-sm-12">
+            <div class="col-md-2 col-sm-12">
                 <div class="row">
                     <h3><?php echo $this->session->userdata("name"); ?></h3>
                     <span><?php echo $this->session->userdata("email"); ?></span><br />
-                    <span>Class of <?php echo "class"?></span><br/>
+                    <span>Class of <?php echo($userStats->class ? $userStats->class!=null : "???");?></span><br/>
                     <br />
-                    <p style="word-wrap:break-word;">bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio</p>
+                    <!--<p style="word-wrap:break-word;">bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio</p>-->
                         <br/>
-                    <span><strong>Santa since:</strong> <?php echo "meow";?></span><br/>
-                    <span><strong>Gifts Exchanged:</strong> <?php echo "moo";?></span><br/>
-                    <span><strong>Medals Earned:</strong> <?php echo "quack";?></span><br />
-                    <span><strong>Easter Eggs Discovered:</strong> <?php echo "ribbet";?></span>
+                    <span><strong>Santa since:</strong> <?php echo($userStats->year_join)?></span><br/>
+                    <span><strong>Gifts Exchanged:</strong> <?php echo($this->datamod->giftsExchanged($id));?></span><br/>
                     <span><strong></strong></span>
-                </div>
-                <div class="row">
-                    <h4>Medals</h4>
                 </div>
             </div>
 
-            <div class="col-md-9 col-sm-12">
+            <div class="col-md-10 col-sm-12">
                 <div class="row">
                     <h3>My groups </h3>
 
                     <p>You are currently
-                        in <?php echo($this->datamod->countPersonGroups($this->session->userdata('id'))); ?>/5
+                        in <?php echo($this->datamod->countPersonGroups($id)); ?>/5
                         groups.</p>
                     <div class="container">
                     <ul id="years" class="nav nav-tabs">
@@ -49,7 +47,7 @@
                         <?php
                         $year = $first_year; //reset year variable
                         while ($year <= $current_year){
-                            $count = false; //whether groups exist for the curent year
+                            $count = false; //whether groups exist for the current year
                             if ($year != $current_year) //only add the active class to the most recent year
                                 echo '<div class="tab-pane fade" id="' . $year . '">';
                             else echo '<div class="tab-pane fade active in" id="' . $year . '">';?>
@@ -69,7 +67,7 @@
                                     echo '<tr><td><i>' . $group->name . '</i></td>';
                                     echo '<td>' . $group->code . '</td>';
                                     echo '<td>' . $this->datamod->countMembers($group->code,$group->year) . '</td>';
-                                    echo '<td>' . $this->datamod->getPair($group->code, $this->session->userdata('id'),$group->year) . '</td>';
+                                    echo '<td>' . $this->datamod->getPair($group->code, $id,$group->year) . '</td>';
                                     echo '<td>' . $group->description . '</td>';
                                     echo($group->leaveable ? '<td><a href="' . base_url('profile') . '/rm/' . $group->code . '">[leave]</a>&nbsp;</td>' : "<td></td>");
                                     echo '</tr>';
@@ -125,7 +123,7 @@
                     <h3>Settings</h3>
                     <div class="container">
 
-                    <p><a href="<?php echo base_url('profile/resetPin'); ?>">Reset</a> my pin.</p>
+                    <!--settings here-->
                     <br/>
                 </div>
                     </div>
@@ -133,3 +131,4 @@
         </div>
     </div>
 </div>
+    </div>

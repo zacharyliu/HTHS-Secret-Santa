@@ -21,12 +21,12 @@ class Admin extends CI_Controller
     public function index()
     {
         $groups = $this->datamod->listAllGroups();
-        foreach ($groups as &$group) {
+        foreach ($groups as &$group) {//get list of groups for pairing
             $year = $group->year;//get the year of the group
             $group->memberCount = $this->datamod->countMembers($group->code,$year);
             $group->paired = $this->datamod->paired($group->code,$year);
         }
-        $data = array('groups' => $groups, 'first_year'=>$this->adminmod->getFirstYear(),'current_year'=>intval(date('Y')));
+        $data = array('groups' => $groups, 'templates'=>$this->adminmod->listTemplateGroups(), 'first_year'=>$this->adminmod->getFirstYear(),'current_year'=>intval(date('Y')));
         render('admin/index', $data);
     }
 
