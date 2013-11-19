@@ -8,6 +8,8 @@ class Login extends CI_Controller
     public function index()
     {
         require(APPPATH . 'classes/openid.php');
+        require(APPPATH . 'config/admin_users.php'); //retrieve the list of admin users
+
         $openid = new LightOpenID($_SERVER['HTTP_HOST']);
         if (!$openid->mode) {
             // Didn't get login info from the OpenID provider yet / came from the login link
@@ -43,7 +45,7 @@ class Login extends CI_Controller
                         $user_id = $this->datamod->getUserId($email);//@todo addUser should return id
                     }
                     //check for admin permissions
-                    if ($user_data['contact/email'] == 'zliu@ctemc.org' || $user_data['contact/email'] == 'mhsu@ctemc.org' || $user_data['contact/email'] == 'vchen@ctemc.org')
+                    if (in_array($user_data['contact/email'],$admin_users)) //check against imported admin_users.config file
                         $admin = 'true';
                     else
                         $admin = 'false';

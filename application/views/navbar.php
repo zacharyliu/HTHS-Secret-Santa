@@ -11,6 +11,7 @@
         <ul class="nav navbar-nav navbar-left">
             <li><a class="navbar-brand" href="/"><img id="title-icon" src="../img/app-icon.png" height="45px" width="45px" /><span id="title">HTHS Secret Santa</span></a></li>
             <li><a href="/secretsanta/about">About</a></li>
+            <li><a href="/discover">Discover</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <?php

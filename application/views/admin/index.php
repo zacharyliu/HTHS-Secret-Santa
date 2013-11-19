@@ -5,6 +5,7 @@
 
         <div class="row">
             <h2>Group Management</h2>
+            <p>Run pairing on designated groups.</p>
             <ul id="years" class="nav nav-tabs">
                 <?php
                 $year = $first_year; //don't override first_year variable
@@ -64,6 +65,7 @@
         </div>
         <div class="row">
             <h2>Template Groups</h2>
+            <p>These are default groups that are available to join at any time.</p>
             <table class="table table-bordered table-striped" id="groups">
                 <tr>
                     <th>Group Name</th>
@@ -99,10 +101,15 @@
                     <label class="sr-only" for="groupDescrip">Description</label>
                     <input type="text" class="form-control" id="groupDescrip" placeholder="Description">
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"> Private Group
+                    </label>
+                </div>
+                <button type="button" class="btn btn-default">Submit</button>
             </form>
-            <div><a href="/admin/lockold">Lock</a> last year's groups. This will make all groups
-                from <?php echo $this->adminmod->getPrevYear() ?> unleaveable.
+            <!--<div><a href="/admin/lockold">Lock</a> last year's groups. This will make all groups
+                from <?php echo $this->adminmod->getPrevYear() ?> unleaveable.-->
             </div>
         </div>
 
