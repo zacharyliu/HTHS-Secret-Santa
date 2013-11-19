@@ -11,14 +11,14 @@
     <meta name="author" content="">
 
     <!-- Bootstrap CSS Styles-->
-    <link href="<?=base_url()?>css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?=base_url('css/bootstrap.min.css')?>" rel="stylesheet">
     <style type="text/css">
         body {
             padding-top: 60px;
             padding-bottom: 40px;
         }
     </style>
-    <link href="<?=base_url()?>css/main.css" rel="stylesheet">
+    <link href="<?=base_url('css/main.css')?>" rel="stylesheet">
 
     <!-- Fav and touch icons -->
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?=base_url()?>ico/apple-touch-icon-144-precomposed.png">

@@ -12,7 +12,7 @@
             </dd>
 
             <dt> How do I register?</dt>
-            <dd>You can register <a href="/login">here</a>. Be sure to use your "ctemc.org"
+            <dd>You can register <a href="<?=base_url('login')?>">here</a>. Be sure to use your "ctemc.org"
                 email when registering!
             </dd>
 

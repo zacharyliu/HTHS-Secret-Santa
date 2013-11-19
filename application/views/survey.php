@@ -23,7 +23,7 @@
         echo form_open('profile/resetPin');
         echo '<h3>Reset my Pin</h3><p>Fill out this form to reset your encryption pin.  <b>DO NOT</b> forget this, since it is required to view your partner name. You can reset your pin until the day registration closes.</p>';
     } else {
-        echo form_open('secretsanta/survey');
+        echo form_open('survey');
         echo '<h3>Almost there!</h3><p>Just a few steps left.</p>
 		<br />
 				<p>1. Define a <b>4 digit numerical</b> pin to be used in encryption.  This must be set to participate and ensures you are the only one who can view your partner. <b>DO NOT</b> forget this. We do not store your pin, so it cannot be recovered.</p>';
