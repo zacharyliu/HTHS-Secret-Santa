@@ -19,7 +19,7 @@
                 echo '<li><a style="background: rgba(0,0,0,0)">Hi ' . $this->session->userdata('name') . '!</a></li>';
                 if ($this->session->userdata('admin') == 'true')
                     echo '<li><a href="' . base_url("admin") . '">Admin Panel</a>';
-                echo '<li><a href="'. base_url('profile') .'">Profile</a></li>' . '<li><a href="/login/logout">Logout</a>';
+                echo '<li><a href="'. base_url('profile') .'">Profile</a></li>' . '<li><a href="' . base_url('logout') . '">Logout</a>';
             } else {
                 echo '<li><a href="' . base_url('login') . '">Login / Register</a></li>';
             }?>

@@ -40,6 +40,8 @@
 
 $route['default_controller'] = "secretsanta";
 $route['404_override'] = '';
+$route['logout'] = 'login/logout';
+$route['about'] = 'secretsanta/about';
 
 
 /* End of file routes.php */
