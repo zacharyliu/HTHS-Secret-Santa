@@ -85,7 +85,7 @@ $(document).ready () ->
   #save button event handler
   $("#modal-edit-btn-save").click( ()->
     #save the editted task
-    editGroup($("#modal-edit-code").val(),$("#modal-edit-name").val(),$("#modal-edit-description").val(),$("#modal-edit-privacy").is(':checked'))
+    editGroup($("#modal-edit-code").val(),$("#modal-edit-name").val(),$("#modal-edit-description").val(),$("#modal-edit-privacy").is(':checked')&1)
 
   )
 
@@ -94,7 +94,6 @@ $(document).ready () ->
 
 #add new group to save data array
 newGroup = (groupcode,groupname,description,privacy) ->
-  console.log groupcode,groupname,description,privacy
   $.ajax(
     url: "/admin/newTemplateGroup",
     type: 'POST',

@@ -67,7 +67,7 @@
         </div>
         <div class="row">
             <h2>Template Groups</h2>
-            <p>These are default groups that are available to join at any time. These groups are persistent and are not removed when there are no users in them. Any edits made will be reflected in the group properties even after creation.</p>
+            <p>These are default groups that are available to join at any time. These groups are persistent and are not removed when there are no users in them. Any edits made will be reflected in the group properties even after creation. Deleting a template group will not delete the actual group if it is already created.</p>
             <table class="table table-bordered table-striped" id="groups-templates">
                 <tr>
                     <th>Group Code</th>
