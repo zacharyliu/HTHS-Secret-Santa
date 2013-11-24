@@ -9,9 +9,9 @@
 
     <div class="navbar-collapse collapse" style="overflow: hidden;">
         <ul class="nav navbar-nav navbar-left">
-            <li><a class="navbar-brand" href="/"><img id="title-icon" src="<?=base_url('/img/app-icon.png')?>" height="45px" width="45px" /><span id="title">HTHS Secret Santa</span></a></li>
-            <li><a href="<?=base_url('about')?>">About</a></li>
-            <li><a href="<?=base_url('discover')?>">Discover</a></li>
+            <li><a class="navbar-brand" href="/"><img id="title-icon" src="<?php echo base_url('/img/app-icon.png')?>" height="45px" width="45px" /><span id="title">HTHS Secret Santa</span></a></li>
+            <li><a href="<?php echo base_url('about')?>">About</a></li>
+            <li><a href="<?php echo base_url('discover')?>">Discover</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <?php

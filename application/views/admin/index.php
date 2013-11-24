@@ -1,4 +1,4 @@
-<script src="<?php base_url()?>/js/admin.js"></script>
+<script src="<?php echo base_url("/js/admin.js")?>"></script>
 <div class="container">
 <div class="row">
     <div class="col-md-12">
@@ -92,7 +92,7 @@
                     </tr>
                 <?php    }
                 }
-                else echo '<tr id="empty-templates"><td colspan=4>Nothing to show here...</td></tr>';
+                else echo '<tr id="empty-templates"><td colspan=5>Nothing to show here...</td></tr>';
                 ?>
             </table>
             <form id="newgroupform" class="form-inline" role="form">
