@@ -117,7 +117,11 @@ class Adminmod extends CI_Model
     }
 
     public function editTemplateGroup($code,$name,$description,$privacy){
-        return $this->db->update('groups_template',array('name'=>$name,'description'=>$description,'private'=>$privacy),array('code'=>$code));
+        $this->db->update('groups_template',array('name'=>$name,'description'=>$description,'private'=>$privacy),array('code'=>$code));
+        if ($this->checkGroupExists($code)) {
+            $this->editGroup($code,$name,$description,$privacy);
+        }
+        return true;
     }
 
     public function createTemplateGroup($code){
@@ -132,6 +136,11 @@ class Adminmod extends CI_Model
 
         if ($query->num_rows() == 0) return false;
         else return true;
+    }
+
+    private function editGroup($code, $name, $description, $privacy, $year = NULL) {
+        if ($year==null) $year=$this->current_year;
+        return $this->db->update('groups',array('name'=>$name,'description'=>$description,'private'=>$privacy),array('code'=>$code, 'year'=>$year));
     }
 
 }

@@ -53,6 +53,9 @@ class Datamod extends CI_Model
         return $query->num_rows();
     }
 
+    public function totalgiftsExchanged() {
+        return $this->db->get('pairs')->num_rows();
+    }
     /**
      * get the user's join year based on user id
      * @return int;
@@ -420,8 +423,8 @@ class Datamod extends CI_Model
         if (!$this->checkGroup($code)){
             $this->db->insert('groups', array('code' => $code, 'name' => $name, 'year' => $this->current_year));
         //add a new membership entry as well
+        }
             $this->db->insert('users_groups', array('id' => $id, 'code' => $code, 'year' => $this->current_year));
-    }
     }
 
     /**
@@ -515,18 +518,21 @@ class Datamod extends CI_Model
     public function groupInfoMultiple($codeArray, $year = NULL)
     {
         if ($year == NULL) $year = $this->current_year;
-        if ($codeArray != false)//prevent empty array exception
-        foreach ($codeArray as $code) {
-            $this->db->or_where('code', $code);
-        }
-        $query = $this->db->where('year', $year)->from('groups')->get();
-        $output = array();
-        if ($query->num_rows() > 0) {
-            foreach ($query->result() as $group) {
-                $output[] = $group;
+        if ($codeArray != false){//prevent empty array exception
+            foreach ($codeArray as $code) {
+                $this->db->or_where('code', $code);
+                $this->db->where('year', $year);
             }
-        }
-        return $output;
+            $query = $this->db->from('groups')->get();
+            $output = array();
+            if ($query->num_rows() > 0) {
+                foreach ($query->result() as $group) {
+                    $output[] = $group;
+                }
+            }
+            return $output;
+    }
+        else return array();
     }
 
     ////SETTINGS

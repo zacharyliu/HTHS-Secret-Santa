@@ -17,7 +17,6 @@ $userStats = $this->datamod->userStats($id);//get user stats
                     <span><?php echo $this->session->userdata("email"); ?></span><br />
                     <span>Class of <?php echo($userStats->class ? $userStats->class!=null : "???");?></span><br/>
                     <br />
-                    <!--<p style="word-wrap:break-word;">bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio</p>-->
                         <br/>
                     <span><strong>Santa since:</strong> <?php echo($userStats->year_join)?></span><br/>
                     <span><strong>Gifts Exchanged:</strong> <?php echo($this->datamod->giftsExchanged($id));?></span><br/>
@@ -69,7 +68,7 @@ $userStats = $this->datamod->userStats($id);//get user stats
                                     echo '<td>' . $this->datamod->countMembers($group->code,$group->year) . '</td>';
                                     echo '<td>' . $this->datamod->getPair($group->code, $id,$group->year) . '</td>';
                                     echo '<td>' . $group->description . '</td>';
-                                    echo($group->leaveable ? '<td><a href="' . base_url('profile') . '/rm/' . $group->code . '">[leave]</a>&nbsp;</td>' : "<td></td>");
+                                    echo($group->leaveable ? '<td><a href="' . base_url('profile') . '/rm/' . $group->code . '"<button type="button" class="btn btn-primary">Leave</button>&nbsp;</td>' : "<td></td>");
                                     echo '</tr>';
                             }
                             }
