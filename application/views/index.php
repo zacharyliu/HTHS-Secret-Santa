@@ -1,7 +1,7 @@
-<link href="/css/home.css" rel="stylesheet">
+<link href="<?=base_url('/css/home.css')?>" rel="stylesheet">
 <script src="<?php echo base_url('/js/jquery.quovolver.js') ?>"></script>
-<script type="text/javascript" src="/js/jquery.stellar.min.js"></script>
-<script type="text/javascript" src="/js/snowstorm-min.js"></script>
+<script type="text/javascript" src="<?=base_url('/js/jquery.stellar.min.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('/js/snowstorm-min.js')?>"></script>
 <script>
     $(document).ready(function () {
 
@@ -151,7 +151,7 @@
             </div>
         </div>
         <div class="row">
-            <a href="/login"><button class="btn register-btn">Sign up for the secret santa.
+            <a href="<?=base_url('login')?>"><button class="btn register-btn">Sign up for the secret santa.
             </button></a>
         </div>
     </div>

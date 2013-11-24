@@ -11,25 +11,25 @@
     <meta name="author" content="">
 
     <!-- Bootstrap CSS Styles-->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?=base_url('css/bootstrap.min.css')?>" rel="stylesheet">
     <style type="text/css">
         body {
             padding-top: 60px;
             padding-bottom: 40px;
         }
     </style>
-    <link href="/css/main.css" rel="stylesheet">
+    <link href="<?=base_url('css/main.css')?>" rel="stylesheet">
 
     <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="/ico/apple-touch-icon-57-precomposed.png">
-    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?=base_url('ico/apple-touch-icon-144-precomposed.png')?>">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?=base_url('ico/apple-touch-icon-114-precomposed.png')?>">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?=base_url('ico/apple-touch-icon-72-precomposed.png')?>">
+    <link rel="apple-touch-icon-precomposed" href="<?=base_url('ico/apple-touch-icon-57-precomposed.png')?>">
+    <link rel="shortcut icon" href="<?=base_url('ico/favicon.png')?>">
 
     <!--global js-->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
+    <script src="<?=base_url('js/bootstrap.min.js')?>"></script>
     <!--js that are not part of bootstrap-->
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
 </head>

@@ -72,8 +72,8 @@ class Login extends CI_Controller
 
     public function logout()
     {
-
-        redirect(base_url('secretsanta/logout'));
+        $this->session->sess_destroy();
+        render('logout_success');
     }
 
 }
