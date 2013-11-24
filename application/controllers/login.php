@@ -31,7 +31,7 @@ class Login extends CI_Controller
                 $user_data = $openid->getAttributes();
 
                 // Check to make sure that the user is logging in using a @ctemc.org account:
-                if (preg_match('/^[^@]+@ctemc\.org$/', $user_data['contact/email'])) {
+                if ($domain_restriction =='' || (preg_match($domain_restriction, $user_data['contact/email']))) {
                     //echo "Welcome, " . " " . $user_data['namePerson/first'] . ' ' . $user_data['namePerson/last'];
 
                     $name = $user_data['namePerson/first'] . ' ' . $user_data['namePerson/last'];

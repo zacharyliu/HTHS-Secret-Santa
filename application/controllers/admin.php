@@ -32,10 +32,10 @@ class Admin extends CI_Controller
 
     public function pairCustom()
     {
-        if (isset($_POST['code']) && $_POST['code'] != '') {
-            $result = $this->adminmod->pairCustom($_POST['code']);
+        if ($this->input->post('code') != '') {
+            $result = $this->adminmod->pairCustom($this->input->post('code'));
             if ($result) {
-                $this->session->set_flashdata('admin', message('<strong>Success!</strong> Successfully ran pairing on code ' . $_POST['code'] . ' with ' . $result . ' members',1));
+                $this->session->set_flashdata('admin', message('<strong>Success!</strong> Successfully ran pairing on code ' . $this->input->post('code') . ' with ' . $result . ' members',1));
                 redirect('admin');
             } else {
                 $this->session->set_flashdata('admin', message('<strong>Error!</strong> Pairing failed. Invalid code, group does not meet requirements, or pairing was already run.',3));
@@ -45,5 +45,40 @@ class Admin extends CI_Controller
             $this->session->set_flashdata('admin', message('<strong>Error!</strong> No code specified',3));
             redirect('admin');
         }
+    }
+
+    /**
+     * ajax function for adding a new template group to the groups_template table
+     */
+    public function newTemplateGroup() {
+        $name = $this->input->post("n"); //name of group
+        $code = $this->input->post("c");//descrip of group
+        $description = $this->input->post("d");//descrip of group
+        $privacy = $this->input->post("p");//descrip of group
+        $group_code =$this->adminmod->newTemplateGroup($code,$name,$description,$privacy);//($user_id,$task_name,$date,$estimated)
+        echo $group_code;
+    }
+
+    public function deleteTemplateGroup() {
+        $code = $this->input->post('c');
+        $this->adminmod->deleteTemplateGroup($code);
+        echo true;
+    }
+
+    public function loadAllTemplateGroups() {
+        echo json_encode($this->adminmod->loadAllTemplateGroups());
+    }
+
+    public function editTemplateGroup() {
+        $code = $this->input->post("c");//code of group
+        $name = $this->input->post("n");//name of group
+        $description = $this->input->post("d");//descrip of group
+        $privacy = $this->input->post("p");//privacy
+        echo $this->adminmod->editTemplateGroup($code,$name,$description,$privacy);
+    }
+
+    public function createTemplateGroup() {
+        $code = $this->input->post("c");
+        echo $this->adminmod->createTemplateGroup($code);
     }
 }

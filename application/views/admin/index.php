@@ -1,5 +1,7 @@
+<script src="<?php base_url()?>/js/admin.js"></script>
+<div class="container">
 <div class="row">
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-12">
         <?php if ($this->session->flashdata('admin')) echo $this->session->flashdata('admin'); //if there's an admin result, echo it?>
         <h1>Admin Panel</h1>
 
@@ -66,36 +68,41 @@
         <div class="row">
             <h2>Template Groups</h2>
             <p>These are default groups that are available to join at any time.</p>
-            <table class="table table-bordered table-striped" id="groups">
+            <table class="table table-bordered table-striped" id="groups-templates">
                 <tr>
-                    <th>Group Name</th>
                     <th>Group Code</th>
+                    <th>Group Name</th>
                     <th>Description</th>
+                    <th>Privacy</th>
                     <th>Actions</th>
                 </tr>
                 <?php
                 if ($templates != false) {//template groups present
                     foreach ($templates as $template) {
-                        var_dump($template->name);
+                        if ($template->exists == true)
+                            $exists = 'disabled';
+                        else $exists = "";
                 ?>
-                    <tr>
-                        <td><?php echo $template->name ?></td>
-                        <td><?php echo $template->code ?></td>
-                        <td><?php echo $template->description ?></td>
+                    <tr class="group" id="<?php echo $template->code?>">
+                        <td class="groupcode"><?php echo $template->code ?></td>
+                        <td class="groupname"><?php echo $template->name ?></td>
+                        <td class="description"><?php echo $template->description ?></td>
+                        <td class="privacy"><?php echo $template->private?></td>
+                        <td class="actions"><button type="button" class="create btn btn-success"<?php echo $exists?>>Create</button><button type="button" class="edit btn btn-warning">Edit</button><button type="button" class="delete btn btn-danger">Delete</button></td>
                     </tr>
                 <?php    }
                 }
-                else echo '<tr><td colspan=4>Nothing to show here...</td></tr>';
+                else echo '<tr id="empty-templates"><td colspan=4>Nothing to show here...</td></tr>';
                 ?>
             </table>
-            <form class="form-inline" role="form">
+            <form id="newgroupform" class="form-inline" role="form">
+                <div class="form-group">
+                    <label class="sr-only" for="groupCode">Code</label>
+                    <input type="text" class="form-control" id="groupCode" maxlength="4" placeholder="Code">
+                </div>
                 <div class="form-group">
                     <label class="sr-only" for="groupName">Name</label>
                     <input type="text" class="form-control" id="groupName" placeholder="Group Name">
-                </div>
-                <div class="form-group">
-                    <label class="sr-only" for="groupCode">Code</label>
-                    <input type="text" class="form-control" id="groupCode" placeholder="Code">
                 </div>
                 <div class="form-group">
                     <label class="sr-only" for="groupDescrip">Description</label>
@@ -103,10 +110,10 @@
                 </div>
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox"> Private Group
+                        <input id="privacy" type="checkbox"> Private Group
                     </label>
                 </div>
-                <button type="button" class="btn btn-default">Submit</button>
+                <button type="button" id="createGroup" class="btn btn-default disabled">Submit</button>
             </form>
             <!--<div><a href="/admin/lockold">Lock</a> last year's groups. This will make all groups
                 from <?php echo $this->adminmod->getPrevYear() ?> unleaveable.-->
@@ -114,4 +121,46 @@
         </div>
 
     </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="modal-edit-label"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Edit Group Template Entry</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <label for="modal-edit-code">Group Code</label>
+                        <input type="text" class="form-control" placeholder="Group Code" id="modal-edit-code" disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="modal-edit-name">Group Name</label>
+                        <input type="text" class="form-control" id="modal-edit-name" placeholder="Group Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-edit-description">Group Description</label>
+                        <input type="text" class="form-control" id="modal-edit-description" placeholder="Group Description">
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input id="modal-edit-privacy" type="checkbox"> Private Group
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" id="modal-edit-btn-save" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 </div>

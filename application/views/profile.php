@@ -4,7 +4,7 @@ $userStats = $this->datamod->userStats($id);//get user stats
 ?>
 <div class="container">
 <div class="row">
-    <div class="col-md-10 col-md-offset-1 col-sm-12">
+    <div class="col-md-12 col-sm-12">
         <div class="row">
             <?php if (($this->session->flashdata('result'))) echo $this->session->flashdata('result'); //if there's a result message, show it?>
             <?php echo form_error('group'); ?>

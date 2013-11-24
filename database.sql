@@ -3,10 +3,11 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 16, 2013 at 07:52 PM
+-- Generation Time: Nov 23, 2013 at 07:11 PM
 -- Server version: 5.5.20-log
 -- PHP Version: 5.3.10
 
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -39,11 +40,26 @@ CREATE TABLE IF NOT EXISTS `groups` (
   `code` varchar(4) NOT NULL,
   `name` varchar(50) NOT NULL,
   `description` varchar(100) NOT NULL,
+  `private` tinyint(1) NOT NULL DEFAULT '1',
   `leaveable` tinyint(1) NOT NULL DEFAULT '1',
   `deleteable` tinyint(1) NOT NULL DEFAULT '1',
   `year` smallint(4) NOT NULL,
-  PRIMARY KEY (`code`)
+  PRIMARY KEY (`code`,`year`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `groups_template`
+--
+
+CREATE TABLE IF NOT EXISTS `groups_template` (
+  `code` varchar(4) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  `private` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='public template groups';
 
 -- --------------------------------------------------------
 
@@ -72,8 +88,9 @@ CREATE TABLE IF NOT EXISTS `users` (
   `pubkey` text NOT NULL,
   `privkey` text NOT NULL,
   `year_join` smallint(4) NOT NULL,
+  `class` tinyint(4) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=63 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -87,3 +104,4 @@ CREATE TABLE IF NOT EXISTS `users_groups` (
   `year` smallint(4) NOT NULL,
   PRIMARY KEY (`id`,`code`,`year`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+SET FOREIGN_KEY_CHECKS=1;

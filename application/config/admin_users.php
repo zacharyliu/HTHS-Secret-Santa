@@ -6,3 +6,10 @@
  * Check /application/controller/login for more details
  */
 $admin_users = array('mhsu@ctemc.org','vchen@ctemc.org','zliu@ctemc.org');
+
+
+/**
+ * in some cases you may want to include a domain restriction for email logins
+ * If that is the case, define a regex in $domain_restriction
+ **/
+$domain_restriction = '/^[^@]+@ctemc\.org$/';

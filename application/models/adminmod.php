@@ -59,10 +59,6 @@ class Adminmod extends CI_Model
         }
     }
 
-    public function listTemplateGroups(){
-        return $this->db->get('groups_template')->result();
-    }
-
     /**
      * @deprecated
      * lock groups from previous year:
@@ -98,4 +94,44 @@ class Adminmod extends CI_Model
         $row = $query->row();
         return $row->firstyear;
     }
+
+
+    public function listTemplateGroups(){
+        $data = false;
+        foreach ($this->db->get('groups_template')->result() as $row){
+            $row->exists = $this->checkGroupExists($row->code);
+            $data[] = $row;
+        }
+        return $data;
+    }
+
+    public function newTemplateGroup($code,$name,$description,$privacy) {
+        $this->db->insert('groups_template',array('code' => $code, 'name' => $name, 'description' => $description, 'private' => $privacy));
+        return $code;//$this->db->insert_id();
+    }
+
+
+    public function deleteTemplateGroup($code) {
+        $this->db->delete('groups_template',array('code' => $code));
+        return true;
+    }
+
+    public function editTemplateGroup($code,$name,$description,$privacy){
+        return $this->db->update('groups_template',array('name'=>$name,'description'=>$description,'private'=>$privacy),array('code'=>$code));
+    }
+
+    public function createTemplateGroup($code){
+        $template = $this->db->get_where('groups_template',array('code'=>$code))->result();
+        $template = $template[0];
+        $this->db->insert('groups',array('code'=>$template->code,'name'=>$template->name,'description'=>$template->description,'private'=>$template->private,'deleteable'=>0,'year'=>$this->current_year));
+    }
+
+    private function checkGroupExists($code,$year = NULL){
+        if ($year==null) $year=$this->current_year;
+        $query = $this->db->get_where('groups',array('code'=>$code,'year'=>$year));
+
+        if ($query->num_rows() == 0) return false;
+        else return true;
+    }
+
 }
