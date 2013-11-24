@@ -1,8 +1,50 @@
 @main: #27ae60;
-@main-complement: #d15050;
+@main-complement: #bf4040;
 @main-bgd: #6ccfff;
 @main-text:#ffffff;
+@main-brown: #855E42;
 
+.home-spotlight {
+  background: url(../img/hths-ss-logo.png);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  background-position: center;
+}
+
+/*.logo-container {
+  height:400px;
+  background-color:#e74c3c;
+  margin: -20px -20px 0 -20px;
+  background-image: url(../img/whitelogo.png);
+  background-repeat: no-repeat;
+  background-size:70%;
+  background-position:center;
+}*/
+
+@media (min-width: 1265px) {
+  .home-spotlight {
+    background-size:1150px;
+  }
+}
+
+@media (min-width: 634px) and (max-width: 1265px) {
+  .home-spotlight{
+    background-size:90%;
+  }
+}
+
+@media (max-width: 634px){
+  .home-spotlight {
+    background-size:90%;
+    height: 200px;
+  }
+}
 
 .home-container {
   height:100%;
@@ -12,7 +54,7 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;*/
-  background-size: 130% 1500px;
+  background-size: 130% 1800px;
   background-color: @main-bgd;
   background-position:left
 }
@@ -108,7 +150,7 @@ img.carousel{
 }
 
 .home-footer {
-  background-color:@main;
+  background-color:@main-brown;
   text-align: center;
   //margin-left:-20px;
   //margin-right:-20px;

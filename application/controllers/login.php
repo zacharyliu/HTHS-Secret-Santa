@@ -55,7 +55,7 @@ class Login extends CI_Controller
 
                     if ($this->datamod->getPrivKey($user_id) == false)
                         redirect(base_url('secretsanta/survey'));
-                    else redirect('/');
+                    else redirect('/profile');
                 } else {
                     $this->login_failure('Please log in using a @ctemc.org account.');
                 }

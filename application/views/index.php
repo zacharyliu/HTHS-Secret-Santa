@@ -11,8 +11,9 @@
     });
 </script>
     <div class="home-container slide row" data-slide="1" data-stellar-background-ratio="0.5">
-
-        <div style="margin:0px 30px 0px 30px;">
+        <div class="home-spotlight"></div>
+        <div class="container">
+        <div style="margin:100px 30px 0px 30px;">
             <div class="subsection-icon" style="font-size:65px;line-height:65px;">&#xF06B;</div>
             <div class="section-header">Everybody likes gifts... right?</div>
             <div class="subsection-text">HTHS Secret Santa is a fully fledged, feature filled application that makes it
@@ -133,6 +134,7 @@
             </div>
 
         </div>
+    </div>
     </div>
     <div class="home-footer slide row" data-slide="2" data-stellar-background-ratio="0.5">
 
