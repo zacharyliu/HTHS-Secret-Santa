@@ -8,7 +8,7 @@ class Login extends CI_Controller
     public function index()
     {
         require(APPPATH . 'classes/openid.php');
-        require(APPPATH . 'config/admin_users.php'); //retrieve the list of admin users
+        //require(APPPATH . 'config/admin_settings.php'); //retrieve the list of admin users
 
         $openid = new LightOpenID($_SERVER['HTTP_HOST']);
         if (!$openid->mode) {
@@ -31,7 +31,7 @@ class Login extends CI_Controller
                 $user_data = $openid->getAttributes();
 
                 // Check to make sure that the user is logging in using a @ctemc.org account:
-                if ($domain_restriction =='' || (preg_match($domain_restriction, $user_data['contact/email']))) {
+                if ($this->config->item('domain_restriction') == '' || (preg_match($this->config->item('domain_restriction'), $user_data['contact/email']))) {
                     //echo "Welcome, " . " " . $user_data['namePerson/first'] . ' ' . $user_data['namePerson/last'];
 
                     $name = $user_data['namePerson/first'] . ' ' . $user_data['namePerson/last'];
@@ -45,7 +45,7 @@ class Login extends CI_Controller
                         $user_id = $this->datamod->getUserId($email);//@todo addUser should return id
                     }
                     //check for admin permissions
-                    if (in_array($user_data['contact/email'],$admin_users)) //check against imported admin_users.config file
+                    if (in_array($user_data['contact/email'],$this->config->item('admin_users'))) //check against imported admin_users.config file
                         $admin = 'true';
                     else
                         $admin = 'false';
@@ -67,13 +67,17 @@ class Login extends CI_Controller
     private function login_failure($message = 'Login failure')
     {
         echo $message;
-        exit();
+        render("landing",array("icon"=>"&#xf071;","header"=>"Login failure","subheader"=>$message));
+    }
+
+    public function timeout(){
+        render("landing",array("icon"=>"&#xf071;","header"=>"Oops! You don't have permission to view this page.","subheader"=>"Your session has expired, or you are not logged in. Please <a href='/login'>login</a> to continue."));
     }
 
     public function logout()
     {
         $this->session->sess_destroy();
-        render('logout_success');
+        render("landing",array("icon"=>"&#xf071;","header"=>"Logout success!","subheader"=>"You have successfully been logged out of your account. Come back soon!"));
     }
 
 }

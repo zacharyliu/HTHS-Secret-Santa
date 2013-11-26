@@ -555,4 +555,13 @@ class Datamod extends CI_Model
         $query = $this->db->select('give')->where(array('give' => $id))->get("pairs");
         return $query->num_rows();
     }
+
+    ///DISCOVER GROUPS
+    public function listTrendingGroups(){
+        $data = false;
+        foreach ($this->db->order_by("name","asc")->get_where('groups',array("private"=>0),10)->result() as $row){
+            $data[] = $row;
+        }
+        return $data;
+    }
 }

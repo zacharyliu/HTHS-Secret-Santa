@@ -23,13 +23,12 @@ class Profile extends CI_Controller
         $this->load->library('form_validation');//form validation helper
 
         if ($this->session->userdata('auth') != 'true') {
-           $this->session->set_flashdata('result',message('Looks like your session has expired. Please sign in again.',3));//note: the message is never actually triggered
-            redirect('secretsanta');
+            redirect(base_url("login/timeout"));
         }
 
-        if (!$this->datamod->getPrivKey($this->session->userdata('id'))) //if key is not set, set key
+        /*if (!$this->datamod->getPrivKey($this->session->userdata('id'))) //if key is not set, set key
             redirect('secretsanta/survey');
-
+*/
     }
 
     /**
@@ -72,7 +71,7 @@ class Profile extends CI_Controller
         } else {
             $this->datamod->addGroup($this->session->userdata('id'), set_value('group'));
             $this->session->set_flashdata('result', message('You have successfully joined the group <strong>' . $this->datamod->getGroupName(set_value('group')) . '</strong>!',1)); //groupCode
-            redirect('profile');
+            redirect(base_url('profile'));
         }
     }
 
@@ -86,7 +85,7 @@ class Profile extends CI_Controller
         } else {
             $this->datamod->genGroup($this->session->userdata('id'), set_value('group_name'));
             $this->session->set_flashdata('result', message('You have successfully created the group <strong>' . set_value('group_name') . '</strong>! Your group code is <strong>' . $this->datamod->getGroupCode(set_value('group_name')) . '</strong>. Keep this in a safe place.',1)); //groupcreate
-            redirect('profile');
+            redirect(base_url('profile'));
         }
     }
 
@@ -100,7 +99,7 @@ class Profile extends CI_Controller
 
             else $this->session->set_flashdata('result', message('Poopy. Something went wrong. :( ',3));
         } else $this->session->set_flashdata('result', message('<strong>Error!</strong> You can\'t leave this group! </div>',3));
-        redirect('profile');
+        redirect(base_url('profile'));
 
     }
 
@@ -120,7 +119,7 @@ class Profile extends CI_Controller
 
             $this->datamod->storeKeyPair($this->session->userdata('id'), $keys);
             $this->session->set_flashdata('result', message('Pin reset to <strong>' . set_value('pin') . '</strong>. Don\'t forget it again!',1));
-            redirect('profile');
+            redirect(base_url('profile'));
         }
     }
 
@@ -156,7 +155,7 @@ class Profile extends CI_Controller
     public function numGroups()
     { //verifies that user is in less than threshold groups
         $num = $this->datamod->countPersonGroups($this->session->userdata('id'));
-        if ($num < 5)
+        if ($num < $this->config->item('max_groups'))
             return true;
         else {
             $this->form_validation->set_message('numGroups', 'You are already in <strong>' . $num . '</strong> groups.  Leave a group and try again.');

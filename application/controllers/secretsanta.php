@@ -62,6 +62,10 @@ class Secretsanta extends CI_Controller
             render('survey_success');
         }
     }
+
+    public function notfound() {
+        render("landing",array("icon"=>"&#xf071;","header"=>"404 Page not Found","subheader"=>"The page you requested does not exist."));
+    }
 }
 
 

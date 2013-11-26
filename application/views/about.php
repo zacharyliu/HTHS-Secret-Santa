@@ -1,36 +1,40 @@
-<div class="" row>
-
-    <div style="margin-top:auto;margin-left:30px;margin-right:30px;">
+<div class="container">
+    <div class="row">
         <h2> Frequently Asked Questions </h2>
-        <br />
+        <br/>
         <dl>
             <dt> What is HTHS Secret Santa?</dt>
-            <dd>Currently in its second year of operations, <i>HTHS Secret Santa</i> is a web app built by and for HTHS students.
-                Our goal is to foster community and giving in the high tech community by organizing an intuitive
+            <dd>Currently in its second year of operations, <i>HTHS Secret Santa</i> is a web app built by and for HTHS
+                students.
+                Our goal is to foster community and giving in the High Tech community by organizing an intuitive
                 <a href="http://www.wikihow.com/Do-a-Secret-Santa"> Secret Santa</a>
                 through a web application. We'd love for you to participate in this year's festivities!
             </dd>
 
             <dt> How do I register?</dt>
-            <dd>You can register <a href="<?=base_url('login')?>">here</a>. Be sure to use your "ctemc.org"
+            <dd>You can register <a href="<?= base_url('login') ?>">here</a>. Be sure to use your "ctemc.org"
                 email when registering!
             </dd>
 
             <dt> What if I want to have a Secret Santa among my own friends?</dt>
-            <dd><i>You can!</i> We implemented a unique "groups" feature that allows you to participate in multiple <i> Secret Santas </i>.
+            <dd><i>You can!</i> We implemented a unique "groups" feature that allows you to participate in multiple <i>
+                    Secret Santas </i>.
                 After you login/register, you are given to option to create your own group that has a specifically
-                generated code. Once you share this code with your friends, you'll be able to be matched with your friends in that
+                generated code. Once you share this code with your friends, you'll be able to be matched with your
+                friends in that
                 same group. It's as simple as that!
             </dd>
 
             <dt> What is the price range for gifts?</dt>
-            <dd>For the school-wide HTHS group, try to keep your budgets around $10. Remember that creative and thoughtful gifts
+            <dd>For the school-wide HTHS group, try to keep your budgets around $10. Remember that creative and
+                thoughtful gifts
                 are more valuable than excessively pricey gifts!
             </dd>
 
             <dt> What kinds of gifts should I buy?</dt>
-            <dd>You can buy anything that you think that your exchange partner would enjoy! Please make sure it's school appropriate,
-                because you will probably be bringing your gifts into school.
+            <dd>You can buy anything that you think that your exchange partner would enjoy! Please make sure it's school
+                appropriate,
+                because you will be bringing your gifts into school.
             </dd>
 
             <dt>What do I do if I don't want to participate anymore?</dt>
@@ -45,9 +49,9 @@
 
         <h2> Special thanks... </h2>
 
-        <p>
-        <li><b> Developers:</b> Vincent Chen (Sr.); Matt Hsu (Sr.); Zachary Liu(Sr.)</li>
-
+        <ul>
+            <li><b> Developers:</b> Vincent Chen (Sr.); Matt Hsu (Sr.); Zachary Liu(Sr.)</li>
+        </ul>
     </div>
 
 </div>

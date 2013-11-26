@@ -39,7 +39,7 @@
 */
 
 $route['default_controller'] = "secretsanta";
-$route['404_override'] = '';
+$route['404_override'] = 'secretsanta/notfound';
 $route['logout'] = 'login/logout';
 $route['about'] = 'secretsanta/about';
 
