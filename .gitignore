@@ -9,3 +9,5 @@
 /application/config/database.php
 /css/main.css
 *.map
+
+node_modules
