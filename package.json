@@ -1,0 +1,8 @@
+{
+  "name": "HTHS-Secret-Santa",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-contrib-less": "~0.8.2"
+  }
+}
