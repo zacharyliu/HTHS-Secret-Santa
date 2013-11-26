@@ -53,11 +53,11 @@ class Login extends CI_Controller
                     //set session info
                     $this->session->set_userdata(array('auth' => 'true', 'admin' => $admin, 'name' => $name, 'email' => $email, 'id' => $user_id));
 
-                    if ($this->datamod->getPrivKey($user_id) == false)
-                        redirect(base_url('secretsanta/survey'));
-                    else redirect('/profile');
+                    //if ($this->datamod->getPrivKey($user_id) == false)
+                        //redirect(base_url('secretsanta/survey'));
+                    redirect(base_url('/profile'));
                 } else {
-                    $this->login_failure('Please log in using a @ctemc.org account.');
+                    $this->login_failure('Please log in using an @ctemc.org account.');
                 }
 
             }
@@ -66,7 +66,7 @@ class Login extends CI_Controller
 
     private function login_failure($message = 'Login failure')
     {
-        echo $message;
+        //echo $message;
         render("landing",array("icon"=>"&#xf071;","header"=>"Login failure","subheader"=>$message));
     }
 
@@ -77,7 +77,7 @@ class Login extends CI_Controller
     public function logout()
     {
         $this->session->sess_destroy();
-        render("landing",array("icon"=>"&#xf071;","header"=>"Logout success!","subheader"=>"You have successfully been logged out of your account. Come back soon!"));
+        render("landing",array("icon"=>"&#xf058;","header"=>"Logout success!","subheader"=>"You have successfully been logged out of your account. Come back soon!"));
     }
 
 }

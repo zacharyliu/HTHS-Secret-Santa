@@ -15,7 +15,7 @@ $userStats = $this->datamod->userStats($id);//get user stats
                 <div class="row">
                     <h3><?php echo $this->session->userdata("name"); ?></h3>
                     <span><?php echo $this->session->userdata("email"); ?></span><br />
-                    <span>Class of <?php echo($userStats->class ? $userStats->class!=null : "???");?></span><br/>
+                    <!--<span>Class of <?php echo($userStats->class ? $userStats->class!=null : "???");?></span><br/>-->
                     <br />
                         <br/>
                     <span><strong>Santa since:</strong> <?php echo($userStats->year_join)?></span><br/>
@@ -119,7 +119,7 @@ $userStats = $this->datamod->userStats($id);//get user stats
                 <br/>
                 </div>
                 <div class="row">
-                    <h3>Settings</h3>
+                    <!--<h3>Settings</h3>-->
                     <div class="container">
 
                     <!--settings here-->
