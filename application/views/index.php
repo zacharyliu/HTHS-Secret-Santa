@@ -127,9 +127,9 @@
                 <div class="subsection-icon">&#xF017;</div>
                 <div class="subsection-header">Important Dates are coming up.</div>
                 <div class="subsection-text">
-                    Registration ends: <i> TBD</i><br/>
-                    Partner Assignments: <i> TBD </i><br/>
-                    Gift Exchange: <i> Friday, 12/20 </i><br/>
+                    Registration ends: <i> Saturday, 12/9</i><br/>
+                    Partner Assignments: <i> Saturday, 12/9 </i><br/>
+                    Gift Exchange: <i> Thursday, 12/19 </i><br/>
                 </div>
             </div>
 
