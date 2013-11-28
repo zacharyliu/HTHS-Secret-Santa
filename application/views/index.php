@@ -12,7 +12,7 @@
 </script>
     <div class="home-container slide row" data-slide="1" data-stellar-background-ratio="0.5">
         <div class="home-spotlight"></div>
-        <div class="container">
+        <div class="container" id="home-main">
         <div style="margin:100px 30px 0px 30px;">
             <div class="subsection-icon" style="font-size:65px;line-height:65px;">&#xF06B;</div>
             <div class="section-header"><?php echo $this->datamod->totalgiftsExchanged()?> gifts exchanged!</div>
