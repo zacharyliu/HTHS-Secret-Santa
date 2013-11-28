@@ -10,9 +10,9 @@
         $(document).off('.carousel.data-api')//carousel collision with stellar plugin
     });
 </script>
-    <div class="home-container slide row" data-slide="1" data-stellar-background-ratio="0.5">
+    <div class="home-container slide" data-slide="1" data-stellar-background-ratio="0.5">
         <div class="home-spotlight"></div>
-        <div class="container">
+        <div class="container" id="home-main">
         <div style="margin:100px 30px 0px 30px;">
             <div class="subsection-icon" style="font-size:65px;line-height:65px;">&#xF06B;</div>
             <div class="section-header"><?php echo $this->datamod->totalgiftsExchanged()?> gifts exchanged!</div>
@@ -136,7 +136,7 @@
         </div>
     </div>
     </div>
-    <div class="home-footer slide row" data-slide="2" data-stellar-background-ratio="0.5">
+    <div class="home-footer slide container" data-slide="2" data-stellar-background-ratio="0.5">
 
         <div class="row">
             <div class="col-md-12">

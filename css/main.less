@@ -54,62 +54,61 @@ dd{ //definitions
   //min-height: 60px;
   //box-shadow: 0 5px 5px rgba(0,0,0,0.2);
   .fade;
-}
 
-/*collapse button*/
-.navbar .navbar-toggle {
-  border:none;
-  border-radius:0px;
-  margin-top:0px;
-  margin-bottom:0px;
-  margin-right:-10px;
-  height:60px;
-  width:60px;
-  padding-left:19px;
-  z-index: 10;
-  .fade;
-}
-
-.navbar .navbar-toggle:hover {
-  background-color:rgba(0,0,0,0.2);
-}
-
-.navbar-toggle .icon-bar {
-  height:7px;
-  width:7px;
-  margin-left:8px;
-  border-radius:0;
-}
-
-.navbar .nav.navbar-nav > li {
-  >a{
-    //padding: 5px 25px;
+  .navbar-brand {
+    line-height: 30px;
+    font-size:23px;
+    margin-top:0px;
+    font-family:Roboto;
     color:#ffffff;
-    //height:60px;
-    line-height:30px; //this influences height of navbar
-    font-size:17px;
-    border-radius:0px;
-    vertical-align: middle;
-    .fade;
-  }
-}
-.navbar .navbar-collapse .nav.navbar-nav > li {
-  >a:hover,>a:focus {
-    background-color:@main-dark;
-  }
-}
+    max-width: none;
 
-.navbar-inverse .navbar-brand{
-  line-height: 30px;
-  font-size:23px;
-  margin-top:0px;
-  font-family:Roboto;
-  color:#ffffff;
-  max-width: none;
-  #title-icon {
-    margin-right: 10px;
-    margin-top: -15px;
-    margin-bottom: -10px;
+    // Shift upwards to fix alignment issue
+    position: relative;
+    top: -2px;
+
+    #title-icon {
+      margin-right: 10px;
+      margin-top: -15px;
+      margin-bottom: -10px;
+    }
+  }
+
+  /*collapse button*/
+  .navbar-toggle {
+    border:none;
+    border-radius:0px;
+    margin-top:0px;
+    margin-bottom:0px;
+    margin-right:-10px;
+    height:60px;
+    width:60px;
+    padding-left:19px;
+    z-index: 10;
+    .fade;
+
+    &:hover {
+      background-color:rgba(0,0,0,0.2);
+    }
+
+    .icon-bar {
+      height:7px;
+      width:7px;
+      margin-left:8px;
+      border-radius:0;
+    }
+  }
+
+  // link items in navbar
+  .navbar-nav > li > a {
+    color: #ffffff;
+    line-height: 30px; //this influences height of navbar
+    font-size: 17px;
+    border-radius: 0px;
+    .fade;
+    &:hover, &:focus {
+      background-color: @main-dark;
+    }
   }
 }
 

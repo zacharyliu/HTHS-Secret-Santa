@@ -11,7 +11,7 @@
     </div>
 
     <div class="navbar-collapse collapse" style="overflow: hidden;">
-        <ul class="nav navbar-nav navbar-left">
+        <ul class="nav navbar-nav">
             <li><a href="<?php echo base_url('about')?>">About</a></li>
             <?php if ($this->session->userdata('auth') == 'true') {
             echo "<li><a href=" . base_url('discover') . ">Discover</a></li>";
