@@ -34,14 +34,15 @@ class Login extends CI_Controller
                 if ($this->config->item('domain_restriction') == '' || (preg_match($this->config->item('domain_restriction'), $user_data['contact/email']))) {
                     //echo "Welcome, " . " " . $user_data['namePerson/first'] . ' ' . $user_data['namePerson/last'];
 
-                    $name = $user_data['namePerson/first'] . ' ' . $user_data['namePerson/last'];
+                    $fname = $user_data['namePerson/first'];
+                    $lname = $user_data['namePerson/last'];
                     $email = $user_data['contact/email'];
 
                     // Load user ID if it exists
                     $this->load->model('datamod');
                     $user_id = $this->datamod->getUserId($email);
                     if ($user_id == false) {
-                        $this->datamod->addUser($name, $email);
+                        $this->datamod->addUser($fname . " " . $lname, $email);
                         $user_id = $this->datamod->getUserId($email);//@todo addUser should return id
                     }
                     //check for admin permissions
@@ -51,13 +52,13 @@ class Login extends CI_Controller
                         $admin = 'false';
 
                     //set session info
-                    $this->session->set_userdata(array('auth' => 'true', 'admin' => $admin, 'name' => $name, 'email' => $email, 'id' => $user_id));
+                    $this->session->set_userdata(array('auth' => 'true', 'admin' => $admin, 'fname' => $fname, 'lname' => $lname,'email' => $email, 'id' => $user_id));
 
-                    if ($this->datamod->getPrivKey($user_id) == false)
-                        redirect(base_url('secretsanta/survey'));
-                    else redirect('/profile');
+                    //if ($this->datamod->getPrivKey($user_id) == false)
+                        //redirect(base_url('secretsanta/survey'));
+                    redirect(base_url('/profile'));
                 } else {
-                    $this->login_failure('Please log in using a @ctemc.org account.');
+                    $this->login_failure('Please log in using an @ctemc.org account.');
                 }
 
             }
@@ -66,7 +67,7 @@ class Login extends CI_Controller
 
     private function login_failure($message = 'Login failure')
     {
-        echo $message;
+        //echo $message;
         render("landing",array("icon"=>"&#xf071;","header"=>"Login failure","subheader"=>$message));
     }
 
@@ -77,7 +78,7 @@ class Login extends CI_Controller
     public function logout()
     {
         $this->session->sess_destroy();
-        render("landing",array("icon"=>"&#xf071;","header"=>"Logout success!","subheader"=>"You have successfully been logged out of your account. Come back soon!"));
+        render("landing",array("icon"=>"&#xf058;","header"=>"Logout success!","subheader"=>"You have successfully been logged out of your account. Come back soon!"));
     }
 
 }

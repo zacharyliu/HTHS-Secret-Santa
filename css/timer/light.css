@@ -27,10 +27,12 @@
 .dash_title {
 	position: absolute;
 	display: block;
+    width: 100%;
+    padding-left: 20px;
 	bottom: 0px;
 	right: 6px;
 	font-size: 9pt;
-	color: #555;
+	color: #dddddd/*#555*/;
 	text-transform: uppercase;
 	letter-spacing: 2px;
 }

@@ -35,7 +35,7 @@ dd{ //definitions
 .navbar,
 .navbar-inverse,
 .navbar-fixed-top,
-.nav-collapse {
+.navbar-collapse {
   background-color:@main;
   padding-left:10px;
   padding-right:10px;
@@ -60,7 +60,8 @@ dd{ //definitions
 .navbar .navbar-toggle {
   border:none;
   border-radius:0px;
-  margin-top:-9px;
+  margin-top:0px;
+  margin-bottom:0px;
   margin-right:-10px;
   height:60px;
   width:60px;
@@ -98,13 +99,15 @@ dd{ //definitions
   }
 }
 
-.navbar .navbar-brand{
-  font-size:25px;
+.navbar-inverse .navbar-brand{
+  line-height: 30px;
+  font-size:23px;
   margin-top:0px;
   font-family:Roboto;
   color:#ffffff;
   max-width: none;
-  img {
+  #title-icon {
+    margin-right: 10px;
     margin-top: -15px;
     margin-bottom: -10px;
   }

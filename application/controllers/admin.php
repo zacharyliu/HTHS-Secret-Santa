@@ -9,8 +9,7 @@ class Admin extends CI_Controller
     {
         parent::__construct();
         if (!$this->session->userdata('admin')) {
-            header('HTTP/1.1 403 Forbidden');
-            exit();
+            redirect(base_url("login/timeout"));
         }
         $this->load->model('datamod'); //load the data model
         $this->load->model('adminmod'); //load the admin model

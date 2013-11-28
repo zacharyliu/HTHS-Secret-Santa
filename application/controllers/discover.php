@@ -55,7 +55,7 @@ class Discover extends CI_Controller
         if ($num < $this->config->item('max_groups'))
             return true;
         else {
-            $this->session->set_flashdata('result', 'You are already in <strong>' . $num . '</strong> groups.  Leave a group and try again.');
+            $this->session->set_flashdata('result', message('You are already in <strong>' . $num . '</strong> groups.  Leave a group and try again.',3));
             return false;
         }
     }
