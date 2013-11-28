@@ -16,32 +16,14 @@ body {
 
 .home-spotlight {
   background: url(../img/hths-ss-logo.png);
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
   background-repeat: no-repeat;
   height: 400px;
   margin-left: auto;
   margin-right: auto;
   background-position: center;
-}
+  background-size: 90%;
 
-@media (min-width: 1265px) {
-  .home-spotlight {
-    background-size:1150px;
-  }
-}
-
-@media (min-width: 634px) and (max-width: 1265px) {
-  .home-spotlight{
-    background-size:90%;
-  }
-}
-
-@media (max-width: 634px){
-  .home-spotlight {
-    background-size:90%;
+  @media (max-width: 634px) {
     height: 200px;
   }
 }
