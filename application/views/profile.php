@@ -13,7 +13,7 @@ $userStats = $this->datamod->userStats($id);//get user stats
 
             <div class="col-md-2 col-sm-12">
                 <div class="row">
-                    <h3><?php echo $this->session->userdata("name"); ?></h3>
+                    <h3><?php echo $this->session->userdata("fname") . " " . $this->session->userdata("lname"); ?></h3>
                     <span><?php echo $this->session->userdata("email"); ?></span><br />
                     <!--<span>Class of <?php echo($userStats->class ? $userStats->class!=null : "???");?></span><br/>-->
                     <br />
