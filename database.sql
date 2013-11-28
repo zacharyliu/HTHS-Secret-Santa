@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `groups` (
 CREATE TABLE IF NOT EXISTS `groups_template` (
   `code` varchar(4) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `description` varchar(100) NOT NULL,
+  `description` varchar(150) NOT NULL,
   `private` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='public template groups';

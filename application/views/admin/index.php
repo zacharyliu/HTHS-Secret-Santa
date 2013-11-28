@@ -102,11 +102,11 @@
                 </div>
                 <div class="form-group">
                     <label class="sr-only" for="groupName">Name</label>
-                    <input type="text" class="form-control" id="groupName" placeholder="Group Name">
+                    <input type="text" class="form-control" id="groupName" maxlength="50" placeholder="Group Name">
                 </div>
                 <div class="form-group">
                     <label class="sr-only" for="groupDescrip">Description</label>
-                    <input type="text" class="form-control" id="groupDescrip" placeholder="Description">
+                    <input type="text" class="form-control" id="groupDescrip" maxlength="150" placeholder="Description">
                 </div>
                 <div class="checkbox">
                     <label>
@@ -140,11 +140,11 @@
 
                     <div class="form-group">
                         <label for="modal-edit-name">Group Name</label>
-                        <input type="text" class="form-control" id="modal-edit-name" placeholder="Group Name">
+                        <input type="text" class="form-control" id="modal-edit-name" maxlength="50" placeholder="Group Name">
                     </div>
                     <div class="form-group">
                         <label for="modal-edit-description">Group Description</label>
-                        <input type="text" class="form-control" id="modal-edit-description" placeholder="Group Description">
+                        <input type="text" class="form-control" id="modal-edit-description" maxlength="150" placeholder="Group Description">
                     </div>
                     <div class="checkbox">
                         <label>
