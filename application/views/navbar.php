@@ -28,6 +28,7 @@
             array('text'=>'Discover', 'route'=>'discover', 'side'=>'left', 'auth'=>false, 'admin'=>false, 'auth_hide'=>false),
             array('text'=>'Admin Panel', 'route'=>'admin', 'side'=>'right', 'auth'=>true, 'admin'=>true, 'auth_hide'=>false),
             array('text'=>'Profile', 'route'=>'profile', 'side'=>'right', 'auth'=>true, 'admin'=>false, 'auth_hide'=>false),
+            array('text'=>'Logout', 'route'=>'logout', 'side'=>'right', 'auth'=>true, 'admin'=>false, 'auth_hide'=>false),
             array('text'=>'Login / Register', 'route'=>'login', 'side'=>'right', 'auth'=>false, 'admin'=>false, 'auth_hide'=>true),
         );
 
