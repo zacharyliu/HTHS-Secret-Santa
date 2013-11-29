@@ -51,7 +51,7 @@
         }
         ?>
         <ul class="nav navbar-nav">
-            <?=$navbar_html['left']?>
+            <?php echo $navbar_html['left']?>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <?php

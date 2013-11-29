@@ -272,6 +272,7 @@ class Datamod extends CI_Model
     /////////////////////////////////////
     /**
      * get the name of a group by code
+     * @deprecated
      * @param $code             group code
      * @return string|bool      false on failure
      */
@@ -290,6 +291,7 @@ class Datamod extends CI_Model
 
     /**
      * get group code by group name
+     * @deprecated
      * @param string $name group name
      * @return bool             false on failure
      */
@@ -308,6 +310,7 @@ class Datamod extends CI_Model
 
     /**
      * get group description by code
+     * @deprecated
      * @param $code     group code
      * @return string   group description
      */
@@ -386,11 +389,11 @@ class Datamod extends CI_Model
      */
     private function __genGroup()
     {
-        $code = $this->randstring(4); //generate a unique code
+        $code = $this->__randstring(4); //generate a unique code
         $this->db->where('code', $code);
         $query = $this->db->get('groups');
         while ($query->num_rows() > 0) { //while the code is not unique
-            $code = $this->randstring(4);
+            $code = $this->__randstring(4);
             $this->db->where('code', $code);
             $query = $this->db->get('groups');
         }
@@ -403,7 +406,7 @@ class Datamod extends CI_Model
      * @param string $charset charset of string
      * @return string               random string
      */
-    private function randstring($len, $charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789')
+    private function __randstring($len, $charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789')
     {
         $str = '';
         $count = strlen($charset);
@@ -516,7 +519,7 @@ class Datamod extends CI_Model
 
     /**
      * gets all years of group data for a person
-     * retrives owner of group as well
+     * retrieves owner of group as well
      * @param $id
      * @return array
      */
