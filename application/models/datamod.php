@@ -419,9 +419,10 @@ class Datamod extends CI_Model
      */
     public function addGroup($id, $code, $name = null)
     {
-        //if the group doesnt exist in master table, add it
+        //if the group doesn't exist in master table, add it
         if (!$this->checkGroup($code)){
             $this->db->insert('groups', array('code' => $code, 'name' => $name, 'year' => $this->current_year));
+            $this->db->insert('groups_owner',array('code' => $code, 'owner' => $id, 'year' => $this->current_year));//add the creater as group owner
         //add a new membership entry as well
         }
             $this->db->insert('users_groups', array('id' => $id, 'code' => $code, 'year' => $this->current_year));

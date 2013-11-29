@@ -31,8 +31,7 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div
-                        style="">
+                    <div id="quovolver">
                         <blockquote>
                             <p>Kindness in words creates confidence. Kindness in thinking creates profoundness. Kindness
                                 in

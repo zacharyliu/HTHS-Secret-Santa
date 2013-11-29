@@ -22,7 +22,7 @@
                 <?php
                 $year = $first_year; //reset year variable
                 while ($year <= $current_year){
-                    $count = false; //whether groups exist for the curent year
+                    $count = false; //whether groups exist for the current year
                     if ($year != $current_year) //only add the active class to the most recent year
                         echo '<div class="tab-pane fade" id="' . $year . '">';
                     else echo '<div class="tab-pane fade active in" id="' . $year . '">';?>
