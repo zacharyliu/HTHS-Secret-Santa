@@ -419,13 +419,13 @@ class Datamod extends CI_Model
      * @param null $name group name
      * @return void
      */
-    public function addGroup($id, $name = null, $description)
+    public function addGroup($id, $name = null, $description = null, $code = null)
     {
-        $code = $this->__genGroup();
+        if ($code == null) $code = $this->__genGroup();
         //if the group doesn't exist in master table, add it
         if (!$this->checkGroup($code)) {
             $this->db->insert('groups', array('code' => $code, 'name' => $name, 'description' => $description, 'year' => $this->current_year));
-            $this->db->insert('groups_owner', array('code' => $code, 'owner' => $id, 'year' => $this->current_year)); //add the creater as group owner
+            $this->db->insert('groups_owner', array('code' => $code, 'owner' => $id, 'year' => $this->current_year)); //add the creator as group owner
             //add a new membership entry as well
         }
         $this->db->insert('users_groups', array('id' => $id, 'code' => $code, 'year' => $this->current_year));

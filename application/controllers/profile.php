@@ -61,7 +61,7 @@ class Profile extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->_render(array('first_year'=>$this->datamod->getJoinYear($this->session->userdata('id')),'current_year'=>intval(date('Y'))));
         } else {
-            $this->datamod->addGroup($this->session->userdata('id'), set_value('group'));
+            $this->datamod->addGroup($this->session->userdata('id'), null, null, set_value('group'));
             $this->session->set_flashdata('result', message('You have successfully joined the group <strong>' . $this->datamod->getGroupName(set_value('group')) . '</strong>!',1)); //groupCode
             redirect(base_url('profile'));
         }
