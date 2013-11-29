@@ -382,7 +382,7 @@ class Datamod extends CI_Model
      * @param string $person        user's name
      * @param string $name          group name
      */
-    public function genGroup($id, $name)
+    public function genGroup($id, $name, $description)
     {
         $code = $this->randstring(4); //generate a unique code
         $this->db->where('code', $code);
@@ -392,7 +392,7 @@ class Datamod extends CI_Model
             $this->db->where('code', $code);
             $query = $this->db->get('groups');
         }
-        $this->addGroup($id, $code, $name);
+        $this->addGroup($id, $code, $name, $description);
     }
 
     /**
@@ -417,11 +417,11 @@ class Datamod extends CI_Model
      * @param null $name            group name
      * @return void
      */
-    public function addGroup($id, $code, $name = null)
+    public function addGroup($id, $code, $name = null, $description)
     {
         //if the group doesn't exist in master table, add it
         if (!$this->checkGroup($code)){
-            $this->db->insert('groups', array('code' => $code, 'name' => $name, 'year' => $this->current_year));
+            $this->db->insert('groups', array('code' => $code, 'name' => $name, 'description' => $description, 'year' => $this->current_year));
             $this->db->insert('groups_owner',array('code' => $code, 'owner' => $id, 'year' => $this->current_year));//add the creater as group owner
         //add a new membership entry as well
         }

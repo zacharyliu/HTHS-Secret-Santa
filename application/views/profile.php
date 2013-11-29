@@ -94,7 +94,7 @@ $userStats = $this->datamod->userStats($id);//get user stats
 
                     <label for="inputGroupCode">Group Code: </label>
                     <input type="text" class="form-custom" maxlength="4" size="4" name="group" id="inputGroupCode"
-                           placeholder="">
+                           placeholder="Code">
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <button class="btn btn-default" type="submit">Add Group</button>
                 </form>
@@ -110,10 +110,15 @@ $userStats = $this->datamod->userStats($id);//get user stats
                 <form method="post"
                       action="<?php echo base_url('profile/addgroup'); //@todo base is needed since persistent form?>">
                     <label for="inputGroupName">Group Name: </label>
-                    <input type="text" class="form-custom" maxlength="50" size="50" name="group_name"
+                    <input type="text" class="form-custom" maxlength="50" size="25" name="group_name"
                            id="inputGroupName"
-                           placeholder="">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
+                           placeholder="Name">
+                    &nbsp;&nbsp;
+                    <label for="inputGroupName">Group Description: </label>
+                    <input type="text" class="form-custom" maxlength="150" size="25" name="group_description"
+                           id="inputGroupDescription"
+                           placeholder="Description">
+                    &nbsp;&nbsp;
                     <button class="btn btn-default" type="submit">Create Group</button>
                 </form>
                 <br/>
