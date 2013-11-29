@@ -377,12 +377,11 @@ class Datamod extends CI_Model
     //GROUP FUNCTIONS - Group  Creation
     /////////////////////////////////////
     /**
-     * generates a group code and pushes it to the addgroup function
-     * @todo let addGroup handle gengroup
+     * generates a group code and checks that it is unique
      * @param string $person        user's name
      * @param string $name          group name
      */
-    public function genGroup($id, $name, $description)
+    private function __genGroup()
     {
         $code = $this->randstring(4); //generate a unique code
         $this->db->where('code', $code);
@@ -392,7 +391,7 @@ class Datamod extends CI_Model
             $this->db->where('code', $code);
             $query = $this->db->get('groups');
         }
-        $this->addGroup($id, $code, $name, $description);
+        return $code;
     }
 
     /**
@@ -417,8 +416,9 @@ class Datamod extends CI_Model
      * @param null $name            group name
      * @return void
      */
-    public function addGroup($id, $code, $name = null, $description)
+    public function addGroup($id, $name = null, $description)
     {
+        $code = $this->__genGroup();
         //if the group doesn't exist in master table, add it
         if (!$this->checkGroup($code)){
             $this->db->insert('groups', array('code' => $code, 'name' => $name, 'description' => $description, 'year' => $this->current_year));
