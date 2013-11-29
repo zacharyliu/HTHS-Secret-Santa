@@ -41,7 +41,7 @@ $(document).ready () ->
 
   )
 
-  #edit task button is pressed
+  #edit group button is pressed
   $("#groups-templates").on('click','.edit', ()->
     $("#modal-edit").modal('show');
     $("#modal-edit-code").val($(this).parents("tr.group").attr("id"));
@@ -50,14 +50,14 @@ $(document).ready () ->
     $("#modal-edit-privacy").prop("checked",parseInt($(this).parent().siblings(".privacy").text()))
   )
 
-  #delete task button is pressed
+  #delete group button is pressed
   $("#groups-templates").on('click','.delete', ()->
     groupSelector = $(this).parents("tr.group")
     id = groupSelector.attr("id")
     deleteGroup(id)
   )
 
-  #enable/disable the add task button
+  #enable/disable the add group button
   $("#newgroupform input[type=text]").keyup( ()->
     if $("#groupCode").val() != "" && $("#groupName").val() != "" && $("#groupDescrip").val() != ""
       $("#createGroup").removeClass("disabled")
@@ -84,7 +84,7 @@ $(document).ready () ->
 
   #save button event handler
   $("#modal-edit-btn-save").click( ()->
-    #save the editted task
+    #save the editted group
     editGroup($("#modal-edit-code").val(),$("#modal-edit-name").val(),$("#modal-edit-description").val(),$("#modal-edit-privacy").is(':checked')&1)
 
   )

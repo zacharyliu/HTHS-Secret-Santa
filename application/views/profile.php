@@ -2,13 +2,18 @@
 $id = $this->session->userdata('id'); //set id for use
 $userStats = $this->datamod->userStats($id); //get user stats
 ?>
+<script src="<?php echo base_url("/js/profile.js")?>"></script>
 <div class="container">
     <div class="row">
         <div class="col-md-12 col-sm-12">
             <div class="row">
-                <?php if (($this->session->flashdata('result'))) echo $this->session->flashdata('result'); //if there's a result message, show it?>
-                <?php echo form_error('group'); ?>
-                <?php echo form_error('group_name'); ?>
+                <?php if (($this->session->flashdata('result'))) echo $this->session->flashdata('result'); //if there's a result message, show it
+                echo form_error('group');
+                echo form_error('group_name');
+                echo form_error('group_description');
+                echo form_error('edit-grp-code');
+                echo form_error('edit-grp-name');
+                echo form_error('edit-grp-description'); ?>
                 <br/>
 
                 <div class="col-md-2 col-sm-12">
@@ -65,21 +70,24 @@ $userStats = $this->datamod->userStats($id); //get user stats
                                     foreach ($groups as $group) {
                                         if ($group->year == $year) {
                                             $count = true;
-                                            echo '<tr><td><i>' . $group->name . '</i></td>';
-                                            echo '<td>' . $group->code . '</td>';
+                                            echo '<tr><td class="groupname"><i>' . $group->name . '</i></td>';
+                                            echo '<td class="groupcode">' . $group->code . '</td>';
                                             echo '<td>' . $this->datamod->countMembers($group->code, $group->year) . '</td>';
                                             echo '<td>' . $this->datamod->getPair($group->code, $id, $group->year) . '</td>';
-                                            echo '<td>' . $group->description . '</td>';
-                                            if ($id == $group->owner) { //is current user group owner?
-                                                if ($group->leaveable){ //group is leaveable -- allow editing
-                                                    echo '<td>';
-                                                    echo '<button type="button" id="edit" class="btn btn-warning">Edit</button>';
-                                                    echo '<a href="' . base_url('profile/rm/' . $group->code) . '"><button type="button" class="btn btn-primary">Leave</button></a>';
-                                                    echo '</td>';
+                                            echo '<td class="description">' . $group->description . '</td>';
+                                            if ($group->year == $current_year){//only show buttons if its a current year group
+                                                if ($id == $group->owner) { //is current user group owner?
+                                                    if ($group->leaveable){ //group is leaveable -- allow editing
+                                                        echo '<td>';
+                                                        echo '<button type="button" class="btn btn-warning grp-edit">Edit</button>';
+                                                        echo '<a href="' . base_url('profile/rm/' . $group->code) . '"><button type="button" class="btn btn-primary">Leave</button></a>';
+                                                        echo '</td>';
+                                                    }
+                                                    else echo '<td>';
                                                 }
-                                                else echo '<td>';
+                                                else echo($group->leaveable ? '<td><a href="' . base_url('profile/rm/' . $group->code) . '"><button type="button" class="btn btn-primary">Leave</button></a>&nbsp;</td>' : "<td></td>");
                                             }
-                                            else echo($group->leaveable ? '<td><a href="' . base_url('profile/rm/' . $group->code) . '"><button type="button" class="btn btn-primary">Leave</button></a>&nbsp;</td>' : "<td></td>");
+                                            else echo "<td></td>";
                                             echo '</tr>';
                                         }
                                     }
@@ -164,25 +172,25 @@ $userStats = $this->datamod->userStats($id); //get user stats
                     <h4 class="modal-title">Edit Group</h4>
                 </div>
                 <div class="modal-body">
-                    <form role="form">
+                    <form role="form" method="post" action="<?php echo base_url('profile/editGroup')?>">
+                        <input type="hidden" name="edit-grp-code" id="modal-edit-grp-code-hidden">
                         <div class="form-group">
                             <label for="modal-edit-grp-code">Group Code</label>
                             <input type="text" class="form-control" placeholder="Group Code" id="modal-edit-grp-code" disabled>
                         </div>
-
                         <div class="form-group">
                             <label for="modal-edit-name">Group Name</label>
-                            <input type="text" class="form-control" id="modal-edit-grp-name" maxlength="50" placeholder="Group Name">
+                            <input type="text" class="form-control" id="modal-edit-grp-name" name="edit-grp-name" maxlength="50" placeholder="Group Name">
                         </div>
                         <div class="form-group">
                             <label for="modal-edit-description">Group Description</label>
-                            <input type="text" class="form-control" id="modal-edit-grp-description" maxlength="150" placeholder="Group Description">
+                            <input type="text" class="form-control" id="modal-edit-grp-description" name="edit-grp-description" maxlength="150" placeholder="Group Description">
                         </div>
-                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="button" id="modal-edit-grp-btn-save" class="btn btn-primary">Save changes</button>
+                    <button type="submit" id="modal-edit-grp-btn-save" class="btn btn-primary">Save changes</button>
+                    </form>
                 </div>
             </div>
             <!-- /.modal-content -->
