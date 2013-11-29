@@ -70,7 +70,7 @@ class Profile extends CI_Controller
     public function addgroup()
     { //form helper for creating new group
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
-        $this->form_validation->set_rules('group_name', 'Group Name', 'trim|required|min_length[4]|max_length[50]|callback_numGroups|callback_checkGroupName|xss_clean');
+        $this->form_validation->set_rules('group_name', 'Group Name', 'trim|required|min_length[4]|max_length[50]|callback_numGroups|xss_clean');
         $this->form_validation->set_rules('group_description', 'Group Description', 'trim|max_length[150]|xss_clean');
 
         if ($this->form_validation->run() == FALSE) {
@@ -86,9 +86,9 @@ class Profile extends CI_Controller
     {
         //form helper for editing a group
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
-        $this->form_validation->set_rules('edit-grp-code', 'Group Code Edit', 'trim|required|min_length[4]|max_length[4]|callback_checkGroupOwner|xss_clean');
-        $this->form_validation->set_rules('edit-grp-name', 'Group Name Edit', 'trim|required|min_length[4]|max_length[50]|callback_checkGroupName|xss_clean');
-        $this->form_validation->set_rules('edit-grp-description', 'Group Description Edit', 'trim|max_length[150]|xss_clean');
+        $this->form_validation->set_rules('edit-grp-code', 'edited Group Code', 'trim|required|min_length[4]|max_length[4]|callback_checkGroupOwner|xss_clean');
+        $this->form_validation->set_rules('edit-grp-name', 'edited Group Name', 'trim|required|min_length[4]|max_length[50]|xss_clean');
+        $this->form_validation->set_rules('edit-grp-description', 'editedGroup Description', 'trim|max_length[150]|xss_clean');
 
         if ($this->form_validation->run() == FALSE) {
             $this->_render(array('first_year' => $this->datamod->getJoinYear($this->session->userdata('id')), 'current_year' => intval(date('Y'))));
@@ -147,6 +147,11 @@ class Profile extends CI_Controller
         }
     }
 
+    /**
+     * @deprecated
+     * @param $str
+     * @return bool
+     */
     public function checkGroupName($str)
     { //checks entered group name to make sure it exists
         if ($this->datamod->checkGroupName($str) == true) { //if exists

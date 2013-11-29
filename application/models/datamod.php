@@ -171,6 +171,7 @@ class Datamod extends CI_Model
 
     /**
      * checks whether a group name already exists
+     * @deprecated - group names no longer have to be unique
      * @todo potential security vulnerability - fishing for group names
      * @param string $name group name to check against
      * @return bool             true on success, false in failure
