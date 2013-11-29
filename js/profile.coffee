@@ -20,8 +20,8 @@ $('document').ready () ->
   )
 
   #enable/disable the save changes button
-  $("#modal-edit input[type=text]").keyup( ()->
-    if $("#modal-edit-name").val() != ""
-      $("#modal-edit-btn-save").removeClass("disabled")
-    else $("#modal-edit-btn-save").addClass("disabled")
+  $("#modal-edit-grp input[type=text]").keyup( ()->
+    if $("#modal-edit-grp-name").val() != ""
+      $("#modal-edit-grp-btn-save").removeClass("disabled")
+    else $("#modal-edit-grp-btn-save").addClass("disabled")
   )
