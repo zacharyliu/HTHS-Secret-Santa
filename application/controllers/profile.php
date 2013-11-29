@@ -38,15 +38,7 @@ class Profile extends CI_Controller
      */
     private function _render($data = array())
     {
-        $join_year = $this->datamod->getJoinYear($this->session->userdata('id'));//get the year the user joined
-        $current_year = intval(date('Y'));//get the current year
-        $groupsInfo = array();
-        while ($join_year<=$current_year){
-            $groups = $this->datamod->getPersonGroups($this->session->userdata('id'),$join_year); //get all the group codes for a certain year
-            //a better way of doing this would be to get all of the groups that a user is part of, and run a query once on the groups table. But I'm lazy.
-            $groupsInfo=array_merge($groupsInfo,$this->datamod->groupInfoMultiple($groups,$join_year)); //get all relevant group info for that year, and merge it with the rest of the groups
-            $join_year+=1;
-        }
+        $groupsInfo=$this->datamod->groupInfoMultiple($this->session->userdata('id')); //get all relevant group info for that year, and merge it with the rest of the groups
         $data = array_merge(array('groups' => $groupsInfo), $data); //inject it into data array
 
         render('profile', $data);
