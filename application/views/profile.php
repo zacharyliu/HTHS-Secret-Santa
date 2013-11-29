@@ -117,7 +117,7 @@ $userStats = $this->datamod->userStats($id); //get user stats
                                 <label for="inputGroupCode">Group Code: </label>
                                 <input type="text" class="form-custom" maxlength="4" size="4" name="group"
                                        id="inputGroupCode"
-                                       placeholder="Code">
+                                       placeholder="Code" required>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 <button class="btn btn-default" type="submit">Add Group</button>
                             </form>
@@ -137,7 +137,7 @@ $userStats = $this->datamod->userStats($id); //get user stats
                                 <label for="inputGroupName">Group Name: </label>
                                 <input type="text" class="form-custom" maxlength="50" size="25" name="group_name"
                                        id="inputGroupName"
-                                       placeholder="Name">
+                                       placeholder="Name" required>
                                 &nbsp;&nbsp;
                                 <label for="inputGroupName">Group Description: </label>
                                 <input type="text" class="form-custom" maxlength="150" size="25"
@@ -180,7 +180,7 @@ $userStats = $this->datamod->userStats($id); //get user stats
                         </div>
                         <div class="form-group">
                             <label for="modal-edit-name">Group Name</label>
-                            <input type="text" class="form-control" id="modal-edit-grp-name" name="edit-grp-name" maxlength="50" placeholder="Group Name">
+                            <input type="text" class="form-control" id="modal-edit-grp-name" name="edit-grp-name" maxlength="50" placeholder="Group Name" required>
                         </div>
                         <div class="form-group">
                             <label for="modal-edit-description">Group Description</label>

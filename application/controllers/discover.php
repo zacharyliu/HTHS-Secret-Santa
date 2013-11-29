@@ -40,7 +40,7 @@ class Discover extends CI_Controller
     {
         $group = $this->uri->segment(3);
         if ($this->numGroups() && $this->checkgroup($group) && $this->inGroup($group)) {
-                $this->datamod->addGroup($this->session->userdata('id'), $group);
+                $this->datamod->addGroup($this->session->userdata('id'), null, null, $group);
                 $this->session->set_flashdata('result', message('You have successfully joined the group <strong>' . $this->datamod->getGroupName($group) . '</strong>!', 1)); //groupCode
         }
         redirect(base_url('discover'));

@@ -272,7 +272,6 @@ class Datamod extends CI_Model
     /////////////////////////////////////
     /**
      * get the name of a group by code
-     * @deprecated
      * @param $code             group code
      * @return string|bool      false on failure
      */
