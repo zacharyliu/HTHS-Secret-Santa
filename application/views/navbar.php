@@ -25,7 +25,7 @@
              * auth_hide: hide from non-logged in users?
              */
             array('text'=>'About', 'route'=>'about', 'side'=>'left', 'auth'=>false, 'admin'=>false, 'auth_hide'=>false),
-            array('text'=>'Discover', 'route'=>'discover', 'side'=>'left', 'auth'=>false, 'admin'=>false, 'auth_hide'=>false),
+            array('text'=>'Discover', 'route'=>'discover', 'side'=>'left', 'auth'=>true, 'admin'=>false, 'auth_hide'=>false),
             array('text'=>'Admin Panel', 'route'=>'admin', 'side'=>'right', 'auth'=>true, 'admin'=>true, 'auth_hide'=>false),
             array('text'=>'Profile', 'route'=>'profile', 'side'=>'right', 'auth'=>true, 'admin'=>false, 'auth_hide'=>false),
             array('text'=>'Logout', 'route'=>'logout', 'side'=>'right', 'auth'=>true, 'admin'=>false, 'auth_hide'=>false),
