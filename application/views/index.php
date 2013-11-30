@@ -1,7 +1,7 @@
-<link href="<?php echo base_url('/css/home.css')?>" rel="stylesheet">
+<link href="<?php echo base_url('/css/home.css') ?>" rel="stylesheet">
 <script src="<?php echo base_url('/js/jquery.quovolver.js') ?>"></script>
-<script type="text/javascript" src="<?php echo base_url('/js/jquery.stellar.min.js')?>"></script>
-<script type="text/javascript" src="<?php echo base_url('/js/snowstorm-min.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/js/jquery.stellar.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/js/snowstorm-min.js') ?>"></script>
 <script>
     $(document).ready(function () {
 
@@ -10,12 +10,12 @@
         $(document).off('.carousel.data-api')//carousel collision with stellar plugin
     });
 </script>
-    <div class="home-container slide" data-slide="1" data-stellar-background-ratio="0.5">
-        <div class="container" id="home-main">
+<div class="home-container slide" data-slide="1" data-stellar-background-ratio="0.5">
+    <div class="container" id="home-main">
         <div class="home-spotlight"></div>
         <div style="margin:100px 30px 0px 30px;">
             <div class="subsection-icon" style="font-size:65px;line-height:65px;">&#xF06B;</div>
-            <div class="section-header"><?php echo $this->datamod->totalgiftsExchanged()?> gifts exchanged!</div>
+            <div class="section-header"><?php echo $this->datamod->totalgiftsExchanged() ?> gifts exchanged!</div>
             <div class="subsection-text">HTHS Secret Santa is a fully fledged, feature filled application that makes it
                 easy to exchange
                 gifts with your friends and enemies.
@@ -134,25 +134,27 @@
 
         </div>
     </div>
-    </div>
-    <div class="home-footer slide container" data-slide="2" data-stellar-background-ratio="0.5">
+</div>
+<div class="home-footer slide container" data-slide="2" data-stellar-background-ratio="0.5">
 
-        <div class="row">
-            <div class="col-md-12">
-                <h1 style="text-align:center;color:#FFFFFF;">Time Until Gift Exchange</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <h1 style="text-align:center;color:#FFFFFF;">Time Until Gift Exchange</h1>
 
-                <div style="margin:0 auto 0 auto;"><?php echo $timer; ?></div>
-                <div class="section-header register-header">There are
-                    currently <?php $total = $this->datamod->countUsers();
-                    echo $total ?> secret santas.
-                </div>
-                <div class="section-subheader register-subheader">You're one click away from making
-                    it <?php echo $total + 1 ?>.
-                </div>
+            <div style="margin:0 auto 0 auto;"><?php echo $timer; ?></div>
+            <div class="section-header register-header">There are
+                currently <?php $total = $this->datamod->countUsers();
+                echo $total ?> secret santas.
+            </div>
+            <div class="section-subheader register-subheader">You're one click away from making
+                it <?php echo $total + 1 ?>.
             </div>
         </div>
-        <div class="row">
-            <a href="<?php echo base_url('login')?>"><button class="btn register-btn">Sign up for the secret santa.
-            </button></a>
-        </div>
     </div>
+    <div class="row">
+        <a href="<?php echo base_url('login') ?>">
+            <button class="btn register-btn">Sign up for the secret santa.
+            </button>
+        </a>
+    </div>
+</div>

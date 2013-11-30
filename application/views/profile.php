@@ -60,11 +60,11 @@ $userStats = $this->datamod->userStats($id); //get user stats
                                 <table class="table table-hover table-bordered">
                                     <tr>
                                         <th>Group Name</th>
-                                        <th>Group Code</th>
-                                        <th># of Members</th>
+                                        <th width="35px">Group Code</th>
+                                        <th width="50px"># of Members</th>
                                         <th>Partner</th>
                                         <th>Description</th>
-                                        <th>Options</th>
+                                        <th width="170px">Options</th>
                                     </tr>
                                     <?php
                                     foreach ($groups as $group) {

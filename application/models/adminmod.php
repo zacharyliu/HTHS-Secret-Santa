@@ -18,7 +18,7 @@ class Adminmod extends CI_Model
         for ($i = 0; $i < $total; $i++) {
             $row = $resultSet->row_array($i);
             if (!$this->datamod->inGroup($row['name'], 'hths')) //prevent duplicate additions to hths group
-            $this->datamod->addgroup($row['name'], 'hths');
+                $this->datamod->addgroup($row['name'], 'hths');
         }
 
     }
@@ -26,7 +26,7 @@ class Adminmod extends CI_Model
     public function pairCustom($code)
     {
         $this->db->from('pairs');
-        $this->db->where(array('code'=>$code, 'year'=> $this->current_year));
+        $this->db->where(array('code' => $code, 'year' => $this->current_year));
         $query = $this->db->get();
         if ($query->num_rows() == 0) {
             if ($this->datamod->countMembers($code) >= 5) {
@@ -65,8 +65,9 @@ class Adminmod extends CI_Model
      * sets leaveable = 0 in the groups table
      * advances current_year global variable to this year
      */
-    public function lockold(){
-        $this->db->where('year', getPrevYear())->update("groups",array("leaveable",0));
+    public function lockold()
+    {
+        $this->db->where('year', getPrevYear())->update("groups", array("leaveable", 0));
     }
 
     /**
@@ -75,72 +76,81 @@ class Adminmod extends CI_Model
      * Returns previous year if (current year) < x < (christmas)
      * Returns current year if (christmas) < x < (end of current year)
      */
-    public function getPrevYear() {
+    public function getPrevYear()
+    {
         $month = intval(date('n'));
         $day = intval(date('j'));
         $year = intval(date('Y'));
         if ($month == 12)
             if ($day <= 25) //before or on christmas
-                return $year-1;
+                return $year - 1;
             else return $year;
-        else return $year-1;
+        else return $year - 1;
     }
 
     /**
      * get oldest year of data
      */
-    public function getFirstYear() {
+    public function getFirstYear()
+    {
         $query = $this->db->get('globalvars');
         $row = $query->row();
         return $row->firstyear;
     }
 
 
-    public function listTemplateGroups(){
+    public function listTemplateGroups()
+    {
         $data = false;
-        foreach ($this->db->get('groups_template')->result() as $row){
+        foreach ($this->db->get('groups_template')->result() as $row) {
             $row->exists = $this->checkGroupExists($row->code);
             $data[] = $row;
         }
         return $data;
     }
 
-    public function newTemplateGroup($code,$name,$description,$privacy) {
-        $this->db->insert('groups_template',array('code' => $code, 'name' => $name, 'description' => $description, 'private' => $privacy));
-        return $code;//$this->db->insert_id();
+    public function newTemplateGroup($code, $name, $description, $privacy)
+    {
+        $this->db->insert('groups_template', array('code' => $code, 'name' => $name, 'description' => $description, 'private' => $privacy));
+        return $code; //$this->db->insert_id();
     }
 
 
-    public function deleteTemplateGroup($code) {
-        $this->db->delete('groups_template',array('code' => $code));
+    public function deleteTemplateGroup($code)
+    {
+        $this->db->delete('groups_template', array('code' => $code));
         return true;
     }
 
-    public function editTemplateGroup($code,$name,$description,$privacy){
-        $this->db->update('groups_template',array('name'=>$name,'description'=>$description,'private'=>$privacy),array('code'=>$code));
+    public function editTemplateGroup($code, $name, $description, $privacy)
+    {
+        $this->db->update('groups_template', array('name' => $name, 'description' => $description, 'private' => $privacy), array('code' => $code));
         if ($this->checkGroupExists($code)) {
-            $this->editGroup($code,$name,$description,$privacy);
+            $this->editGroup($code, $name, $description, $privacy);
         }
         return true;
     }
 
-    public function createTemplateGroup($code){
-        $template = $this->db->get_where('groups_template',array('code'=>$code))->result();
+    public function createTemplateGroup($code)
+    {
+        $template = $this->db->get_where('groups_template', array('code' => $code))->result();
         $template = $template[0];
-        $this->db->insert('groups',array('code'=>$template->code,'name'=>$template->name,'description'=>$template->description,'private'=>$template->private,'deleteable'=>0,'year'=>$this->current_year));
+        $this->db->insert('groups', array('code' => $template->code, 'name' => $template->name, 'description' => $template->description, 'private' => $template->private, 'deleteable' => 0, 'year' => $this->current_year));
     }
 
-    private function checkGroupExists($code,$year = NULL){
-        if ($year==null) $year=$this->current_year;
-        $query = $this->db->get_where('groups',array('code'=>$code,'year'=>$year));
+    private function checkGroupExists($code, $year = NULL)
+    {
+        if ($year == null) $year = $this->current_year;
+        $query = $this->db->get_where('groups', array('code' => $code, 'year' => $year));
 
         if ($query->num_rows() == 0) return false;
         else return true;
     }
 
-    private function editGroup($code, $name, $description, $privacy, $year = NULL) {
-        if ($year==null) $year=$this->current_year;
-        return $this->db->update('groups',array('name'=>$name,'description'=>$description,'private'=>$privacy),array('code'=>$code, 'year'=>$year));
+    private function editGroup($code, $name, $description, $privacy, $year = NULL)
+    {
+        if ($year == null) $year = $this->current_year;
+        return $this->db->update('groups', array('name' => $name, 'description' => $description, 'private' => $privacy), array('code' => $code, 'year' => $year));
     }
 
 }

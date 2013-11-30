@@ -379,15 +379,15 @@ class Datamod extends CI_Model
         } else return '[pending]';
     }
 
-    public function getGroupOwner($code, $year = NULL) {
+    public function getGroupOwner($code, $year = NULL)
+    {
         if ($year == NULL) $year = $this->current_year;
         $this->db->select('owner')->where(array('code' => $code, 'year' => $year));
         $query = $this->db->get('groups_owner');
         if ($query->num_rows() == 1) {
             $row = $query->row();
             return $row->owner;
-        }
-        else return null;
+        } else return null;
     }
 
     ///////////////////////////////////////
@@ -537,9 +537,9 @@ class Datamod extends CI_Model
     public function groupInfoMultiple($id)
     {
         $query = $this->db->select('g.*, go.owner')->from('groups g')
-                          ->join('users_groups ug', 'ug.code = g.code AND g.year = ug.year', 'inner')
-                          ->join('groups_owner go', 'g.code=go.code AND g.year=go.year', 'left outer')
-                          ->where(array('ug.id' => $id))->get();
+            ->join('users_groups ug', 'ug.code = g.code AND g.year = ug.year', 'inner')
+            ->join('groups_owner go', 'g.code=go.code AND g.year=go.year', 'left outer')
+            ->where(array('ug.id' => $id))->get();
         $output = array();
         if ($query->num_rows() > 0) {
             foreach ($query->result() as $group) {
@@ -549,8 +549,9 @@ class Datamod extends CI_Model
         return $output;
     }
 
-    public function editGroup($code, $name, $description) {
-        $this->db->where('code', $code)->update('groups',array('name' => $name, 'description' => $description));
+    public function editGroup($code, $name, $description)
+    {
+        $this->db->where('code', $code)->update('groups', array('name' => $name, 'description' => $description));
         return true;
     }
 
