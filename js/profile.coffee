@@ -25,7 +25,3 @@ $('document').ready () ->
       $("#modal-edit-grp-btn-save").removeClass("disabled")
     else $("#modal-edit-grp-btn-save").addClass("disabled")
   )
-
-  # clear the member list modal on close, to load new content
-  $('#modal-member-list').on 'hidden.bs.modal', () ->
-    $(this).removeData('bs.modal')

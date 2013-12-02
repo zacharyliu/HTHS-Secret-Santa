@@ -3,6 +3,7 @@ $id = $this->session->userdata('id'); //set id for use
 $userStats = $this->datamod->userStats($id); //get user stats
 ?>
 <script src="<?php echo base_url("/js/profile.js")?>"></script>
+<script src="<?php echo base_url("/js/memberlist.js")?>"></script>
 <div class="container">
     <div class="row">
         <div class="col-md-12 col-sm-12">
@@ -73,7 +74,7 @@ $userStats = $this->datamod->userStats($id); //get user stats
                                             // TODO: clean up profile view echo statements
                                             echo '<tr><td class="groupname"><i>' . $group->name . '</i></td>';
                                             echo '<td class="groupcode">' . $group->code . '</td>';
-                                            echo '<td><a data-toggle="modal" href="' . base_url('group/' . $group->code . '/' . $year . '/membersModal') . '" data-target="#modal-member-list">' . $this->datamod->countMembers($group->code, $group->year) . '</a></td>';
+                                            echo '<td><a data-toggle="modal" href="' . base_url('group/' . $group->code . '/' . $group->year . '/membersModal') . '" data-target="#modal-member-list">' . $this->datamod->countMembers($group->code, $group->year) . '</a></td>';
                                             echo '<td>' . $this->datamod->getPair($group->code, $id, $group->year) . '</td>';
                                             echo '<td class="description">' . $group->description . '</td>';
                                             if ($group->year == $current_year){//only show buttons if its a current year group
