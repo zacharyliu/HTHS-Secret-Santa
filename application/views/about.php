@@ -12,7 +12,7 @@
             </dd>
 
             <dt> How do I register?</dt>
-            <dd>You can register <a href="<?= base_url('login') ?>">here</a>. Be sure to use your "ctemc.org"
+            <dd>You can register <a href="<?php echo base_url('login') ?>">here</a>. Be sure to use your "ctemc.org"
                 email when registering!
             </dd>
 
@@ -38,7 +38,7 @@
             </dd>
 
             <dt>What do I do if I don't want to participate anymore?</dt>
-            <dd>You can remove yourself from any group as long as you do so before <i> Friday, 12/14 (when registration
+            <dd>You can remove yourself from any group as long as you do so before <i> Sunday, 12/8 (when registration
                     ends). </i> Otherwise, don't back out of your commitments, or there will be repercussions. Don't be
                 <i> that </i> guy.
             </dd>
