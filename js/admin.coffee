@@ -98,7 +98,10 @@ $(document).ready () ->
   $(".enable-pairing").on('click', (e) ->
     e.preventDefault()
     year = $(this).attr('id')
-    $(".btn,.pairing,#{year}").removeClass("disabled")
+    selector = $(".btn,.pairing,#{year}")
+    if selector.hasClass("disabled")
+      selector.removeClass("disabled")
+    else selector.addClass("disabled")
   )
 
 

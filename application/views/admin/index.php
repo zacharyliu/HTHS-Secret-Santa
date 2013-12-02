@@ -9,7 +9,7 @@
             <div class="row">
                 <h2>Group Management</h2>
 
-                <p>Run pairing on designated groups. Click <a href="#" class="enable-pairing" id="<?php echo $current_year?>">here</a> to enable the pairing buttons for the current year. </p>
+                <p>Run pairing on designated groups. Click <a href="#" class="enable-pairing" id="<?php echo $current_year?>">here</a> to toggle the pairing buttons for the current year. </p>
                 <ul id="years" class="nav nav-tabs">
                     <?php
                     $year = $first_year; //don't override first_year variable
