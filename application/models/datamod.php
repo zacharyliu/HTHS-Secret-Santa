@@ -358,7 +358,7 @@ class Datamod extends CI_Model
         $this->db->where(array('users_groups.code' => $code, 'users_groups.year' => $year));
         $this->db->from('users_groups');
         $this->db->join('users', 'users_groups.id = users.id', 'left');
-        $memberNames = [];
+        $memberNames = array();
         foreach ($this->db->get()->result() as $member) {
             array_push($memberNames, $member->name);
         }
