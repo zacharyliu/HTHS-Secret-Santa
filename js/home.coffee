@@ -1,7 +1,8 @@
 $(document).ready( () ->
   #initialize plugins
-  $('blockquote').quovolver(500, 6000);
-  $.stellar();
+  try
+    $('blockquote').quovolver(500, 6000);
+    $.stellar();
   snowStorm.flakesMaxActive = 96;
   snowStorm.flakesMax = 180;
   snowStorm.vMaxX = 12;
@@ -14,16 +15,16 @@ $(document).ready( () ->
   ymax = $(".home-container").height()
   xmax = $('.home-container').width()
 
-  console.log ymax, xmax
+
   #set the sky background
   d = new Date();
   h = d.getHours();
-  console.log h
-  if 7<h<=16 #8AM to 4PM - day
+
+  if 6<h<=16 #7AM to 5PM - day
     $('.sky').addClass('day')
-  else if 16<h<=19 #5PM to 7PM - sunset
+  else if 16<h<=18 #5PM to 7PM - sunset
     $('.sky').addClass('sunset')
-  else if h>19 || h<=4 #8PM to 4AM - night
+  else if h>18 || h<=4 #7PM to 5AM - night
     $('.sky').addClass('night')
     ###
     #lights
@@ -34,7 +35,7 @@ $(document).ready( () ->
       color = colors[randomInt(0,3)]
       $(".light-container").append("<div class='light #{color}' style='left:#{x}px;top:#{y}px;position:absolute' data-stellar-ratio='3'>&bull;</div>")
     ###
-  else if 4<h<=7 #4AM to 7AM - sunrise
+  else if 4<h<=6 #5AM to 7AM - sunrise
     $('.sky').addClass('sunset')
   else
     $('.sky').addClass('day')
