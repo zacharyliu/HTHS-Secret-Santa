@@ -43,7 +43,7 @@
                                 <tr>
                                     <td><?php echo $group->name ?></td>
                                     <td>
-                                        <a data-toggle="modal" href="<?=base_url('group/' . $group->code . '/membersModal')?>" data-target="#modal-member-list">
+                                        <a data-toggle="modal" href="<?=base_url('group/' . $group->code . '/' . $year . '/membersModal')?>" data-target="#modal-member-list">
                                             <?php echo $group->memberCount ?>
                                         </a>
                                     </td>

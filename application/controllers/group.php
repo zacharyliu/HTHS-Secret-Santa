@@ -14,9 +14,9 @@ class Group extends CI_Controller
         }
     }
 
-    public function membersModal($code) {
-        $groupName = $this->datamod->getGroupName($code);
-        $members = $this->datamod->getMemberNames($code);
+    public function membersModal($code, $year = null) {
+        $groupName = $this->datamod->getGroupName($code, $year);
+        $members = $this->datamod->getMemberNames($code, $year);
         if ($members == false) $members = array();
         ?>
         <div class="modal-dialog">

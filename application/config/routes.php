@@ -44,8 +44,8 @@ $route['logout'] = 'login/logout';
 $route['about'] = 'secretsanta/about';
 
 // flip the group routing structure
-$route['group/(:any)/(:any)'] = 'group/$2/$1';
-$route['group/(:any)'] = 'group/index/$1';
+$route['group/(:any)/(:num)/(:any)'] = 'group/$3/$1/$2';
+$route['group/(:any)/(:num)'] = 'group/index/$1/$2';
 
 
 /* End of file routes.php */
