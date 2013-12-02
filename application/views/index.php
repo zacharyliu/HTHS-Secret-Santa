@@ -2,15 +2,11 @@
 <script src="<?php echo base_url('/js/jquery.quovolver.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/js/jquery.stellar.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/js/snowstorm-min.js') ?>"></script>
-<script>
-    $(document).ready(function () {
+<script type="text/javascript" src="<?php echo base_url('/js/home.js') ?>"></script>
 
-        $('blockquote').quovolver(500, 6000);
-        $.stellar();
-        $(document).off('.carousel.data-api')//carousel collision with stellar plugin
-    });
-</script>
-<div class="home-container slide" data-slide="1" data-stellar-background-ratio="0.5">
+<div class="light-container"></div>
+<div class="sky slide" data-slide="1" data-stellar-background-ratio="1">
+<div class="home-container slide" data-slide="2" data-stellar-background-ratio="0.5">
     <div class="container" id="home-main">
         <div class="home-spotlight"></div>
         <div style="margin:100px 30px 0px 30px;">
@@ -135,7 +131,7 @@
         </div>
     </div>
 </div>
-<div class="home-footer slide container" data-slide="2" data-stellar-background-ratio="0.5">
+<div class="home-footer slide container" data-slide="3" data-stellar-background-ratio="0.5">
 
     <div class="row">
         <div class="col-md-12">
@@ -167,4 +163,5 @@
         </a>
         <?php endif; ?>
     </div>
+</div>
 </div>

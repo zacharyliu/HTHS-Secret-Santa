@@ -1,8 +1,11 @@
 @main: #27ae60;
 @main-header: #bf4040;
 @main-header-dark: #8b2c2c;
-@main-bgd: #6ccfff;
-@main-text:#ffffff;
+@main-day: #6ccfff;
+@main-sunset-light: #edb831;
+@main-sunset-dark: #e36a08;
+@main-night: #003366;
+@main-text: #ffffff;
 @main-brown: #855E42;
 
 body {
@@ -22,6 +25,7 @@ body {
   margin-right: auto;
   background-position: center;
   background-size: 90%;
+  z-index:150;
 
   @media (max-width: 634px) {
     height: 200px;
@@ -29,98 +33,98 @@ body {
 }
 
 .home-container {
-  height:100%;
-  text-align:center;
+  height: 100%;
+  text-align: center;
   background: url(../img/tree-gn.svg) no-repeat fixed;
   /*-webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;*/
   background-size: 130% 1800px;
-  background-color: @main-bgd;
-  background-position:left
+  //background-color: @main-day;
+  background-position: left;
+  z-index: 100;
 }
 
-
 .section-header {
-  font-size:50px;
-  line-height:50px;
+  font-size: 50px;
+  line-height: 50px;
   color: @main-header;
-  margin-bottom:10px;
+  margin-bottom: 10px;
   //margin-top:150px;
   font-weight: bold;
 }
 
 // Target section-header in upper part of page
 #home-main .subsection-header {
-  text-shadow: rgba(255,255,255,0.5) 0 0 10px;
+  text-shadow: rgba(255, 255, 255, 0.5) 0 0 10px;
+  z-index: 150;
 }
 
 .section-subheader {
-  font-size:24px;
-  line-height:31px;
-  color:#aeaeae;
+  font-size: 24px;
+  line-height: 31px;
+  color: #aeaeae;
 }
 
 .section-space {
-  height:2px;
-  width:100%;
+  height: 2px;
+  width: 100%;
   //background-color:#dddddd;
   /*background-image: url(../img/horizontal-chain.png);
   background-repeat: no-repeat;
   background-size:40px 40px;
   background-position:center;*/
-  margin-top:60px;
-  margin-bottom:120px;
+  margin-top: 60px;
+  margin-bottom: 120px;
 }
 
-
 .subsection-icon {
-  font-family:FontAwesome;
+  font-family: FontAwesome;
   color: @main-header;
-  font-size:38px;
-  line-height:38px;
-  margin-bottom:10px;
+  font-size: 38px;
+  line-height: 38px;
+  margin-bottom: 10px;
 }
 
 .subsection-header {
-  font-size:24px;
-  line-height:44px;
+  font-size: 24px;
+  line-height: 44px;
   color: @main-header;
   font-weight: bold;
-  text-shadow: rgba(255,255,255,0.2) 0 0 7px;
+  text-shadow: rgba(255, 255, 255, 0.2) 0 0 7px;
 }
 
 .subsection-text {
-  font-size:16px;
-  line-height:20px;
-  color:@main-text;//#aeaeae;
-  margin-bottom:200px;
+  font-size: 16px;
+  line-height: 20px;
+  color: @main-text; //#aeaeae;
+  margin-bottom: 200px;
 }
 
 // Dark shadow behind main section text
 #home-main {
   blockquote p, .subsection-text {
-    text-shadow: rgba(0,0,0,0.4) 0 0 7px;
+    text-shadow: rgba(0, 0, 0, 0.4) 0 0 7px;
   }
 }
 
 .register-header {
-  color:#ffffff;
-  margin-top:50px;
+  color: #ffffff;
+  margin-top: 50px;
 }
 
 .register-subheader {
-  color:#ffffff;
-  margin-bottom:150px;
+  color: #ffffff;
+  margin-bottom: 150px;
 }
 
 .register-btn {
-  background-color:#e74c3c;
+  background-color: #e74c3c;
   width: 50%;
   font-size: 16px;
-  padding-top:20px;
-  padding-bottom:20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   color: white;
 }
 
@@ -131,24 +135,69 @@ body {
 
 .home-footer {
   max-width: none;
-  background-color:@main-brown;
+  background-color: @main-brown;
   text-align: center;
   //margin-left:-20px;
   //margin-right:-20px;
-  margin-bottom:-40px;
+  margin-bottom: -40px;
   //padding-left:20px;
   //padding-right:20px;
-  padding-bottom:60px;
+  padding-bottom: 60px;
 }
 
-#quovolver{
+#quovolver {
   margin-bottom: 200px;
 }
 
 blockquote {
   border-left: none;
-  p {color: @main-text;}
-  small {color: #4f4f4f;}
+  p {
+    color: @main-text;
+  }
+  small {
+    color: #4f4f4f;
+  }
+}
+
+///////SKY//////////
+.day {
+  background: @main-day;
+}
+
+.sunset {
+  background: -webkit-linear-gradient(@main-sunset-light,@main-sunset-dark,@main-night) no-repeat; /* For Safari */
+  background: -o-linear-gradient(@main-sunset-light,@main-sunset-dark,@main-night) no-repeat; /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(@main-sunset-light,@main-sunset-dark,@main-night) no-repeat; /* For Firefox 3.6 to 15 */
+  background: linear-gradient(@main-sunset-light,@main-sunset-dark,@main-night) no-repeat;
+}
+
+.night {
+  background: @main-night;
+}
+
+.light{
+  font-size: 96px;
+  opacity:0.9;
+  z-index:01;
+}
+.yellow{
+  text-shadow: 2px 2px 50px #c6c102;
+  color: #f4e91c;
+}
+
+.blue{
+  text-shadow: 2px 2px 50px #1a6edd;
+  color: #1b79f9;
+}
+
+.red{
+   text-shadow: 2px 2px 50px #c61817;
+   color: #e61d19;
+ }
+
+.green{
+  text-shadow: 2px 2px 50px #108b27;
+  color: #00e60d;
 }
 
 ////////////////////
@@ -157,17 +206,18 @@ blockquote {
 
 .landing-container {
   text-align: center;
-  padding-top:100px;
+  padding-top: 100px;
   margin-bottom: 100px;
 }
-.landing-icon{
+
+.landing-icon {
   font-family: Fontawesome;
-  font-size:100px;
-  line-height:102px;
+  font-size: 100px;
+  line-height: 102px;
   color: @main-header-dark;
 }
 
-.landing-header{
+.landing-header {
   text-align: center;
   font-size: 48px;
   color: @main-header;
