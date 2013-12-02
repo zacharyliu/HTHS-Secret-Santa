@@ -56,7 +56,7 @@
         <ul class="nav navbar-nav navbar-right">
             <?php
             if ($is_logged_in) {
-                echo '<li><a style="background: rgba(0,0,0,0)">Hi ' . $this->session->userdata('fname') . '!</a></li>';
+                echo '<li><a id="navbar-greeting">Hi ' . $this->session->userdata('fname') . '!</a></li>';
             }
             echo $navbar_html['right'];
             ?>
