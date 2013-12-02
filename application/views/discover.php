@@ -48,3 +48,6 @@
             </div>
     </div>
 </div>
+
+<!-- Member List Modal -->
+<div class="modal fade" id="modal-member-list" tabindex="-1" role="dialog" aria-hidden="true"></div>
