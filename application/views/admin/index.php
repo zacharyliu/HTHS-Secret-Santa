@@ -42,7 +42,11 @@
                                 ?>
                                 <tr>
                                     <td><?php echo $group->name ?></td>
-                                    <td><?php echo $group->memberCount ?></td>
+                                    <td>
+                                        <a data-toggle="modal" href="<?=base_url('group/' . $group->code . '/membersModal')?>" data-target="#modal-member-list">
+                                            <?php echo $group->memberCount ?>
+                                        </a>
+                                    </td>
                                     <td><?php echo $group->description ?></td>
                                     <td>
                                         <form method="post" action="/admin/pairCustom">
@@ -177,3 +181,6 @@
 </div>
 <!-- /.modal -->
 </div>
+
+<!-- Member List Modal -->
+<div class="modal fade" id="modal-member-list" tabindex="-1" role="dialog" aria-hidden="true"></div>
