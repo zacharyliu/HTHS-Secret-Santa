@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
     </button>
-       <a class="navbar-brand" href="/"><img id="title-icon" src="<?php echo base_url('img/ico/apple-touch-icon-57-precomposed.png')?>" height="45px" width="45px" /><span id="title">HTHS Secret Santa</span></a>
+       <a class="navbar-brand" href="<?=base_url('/')?>"><img id="title-icon" src="<?php echo base_url('img/ico/apple-touch-icon-57-precomposed.png')?>" height="45px" width="45px" /><span id="title">HTHS Secret Santa</span></a>
     </div>
 
     <div class="navbar-collapse collapse" style="overflow: hidden;">
