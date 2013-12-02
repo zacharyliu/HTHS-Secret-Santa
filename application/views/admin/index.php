@@ -1,4 +1,5 @@
 <script src="<?php echo base_url("/js/admin.js") ?>"></script>
+<script src="<?php echo base_url("/js/memberlist.js") ?>"></script>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -43,7 +44,7 @@
                                 <tr>
                                     <td><?php echo $group->name ?></td>
                                     <td>
-                                        <a data-toggle="modal" href="<?=base_url('group/' . $group->code . '/membersModal')?>" data-target="#modal-member-list">
+                                        <a data-toggle="modal" href="<?=base_url('group/' . $group->code . '/' . $group->year . '/membersModal')?>" data-target="#modal-member-list">
                                             <?php echo $group->memberCount ?>
                                         </a>
                                     </td>

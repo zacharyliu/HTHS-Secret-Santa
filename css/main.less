@@ -110,6 +110,17 @@ dd{ //definitions
       background-color: @main-dark;
     }
   }
+
+  // "Hi, Name" greeting
+  #navbar-greeting {
+    background: rgba(0,0,0,0);
+    font-style: italic;
+
+    // Hide on tablets
+    @media (max-width: 765px) {
+      display: none;
+    }
+  }
 }
 
 .navbar-icon {

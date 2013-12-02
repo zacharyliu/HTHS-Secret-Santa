@@ -1,3 +1,4 @@
+<script src="<?=base_url('js/memberlist.js')?>"></script>
 <div class="container">
     <div class="row">
         <div class="col-md-12 col-sm-12">
@@ -33,7 +34,7 @@
                         else $disabled = "";
                             echo '<tr><td><i>' . $group->name . '</i></td>';
                             echo '<td>' . $group->code . '</td>';
-                            echo '<td>' . $this->datamod->countMembers($group->code,$group->year) . '</td>';
+                            echo '<td><a data-toggle="modal" href="' . base_url('group/' . $group->code . '/' . $group->year . '/membersModal') . '" data-target="#modal-member-list">' . $this->datamod->countMembers($group->code, $group->year) . '</a></td>';
                             echo '<td>' . $group->description . '</td>';
                             echo('<td><a href="'.base_url("/discover/joinGroup/".$group->code).'"><button type="button" class="btn btn-primary '.$disabled.'">Join</button></a></td>' );
                             echo '</tr>';
@@ -47,3 +48,6 @@
             </div>
     </div>
 </div>
+
+<!-- Member List Modal -->
+<div class="modal fade" id="modal-member-list" tabindex="-1" role="dialog" aria-hidden="true"></div>

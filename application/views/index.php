@@ -146,15 +146,25 @@
                 currently <?php $total = $this->datamod->countUsers();
                 echo $total ?> secret santas.
             </div>
-            <div class="section-subheader register-subheader">You're one click away from making
-                it <?php echo $total + 1 ?>.
+
+            <div class="section-subheader register-subheader">
+                <?php if (!$is_logged_in) : ?>
+                You're one click away from making it <?php echo $total + 1 ?>.
+                <?php endif; ?>
             </div>
+
         </div>
     </div>
     <div class="row">
+        <?php if ($is_logged_in) : ?>
+        <a href="<?php echo base_url('profile') ?>">
+            <button class="btn register-btn">Join a group on your profile page.</button>
+        </a>
+        <?php else : ?>
         <a href="<?php echo base_url('login') ?>">
             <button class="btn register-btn">Sign up for the secret santa.
             </button>
         </a>
+        <?php endif; ?>
     </div>
 </div>

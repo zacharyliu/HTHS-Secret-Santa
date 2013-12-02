@@ -1,8 +1,7 @@
 <IfModule mod_rewrite.c>
  
     RewriteEngine On
-    RewriteBase /
- 
+
     ### Canonicalize codeigniter URLs
  
     # If your default controller is something other than
