@@ -326,6 +326,7 @@ class Datamod extends CI_Model
     /**
      * get an array of members that belong to a group
      * @param $code
+     * @param null $year
      * @return array|bool
      */
     public function getMembers($code, $year = NULL)
@@ -340,6 +341,28 @@ class Datamod extends CI_Model
             }
             return $members;
         } else return false;
+    }
+
+    /**
+     * Get array of member names in a group
+     * TODO: make general function to combine with getMembers() function
+     * TODO: move into separate groupmod model
+     * @param $code
+     * @param null $year
+     * @return array
+     */
+    public function getMemberNames($code, $year = NULL)
+    {
+        if ($year == NULL) $year = $this->current_year;
+        $this->db->select('users.name');
+        $this->db->where(array('users_groups.code' => $code, 'users_groups.year' => $year));
+        $this->db->from('users_groups');
+        $this->db->join('users', 'users_groups.id = users.id', 'left');
+        $memberNames = [];
+        foreach ($this->db->get()->result() as $member) {
+            array_push($memberNames, $member->name);
+        }
+        return $memberNames;
     }
 
     /**

@@ -70,9 +70,10 @@ $userStats = $this->datamod->userStats($id); //get user stats
                                     foreach ($groups as $group) {
                                         if ($group->year == $year) {
                                             $count = true;
+                                            // TODO: clean up profile view echo statements
                                             echo '<tr><td class="groupname"><i>' . $group->name . '</i></td>';
                                             echo '<td class="groupcode">' . $group->code . '</td>';
-                                            echo '<td>' . $this->datamod->countMembers($group->code, $group->year) . '</td>';
+                                            echo '<td><a data-toggle="modal" href="' . base_url('group/' . $group->code . '/membersModal') . '" data-target="#modal-member-list">' . $this->datamod->countMembers($group->code, $group->year) . '</a></td>';
                                             echo '<td>' . $this->datamod->getPair($group->code, $id, $group->year) . '</td>';
                                             echo '<td class="description">' . $group->description . '</td>';
                                             if ($group->year == $current_year){//only show buttons if its a current year group
@@ -198,4 +199,6 @@ $userStats = $this->datamod->userStats($id); //get user stats
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
+
+    <div class="modal fade" id="modal-member-list" tabindex="-1" role="dialog" aria-hidden="true"></div>
 </div>

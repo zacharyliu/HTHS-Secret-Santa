@@ -43,6 +43,10 @@ $route['404_override'] = 'secretsanta/notfound';
 $route['logout'] = 'login/logout';
 $route['about'] = 'secretsanta/about';
 
+// flip the group routing structure
+$route['group/(:any)/(:any)'] = 'group/$2/$1';
+$route['group/(:any)'] = 'group/index/$1';
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
