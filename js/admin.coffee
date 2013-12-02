@@ -90,6 +90,17 @@ $(document).ready () ->
   )
 
 
+  ###
+  Group pairing
+  ###
+
+  #enable pairing button
+  $(".enable-pairing").on('click', (e) ->
+    e.preventDefault()
+    year = $(this).attr('id')
+    $(".btn,.pairing,#{year}").removeClass("disabled")
+  )
+
 
 
 #add new group to save data array
