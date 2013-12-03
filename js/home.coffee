@@ -3,6 +3,9 @@ $(document).ready( () ->
   try
     $('blockquote').quovolver(500, 6000);
     $.stellar();
+
+  $(document).off('.carousel.data-api') #carousel collision with stellar plugin
+
   snowStorm.flakesMaxActive = 96;
   snowStorm.flakesMax = 180;
   snowStorm.vMaxX = 12;
