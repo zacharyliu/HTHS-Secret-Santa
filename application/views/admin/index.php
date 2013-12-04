@@ -9,7 +9,7 @@
             <div class="row">
                 <h2>Group Management</h2>
 
-                <p>Run pairing on designated groups.</p>
+                <p>Run pairing on designated groups. Click <a href="#" class="enable-pairing" data-year="<?php echo $current_year?>">here</a> to toggle the pairing buttons for the current year. </p>
                 <ul id="years" class="nav nav-tabs">
                     <?php
                     $year = $first_year; //don't override first_year variable
@@ -53,7 +53,7 @@
                                         <form method="post" action="/admin/pairCustom">
                                             <input type="hidden" name="code" value="<?php echo $group->code ?>">
                                             <button type="submit"
-                                                    class="btn btn-primary" <?php if ($group->paired || $group->year != $current_year) echo ' disabled' ?>>
+                                                    class="btn btn-primary pairing <?php echo $group->year?> disabled" <?php /*if ($group->paired || $group->year != $current_year) echo ' disabled'*/ ?> >
                                                 Run Pairing
                                             </button>
                                         </form>

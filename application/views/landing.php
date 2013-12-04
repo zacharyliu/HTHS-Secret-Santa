@@ -11,6 +11,8 @@
 </style>
 <link href="<?php echo base_url('/css/home.css') ?>" rel="stylesheet">
 <script type="text/javascript" src="<?php echo base_url('/js/snowstorm-min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/js/home.js') ?>"></script>
+<div class="sky">
 <div class="home-container row">
     <div class="container" style="">
 
@@ -26,4 +28,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>
