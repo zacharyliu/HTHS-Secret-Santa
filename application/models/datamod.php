@@ -53,6 +53,22 @@ class Datamod extends CI_Model
         return $query->num_rows();
     }
 
+    /**
+     * Counts the number of users who have joined a group in the given year
+     * @param null $year group year to filter by (default: current year)
+     * @return int number of users
+     */
+    public function countUsersYear($year = null)
+    {
+        if ($year == null) $year = $this->current_year;
+        $this->db->distinct()
+            ->select('users.name')
+            ->from('users')
+            ->join('users_groups', 'users.id = users_groups.id', 'inner')
+            ->where('users_groups.year', $year);
+        return $this->db->get()->num_rows();
+    }
+
     public function totalgiftsExchanged()
     {
         return $this->db->get('pairs')->num_rows();
