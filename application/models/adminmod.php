@@ -88,14 +88,20 @@ class Adminmod extends CI_Model
         else return $year - 1;
     }
 
+
+    public function getGlobalVar($key) {
+        $this->db->where('key', $key);
+        $query = $this->db->get('globalvars');
+        $row = $query->row();
+        return $row->value;
+    }
+
     /**
      * get oldest year of data
      */
     public function getFirstYear()
     {
-        $query = $this->db->get('globalvars');
-        $row = $query->row();
-        return $row->firstyear;
+        return intval($this->getGlobalVar('firstyear'));
     }
 
 
