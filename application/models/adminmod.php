@@ -25,23 +25,31 @@ class Adminmod extends CI_Model
 
     public function pairCustom($code)
     {
+        $this->db->trans_start();
+
         $this->db->from('pairs');
         $this->db->where(array('code' => $code, 'year' => $this->current_year));
         $query = $this->db->get();
-        if ($query->num_rows() == 0) {
-            if ($this->datamod->countMembers($code) >= 5) {
-                $members = $this->datamod->getMembers($code);
-                shuffle($members); //randomize array
-                $total = count($members);
-                //var_dump($members);
-                for ($i = 0; $i < $total; $i++) {
-                    $give = $members[$i];
-                    $receive = ($i + 1 < $total ? $members[$i + 1] : $members[0]); //loop back to first element if i+1 > total # of members
-                    $this->addPair($code, $give, $receive);
-                }
-                return $total;
-            } else return false;
-        } else return false;
+
+        // Refuse to run on a group already paired
+        if ($query->num_rows() != 0) return false;
+
+        // Refuse to run on a group with fewer than 5 members
+        // TODO: read minimum group size from global settings
+        if ($this->datamod->countMembers($code) < 5) return false;
+
+        $members = $this->datamod->getMembers($code);
+        shuffle($members); //randomize array
+        $total = count($members);
+        for ($i = 0; $i < $total; $i++) {
+            $give = $members[$i];
+            $receive = ($i + 1 < $total ? $members[$i + 1] : $members[0]); //loop back to first element if i+1 > total # of members
+            $this->addPair($code, $give, $receive);
+        }
+
+        $this->db->trans_complete();
+
+        return $total;
     }
 
     public function addPair($code, $give, $receive)
