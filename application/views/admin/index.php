@@ -134,6 +134,26 @@
                 <!--<div><a href="/admin/lockold">Lock</a> last year's groups. This will make all groups
                 from <?php echo $this->adminmod->getPrevYear() ?> unleaveable.-->
             </div>
+
+            <div class="row">
+                <h2>Email Login Whitelist</h2>
+                <p>These are whitelisted emails which are not subject to the global email restriction and can log in regardless of what emails are otherwise allowed to log in.</p>
+
+                <ul>
+                    <?php foreach ($allowed_emails as $email) : ?>
+                    <li><?=$email?></li>
+                    <?php endforeach; ?>
+                </ul>
+
+                <form method="post" action="<?=base_url('admin/addAllowedEmail')?>" class="">
+                    <div class="form-group">
+                        <label>Add another allowed email address
+                        <input type="email" name="email" class="form-control" placeholder="user@domain.com"></label>
+                    </div>
+
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
         </div>
 
     </div>

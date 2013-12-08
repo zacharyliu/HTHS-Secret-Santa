@@ -25,8 +25,29 @@ class Admin extends CI_Controller
             $group->memberCount = $this->datamod->countMembers($group->code,$year);
             $group->paired = $this->datamod->paired($group->code,$year);
         }
-        $data = array('groups' => $groups, 'templates'=>$this->adminmod->listTemplateGroups(), 'first_year'=>$this->adminmod->getFirstYear(),'current_year'=>intval(date('Y')));
+        $data = array('groups' => $groups, 'templates'=>$this->adminmod->listTemplateGroups(), 'first_year'=>$this->adminmod->getFirstYear(),'current_year'=>intval(date('Y')), 'allowed_emails' => $this->adminmod->getAllowedEmails());
         render('admin/index', $data);
+    }
+
+    public function addAllowedEmail()
+    {
+        $this->load->library('form_validation');
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
+        $this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email');
+
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('admin', message('<strong>Error!</strong> You must enter a valid email address.'));
+            redirect('admin');
+        }
+
+        $email = $this->input->post('email');
+        if ($this->adminmod->addAllowedEmail($email)) {
+            $this->session->set_flashdata('admin', message("<strong>Success!</strong> Added $email to the list of allowed email addresses."));
+        } else {
+            $this->session->set_flashdata('admin', message("<strong>Error!</strong> Could not add $email."));
+        }
+
+        redirect('admin');
     }
 
     public function pairCustom()

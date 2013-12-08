@@ -161,4 +161,19 @@ class Adminmod extends CI_Model
         return $this->db->update('groups', array('name' => $name, 'description' => $description, 'private' => $privacy), array('code' => $code, 'year' => $year));
     }
 
+    public function getAllowedEmails()
+    {
+        $results = $this->db->get('allowed_emails')->result();
+        $array = array();
+        foreach ($results as $result) {
+            array_push($array, $result->email);
+        }
+        return $array;
+    }
+
+    public function addAllowedEmail($email)
+    {
+        return $this->db->insert('allowed_emails', array('email' => $email));
+    }
+
 }
