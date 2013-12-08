@@ -44,7 +44,7 @@ class Adminmod extends CI_Model
         for ($i = 0; $i < $total; $i++) {
             $give = $members[$i];
             $receive = ($i + 1 < $total ? $members[$i + 1] : $members[0]); //loop back to first element if i+1 > total # of members
-            $this->addPair($code, $give, $receive);
+            $this->addPair($code, $give, $receive, $this->current_year);
         }
 
         $this->db->trans_complete();
@@ -52,9 +52,9 @@ class Adminmod extends CI_Model
         return $total;
     }
 
-    public function addPair($code, $give, $receive)
+    public function addPair($code, $give, $receive, $year)
     {
-        $data = array('group' => $code, 'give' => $give, 'receive' => $receive);
+        $data = array('group' => $code, 'give' => $give, 'receive' => $receive, 'year' => $year);
         // Check if the pair is already in the database
         $this->db->where($data);
         $query = $this->db->get('pairs');
