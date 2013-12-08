@@ -30,16 +30,16 @@ class Login extends CI_Controller
                 // Get user attributes:
                 $user_data = $openid->getAttributes();
 
-                // Check to make sure that the user is logging in using a @ctemc.org account:
-                if ($this->config->item('domain_restriction') == '' || (preg_match($this->config->item('domain_restriction'), $user_data['contact/email']))) {
-                    //echo "Welcome, " . " " . $user_data['namePerson/first'] . ' ' . $user_data['namePerson/last'];
+                // Check to make sure that the user is logging in using a @ctemc.org account or email exception:
+                $this->load->model('datamod');
+                if ($this->config->item('domain_restriction') == '' || (preg_match($this->config->item('domain_restriction'), $user_data['contact/email'])) || $this->datamod->checkAllowedEmailException($user_data['contact/email'])) {
+                    //echo "Welcome, " . " ` . $user_data['namePerson/first'] . ' ' . $user_data['namePerson/last'];
 
                     $fname = $user_data['namePerson/first'];
                     $lname = $user_data['namePerson/last'];
                     $email = $user_data['contact/email'];
 
                     // Load user ID if it exists
-                    $this->load->model('datamod');
                     $user_id = $this->datamod->getUserId($email);
                     if ($user_id == false) {
                         $this->datamod->addUser($fname . " " . $lname, $email);
@@ -58,7 +58,7 @@ class Login extends CI_Controller
                         //redirect(base_url('secretsanta/survey'));
                     redirect(base_url('/profile'));
                 } else {
-                    $this->login_failure('Please log in using an @ctemc.org account.');
+                    $this->login_failure('Please log in using an @ctemc.org account or contact an administrator.');
                 }
 
             }

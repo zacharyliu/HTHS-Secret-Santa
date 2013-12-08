@@ -166,6 +166,16 @@ class Datamod extends CI_Model
         } else return false;
     }
 
+    /**
+     * check whether email is one of exceptions for registration
+     */
+    public function checkAllowedEmailException($email){
+        $query = $this->db->select("email")->where(array('email'=>$email))->get('allowed_emails');
+
+        if ($query->num_rows() >0) {
+            return true;
+        } else return false;
+    }
     ///////////////////////////////////////
     //GROUP FUNCTIONS - Counting and Checking
     /////////////////////////////////////
@@ -437,6 +447,7 @@ class Datamod extends CI_Model
      * @param string $person user's name
      * @param string $name group name
      */
+
     private function __genGroup()
     {
         $code = $this->__randstring(4); //generate a unique code
