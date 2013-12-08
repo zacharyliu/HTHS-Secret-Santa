@@ -50,7 +50,7 @@
                                     </td>
                                     <td><?php echo $group->description ?></td>
                                     <td>
-                                        <form method="post" action="/admin/pairCustom">
+                                        <form method="post" action="<?=base_url('admin/pairCustom')?>">
                                             <input type="hidden" name="code" value="<?php echo $group->code ?>">
                                             <button type="submit"
                                                     class="btn btn-primary pairing <?php echo $group->year?> disabled" <?php /*if ($group->paired || $group->year != $current_year) echo ' disabled'*/ ?> >
