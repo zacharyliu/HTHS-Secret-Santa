@@ -118,6 +118,17 @@ CREATE TABLE IF NOT EXISTS `users_groups` (
   KEY `code` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `allowed_emails`
+--
+
+CREATE TABLE IF NOT EXISTS `allowed_emails` (
+  `email` varchar(100) NOT NULL,
+  PRIMARY KEY (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- Constraints for dumped tables
 --
