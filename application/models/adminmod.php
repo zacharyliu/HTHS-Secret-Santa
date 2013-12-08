@@ -54,7 +54,7 @@ class Adminmod extends CI_Model
 
     public function addPair($code, $give, $receive, $year)
     {
-        $data = array('group' => $code, 'give' => $give, 'receive' => $receive, 'year' => $year);
+        $data = array('code' => $code, 'give' => $give, 'receive' => $receive, 'year' => $year);
         // Check if the pair is already in the database
         $this->db->where($data);
         $query = $this->db->get('pairs');
