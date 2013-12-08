@@ -104,6 +104,11 @@ $(document).ready () ->
     else selector.addClass("disabled")
   )
 
+  #add listener on pairing buttom click
+  $(".btn.pairing").each () ->
+    $(this).click (e) ->
+      salt = $('input#salt').val();
+      $(this).parent('form').find('input[name="salt"]').attr('value', salt);
 
 
 #add new group to save data array

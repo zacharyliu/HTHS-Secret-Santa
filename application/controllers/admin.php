@@ -32,7 +32,13 @@ class Admin extends CI_Controller
     public function pairCustom()
     {
         if ($this->input->post('code') != '') {
-            $result = $this->adminmod->pairCustom($this->input->post('code'));
+            if ($this->input->post('salt') == '') {
+                $this->session->set_flashdata('admin', message('<strong>Error!</strong> You must provide a salt to seed the random pairing.'));
+                redirect('admin');
+                return;
+            }
+
+            $result = $this->adminmod->pairCustom($this->input->post('code'), $this->input->post('salt'));
             if ($result) {
                 $this->session->set_flashdata('admin', message('<strong>Success!</strong> Successfully ran pairing on code ' . $this->input->post('code') . ' with ' . $result . ' members',1));
                 redirect('admin');

@@ -10,6 +10,13 @@
                 <h2>Group Management</h2>
 
                 <p>Run pairing on designated groups. Click <a href="#" class="enable-pairing" data-year="<?php echo $current_year?>">here</a> to toggle the pairing buttons for the current year. </p>
+
+                <p>
+                    <form class="form-inline">
+                        <label>Enter a salt to seed the random pairing: <input id="salt" class="form-control" placeholder="Salt"></label>
+                    </form>
+                </p>
+
                 <ul id="years" class="nav nav-tabs">
                     <?php
                     $year = $first_year; //don't override first_year variable
@@ -52,6 +59,7 @@
                                     <td>
                                         <form method="post" action="<?=base_url('admin/pairCustom')?>">
                                             <input type="hidden" name="code" value="<?php echo $group->code ?>">
+                                            <input type="hidden" name="salt" value="">
                                             <button type="submit"
                                                     class="btn btn-primary pairing <?php echo $group->year?> disabled" <?php /*if ($group->paired || $group->year != $current_year) echo ' disabled'*/ ?> >
                                                 Run Pairing

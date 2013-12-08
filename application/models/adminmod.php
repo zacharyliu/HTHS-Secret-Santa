@@ -23,7 +23,7 @@ class Adminmod extends CI_Model
 
     }
 
-    public function pairCustom($code)
+    public function pairCustom($code, $salt)
     {
         $this->db->trans_start();
 
@@ -39,12 +39,16 @@ class Adminmod extends CI_Model
         if ($this->datamod->countMembers($code) < 5) return false;
 
         $members = $this->datamod->getMembers($code);
-        shuffle($members); //randomize array
+
+        // Randomize array
+        $seed = $code . $this->current_year . $salt;
+        $this->seededShuffle($members, $seed);
+
         $total = count($members);
         for ($i = 0; $i < $total; $i++) {
             $give = $members[$i];
             $receive = ($i + 1 < $total ? $members[$i + 1] : $members[0]); //loop back to first element if i+1 > total # of members
-            $this->addPair($code, $give, $receive);
+            $this->addPair($code, $give, $receive, $this->current_year);
         }
 
         $this->db->trans_complete();
@@ -52,9 +56,21 @@ class Adminmod extends CI_Model
         return $total;
     }
 
-    public function addPair($code, $give, $receive)
+    /**
+     * Shufffles an array in place with a random seed to produce repeatable results.
+     * @param $array
+     * @param $seed
+     */
+    private function seededShuffle(&$array, $seed)
     {
-        $data = array('group' => $code, 'give' => $give, 'receive' => $receive);
+        mt_srand($seed);
+        $order = array_map(create_function('$val', 'return mt_rand();'), range(1, count($array)));
+        array_multisort($order, $array);
+    }
+
+    public function addPair($code, $give, $receive, $year)
+    {
+        $data = array('code' => $code, 'give' => $give, 'receive' => $receive, 'year' => $year);
         // Check if the pair is already in the database
         $this->db->where($data);
         $query = $this->db->get('pairs');
