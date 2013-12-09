@@ -176,11 +176,12 @@ class Adminmod extends CI_Model
     {
         $this->load->library('email');
         // The following two functions are major security holes
+        // although the addslashes() function lowers the risk considerably
         extract($vars); // TODO: use different way of loading variables to avoid risky extract() function
         $subject = '';
-        eval('$subject = "' . $subjectTemplate . '";'); // TODO: use better template system to avoid eval() security risk
+        eval('$subject = "' . addslashes($subjectTemplate) . '";'); // TODO: use better template system to avoid eval() security risk
         $message = '';
-        eval('$message = "' . $messageTemplate . '";'); // TODO: use better template system to avoid eval() security risk
+        eval('$message = "' . addslashes($messageTemplate) . '";'); // TODO: use better template system to avoid eval() security risk
 
         $this->email->from($this->config->item('email_from_name'),
             $this->config->item('email_from_email'));
