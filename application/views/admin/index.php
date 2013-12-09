@@ -10,6 +10,8 @@
                 <h2>Group Management</h2>
 
                 <p>Run pairing on designated groups. Click <a href="#" class="enable-pairing" data-year="<?php echo $current_year?>">here</a> to toggle the pairing buttons for the current year. </p>
+
+                <p><a href="<?=base_url('admin/sendBulkMail')?>" class="btn btn-primary">Send Bulk Mail to All Current Users</a></p>
                 <ul id="years" class="nav nav-tabs">
                     <?php
                     $year = $first_year; //don't override first_year variable
@@ -57,6 +59,7 @@
                                                 Run Pairing
                                             </button>
                                         </form>
+                                        <a href="<?=base_url("admin/sendBulkMail/{$group->code}/{$group->year}")?>" class="btn btn-primary">Send Bulk Mail</a>
                                     </td>
                                 </tr>
 
