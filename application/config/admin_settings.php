@@ -13,3 +13,10 @@ $config['admin_users'] = array('mhsu@ctemc.org','vchen@ctemc.org','zliu@ctemc.or
  * If that is the case, define a regex in $domain_restriction
  **/
 $config['domain_restriction'] = '/^[^@]+@ctemc\.org$/';
+
+
+/**
+ * It may be wise to define a maximum limit on the number of groups a user can join.
+ * Specify a number greater than 0 for $max_groups
+ */
+$config['max_groups'] = 5;
