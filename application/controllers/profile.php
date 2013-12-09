@@ -38,6 +38,11 @@ class Profile extends CI_Controller
      */
     private function _render($data = array())
     {
+        $array_defaults = array('first_year' => $this->datamod->getJoinYear($this->session->userdata('id')), 'current_year' => intval(date('Y')));
+        foreach (array_keys($array_defaults) as $key) {
+            if (!isset($data[$key])) $data[$key] = $array_defaults[$key];
+        }
+        
         $groupsInfo = $this->datamod->groupInfoMultiple($this->session->userdata('id')); //get all relevant group info for that year, and merge it with the rest of the groups
         $data = array_merge(array('groups' => $groupsInfo), $data); //inject it into data array
 
@@ -49,7 +54,7 @@ class Profile extends CI_Controller
      */
     public function index()
     {
-        $this->_render(array('first_year' => $this->datamod->getJoinYear($this->session->userdata('id')), 'current_year' => intval(date('Y'))));
+        $this->_render();
     }
 
     public function groupcode()
@@ -59,7 +64,7 @@ class Profile extends CI_Controller
         $this->form_validation->set_rules('group', 'Group Code', 'trim|required|min_length[4]|max_length[4]|alpha_numeric|callback_checkGroup|callback_inGroup|callback_numGroups');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->_render(array('first_year' => $this->datamod->getJoinYear($this->session->userdata('id')), 'current_year' => intval(date('Y'))));
+            $this->_render();
         } else {
             $this->datamod->addGroup($this->session->userdata('id'), null, null, set_value('group'));
             $this->session->set_flashdata('result', message('You have successfully joined the group <strong>' . $this->datamod->getGroupName(set_value('group')) . '</strong>!', 1)); //groupCode
@@ -74,7 +79,7 @@ class Profile extends CI_Controller
         $this->form_validation->set_rules('group_description', 'Group Description', 'trim|max_length[150]|xss_clean');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->_render(array('first_year' => $this->datamod->getJoinYear($this->session->userdata('id')), 'current_year' => intval(date('Y'))));
+            $this->_render();
         } else {
             $this->datamod->addGroup($this->session->userdata('id'), set_value('group_name'), set_value('group_description'));
             $this->session->set_flashdata('result', message('You have successfully created the group <strong>' . set_value('group_name') . '</strong>! Your group code is <strong>' . $this->datamod->getGroupCode(set_value('group_name')) . '</strong>. Keep this in a safe place.', 1)); //groupcreate
@@ -91,7 +96,7 @@ class Profile extends CI_Controller
         $this->form_validation->set_rules('edit-grp-description', 'editedGroup Description', 'trim|max_length[150]|xss_clean');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->_render(array('first_year' => $this->datamod->getJoinYear($this->session->userdata('id')), 'current_year' => intval(date('Y'))));
+            $this->_render();
         } else {
             if ($this->datamod->editGroup(set_value('edit-grp-code'), set_value('edit-grp-name'), set_value('edit-grp-description'))) {
                 $this->session->set_flashdata('result', message('Successfully updated settings for the group <strong>' . set_value('edit-grp-name') . '</strong>.', 0));
