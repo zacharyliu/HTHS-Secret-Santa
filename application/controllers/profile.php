@@ -61,7 +61,7 @@ class Profile extends CI_Controller
     { //form helper for adding group by code
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
-        $this->form_validation->set_rules('group', 'Group Code', 'trim|required|min_length[4]|max_length[4]|alpha_numeric|callback_checkGroup|callback_inGroup|callback_numGroups');
+        $this->form_validation->set_rules('group', 'Group Code', 'trim|required|min_length[4]|max_length[4]|alpha_numeric|callback_checkGroup|callback_inGroup|callback_numGroups|callback_checkGroupPaired');
 
         if ($this->form_validation->run() == FALSE) {
             $this->_render();
@@ -174,15 +174,15 @@ class Profile extends CI_Controller
     }
 
     public function numGroups()
-    { //verifies that user is in less than threshold groups
-        $num = $this->datamod->countPersonGroups($this->session->userdata('id'));
-        if ($num < $this->config->item('max_groups'))
-            return true;
-        else {
-            $this->form_validation->set_message('numGroups', 'You are already in <strong>' . $num . '</strong> groups.  Leave a group and try again.');
-            return false;
-        }
+{ //verifies that user is in less than threshold groups
+    $num = $this->datamod->countPersonGroups($this->session->userdata('id'));
+    if ($num < $this->config->item('max_groups'))
+        return true;
+    else {
+        $this->form_validation->set_message('numGroups', 'You are already in <strong>' . $num . '</strong> groups.  Leave a group and try again.');
+        return false;
     }
+}
 
     public function checkGroupOwner($str)
     {
@@ -191,6 +191,15 @@ class Profile extends CI_Controller
             return true;
         else {
             $this->form_validation->set_message('checkGroupOwner', 'You do not have permissions to edit the group <strong>' . $this->datamod->getGroupName(set_value('edit-grp-code')) . '</strong>.');
+            return false;
+        }
+    }
+
+    public function checkGroupPaired($code) {
+        if (!$this->datamod->paired($code)) //group has not been paired
+                return true;
+        else {
+            $this->form_validation->set_message('checkGroupPaired', 'Unable to join <strong>' . $this->datamod->getGroupName(set_value('group')) . '</strong> as partners are already assigned. Maybe next year?');
             return false;
         }
     }

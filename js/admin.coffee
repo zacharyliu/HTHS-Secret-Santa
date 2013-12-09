@@ -90,16 +90,16 @@ $(document).ready () ->
   )
 
 
-  ###
-  Group pairing
-  ###
+  #################
+  ##Group pairing##
+  #################
 
   #enable pairing button
   $(".enable-pairing").on('click', (e) ->
     e.preventDefault()
     year = $(this).data('year')
     selector = $(".btn.pairing.#{year}")
-    if selector.hasClass("disabled")
+    if selector.hasClass("disabled") && selector.data("paired") == "false"
       selector.removeClass("disabled")
     else selector.addClass("disabled")
   )
