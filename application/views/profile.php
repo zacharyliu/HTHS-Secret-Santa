@@ -14,7 +14,8 @@ $userStats = $this->datamod->userStats($id); //get user stats
                 echo form_error('group_description');
                 echo form_error('edit-grp-code');
                 echo form_error('edit-grp-name');
-                echo form_error('edit-grp-description'); ?>
+                echo form_error('edit-grp-description');
+                echo form_error('checkGroupPaired');?>
                 <br/>
 
                 <div class="col-md-2 col-sm-12">

@@ -39,7 +39,7 @@ class Discover extends CI_Controller
     public function joinGroup()
     {
         $group = $this->uri->segment(3);
-        if ($this->numGroups() && $this->checkgroup($group) && $this->inGroup($group)) {
+        if ($this->numGroups() && $this->checkgroup($group) && $this->inGroup($group) && $this->checkGRoupPaired($group)) {
                 $this->datamod->addGroup($this->session->userdata('id'), null, null, $group);
                 $this->session->set_flashdata('result', message('You have successfully joined the group <strong>' . $this->datamod->getGroupName($group) . '</strong>!', 1)); //groupCode
         }
@@ -76,5 +76,14 @@ class Discover extends CI_Controller
             $this->session->set_flashdata('result', message('You are already in the group <strong>' . $this->datamod->getGroupName($str) . '</strong>.',3));
             return false;
         } else return true;
+    }
+
+    private function checkGroupPaired($code) {
+        if (!$this->datamod->paired($code)) //group has not been paired
+            return true;
+        else {
+            $this->form_validation->set_message('checkGroupPaired', 'Unable to join <strong>' . $this->datamod->getGroupName(set_value('group')) . '</strong> as partners are already assigned. Maybe next year?');
+            return false;
+        }
     }
 }

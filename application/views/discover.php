@@ -3,9 +3,10 @@
     <div class="row">
         <div class="col-md-12 col-sm-12">
             <div class="row">
-                <?php if (($this->session->flashdata('result'))) echo $this->session->flashdata('result'); //if there's a result message, show it?>
-                <?php echo form_error('group'); ?>
-                <?php echo form_error('group_name'); ?>
+                <?php if (($this->session->flashdata('result'))) echo $this->session->flashdata('result'); //if there's a result message, show it
+                echo form_error('group');
+                echo form_error('group_name');
+                echo form_error('checkGroupPaired'); ?>
                 <br/>
             </div>
             <div class="row">
@@ -28,7 +29,7 @@
                     <?php
                     if ($trending !=false){
                     foreach ($trending as $group) {
-                            if ($this->datamod->inGroup($this->session->userdata('id'),$group->code)){//disable the join button if user is in group
+                            if ($this->datamod->inGroup($this->session->userdata('id'),$group->code) || $this->datamod->paired($group->code)){//disable the join button if user is in group and group has been paired
                                 $disabled = "disabled";
                             }
                         else $disabled = "";
