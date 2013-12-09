@@ -16,6 +16,12 @@ $config['domain_restriction'] = '/^[^@]+@ctemc\.org$/';
 
 
 /**
+ * It may be wise to define a maximum limit on the number of groups a user can join.
+ * Specify a number greater than 0 for $max_groups
+ */
+$config['max_groups'] = 5;
+
+/**
  * Email notification from address settings
  */
 $config['email_from_name'] = 'HTHS Secret Santa';
