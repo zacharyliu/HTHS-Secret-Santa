@@ -13,3 +13,10 @@ $config['admin_users'] = array('mhsu@ctemc.org','vchen@ctemc.org','zliu@ctemc.or
  * If that is the case, define a regex in $domain_restriction
  **/
 $config['domain_restriction'] = '/^[^@]+@ctemc\.org$/';
+
+
+/**
+ * Email notification from address settings
+ */
+$config['email_from_name'] = 'HTHS Secret Santa';
+$config['email_from_email'] = 'hths.secret.santa@gmail.com';

@@ -101,4 +101,37 @@ class Admin extends CI_Controller
         $code = $this->input->post("c");
         echo $this->adminmod->createTemplateGroup($code);
     }
+
+    public function sendBulkMail($code = null, $year = null)
+    {
+        $this->load->library('form_validation');
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
+        $this->form_validation->set_rules('subject', 'trim|required');
+        $this->form_validation->set_rules('message', 'trim|required');
+
+        if ($this->form_validation->run() == false) {
+            $data['varNames'] = array('name', 'email', 'groupCount');
+            $data['code'] = $code;
+            $data['year'] = ($year == null) ? $this->datamod->current_year : $year;
+            render('admin/sendBulkMail', $data);
+        } else {
+            $sendTo = $this->datamod->getMemberEmails($code, $year);
+
+            if ($sendTo == false || count($sendTo) == 0) {
+                $this->session->set_flashdata('admin', message('No recipient users found. Are you sure the group you specified is valid?'));
+                redirect('admin/sendBulkMail');
+            }
+
+            foreach ($sendTo as $email) {
+                $userId = $this->datamod->getUserId($email);
+                $vars['name'] = $this->datamod->getUserName($userId);
+                $vars['email'] = $email;
+                $vars['groupCount'] = $this->datamod->countPersonGroups($userId);
+                $this->adminmod->sendMail($email, $this->input->post('subject'), $this->input->post('message'), $vars);
+            }
+
+            $this->session->set_flashdata('admin', message('Sent successfully to ' . count($sendTo) . ' users.'));
+            redirect('admin/sendBulkMail');
+        }
+    }
 }

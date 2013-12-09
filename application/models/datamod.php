@@ -638,4 +638,30 @@ class Datamod extends CI_Model
         }
         return $data;
     }
+
+    public function getMemberEmails($code = null, $year = null)
+    {
+        if ($year == null) $year = $this->current_year;
+
+        if ($code == null) {
+            $whereClause = array('users_groups.year' => $year);
+        } else {
+            $whereClause = array('users_groups.code' => $code, 'users_groups.year' => $year);
+        }
+
+        $results = $this->db->select('email')
+            ->distinct()
+            ->from('users')
+            ->join('users_groups', 'users.id = users_groups.id', 'inner')
+            ->where($whereClause)
+            ->get()
+            ->result();
+
+        $emails = array();
+        foreach ($results as $result) {
+            array_push($emails, $result->email);
+        }
+
+        return $emails;
+    }
 }

@@ -172,4 +172,23 @@ class Adminmod extends CI_Model
         return $this->db->insert('allowed_emails', array('email' => $email));
     }
 
+    public function sendMail($to, $subjectTemplate, $messageTemplate, $vars)
+    {
+        $this->load->library('email');
+        // The following two functions are major security holes
+        extract($vars); // TODO: use different way of loading variables to avoid risky extract() function
+        $subject = '';
+        eval('$subject = "' . $subjectTemplate . '";'); // TODO: use better template system to avoid eval() security risk
+        $message = '';
+        eval('$message = "' . $messageTemplate . '";'); // TODO: use better template system to avoid eval() security risk
+
+        $this->email->from($this->config->item('email_from_name'),
+            $this->config->item('email_from_email'));
+        $this->email->to($to);
+        $this->email->subject($subject);
+        $this->email->message($message);
+
+        $this->email->send();
+    }
+
 }
