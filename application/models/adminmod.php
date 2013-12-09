@@ -34,10 +34,6 @@ class Adminmod extends CI_Model
         // Refuse to run on a group already paired
         if ($query->num_rows() != 0) return false;
 
-        // Refuse to run on a group with fewer than 5 members
-        // TODO: read minimum group size from global settings
-        if ($this->datamod->countMembers($code) < 5) return false;
-
         $members = $this->datamod->getMembers($code);
         shuffle($members); //randomize array
         $total = count($members);
