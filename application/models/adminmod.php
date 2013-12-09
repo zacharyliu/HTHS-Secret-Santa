@@ -172,16 +172,21 @@ class Adminmod extends CI_Model
         return $this->db->insert('allowed_emails', array('email' => $email));
     }
 
+    private function addSlashesDoubleQuote($string)
+    {
+        return str_replace('"', '\"', $string);
+    }
+
     public function sendMail($to, $subjectTemplate, $messageTemplate, $vars)
     {
         $this->load->library('email');
         // The following two functions are major security holes
-        // although the addslashes() function lowers the risk considerably
+        // although the addSlashesDoubleQuote() function lowers the risk considerably
         extract($vars); // TODO: use different way of loading variables to avoid risky extract() function
         $subject = '';
-        eval('$subject = "' . addslashes($subjectTemplate) . '";'); // TODO: use better template system to avoid eval() security risk
+        eval('$subject = "' . $this->addSlashesDoubleQuote($subjectTemplate) . '";'); // TODO: use better template system to avoid eval() security risk
         $message = '';
-        eval('$message = "' . addslashes($messageTemplate) . '";'); // TODO: use better template system to avoid eval() security risk
+        eval('$message = "' . $this->addSlashesDoubleQuote($messageTemplate) . '";'); // TODO: use better template system to avoid eval() security risk
 
         $this->email->from($this->config->item('email_from_name'),
             $this->config->item('email_from_email'));
