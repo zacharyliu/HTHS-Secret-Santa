@@ -77,7 +77,7 @@ class Datamod extends CI_Model
     {
         if ($include)
             return $this->db->get('pairs')->num_rows();
-        else return $this->db->where(array("year" => "< ".$this->current_year))->get('pairs')->num_rows();
+        else return $this->db->where("year < ".$this->current_year)->get('pairs')->num_rows();
     }
 
     /**
