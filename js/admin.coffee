@@ -99,7 +99,7 @@ $(document).ready () ->
     e.preventDefault()
     year = $(this).data('year')
     selector = $(".btn.pairing.#{year}")
-    if selector.hasClass("disabled") && selector.data("paired") == "false"
+    if selector.hasClass("disabled") && selector.data("paired") == false
       selector.removeClass("disabled")
     else selector.addClass("disabled")
   )

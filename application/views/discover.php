@@ -29,7 +29,7 @@
                     <?php
                     if ($trending !=false){
                     foreach ($trending as $group) {
-                            if ($this->datamod->inGroup($this->session->userdata('id'),$group->code) && $this->datamod->paired($group->code)){//disable the join button if user is in group and group has been paired
+                            if ($this->datamod->inGroup($this->session->userdata('id'),$group->code) || $this->datamod->paired($group->code)){//disable the join button if user is in group and group has been paired
                                 $disabled = "disabled";
                             }
                         else $disabled = "";
