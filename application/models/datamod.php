@@ -69,9 +69,15 @@ class Datamod extends CI_Model
         return $this->db->get()->num_rows();
     }
 
-    public function totalgiftsExchanged()
+    /**
+     * @param $include      whether to include the current year
+     * @return mixed
+     */
+    public function totalgiftsExchanged($include = false)
     {
-        return $this->db->get('pairs')->num_rows();
+        if ($include)
+            return $this->db->get('pairs')->num_rows();
+        else return $this->db->where(array("year" => "< ".$this->current_year))->get('pairs')->num_rows();
     }
 
     /**

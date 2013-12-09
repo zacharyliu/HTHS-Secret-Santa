@@ -11,7 +11,7 @@
         <div class="home-spotlight"></div>
         <div style="margin:100px 30px 0px 30px;">
             <div class="subsection-icon" style="font-size:65px;line-height:65px;">&#xF06B;</div>
-            <div class="section-header"><?php echo $this->datamod->totalgiftsExchanged() ?> gifts exchanged!</div>
+            <div class="section-header"><?php echo $this->datamod->totalgiftsExchanged(false) ?> gifts exchanged!</div>
             <div class="subsection-text">HTHS Secret Santa is a fully fledged, feature filled application that makes it
                 easy to exchange
                 gifts with your friends and enemies.
