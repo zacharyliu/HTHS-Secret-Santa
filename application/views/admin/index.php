@@ -63,7 +63,7 @@
                                                 </form>
                                             </td>
                                             <td style="margin:0;padding:0;border:0;outline:0;">
-                                                <button type="button" href="<?=base_url("admin/sendBulkMail/{$group->code}/{$group->year}")?>" class="btn btn-primary">Send Bulk Mail</button>
+                                                <a href="<?=base_url("admin/sendBulkMail/{$group->code}/{$group->year}")?>" class="btn btn-primary">Send Bulk Mail</a>
                                             </td>
                                         </tr></table>
                                     </td>
