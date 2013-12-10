@@ -52,14 +52,20 @@
                                     </td>
                                     <td><?php echo $group->description ?></td>
                                     <td>
-                                        <form method="post" action="<?=base_url('admin/pairCustom')?>">
-                                            <input type="hidden" name="code" value="<?php echo $group->code ?>">
-                                            <button type="submit"
-                                                    class="btn btn-primary pairing <?php echo $group->year?> disabled" <?php echo ($group->paired || $group->year != $current_year) ? ' data-paired="true"' : 'data-paired="false"'?>>
-                                                Run Pairing
-                                            </button>
-                                        </form>
-                                        <a href="<?=base_url("admin/sendBulkMail/{$group->code}/{$group->year}")?>" class="btn btn-primary">Send Bulk Mail</a>
+                                        <table><tr>
+                                            <td style="margin:0;padding:0;border:0;outline:0;">
+                                                <form method="post" action="<?=base_url('admin/pairCustom')?>">
+                                                    <input type="hidden" name="code" value="<?php echo $group->code ?>">
+                                                    <button type="submit"
+                                                            class="btn btn-primary pairing <?php echo $group->year?> disabled" <?php echo ($group->paired || $group->year != $current_year) ? ' data-paired="true"' : 'data-paired="false"'?>>
+                                                        Run Pairing
+                                                    </button>
+                                                </form>
+                                            </td>
+                                            <td style="margin:0;padding:0;border:0;outline:0;">
+                                                <button type="button" href="<?=base_url("admin/sendBulkMail/{$group->code}/{$group->year}")?>" class="btn btn-primary">Send Bulk Mail</button>
+                                            </td>
+                                        </tr></table>
                                     </td>
                                 </tr>
 
@@ -87,7 +93,7 @@
                         <th>Group Name</th>
                         <th>Description</th>
                         <th>Private</th>
-                        <th width="210px">Actions</th>
+                        <th width="220px">Actions</th>
                     </tr>
                     <?php
                     if ($templates != false) { //template groups present

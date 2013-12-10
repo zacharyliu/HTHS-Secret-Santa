@@ -43,6 +43,7 @@ class Adminmod extends CI_Model
             $this->addPair($code, $give, $receive, $this->current_year);
         }
 
+        $this->db->where(array('code' => $code, 'year' => $this->current_year))->update('groups', array('leaveable'=>0));
         $this->db->trans_complete();
 
         return $total;
