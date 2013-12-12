@@ -1,3 +1,10 @@
+<style type="text/css">
+    #sendTo {
+        max-height: 300px;
+        overflow: auto;
+    }
+</style>
+
 <div class="container">
     <?php if ($this->session->flashdata('admin')) echo $this->session->flashdata('admin'); //if there's an admin result, echo it?>
 
@@ -16,6 +23,15 @@
     <p>
         <form method="post" action="">
         <label>To: <?=($code == null) ? "All Secret Santa members of year $year" : "Members of group code $code in year $year"?></label>
+        <p>
+            <div id="sendTo">
+                <ul>
+                    <?php foreach ($sendTo as $email) : ?>
+                        <li><?=$email?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </p>
         <br/>
         <label>Subject Template: <input class="form-control" type="text" style="width: 500px;" name="subject" required></label>
         <br/>

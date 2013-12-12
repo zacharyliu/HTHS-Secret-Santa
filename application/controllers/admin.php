@@ -109,19 +109,19 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('subject', 'trim|required');
         $this->form_validation->set_rules('message', 'trim|required');
 
+        $sendTo = $this->datamod->getMemberEmails($code, $year);
+
+        if ($sendTo == false || count($sendTo) == 0) {
+            $this->session->set_flashdata('admin', message('No recipient users found. Are you sure the group you specified is valid?'));
+        }
+
         if ($this->form_validation->run() == false) {
             $data['varNames'] = array('name', 'email', 'groupCount');
             $data['code'] = $code;
             $data['year'] = ($year == null) ? $this->datamod->current_year : $year;
+            $data['sendTo'] = $sendTo;
             render('admin/sendBulkMail', $data);
         } else {
-            $sendTo = $this->datamod->getMemberEmails($code, $year);
-
-            if ($sendTo == false || count($sendTo) == 0) {
-                $this->session->set_flashdata('admin', message('No recipient users found. Are you sure the group you specified is valid?'));
-                redirect('admin/sendBulkMail');
-            }
-
             foreach ($sendTo as $email) {
                 $userId = $this->datamod->getUserId($email);
                 $vars['name'] = $this->datamod->getUserName($userId);
