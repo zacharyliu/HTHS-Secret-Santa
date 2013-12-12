@@ -3,6 +3,10 @@
         max-height: 300px;
         overflow: auto;
     }
+
+    .varName {
+        font-family: Monaco,Menlo,Consolas,"Courier New",monospace;
+    }
 </style>
 
 <div class="container">
@@ -15,7 +19,7 @@
     <p>
     <ul>
         <?php foreach ($varNames as $varName): ?>
-            <li><?=$varName?></li>
+            <li class="varName">$<?=$varName?></li>
         <?php endforeach; ?>
     </ul>
     </p>
