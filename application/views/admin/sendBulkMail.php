@@ -1,6 +1,7 @@
 <style type="text/css">
     #sendTo {
-        max-height: 300px;
+        width: 300px;
+        height: 300px;
         overflow: auto;
     }
 
@@ -28,13 +29,11 @@
         <form method="post" action="">
         <label>To: <?=($code == null) ? "All Secret Santa members of year $year" : "Members of group code $code in year $year"?></label>
         <p>
-            <div id="sendTo">
-                <ul>
-                    <?php foreach ($sendTo as $email) : ?>
-                        <li><?=$email?></li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
+            <textarea disabled id="sendTo"><?php
+                foreach ($sendTo as $email) {
+                    echo $email . "\r\n";
+                }
+            ?></textarea>
         </p>
         <br/>
         <label>Subject Template: <input class="form-control" type="text" style="width: 500px;" name="subject" required></label>
