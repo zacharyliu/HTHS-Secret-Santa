@@ -131,7 +131,7 @@ class Admin extends CI_Controller
             }
 
             $this->session->set_flashdata('admin', message('Sent successfully to ' . count($sendTo) . ' users.'));
-            redirect('admin/sendBulkMail');
+            redirect(current_url());
         }
     }
 }
