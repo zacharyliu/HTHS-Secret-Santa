@@ -6,14 +6,24 @@ class Messagesmod extends CI_Model {
     {
         parent::__construct();
         $this->current_year = intval(date('Y'));
+        $this->load->helper('date');
+
+    }
+
+    private function formatDate($timestamp) {
+        return date('M j, Y g:i A', mysql_to_unix($timestamp));
     }
 
     public function listThreads($user_id) {
-        return $this->db->select('message_id, year, code, message, read, MAX(timestamp)')
+        $results = $this->db->select('message_id, year, code, message, read, MAX(timestamp) as timestamp')
             ->from('messages')
             ->where('user_id', $user_id)
             ->group_by('year, code')
             ->get()->result();
+        foreach ($results as &$result) {
+            $result->timestamp = $this->formatDate($result->timestamp);
+        }
+        return $results;
     }
 
     public function markAsRead($user_id, $year = null, $code)

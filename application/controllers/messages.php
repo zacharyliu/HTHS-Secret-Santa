@@ -27,7 +27,7 @@ class Messages extends CI_Controller {
         if (!$this->form_validation->run()) {
             render('messages_send', array('code' => $code));
         } else {
-            $this->messagesmod->send($pair, null, $code, $this->input->post('message'));
+            $this->messagesmod->send($pair, null, $this->input->post('code'), $this->input->post('message'));
             redirect('messages');
         }
     }
