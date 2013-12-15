@@ -3,10 +3,15 @@
 function render($view, $data = null, $title = null)
 {
     $CI = & get_instance();
+    $is_logged_in = $CI->session->userdata('auth') == 'true';
 
     $CI->load->view('header', array('title' => $title));
-    $CI->load->model('messagesmod');
-    $CI->load->view('navbar', array('newMessageCount' => $CI->messagesmod->newMessageCount()));
+    $navbar_data = array();
+    if ($is_logged_in) {
+        $CI->load->model('messagesmod');
+        $navbar_data['newMessageCount'] = $CI->messagesmod->newMessageCount($CI->session->userdata('id'));
+    }
+    $CI->load->view('navbar', $navbar_data);
     $CI->load->view($view, $data);
     if (!in_array($view,array("index","landing"))){//load extra footer content if not on home page
         file_exists('version.php') && include 'version.php';
