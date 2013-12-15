@@ -32,4 +32,10 @@ class Messages extends CI_Controller {
         }
     }
 
+    public function markRead($code)
+    {
+        $this->messagesmod->markAsRead($this->user_id, null, $code);
+        redirect('messages');
+    }
+
 }
