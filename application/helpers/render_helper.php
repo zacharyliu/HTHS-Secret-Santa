@@ -5,7 +5,8 @@ function render($view, $data = null, $title = null)
     $CI = & get_instance();
 
     $CI->load->view('header', array('title' => $title));
-    $CI->load->view('navbar');
+    $CI->load->model('messagesmod');
+    $CI->load->view('navbar', array('newMessageCount' => $CI->messagesmod->newMessageCount()));
     $CI->load->view($view, $data);
     if (!in_array($view,array("index","landing"))){//load extra footer content if not on home page
         file_exists('version.php') && include 'version.php';

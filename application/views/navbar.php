@@ -57,6 +57,7 @@
             <?php
             if ($is_logged_in) {
                 echo '<li><a id="navbar-greeting">Hi ' . $this->session->userdata('fname') . '!</a></li>';
+                echo '<li><a href="' . base_url('messages') . '">Messages (' . $newMessageCount . ')</li>';
             }
             echo $navbar_html['right'];
             ?>
