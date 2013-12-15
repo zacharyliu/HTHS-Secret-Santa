@@ -2,6 +2,12 @@
 
 class Messagesmod extends CI_Model {
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->current_year = intval(date('Y'));
+    }
+
     public function listThreads($user_id) {
         return $this->db->select('message_id, year, code, message, read, MAX(timestamp)')
             ->from('messages')
@@ -10,8 +16,9 @@ class Messagesmod extends CI_Model {
             ->get()->result();
     }
 
-    public function markAsRead($user_id, $year, $code)
+    public function markAsRead($user_id, $year = null, $code)
     {
+        if ($year == null) $year = $this->current_year;
         return $this->db->update('messages', array('read' => true), array('user_id' => $user_id, 'year' => $year, 'code' => $code));
     }
 
@@ -24,7 +31,8 @@ class Messagesmod extends CI_Model {
             ->get()->num_rows();
     }
 
-    public function getThread($user_id, $year, $code) {
+    public function getThread($user_id, $year = null, $code) {
+        if ($year == null) $year = $this->current_year;
         return $this->db->select('*')
             ->from('messages')
             ->where(array('user_id' => $user_id, 'year' => $year, 'code' => $code))
@@ -32,7 +40,8 @@ class Messagesmod extends CI_Model {
             ->get()->result();
     }
 
-    public function send($to_id, $year, $code, $message) {
+    public function send($to_id, $year = null, $code, $message) {
+        if ($year == null) $year = $this->current_year;
         $success = $this->db->insert('messages', array('user_id' => $to_id, 'year' => $year, 'code' => $code, 'message' => $message));
 
         if (!$success) return false;
