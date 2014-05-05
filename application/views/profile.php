@@ -101,9 +101,6 @@ $userStats = $this->datamod->userStats($id); //get user stats
                                       }
                                         ?>
                                 </table>
-                                <div style="padding: 3px 0 0 0;font-size:9px">*Groups must have at least 5 members to be
-                                    valid.
-                                </div>
                             </div>
                         </div>
 
