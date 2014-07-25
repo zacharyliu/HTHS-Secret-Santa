@@ -17,7 +17,7 @@
                 gifts with your friends and enemies.
             </div>
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-6">
                     <div class="subsection-icon">&#xF004;</div>
                     <div class="subsection-header">Spread the love!</div>
                     <div class="subsection-text">Studies show that generosity can help reduce stress. Make a difference
@@ -26,7 +26,7 @@
                         holiday spirit alive.
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div id="quovolver">
                         <blockquote>
                             <p>Kindness in words creates confidence. Kindness in thinking creates profoundness. Kindness

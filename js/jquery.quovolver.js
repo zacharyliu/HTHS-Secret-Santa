@@ -30,7 +30,7 @@
 		$(this).hide();
 		$(firstQuo).show();
 		
-		// Set the hight of the wrapper
+		// Set the height of the wrapper
 		$(this).parent().css({height: $(firstQuo).height()});		
 		
 		// Where the magic happens
