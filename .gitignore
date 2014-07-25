@@ -17,4 +17,6 @@
 /js/profile.js
 *.map
 
+/phpmyadmin
+
 node_modules
