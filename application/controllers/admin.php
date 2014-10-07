@@ -21,12 +21,12 @@ class Admin extends CI_Controller
     {
         $groups = $this->datamod->listAllGroups();
         foreach ($groups as &$group) {//get list of groups for pairing
-            $year = $group->year;//get the year of the group
+            $year = $this->__getGlobalVar("firstyear");//get the year of the group
             $group->memberCount = $this->datamod->countMembers($group->code,$year);
             $group->paired = $this->datamod->paired($group->code,$year);
         }
-        $data = array('groups' => $groups, 'templates'=>$this->adminmod->listTemplateGroups(), 'first_year'=>$this->adminmod->getFirstYear(),'current_year'=>intval(date('Y')), 'allowed_emails' => $this->adminmod->getAllowedEmails());
-        render('admin/index', $data);
+        $data = array('groups' => $groups, 'templates'=>$this->adminmod->listTemplateGroups(), 'first_year'=>$this->__getGlobalVar('first_year'),'current_year'=>intval(date('Y')), 'allowed_emails' => $this->adminmod->getAllowedEmails());
+        render('admin/groups', $data);
     }
 
     public function addAllowedEmail()
@@ -133,5 +133,13 @@ class Admin extends CI_Controller
             $this->session->set_flashdata('admin', message('Sent successfully to ' . count($sendTo) . ' users.'));
             redirect(current_url());
         }
+    }
+
+    private function __getGlobalVar($var) {
+        return $this->config->item($var);
+    }
+
+    private function __setGlobalVar($varName,$val) {
+        $this->config->set_item($varName, $val);
     }
 }

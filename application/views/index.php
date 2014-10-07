@@ -131,7 +131,7 @@
         </div>
     </div>
 </div>
-<div class="home-footer slide container" data-slide="3" data-stellar-background-ratio="0.5">
+<div class="home-footer slide container-fluid" data-slide="3" data-stellar-background-ratio="0.5">
 
     <div class="row">
         <div class="col-md-12">

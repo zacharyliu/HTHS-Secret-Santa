@@ -1,8 +1,15 @@
+<link href="<?php echo base_url('css/admin.css')?>" rel="stylesheet">
 <script src="<?php echo base_url("/js/admin.js") ?>"></script>
 <script src="<?php echo base_url("/js/memberlist.js") ?>"></script>
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="active"><a href="#">Test 1</a></li>
+                <li><a>Test 2</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <?php if ($this->session->flashdata('admin')) echo $this->session->flashdata('admin'); //if there's an admin result, echo it?>
             <h1>Admin Panel</h1>
 
@@ -106,7 +113,7 @@
                                 <td class="groupcode"><?php echo $template->code ?></td>
                                 <td class="groupname"><?php echo $template->name ?></td>
                                 <td class="description"><?php echo $template->description ?></td>
-                                <td class="privacy"><?php echo $template->private ?></td>
+                                <td class="privacy"><?php echo $template->private == true ? "Yes" : "No" ?></td>
                                 <td class="actions">
                                     <button type="button" class="create btn btn-success"<?php echo $exists ?>>Create
                                     </button>

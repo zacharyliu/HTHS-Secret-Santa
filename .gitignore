@@ -6,6 +6,7 @@
 
 *.idea
 
+/application/config/admin_settings.php
 /application/config/database.php
 /application/config/config.php
 /application/config/email.php
