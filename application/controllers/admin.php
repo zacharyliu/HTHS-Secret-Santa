@@ -15,18 +15,28 @@ class Admin extends CI_Controller
         $this->load->model('adminmod'); //load the admin model
         //$this->load->model('migrations');//load the migrations model
         $this->load->helper('message'); //load the bootstrap message helper
+        $this->load->helper('render_admin');
     }
 
     public function index()
     {
+        redirect(base_url("admin/groups"));
+    }
+
+    public function groups() {
+        $year = $this->__getGlobalVar("firstyear");//get the year of the group
         $groups = $this->datamod->listAllGroups();
         foreach ($groups as &$group) {//get list of groups for pairing
-            $year = $this->__getGlobalVar("firstyear");//get the year of the group
+
             $group->memberCount = $this->datamod->countMembers($group->code,$year);
             $group->paired = $this->datamod->paired($group->code,$year);
         }
         $data = array('groups' => $groups, 'templates'=>$this->adminmod->listTemplateGroups(), 'first_year'=>$this->__getGlobalVar('first_year'),'current_year'=>intval(date('Y')), 'allowed_emails' => $this->adminmod->getAllowedEmails());
-        render('admin/groups', $data);
+        render_admin('admin/groups', $data);
+    }
+
+    public function general() {
+
     }
 
     public function addAllowedEmail()

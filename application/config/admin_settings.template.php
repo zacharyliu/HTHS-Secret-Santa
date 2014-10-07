@@ -6,6 +6,10 @@
 $config['evt_name'] = "HTHS Secret Santa";
 
 /**
+ * The first year that data exists
+ */
+$config['first_year'] = 2012;
+/**
  * this file contains an array of all users that have admin privileges.
  * modify the $admin array to add or remove administrators
  * This file is included on login and users and permissions are determined during that time.
