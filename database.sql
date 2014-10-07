@@ -38,10 +38,9 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 CREATE TABLE IF NOT EXISTS `globalvars` (
-  `firstyear` smallint(4) NOT NULL COMMENT 'The first year that data exists for',
-  `registration` tinyint(1) NOT NULL,
-  `maxgroups` int(2) NOT NULL,
-  UNIQUE KEY `firstyear` (`firstyear`)
+  `key` varchar(20) NOT NULL,
+  `value` text NOT NULL,
+  UNIQUE KEY `key` (`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='secretsanta global variables';
 
 -- --------------------------------------------------------
