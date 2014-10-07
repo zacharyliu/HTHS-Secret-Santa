@@ -203,5 +203,10 @@ $userStats = $this->datamod->userStats($id); //get user stats
     </div>
     <!-- /.modal -->
 
-    <div class="modal fade" id="modal-member-list" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal fade" id="modal-member-list" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            </div> <!-- /.modal-content -->
+        </div> <!-- /.modal-dialog -->
+    </div>
 </div>

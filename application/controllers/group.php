@@ -19,8 +19,13 @@ class Group extends CI_Controller
         $members = $this->datamod->getMemberNames($code, $year);
         if ($members == false) $members = array();
         ?>
-        <div class="modal-dialog">
-            <div class="modal-content">
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        </head>
+        <body>
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title">Members of <?=$groupName?></h4>
@@ -35,9 +40,9 @@ class Group extends CI_Controller
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
-            </div>
-        </div>
-        <?php
+        </body>
+        </html>
+<?php
     }
 
 }
