@@ -18,6 +18,7 @@
             padding-bottom: 40px;
         }
     </style>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="<?php echo base_url('css/main.css')?>" rel="stylesheet">
 
     <!-- Fav and touch icons -->

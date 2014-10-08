@@ -36,7 +36,32 @@ class Admin extends CI_Controller
     }
 
     public function general() {
+        $this->load->library('form_validation');
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
+        $this->form_validation->set_rules('subject', 'trim|required');
+        $this->form_validation->set_rules('message', 'trim|required');
 
+
+            $this->session->set_flashdata('admin', message('No recipient users found. Are you sure the group you specified is valid?'));
+
+        if ($this->form_validation->run() == false) {
+            //$data['varNames'] = array('name', 'email', 'groupCount');
+            //$data['code'] = $code;
+            //$data['year'] = ($year == null) ? $this->datamod->current_year : $year;
+            //$data['sendTo'] = $sendTo;
+            render_admin('admin/general');
+        } else {
+            foreach ($sendTo as $email) {
+                $userId = $this->datamod->getUserId($email);
+                $vars['name'] = $this->datamod->getUserName($userId);
+                $vars['email'] = $email;
+                $vars['groupCount'] = $this->datamod->countPersonGroups($userId);
+                $this->adminmod->sendMail($email, $this->input->post('subject'), $this->input->post('message'), $vars);
+            }
+
+            $this->session->set_flashdata('admin', message('Sent successfully to ' . count($sendTo) . ' users.'));
+            redirect(current_url());
+        }
     }
 
     public function addAllowedEmail()
