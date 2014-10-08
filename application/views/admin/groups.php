@@ -1,12 +1,11 @@
 
-<script src="<?php echo base_url("/js/admin.js") ?>"></script>
+<script src="<?php echo base_url("/js/admin/groups.js") ?>"></script>
 <script src="<?php echo base_url("/js/memberlist.js") ?>"></script>
 <div class="container-fluid">
     <div class="row">
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <?php if ($this->session->flashdata('admin')) echo $this->session->flashdata('admin'); //if there's an admin result, echo it?>
-            <h1>Admin Panel</h1>
 
             <div class="row">
                 <h2>Group Management</h2>

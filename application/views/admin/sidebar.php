@@ -1,5 +1,6 @@
 <link href="<?php echo base_url('css/admin.css')?>" rel="stylesheet">
 <div class="col-sm-3 col-md-2 sidebar">
+    <h2>Admin Panel</h2>
     <ul class="nav nav-sidebar">
         <?php
         $sidebar = array(
@@ -10,7 +11,8 @@
              *
              */
             array('text'=>'Group Management', 'route'=>'admin/groups'),
-            array('text'=>'General Settings', 'route'=>'admin/general')
+            array('text'=>'General Settings', 'route'=>'admin/general'),
+            array('text'=>'Advanced Settings', 'route'=>'admin/advanced')
         );
         $sidebar_html="";
         foreach ($sidebar as $item) {

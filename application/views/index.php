@@ -138,9 +138,9 @@
             <h1 style="text-align:center;color:#FFFFFF;">Time Until Gift Exchange</h1>
 
             <div style="margin:0 auto 0 auto;"><?php echo $timer; ?></div>
-            <div class="section-header register-header">There are
-                currently <?php $total = $this->datamod->countUsersYear();
-                echo $total ?> secret santas.
+            <div class="section-header register-header">Join
+                <?php $total = $this->datamod->countUsersYear();
+                echo $total ?> secret santas this year.
             </div>
 
             <div class="section-subheader register-subheader">
