@@ -82,7 +82,7 @@ class Profile extends CI_Controller
             $this->_render();
         } else {
             $this->datamod->addGroup($this->session->userdata('id'), set_value('group_name'), set_value('group_description'));
-            $this->session->set_flashdata('result', message('You have successfully created the group <strong>' . set_value('group_name') . '</strong>! Your group code is <strong>' . $this->datamod->getGroupCode(set_value('group_name')) . '</strong>. Keep this in a safe place.', 1)); //groupcreate
+            $this->session->set_flashdata('result', message('You have successfully created the group <strong>' . set_value('group_name') . '</strong>! Your group code is <strong>' . $this->datamod->getGroupCode(set_value('group_name')) . '</strong>.', 1)); //groupcreate
             redirect(base_url('profile'));
         }
     }

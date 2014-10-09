@@ -4,8 +4,13 @@ function render($view, $data = null, $title = null)
 {
     $CI = & get_instance();
 
-    $CI->load->view('header', array('title' => $title));
-    $CI->load->view('navbar');
+    //consolidate data from admin_config file
+    $data['site_name']= $CI->config->item('site_name');
+    $data['partner_date'] = new DateTime(date('Y').'-'.$CI->config->item('evt_partner_month')."-".$CI->config->item('evt_partner_day')); //generate partner assignment date
+    $data['gift_date'] = new DateTime(date('Y').'-'.$CI->config->item('evt_gift_month').'-'.$CI->config->item('evt_gift_day'));//generate gift exchange date
+
+    $CI->load->view('header', array('title' => $title, $data));
+    $CI->load->view('navbar', array('site_name' => $data['site_name']));
     $CI->load->view($view, $data);
     if (!in_array($view,array("index","landing"))){//load extra footer content if not on home page
         //file_exists('version.php') && include 'version.php';

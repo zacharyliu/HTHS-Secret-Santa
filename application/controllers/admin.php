@@ -24,14 +24,13 @@ class Admin extends CI_Controller
     }
 
     public function groups() {
-        $year = $this->__getGlobalVar("firstyear");//get the year of the group
+        $year = $this->config->item("first_year");//get the year of the group
         $groups = $this->datamod->listAllGroups();
         foreach ($groups as &$group) {//get list of groups for pairing
-
-            $group->memberCount = $this->datamod->countMembers($group->code,$year);
+            $group->memberCount = $this->datamod->countMembers($group->code,$group->year);
             $group->paired = $this->datamod->paired($group->code,$year);
         }
-        $data = array('groups' => $groups, 'templates'=>$this->adminmod->listTemplateGroups(), 'first_year'=>$this->__getGlobalVar('first_year'),'current_year'=>intval(date('Y')), 'allowed_emails' => $this->adminmod->getAllowedEmails());
+        $data = array('groups' => $groups, 'templates'=>$this->adminmod->listTemplateGroups(), 'first_year'=>$year,'current_year'=>intval(date('Y')), 'allowed_emails' => $this->adminmod->getAllowedEmails());
         render_admin('admin/groups', $data);
     }
 
@@ -170,11 +169,7 @@ class Admin extends CI_Controller
         }
     }
 
-    private function __getGlobalVar($var) {
-        return $this->config->item($var);
-    }
-
-    private function __setGlobalVar($varName,$val) {
+    private function __setConfigVar($varName,$val) {
         $this->config->set_item($varName, $val);
     }
 }

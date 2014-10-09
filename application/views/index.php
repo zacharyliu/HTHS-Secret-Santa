@@ -122,9 +122,8 @@
                 <div class="subsection-icon">&#xF017;</div>
                 <div class="subsection-header">Important Dates are coming up.</div>
                 <div class="subsection-text">
-                    Registration ends: <i> Sunday, 12/8</i><br/>
-                    Partner Assignments: <i> Sunday, 12/8 </i><br/>
-                    Gift Exchange: <i> Thursday, 12/19 </i><br/>
+                    Partner Assignments: <i> <?= date_format($partner_date,"l, n/j")?> </i><br/>
+                    Gift Exchange: <i> <?= date_format($gift_date,"l, n/j")?> </i><br/>
                 </div>
             </div>
 
@@ -140,7 +139,7 @@
             <div style="margin:0 auto 0 auto;"><?php echo $timer; ?></div>
             <div class="section-header register-header">Join
                 <?php $total = $this->datamod->countUsersYear();
-                echo $total ?> secret santas this year.
+                echo $total ?> other secret santas this year.
             </div>
 
             <div class="section-subheader register-subheader">
