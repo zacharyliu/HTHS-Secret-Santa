@@ -28,7 +28,7 @@ class Admin extends CI_Controller
         $groups = $this->datamod->listAllGroups();
         foreach ($groups as &$group) {//get list of groups for pairing
             $group->memberCount = $this->datamod->countMembers($group->code,$group->year);
-            $group->paired = $this->datamod->paired($group->code,$year);
+            $group->paired = $this->datamod->paired($group->code,$group->year);
         }
         $data = array('groups' => $groups, 'templates'=>$this->adminmod->listTemplateGroups(), 'first_year'=>$year,'current_year'=>intval(date('Y')), 'allowed_emails' => $this->adminmod->getAllowedEmails());
         render_admin('admin/groups', $data);
@@ -71,7 +71,7 @@ class Admin extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('admin', message('<strong>Error!</strong> You must enter a valid email address.'));
-            redirect('admin');
+            redirect('admin/groups');
         }
 
         $email = $this->input->post('email');
@@ -81,7 +81,7 @@ class Admin extends CI_Controller
             $this->session->set_flashdata('admin', message("<strong>Error!</strong> Could not add $email."));
         }
 
-        redirect('admin');
+        redirect('admin/groups');
     }
 
     public function pairCustom()
@@ -90,14 +90,14 @@ class Admin extends CI_Controller
             $result = $this->adminmod->pairCustom($this->input->post('code'));
             if ($result) {
                 $this->session->set_flashdata('admin', message('<strong>Success!</strong> Successfully ran pairing on code ' . $this->input->post('code') . ' with ' . $result . ' members',1));
-                redirect('admin');
+                redirect(base_url('admin/groups'));
             } else {
                 $this->session->set_flashdata('admin', message('<strong>Error!</strong> Pairing failed. Invalid code, group does not meet requirements, or pairing was already run.',3));
-                redirect('admin');
+                redirect(base_url('admin/groups'));
             }
         } else {
             $this->session->set_flashdata('admin', message('<strong>Error!</strong> No code specified',3));
-            redirect('admin');
+            redirect(base_url('admin/groups'));
         }
     }
 
@@ -109,7 +109,7 @@ class Admin extends CI_Controller
         $code = $this->input->post("c");//descrip of group
         $description = $this->input->post("d");//descrip of group
         $privacy = $this->input->post("p");//descrip of group
-        $group_code =$this->adminmod->newTemplateGroup($code,$name,$description,$privacy);//($user_id,$task_name,$date,$estimated)
+        $group_code = $this->adminmod->newTemplateGroup($code,$name,$description,$privacy);//($user_id,$task_name,$date,$estimated)
         echo $group_code;
     }
 

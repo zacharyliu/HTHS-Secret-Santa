@@ -55,7 +55,7 @@
                                                 <form method="post" action="<?=base_url('admin/pairCustom')?>">
                                                     <input type="hidden" name="code" value="<?php echo $group->code ?>">
                                                     <button type="submit"
-                                                            class="btn btn-primary pairing <?php echo $group->year?> disabled" <?php echo ($group->paired || $group->year != $current_year) ? ' data-paired="true"' : 'data-paired="false"'?>>
+                                                            class="btn btn-primary pairing <?php echo $group->year?> disabled" <?php echo ($group->paired || ($group->year != $current_year)) ? ' data-paired="true"' : 'data-paired="false"'?>>
                                                         Run Pairing
                                                     </button>
                                                 </form>

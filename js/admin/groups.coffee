@@ -111,7 +111,7 @@ $(document).ready () ->
 #add new group to save data array
 newGroup = (groupcode,groupname,description,privacy) ->
   $.ajax(
-    url: "admin/newTemplateGroup",
+    url: '/admin/newTemplateGroup',
     type: 'POST',
     data:
       c: groupcode

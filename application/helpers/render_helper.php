@@ -9,7 +9,7 @@ function render($view, $data = null, $title = null)
     $data['partner_date'] = new DateTime(date('Y').'-'.$CI->config->item('evt_partner_month')."-".$CI->config->item('evt_partner_day')); //generate partner assignment date
     $data['gift_date'] = new DateTime(date('Y').'-'.$CI->config->item('evt_gift_month').'-'.$CI->config->item('evt_gift_day'));//generate gift exchange date
 
-    $CI->load->view('header', array('title' => $title, $data));
+    $CI->load->view('header', array('title' => $title, 'site_name' => $data['site_name']));
     $CI->load->view('navbar', array('site_name' => $data['site_name']));
     $CI->load->view($view, $data);
     if (!in_array($view,array("index","landing"))){//load extra footer content if not on home page

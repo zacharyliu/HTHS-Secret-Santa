@@ -3,6 +3,7 @@
     echo form_error('partner-date');
     echo form_error('gift-date');
     echo form_error('site-name');
+    echo form_error('max-groups');
     ?>
     <br/>
 
@@ -21,9 +22,8 @@
             <p>Designate a date for partner assignments and for the gift exchange. These dates are purely cosmetic. It is your responsibility to run pairing and enforce these deadlines.</p>
             <div class="col-md-3 col-lg-2">
                 <label for="partner-date">Partner Assignment Date</label>
-
                 <div class='input-group date' id='partner-date'>
-                    <input readonly type='text' class="form-control" name="partner-date" data-date-format="MM/DD"/>
+                    <input readonly type='text' val="<?php date_format($partner_date,"m/d"); ?>"class="form-control" name="partner-date" data-date-format="MM/DD"/>
 					<span class="input-group-addon">
 						<i class="fa fa-calendar"></i>
 					</span>
