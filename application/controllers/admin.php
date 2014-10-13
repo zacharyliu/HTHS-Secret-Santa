@@ -41,14 +41,14 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('message', 'trim|required');
 
 
-            $this->session->set_flashdata('admin', message('No recipient users found. Are you sure the group you specified is valid?'));
-
+        $this->session->set_flashdata('admin', message('No recipient users found. Are you sure the group you specified is valid?'));
+        $max_groups = $this->config->item('max_groups');
         if ($this->form_validation->run() == false) {
             //$data['varNames'] = array('name', 'email', 'groupCount');
             //$data['code'] = $code;
             //$data['year'] = ($year == null) ? $this->datamod->current_year : $year;
             //$data['sendTo'] = $sendTo;
-            render_admin('admin/general');
+            render_admin('admin/general', array('max_groups' => $max_groups));
         } else {
             foreach ($sendTo as $email) {
                 $userId = $this->datamod->getUserId($email);

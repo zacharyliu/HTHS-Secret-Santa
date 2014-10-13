@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-            <h2>Admin Panel</h2>
+            <h3>Admin Panel</h3>
             <ul class="nav nav-sidebar">
                 <?php
                 $sidebar = array(

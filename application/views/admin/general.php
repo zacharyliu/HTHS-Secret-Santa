@@ -13,17 +13,17 @@
     <form role="form">
         <div class="row form-group">
             <p>Name of the site that will show up in the navbar.</p>
-            <div class="col-md-3 col-lg-2">
+            <div class="col-md-4 col-lg-2">
                 <label for="site-name">Site Name</label>
-                <input type="text" class="form-control" id="site-name" name="site-name">
+                <input type="text" value="<?= $site_name; ?>" class="form-control" id="site-name" name="site-name">
             </div>
         </div>
         <div class="row form-group">
             <p>Designate a date for partner assignments and for the gift exchange. These dates are purely cosmetic. It is your responsibility to run pairing and enforce these deadlines.</p>
-            <div class="col-md-3 col-lg-2">
+            <div class="col-md-4 col-lg-2">
                 <label for="partner-date">Partner Assignment Date</label>
                 <div class='input-group date' id='partner-date'>
-                    <input readonly type='text' val="<?php date_format($partner_date,"m/d"); ?>"class="form-control" name="partner-date" data-date-format="MM/DD"/>
+                    <input readonly type='text' value="<?= date_format($partner_date,"m/d"); ?>"class="form-control" name="partner-date" data-date-format="MM/DD"/>
 					<span class="input-group-addon">
 						<i class="fa fa-calendar"></i>
 					</span>
@@ -31,11 +31,11 @@
             </div>
         </div>
         <div class="row form-group">
-            <div class="col-md-3 col-lg-2">
+            <div class="col-md-4 col-lg-2">
                 <label for="gift-date">Gift Exchange Date</label>
 
                 <div class='input-group date' id='gift-date'>
-                    <input readonly type='text' class="form-control" name="gift-date" data-date-format="MM/DD"/>
+                    <input readonly type='text' value="<?= date_format($partner_date,"m/d"); ?>" class="form-control" name="gift-date" data-date-format="MM/DD"/>
 					<span class="input-group-addon">
 						<i class="fa fa-calendar"></i>
 					</span>
@@ -44,9 +44,9 @@
         </div>
         <div class="row form-group">
             <p>Max number of groups that a user can be in.</p>
-            <div class="col-md-3 col-lg-2">
+            <div class="col-md-4 col-lg-2">
             <label for="max-groups">Max Groups</label>
-            <input type="number" min="1" max="20" class="form-control" id="max-groups" name="max-groups">
+            <input type="number" min="1" max="20" value="<?= $max_groups;?>"class="form-control" id="max-groups" name="max-groups">
                 </div>
         </div>
         <div class="form-group">
