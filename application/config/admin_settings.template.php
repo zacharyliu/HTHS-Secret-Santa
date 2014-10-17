@@ -11,12 +11,6 @@
 $config['site_name'] = "HTHS Secret Santa";
 
 /*
- * The first year that data exists
- * Do not modify this manually.
- */
-$config['first_year'] = 2012;
-
-/*
  * an array of users who have admin privileges
  * Must be properly formatted emails
  * This file is included on login and users and permissions are determined during that time.
@@ -59,3 +53,10 @@ $config['evt_gift_day'] = 25;
  */
 $config['email_from_name'] = 'HTHS Secret Santa';
 $config['email_from_email'] = 'hths.secret.santa@gmail.com';
+
+/*--------------------------------------------
+ * DO NOT MODIFY THE VARIABLES BELOW MANUALLY
+ *--------------------------------------------
+ */
+$config['first_year'] = 2012; //The first year that data exists
+$config['setup'] = FALSE; //Whether setup script has been run

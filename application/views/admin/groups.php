@@ -155,7 +155,6 @@
     <p>These are whitelisted emails which are not subject to the global email restriction and can log in regardless of
         what emails are otherwise allowed to log in.</p>
 
-    <?= var_dump($allowed_emails) ?>
 
     <textarea class="emails" disabled><?php
         foreach ($allowed_emails as $email) {

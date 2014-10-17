@@ -37,17 +37,15 @@ class Admin extends CI_Controller
     public function general() {
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
-        $this->form_validation->set_rules('subject', 'trim|required');
-        $this->form_validation->set_rules('message', 'trim|required');
+        $this->form_validation->set_rules('partner-date', 'trim|required|exact_length[5]');
+        $this->form_validation->set_rules('gift-date', 'trim|required|exact_length[5]');
+        $this->form_validation->set_rules('max-groups', 'trim|required|greater_than[0]|less_than[20]');
 
 
         $this->session->set_flashdata('admin', message('No recipient users found. Are you sure the group you specified is valid?'));
         $max_groups = $this->config->item('max_groups');
         if ($this->form_validation->run() == false) {
-            //$data['varNames'] = array('name', 'email', 'groupCount');
-            //$data['code'] = $code;
-            //$data['year'] = ($year == null) ? $this->datamod->current_year : $year;
-            //$data['sendTo'] = $sendTo;
+
             render_admin('admin/general', array('max_groups' => $max_groups));
         } else {
             foreach ($sendTo as $email) {
@@ -58,7 +56,7 @@ class Admin extends CI_Controller
                 $this->adminmod->sendMail($email, $this->input->post('subject'), $this->input->post('message'), $vars);
             }
 
-            $this->session->set_flashdata('admin', message('Sent successfully to ' . count($sendTo) . ' users.'));
+            $this->session->set_flashdata('admin', 'Success! Settings are updated.'));
             redirect(current_url());
         }
     }
