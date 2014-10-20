@@ -2,22 +2,15 @@
     <?php if (($this->session->flashdata('admin'))) echo $this->session->flashdata('admin'); //if there's a result message, show it
     echo form_error('partner-date');
     echo form_error('gift-date');
-    echo form_error('site-name');
     echo form_error('max-groups');
     ?>
     <br/>
 
     <h2>General Settings</h2>
+    <p>Modify these general settings based on event logistics. Any changes will be effective immdeiately.</p>
     <br/>
 
-    <form role="form">
-        <div class="row form-group">
-            <p>Name of the site that will show up in the navbar.</p>
-            <div class="col-md-4 col-lg-2">
-                <label for="site-name">Site Name</label>
-                <input type="text" value="<?= $site_name; ?>" class="form-control" id="site-name" name="site-name">
-            </div>
-        </div>
+    <form role="form" method="post" action="<?php echo current_url(); //base for persistent forms?>">
         <div class="row form-group">
             <p>Designate a date for partner assignments and for the gift exchange. These dates are purely cosmetic. It is your responsibility to run pairing and enforce these deadlines.</p>
             <div class="col-md-4 col-lg-2">

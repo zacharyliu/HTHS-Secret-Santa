@@ -109,12 +109,9 @@ class Profile extends CI_Controller
     { //remove membership from group
         $groupname = $this->datamod->getGroupName($code);
 
-        if ($this->datamod->leaveable($code)) {
             if ($this->datamod->removeFromGroup($this->session->userdata('id'), $this->uri->segment(3)))
                 $this->session->set_flashdata('result', message('Successfully left the group <strong>' . $groupname . '</strong>.', 0));
-
-            else $this->session->set_flashdata('result', message('Poopy. Something went wrong. :( ', 3));
-        } else $this->session->set_flashdata('result', message('<strong>Error!</strong> You can\'t leave this group!', 3));
+            else $this->session->set_flashdata('result', message('<strong>Error!</strong> You can\'t leave this group!', 3));
         redirect(base_url('profile'));
 
     }

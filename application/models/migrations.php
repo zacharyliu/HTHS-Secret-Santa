@@ -1,6 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * Migrations from old database schemas
+ * Do not use this model in production.
  */
 
 

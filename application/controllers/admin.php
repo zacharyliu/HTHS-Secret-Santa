@@ -37,28 +37,34 @@ class Admin extends CI_Controller
     public function general() {
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
-        $this->form_validation->set_rules('partner-date', 'trim|required|exact_length[5]');
-        $this->form_validation->set_rules('gift-date', 'trim|required|exact_length[5]');
+        $this->form_validation->set_rules('partner-date', 'trim|required|exact_length[5]|callback_validDate');
+        $this->form_validation->set_rules('gift-date', 'trim|required|exact_length[5]|callback_validDate');
         $this->form_validation->set_rules('max-groups', 'trim|required|greater_than[0]|less_than[20]');
 
 
-        $this->session->set_flashdata('admin', message('No recipient users found. Are you sure the group you specified is valid?'));
         $max_groups = $this->config->item('max_groups');
+
         if ($this->form_validation->run() == false) {
-
             render_admin('admin/general', array('max_groups' => $max_groups));
-        } else {
-            foreach ($sendTo as $email) {
-                $userId = $this->datamod->getUserId($email);
-                $vars['name'] = $this->datamod->getUserName($userId);
-                $vars['email'] = $email;
-                $vars['groupCount'] = $this->datamod->countPersonGroups($userId);
-                $this->adminmod->sendMail($email, $this->input->post('subject'), $this->input->post('message'), $vars);
-            }
+        }
+        else {
+            $partnerDate = $this->__parseDate(set_value('partner-date'));
+            $giftDate = $this->__parseDate(set_value('gift-date'));
+            var_dump(set_value('max-groups'));
+            $this->config->set_item('max_groups',set_value('max-groups'));
+            $this->config->set_item('evt_partner_month', $partnerDate[0]);
+            $this->config->set_item('evt_partner_day', $partnerDate[1]);
+            $this->config->set_item('evt_gift_month', $giftDate[0]);
+            $this->config->set_item('evt_gift_day', $giftDate[1]);
 
-            $this->session->set_flashdata('admin', 'Success! Settings are updated.'));
+            $this->session->set_flashdata('admin', 'Success! Settings are updated.');
             redirect(current_url());
         }
+    }
+
+
+    public function advanced() {
+        render_admin('admin/advanced');
     }
 
     public function addAllowedEmail()
@@ -101,12 +107,17 @@ class Admin extends CI_Controller
 
     /**
      * ajax function for adding a new template group to the groups_template table
+     * Accepts post to the following variables:
+     * n            group nane
+     * c            group code
+     * d            group description
+     * p            group privacy
      */
     public function newTemplateGroup() {
-        $name = $this->input->post("n"); //name of group
-        $code = $this->input->post("c");//descrip of group
-        $description = $this->input->post("d");//descrip of group
-        $privacy = $this->input->post("p");//descrip of group
+        $name = $this->input->post("n");
+        $code = $this->input->post("c");
+        $description = $this->input->post("d");
+        $privacy = $this->input->post("p");
         $group_code = $this->adminmod->newTemplateGroup($code,$name,$description,$privacy);//($user_id,$task_name,$date,$estimated)
         echo $group_code;
     }
@@ -167,7 +178,34 @@ class Admin extends CI_Controller
         }
     }
 
-    private function __setConfigVar($varName,$val) {
-        $this->config->set_item($varName, $val);
+    //
+    //form validation callback functions (public)
+    //
+    /**
+     * checks input is valid date in form MM/DD
+     * @param $str
+     * @return boolean
+     */
+    public function validDate($str) {
+        preg_match('/^([0-9]{2})/([0-9]{2})$/',$str, $matches);
+        $month = intval($matches[1]);
+        $day = intval($matches[2]);
+        if ( $month >= 1 && $month <= 12 && $day >=1 && $day <=31)
+            return true;
+        else return false;
+    }
+
+    /**
+     * Return an array of [month,day]
+     * Prec: valid date
+     * @param string $date
+     * @return array        [month,day]
+     * @private
+     */
+    private function __parseDate($date) {
+        preg_match('/^([0-9]{2})\/([0-9]{2})$/',$date, $matches);
+        $date_array[] = intval($matches[1]);
+        $date_array[] = intval($matches[2]);
+        return $date_array;
     }
 }

@@ -1,6 +1,6 @@
 <div class="row">
     <?php if (($this->session->flashdata('admin'))) echo $this->session->flashdata('admin'); //if there's a result message, show it
-    echo form_error('site-name');
+    //echo form_error('site-name');
     ?>
     <br/>
 
