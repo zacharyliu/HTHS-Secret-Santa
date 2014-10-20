@@ -93,7 +93,7 @@ class Profile extends CI_Controller
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
         $this->form_validation->set_rules('edit-grp-code', 'edited Group Code', 'trim|required|min_length[4]|max_length[4]|callback_checkGroupOwner|xss_clean');
         $this->form_validation->set_rules('edit-grp-name', 'edited Group Name', 'trim|required|min_length[4]|max_length[50]|xss_clean');
-        $this->form_validation->set_rules('edit-grp-description', 'editedGroup Description', 'trim|max_length[150]|xss_clean');
+        $this->form_validation->set_rules('edit-grp-description', 'edited Group Description', 'trim|max_length[150]|xss_clean');
 
         if ($this->form_validation->run() == FALSE) {
             $this->_render();

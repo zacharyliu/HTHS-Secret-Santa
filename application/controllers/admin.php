@@ -37,9 +37,9 @@ class Admin extends CI_Controller
     public function general() {
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
-        $this->form_validation->set_rules('partner-date', 'trim|required|exact_length[5]|callback_validDate');
-        $this->form_validation->set_rules('gift-date', 'trim|required|exact_length[5]|callback_validDate');
-        $this->form_validation->set_rules('max-groups', 'trim|required|greater_than[0]|less_than[20]');
+        $this->form_validation->set_rules('partner-date', 'edited Partner Date', 'trim|required|callback_validDate|exact_length[5]|xss_clean');
+        $this->form_validation->set_rules('gift-date', 'edited Gift Date', 'trim|required|callback_validDate|exact_length[5]|xss_clean');
+        $this->form_validation->set_rules('max-groups', 'edited Max Groups', 'trim|required|greater_than[0]|less_than[20]|xss_clean');
 
 
         $max_groups = $this->config->item('max_groups');
@@ -57,7 +57,7 @@ class Admin extends CI_Controller
             $this->config->set_item('evt_gift_month', $giftDate[0]);
             $this->config->set_item('evt_gift_day', $giftDate[1]);
 
-            $this->session->set_flashdata('admin', 'Success! Settings are updated.');
+            $this->session->set_flashdata('admin', message('Success! Settings are updated.'));
             redirect(current_url());
         }
     }
@@ -187,12 +187,19 @@ class Admin extends CI_Controller
      * @return boolean
      */
     public function validDate($str) {
-        preg_match('/^([0-9]{2})/([0-9]{2})$/',$str, $matches);
-        $month = intval($matches[1]);
-        $day = intval($matches[2]);
-        if ( $month >= 1 && $month <= 12 && $day >=1 && $day <=31)
+        preg_match('/^([0-9]{2})\/([0-9]{2})$/',$str, $matches);
+        $month = 0;
+        $day = 0;
+        if (!empty($matches)) {
+            $month = intval($matches[1]);
+            $day = intval($matches[2]);
+        }
+        if ($month >= 1 && $month <= 12 && $day >=1 && $day <=31)
             return true;
-        else return false;
+        else{
+            $this->form_validation->set_message('validDate', 'Invalid date was inputted.');
+            return false;
+        }
     }
 
     /**
