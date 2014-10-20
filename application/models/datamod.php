@@ -3,8 +3,10 @@
 class Datamod extends CI_Model
 {
 
-    /*Class Variables*/
-    var $current_year; //declare current year class variable
+    /**
+     * @var int $current_year       current calendar year
+     */
+    var $current_year;
 
     /**
      * model constructor
@@ -16,6 +18,53 @@ class Datamod extends CI_Model
         parent::__construct();
 
         $this->current_year = intval(date('Y')); //set the current year for group operations
+    }
+
+    /**
+     * Gets global vars based on string or array of keys
+     * val will be unserialized if serialized
+     * @param null|string|array $keys       null will retrieve all global vars
+     * @return array|bool                   array of vars in [key,value] or false if not found
+     */
+    public function getGlobalVar($keys = NULL){
+        $this->db->select('*');
+        if ($keys != NULL) { //no key specified
+            if (is_array($keys)){   //array of keys
+                foreach($keys as $key) {
+                    $this->db->or_where('key',$key); //string of key
+                }
+            }
+            else $this->db->where('key',$keys);
+        }
+        $query = $this->db->get('globalvars');
+        $output = array();
+        //echo $this->db->last_query();
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $var) {
+                if ($this->__isSerialized($var->val)){ //unserialize serialized data
+                    $var->val = unserialize($var->val);
+                }
+                $output[$var->key] = $var->val; //normalize output
+            }
+            return $output;
+        }
+        return false;
+
+    }
+
+    /**
+     * check if a string is a serialized object or array
+     * @param $str          string to check
+     * @return bool         true on serialized
+     * @private
+     */
+    private function __isSerialized($str) {
+        $data = @unserialize($str);
+        if ($str === 'b:0;' || $data !== false) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /////////////////////////
@@ -70,6 +119,7 @@ class Datamod extends CI_Model
     }
 
     /**
+     * get total gifts exchanged by counting paired members
      * @param boolean $include      whether to include the current year
      * @return mixed
      */
@@ -122,59 +172,6 @@ class Datamod extends CI_Model
         return $row->name;
     }
 
-    /**
-     * get a user's private key by id
-     * @param int $id id to retrieve key for
-     * @return bool|string      private key on success, false on failure
-     * @deprecated
-     */
-    public function getPrivKey($id)
-    {
-        $this->db->select('privkey');
-        $this->db->where('id', $id);
-        $query = $this->db->get('users');
-        $row = $query->row();
-        $privkey = (isset($row->privkey) ? $row->privkey : '');
-        if ($privkey != '')
-            return $privkey;
-        else
-            return false;
-    }
-
-    /**
-     * get a user's public key by id
-     * @param int $id id to retrieve key for
-     * @return bool|string      public key on success, false on failure
-     * @deprecated
-     */
-    public function getPubKey($id)
-    {
-        $this->db->select('pubkey')->where('id', $id);
-        $query = $this->db->get('users');
-        $row = $query->row();
-        $pubkey = (isset($row->pubkey) ? $row->pubkey : '');
-        if ($pubkey != "")
-            return $pubkey;
-        else
-            return false;
-    }
-
-    /**
-     * store a generated [private,public] key pair
-     * @param int $id id to store keys for
-     * @param string[2] $keys   keys to store
-     * @return bool             true on success, false on failure
-     * @deprecated
-     */
-    public function storeKeyPair($id, $keys)
-    {
-        $data = array('privkey' => $keys[0], 'pubkey' => $keys[1]);
-        // Check if privkey is in db
-        if ($this->getPrivKey($id) == false) {
-            $this->db->where('id', $id)->update('users', $data);
-            return true;
-        } else return false;
-    }
 
     /**
      * check whether email is whitelisted for registration
@@ -205,25 +202,6 @@ class Datamod extends CI_Model
     { //checks if the group code exists
         if ($year == NULL) $year = $this->current_year;
         $this->db->where(array('code' => $code, 'year' => $year));
-        $query = $this->db->get('groups');
-        if ($query->num_rows() > 0)
-            return true;
-        else
-            return false;
-    }
-
-    /**
-     * checks whether a group name already exists
-     * @deprecated              group names no longer have to be unique
-     * @todo potential security vulnerability - fishing for group names
-     * @param string $name      group name
-     * @param int $year         year to check (default: $this->current_year)
-     * @return bool             true on success, false in failure
-     */
-    public function checkGroupName($name, $year = NULL)
-    { //checks to see if the group with $name already exists
-        if ($year == NULL) $year = $this->current_year;
-        $this->db->where(array('name' => $name, 'year' => $year));
         $query = $this->db->get('groups');
         if ($query->num_rows() > 0)
             return true;
@@ -360,22 +338,6 @@ class Datamod extends CI_Model
     }
 
     /**
-     * get group description by code
-     * @deprecated
-     * @param $code             group code
-     * @param int $year         year to check (default: $this->current_year)
-     * @return string           group description
-     */
-    public function getGroupDescription($code, $year = NULL)
-    { //gets description of the group by code
-        if ($year == NULL) $year = $this->current_year;
-        $this->db->select('description')->where(array('code' => $code, 'year' => $year));
-        $query = $this->db->get('groups');
-        $row = $query->row();
-        return $row->description;
-    }
-
-    /**
      * get an array of members that belong to a group
      * @param int $code         group code
      * @param int $year         year to check (default: $this->current_year)
@@ -415,27 +377,6 @@ class Datamod extends CI_Model
             array_push($memberNames, $member->name);
         }
         return $memberNames;
-    }
-
-    /**
-     * get an array of groups a person belongs to
-     * @deprecated
-     * @param string $id        user id
-     * @param int $year         year to check (default: $this->current_year)
-     * @return string[]|bool    false on failure
-     */
-    public function getPersonGroups($id, $year = NULL)
-    { //get array of groups a person belongs to (input: persons id)
-        if ($year == NULL) $year = $this->current_year;
-        $this->db->select('code')->where(array('id' => $id, 'year' => $year));
-        $query = $this->db->get('users_groups');
-        if ($query->num_rows() > 0) {
-            $groups = array();
-            foreach ($query->result() as $row) {
-                $groups[] = $row->code;
-            }
-            return $groups;
-        } else return false;
     }
 
     /**

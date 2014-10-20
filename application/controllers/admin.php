@@ -145,6 +145,15 @@ class Admin extends CI_Controller
         echo $this->adminmod->createTemplateGroup($code);
     }
 
+    public function testVar() {
+        $test = $this->datamod->getGlobalVar('test1');
+        var_dump($test);
+        $test = $this->datamod->getGlobalVar(array('test1','test2'));
+        var_dump($test);
+        $test = $this->datamod->getGlobalVar();
+        var_dump($test);
+    }
+
     public function sendBulkMail($code = null, $year = null)
     {
         $this->load->library('form_validation');

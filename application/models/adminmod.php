@@ -1,5 +1,9 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
+
+/**
+ * Class Adminmod
+ */
 class Adminmod extends CI_Model
 {
 
@@ -10,17 +14,15 @@ class Adminmod extends CI_Model
         $this->current_year = intval(date('Y'));
     }
 
-    public function addGroupHTHS()
-    { //postfix: make sure all members are in HTHS global group
-        $sql = "SELECT `name` FROM `users`";
-        $resultSet = $this->db->query($sql);
-        $total = $resultSet->num_rows();
-        for ($i = 0; $i < $total; $i++) {
-            $row = $resultSet->row_array($i);
-            if (!$this->datamod->inGroup($row['name'], 'hths')) //prevent duplicate additions to hths group
-                $this->datamod->addgroup($row['name'], 'hths');
+    public function setGlobalVar($key,$val) {
+        if (is_array($val) || is_object($val)){
+            $val = serialize($val);
         }
+        $query = $this->db->get_where('globalvars', array($key => $val));
+        if ($query->num_rows() == 0) return false;
 
+        $this->db->update('globalvars', array($key => $val));
+        return true;
     }
 
     public function pairCustom($code)
@@ -64,41 +66,12 @@ class Adminmod extends CI_Model
         }
     }
 
-    /**
-     * @deprecated
-     * lock groups from previous year:
-     * sets leaveable = 0 in the groups table
-     * advances current_year global variable to this year
-     */
-    public function lockold()
-    {
-        $this->db->where('year', getPrevYear())->update("groups", array("leaveable", 0));
-    }
-
-    /**
-     * @deprecated
-     * gets the previous year based on whether christmas has passed or not
-     * Returns previous year if (current year) < x < (christmas)
-     * Returns current year if (christmas) < x < (end of current year)
-     */
-    public function getPrevYear()
-    {
-        $month = intval(date('n'));
-        $day = intval(date('j'));
-        $year = intval(date('Y'));
-        if ($month == 12)
-            if ($day <= 25) //before or on christmas
-                return $year - 1;
-            else return $year;
-        else return $year - 1;
-    }
-
 
     public function listTemplateGroups()
     {
         $data = false;
         foreach ($this->db->get('groups_template')->result() as $row) {
-            $row->exists = $this->checkGroupExists($row->code);
+            $row->exists = $this->__checkGroupExists($row->code);
             $data[] = $row;
         }
         return $data;
@@ -120,8 +93,8 @@ class Adminmod extends CI_Model
     public function editTemplateGroup($code, $name, $description, $privacy)
     {
         $this->db->update('groups_template', array('name' => $name, 'description' => $description, 'private' => $privacy), array('code' => $code));
-        if ($this->checkGroupExists($code)) {
-            $this->editGroup($code, $name, $description, $privacy);
+        if ($this->__checkGroupExists($code)) {
+            $this->__editGroup($code, $name, $description, $privacy);
         }
         return true;
     }
@@ -133,7 +106,7 @@ class Adminmod extends CI_Model
         $this->db->insert('groups', array('code' => $template->code, 'name' => $template->name, 'description' => $template->description, 'private' => $template->private, 'deleteable' => 0, 'year' => $this->current_year));
     }
 
-    private function checkGroupExists($code, $year = NULL)
+    private function __checkGroupExists($code, $year = NULL)
     {
         if ($year == null) $year = $this->current_year;
         $query = $this->db->get_where('groups', array('code' => $code, 'year' => $year));
@@ -142,7 +115,7 @@ class Adminmod extends CI_Model
         else return true;
     }
 
-    private function editGroup($code, $name, $description, $privacy, $year = NULL)
+    private function __editGroup($code, $name, $description, $privacy, $year = NULL)
     {
         if ($year == null) $year = $this->current_year;
         return $this->db->update('groups', array('name' => $name, 'description' => $description, 'private' => $privacy), array('code' => $code, 'year' => $year));
