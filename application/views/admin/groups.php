@@ -145,8 +145,6 @@
         </div>
         <button type="button" id="createGroup" class="btn btn-default disabled">Submit</button>
     </form>
-    <!--<div><a href="/admin/lockold">Lock</a> last year's groups. This will make all groups
-                from <?php echo $this->adminmod->getPrevYear() ?> unleaveable.-->
 </div>
 
 <div class="row">

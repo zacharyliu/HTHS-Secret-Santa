@@ -24,7 +24,7 @@ class Admin extends CI_Controller
     }
 
     public function groups() {
-        $year = $this->config->item("first_year");//get the year of the group
+        $year = $this->datamod->getGlobalVar("first_year");//get the year of the group
         $groups = $this->datamod->listAllGroups();
         foreach ($groups as &$group) {//get list of groups for pairing
             $group->memberCount = $this->datamod->countMembers($group->code,$group->year);
@@ -42,7 +42,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('max-groups', 'edited Max Groups', 'trim|required|greater_than[0]|less_than[20]|xss_clean');
 
 
-        $max_groups = $this->config->item('max_groups');
+        $max_groups = $this->datamod->getGlobalVar('max_groups');
 
         if ($this->form_validation->run() == false) {
             render_admin('admin/general', array('max_groups' => $max_groups));
@@ -50,14 +50,13 @@ class Admin extends CI_Controller
         else {
             $partnerDate = $this->__parseDate(set_value('partner-date'));
             $giftDate = $this->__parseDate(set_value('gift-date'));
-            var_dump(set_value('max-groups'));
-            $this->config->set_item('max_groups',set_value('max-groups'));
-            $this->config->set_item('evt_partner_month', $partnerDate[0]);
-            $this->config->set_item('evt_partner_day', $partnerDate[1]);
-            $this->config->set_item('evt_gift_month', $giftDate[0]);
-            $this->config->set_item('evt_gift_day', $giftDate[1]);
+
+            $this->adminmod->setGlobalVar('evt_partner_date', $partnerDate);
+            $this->adminmod->setGlobalVar('evt_gift_date', $giftDate);
+            $this->adminmod->setGlobalVar('max_groups',set_value('max-groups'));
 
             $this->session->set_flashdata('admin', message('Success! Settings are updated.'));
+            exit();
             redirect(current_url());
         }
     }

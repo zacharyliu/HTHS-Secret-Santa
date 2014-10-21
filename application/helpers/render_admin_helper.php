@@ -3,11 +3,14 @@
 function render_admin($view, $data = null, $title = null)
 {
     $CI = & get_instance();
+    $CI->load->model('datamod');
 
     //consolidate data from admin_config file
-    $data['site_name']= $CI->config->item('site_name');
-    $data['partner_date'] = new DateTime(date('Y').'-'.$CI->config->item('evt_partner_month')."-".$CI->config->item('evt_partner_day')); //generate partner assignment date
-    $data['gift_date'] = new DateTime(date('Y').'-'.$CI->config->item('evt_gift_month').'-'.$CI->config->item('evt_gift_day'));//generate gift exchange date
+    $g_vars = $CI->datamod->getGlobalVar(); //get all global vars
+
+    $data['site_name']= $g_vars['site_name'];
+    $data['partner_date'] = new DateTime(date('Y').'-'.$g_vars['evt_partner_date'][0]."-".$g_vars['evt_partner_date'][1]); //generate partner assignment date
+    $data['gift_date'] = new DateTime(date('Y').'-'.$g_vars['evt_gift_date'][0].'-'.$g_vars['evt_gift_date'][1]);//generate gift exchange date
 
     $CI->load->view('header', array('title' => $title, 'site_name' => $data['site_name']));
     $CI->load->view('navbar', array('site_name' => $data['site_name']));

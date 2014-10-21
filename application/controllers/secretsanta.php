@@ -22,7 +22,8 @@ class Secretsanta extends CI_Controller
     {
         $this->load->library('countdown');
         $this->load->model('datamod');
-        $vars['timer'] = $this->countdown->generate(array('day' => $this->config->item("evt_gift_day"), 'month' => $this->config->item("evt_gift_month"), 'year' => date("Y"), 'hour' => 7, 'minute' => 40, 'second' => 0), 'light'); //target date, light or dark
+        $gift_date = $this->datamod->getGlobalVar("evt_gift_date");
+        $vars['timer'] = $this->countdown->generate(array('day' => $gift_date[1], 'month' => $gift_date[0], 'year' => date("Y"), 'hour' => 7, 'minute' => 40, 'second' => 0), 'light'); //target date, light or dark
         $vars['is_logged_in'] = ($this->session->userdata('auth') == 'true');
         render('index', $vars);
     }

@@ -28,7 +28,7 @@
                 <label for="gift-date">Gift Exchange Date</label>
 
                 <div class='input-group date' id='gift-date'>
-                    <input readonly type='text' value="<?= date_format($partner_date,"m/d"); ?>" class="form-control" name="gift-date" data-date-format="MM/DD"/>
+                    <input readonly type='text' value="<?= date_format($gift_date,"m/d"); ?>" class="form-control" name="gift-date" data-date-format="MM/DD"/>
 					<span class="input-group-addon">
 						<i class="fa fa-calendar"></i>
 					</span>

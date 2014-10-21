@@ -173,7 +173,7 @@ class Profile extends CI_Controller
     public function numGroups()
 { //verifies that user is in less than threshold groups
     $num = $this->datamod->countPersonGroups($this->session->userdata('id'));
-    if ($num < $this->config->item('max_groups'))
+    if ($num < $this->datamod->getGlobalVar('max_groups'))
         return true;
     else {
         $this->form_validation->set_message('numGroups', 'You are already in <strong>' . $num . '</strong> groups.  Leave a group and try again.');

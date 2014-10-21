@@ -32,7 +32,8 @@ class Login extends CI_Controller
 
                 // Check to make sure that the user is logging in using a @ctemc.org account or email exception:
                 $this->load->model('datamod');
-                if ($this->config->item('domain_restriction') == '' || (preg_match($this->config->item('domain_restriction'), $user_data['contact/email'])) || $this->datamod->checkAllowedEmailException($user_data['contact/email'])) {
+                $domain_restriction = $this->datamod->getGlobalVar('domain_restriction');
+                if ($domain_restriction == '' || (preg_match($domain_restriction, $user_data['contact/email'])) || $this->datamod->checkAllowedEmailException($user_data['contact/email'])) {
                     //echo "Welcome, " . " ` . $user_data['namePerson/first'] . ' ' . $user_data['namePerson/last'];
 
                     $fname = $user_data['namePerson/first'];
@@ -46,7 +47,7 @@ class Login extends CI_Controller
                         $user_id = $this->datamod->getUserId($email);//@todo addUser should return id
                     }
                     //check for admin permissions
-                    if (in_array($user_data['contact/email'],$this->config->item('admin_users'))) //check against imported admin_users.config file
+                    if (in_array($user_data['contact/email'],$this->datamod->getGlobalVar('admin_users'))) //check against imported admin_users.config file
                         $admin = 'true';
                     else
                         $admin = 'false';

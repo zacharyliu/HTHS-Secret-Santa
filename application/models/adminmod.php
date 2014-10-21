@@ -12,16 +12,18 @@ class Adminmod extends CI_Model
         // Call the Model constructor
         parent::__construct();
         $this->current_year = intval(date('Y'));
+        if (ENVIRONMENT != 'development') die("Must be run in development environment.");
     }
 
     public function setGlobalVar($key,$val) {
         if (is_array($val) || is_object($val)){
             $val = serialize($val);
         }
-        $query = $this->db->get_where('globalvars', array($key => $val));
+        //check if var exists
+        $query = $this->db->get_where('globalvars', array("key" => $key));
         if ($query->num_rows() == 0) return false;
 
-        $this->db->update('globalvars', array($key => $val));
+        $this->db->where('key', $key)->update('globalvars', array('val' => $val));
         return true;
     }
 

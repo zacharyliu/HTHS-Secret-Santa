@@ -39,6 +39,15 @@ class Datamod extends CI_Model
         $query = $this->db->get('globalvars');
         $output = array();
         //echo $this->db->last_query();
+
+        if ($query->num_rows == 1) { //if only one var requested, return val
+            $row = $query->row();
+            if ($this->__isSerialized($row->val)){ //unserialize serialized data
+                $row->val = unserialize($row->val);
+            }
+            return $row->val;
+        }
+
         if ($query->num_rows() > 0) {
             foreach ($query->result() as $var) {
                 if ($this->__isSerialized($var->val)){ //unserialize serialized data
