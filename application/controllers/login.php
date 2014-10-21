@@ -59,7 +59,7 @@ class Login extends CI_Controller
                         //redirect(base_url('secretsanta/survey'));
                     redirect(base_url('/profile'));
                 } else {
-                    $this->login_failure('Please log in using an @ctemc.org account or contact an administrator.');
+                    $this->login_failure('Please log in using an authorized email account or contact an administrator.');
                 }
 
             }

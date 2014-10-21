@@ -56,14 +56,30 @@ class Admin extends CI_Controller
             $this->adminmod->setGlobalVar('max_groups',set_value('max-groups'));
 
             $this->session->set_flashdata('admin', message('Success! Settings are updated.'));
-            exit();
             redirect(current_url());
         }
     }
 
 
     public function advanced() {
-        render_admin('admin/advanced');
+        $this->load->library('form_validation');
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
+        $this->form_validation->set_rules('site-name', 'edited Site Name', 'trim|required|max_length[40]|xss_clean');
+        $this->form_validation->set_rules('domain-restriction', 'edited Domain Restriction', 'trim|callback_validRegex|xss_clean');
+
+
+        $domain_restriction = $this->datamod->getGlobalVar('domain_restriction');
+
+        if ($this->form_validation->run() == false) {
+            render_admin('admin/advanced', array('domain_restriction' => $domain_restriction));
+        }
+        else {
+            $this->adminmod->setGlobalVar('site_name', set_value('site-name'));
+            $this->adminmod->setGlobalVar('domain_restriction', set_value('domain-restriction'));
+
+            $this->session->set_flashdata('admin', message('Success! Settings are updated.'));
+            redirect(current_url());
+        }
     }
 
     public function addAllowedEmail()
@@ -192,7 +208,7 @@ class Admin extends CI_Controller
     /**
      * checks input is valid date in form MM/DD
      * @param $str
-     * @return boolean
+     * @return bool
      */
     public function validDate($str) {
         preg_match('/^([0-9]{2})\/([0-9]{2})$/',$str, $matches);
@@ -208,6 +224,21 @@ class Admin extends CI_Controller
             $this->form_validation->set_message('validDate', 'Invalid date was inputted.');
             return false;
         }
+    }
+
+    /**
+     * sloppily checks whether regex is valid
+     * @param $str
+     * @return bool
+     */
+    public function validRegex($str) {
+        if (strlen($str) == 0) return true;
+        $subject = 'test1@example.com';
+        if (@preg_match($str, $subject) === false) { //suppress errors
+            $this->form_validation->set_message('validRegex', 'Invalid regex was inputted');
+            return false;
+        }
+        return true;
     }
 
     /**

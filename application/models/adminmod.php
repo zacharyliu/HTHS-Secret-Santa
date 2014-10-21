@@ -12,7 +12,6 @@ class Adminmod extends CI_Model
         // Call the Model constructor
         parent::__construct();
         $this->current_year = intval(date('Y'));
-        if (ENVIRONMENT != 'development') die("Must be run in development environment.");
     }
 
     public function setGlobalVar($key,$val) {
