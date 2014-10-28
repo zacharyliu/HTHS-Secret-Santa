@@ -63,19 +63,27 @@ class Admin extends CI_Controller
 
     public function advanced() {
         $this->load->library('form_validation');
+        $this->load->helper('email'); //email validation
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
         $this->form_validation->set_rules('site-name', 'edited Site Name', 'trim|required|max_length[40]|xss_clean');
         $this->form_validation->set_rules('domain-restriction', 'edited Domain Restriction', 'trim|callback_validRegex|xss_clean');
+        $this->form_validation->set_rules('admin-users', 'edited Admin Users', 'trim|required|callback_validEmails|callback_checkCurrentAdmin|xss_clean');
 
 
         $domain_restriction = $this->datamod->getGlobalVar('domain_restriction');
+        $admin_users = $this->datamod->getGlobalVar('admin_users');
 
         if ($this->form_validation->run() == false) {
-            render_admin('admin/advanced', array('domain_restriction' => $domain_restriction));
+            render_admin('admin/advanced', array('domain_restriction' => $domain_restriction, 'admin_users' => $admin_users));
         }
         else {
             $this->adminmod->setGlobalVar('site_name', set_value('site-name'));
             $this->adminmod->setGlobalVar('domain_restriction', set_value('domain-restriction'));
+
+            $admin_users = explode("\r\n", set_value('admin-users')); //\n\r
+            $admin_users = array_unique($admin_users); //remove duplicates
+            $admin_users = array_filter($admin_users,function($a){return $a!="";}); //remove blank elements
+            $this->adminmod->setGlobalVar('admin_users', $admin_users);
 
             $this->session->set_flashdata('admin', message('Success! Settings are updated.'));
             redirect(current_url());
@@ -160,14 +168,6 @@ class Admin extends CI_Controller
         echo $this->adminmod->createTemplateGroup($code);
     }
 
-    public function testVar() {
-        $test = $this->datamod->getGlobalVar('test1');
-        var_dump($test);
-        $test = $this->datamod->getGlobalVar(array('test1','test2'));
-        var_dump($test);
-        $test = $this->datamod->getGlobalVar();
-        var_dump($test);
-    }
 
     public function sendBulkMail($code = null, $year = null)
     {
@@ -236,6 +236,37 @@ class Admin extends CI_Controller
         $subject = 'test1@example.com';
         if (@preg_match($str, $subject) === false) { //suppress errors
             $this->form_validation->set_message('validRegex', 'Invalid regex was inputted');
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Check whether every email in a '\n\r' delimited list is valid
+     * @param $str
+     * @return bool
+     */
+    public function validEmails($str) {
+        $emails = explode("\r\n",$str);  //\n\r
+        foreach( $emails as $email) {
+            if (!valid_email($email) || $email == "") {
+                $this->form_validation->set_message('validEmails', 'Invalid email address was inputted.');
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Checks the current admin is in a string
+     * @param $str
+     * @return bool
+     */
+    public function checkCurrentAdmin($str)
+    {
+        $admin = $this->session->userdata('email');
+        if (strpos($admin, $str) === FALSE) {
+            $this->form_validation->set_message("checkCurrentAdmin", 'Current user must be in admin emails.');
             return false;
         }
         return true;
