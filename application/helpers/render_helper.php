@@ -7,6 +7,7 @@ function render($view, $data = null, $title = null)
 
     //consolidate data from admin_config file
     $g_vars = $CI->datamod->getGlobalVar();
+    $data['first_year'] = $g_vars['first_year'];
     $data['site_name']= $g_vars['site_name'];
     $data['partner_date'] = new DateTime(date('Y').'-'.$g_vars['evt_partner_date'][0]."-".$g_vars['evt_partner_date'][1]); //generate partner assignment date
     $data['gift_date'] = new DateTime(date('Y').'-'.$g_vars['evt_gift_date'][0].'-'.$g_vars['evt_gift_date'][1]);//generate gift exchange date

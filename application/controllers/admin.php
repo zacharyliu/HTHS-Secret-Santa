@@ -39,7 +39,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
         $this->form_validation->set_rules('partner-date', 'edited Partner Date', 'trim|required|callback_validDate|exact_length[5]|xss_clean');
         $this->form_validation->set_rules('gift-date', 'edited Gift Date', 'trim|required|callback_validDate|exact_length[5]|xss_clean');
-        $this->form_validation->set_rules('max-groups', 'edited Max Groups', 'trim|required|greater_than[0]|less_than[20]|xss_clean');
+        $this->form_validation->set_rules('max-groups', 'edited Max Groups', 'trim|required|greater_than[0]|less_than[21]|xss_clean');
 
 
         $max_groups = $this->datamod->getGlobalVar('max_groups');

@@ -37,7 +37,7 @@ class Secretsanta extends CI_Controller
     {
         $this->load->model('datamod');
 
-        if ($this->datamod->getPrivKey($this->session->userdata('id')) != false) //only allow access if keys not set
+        //if ($this->datamod->getPrivKey($this->session->userdata('id')) != false) //only allow access if keys not set
         redirect('profile');
 
         $this->load->helper('form');
@@ -52,13 +52,13 @@ class Secretsanta extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             render('survey');
         } else {
-            $this->load->library('crypt');
-            $keys = $this->crypt->create_key(md5($this->session->userdata('email') . set_value('pin'))); //[private, public]
+            //$this->load->library('crypt');
+            //$keys = $this->crypt->create_key(md5($this->session->userdata('email') . set_value('pin'))); //[private, public]
             //var_dump($keys);
 
             $id = $this->session->userdata('id');
 
-            $this->datamod->storeKeyPair($id, $keys);
+            //$this->datamod->storeKeyPair($id, $keys);
             if (!$this->datamod->inGroup($this->session->userdata('name'), 'hths')) //prevent duplicate additions to hths group
             $this->datamod->addgroup($this->session->userdata('name'), 'hths');
             render('survey_success');

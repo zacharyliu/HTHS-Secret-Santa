@@ -35,7 +35,7 @@ $userStats = $this->datamod->userStats($id); //get user stats
             <h3>My groups </h3>
 
             <p>You are currently
-                in <?php echo($this->datamod->countPersonGroups($id)); ?>/5
+                in <?php echo($this->datamod->countPersonGroups($id)); ?>/<?=$max_groups?>
                 groups.</p>
 
                 <ul id="years" class="nav nav-tabs">

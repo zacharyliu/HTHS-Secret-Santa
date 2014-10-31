@@ -16,7 +16,7 @@
             <div class="col-md-4 col-lg-2">
                 <label for="partner-date">Partner Assignment Date</label>
                 <div class='input-group date' id='partner-date'>
-                    <input readonly type='text' value="<?= date_format($partner_date,"m/d"); ?>"class="form-control" name="partner-date" data-date-format="MM/DD"/>
+                    <input required readonly type='text' value="<?= date_format($partner_date,"m/d"); ?>"class="form-control" name="partner-date" data-date-format="MM/DD"/>
 					<span class="input-group-addon">
 						<i class="fa fa-calendar"></i>
 					</span>
@@ -28,7 +28,7 @@
                 <label for="gift-date">Gift Exchange Date</label>
 
                 <div class='input-group date' id='gift-date'>
-                    <input readonly type='text' value="<?= date_format($gift_date,"m/d"); ?>" class="form-control" name="gift-date" data-date-format="MM/DD"/>
+                    <input required readonly type='text' value="<?= date_format($gift_date,"m/d"); ?>" class="form-control" name="gift-date" data-date-format="MM/DD"/>
 					<span class="input-group-addon">
 						<i class="fa fa-calendar"></i>
 					</span>
@@ -39,7 +39,7 @@
             <p>Max number of groups that a user can be in.</p>
             <div class="col-md-4 col-lg-2">
             <label for="max-groups">Max Groups</label>
-            <input type="number" min="1" max="20" value="<?= $max_groups;?>"class="form-control" id="max-groups" name="max-groups">
+            <input required type="number" min="1" max="20" value="<?= $max_groups;?>"class="form-control" id="max-groups" name="max-groups">
                 </div>
         </div>
         <div class="form-group">

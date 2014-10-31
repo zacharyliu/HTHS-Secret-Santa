@@ -45,6 +45,7 @@ class Profile extends CI_Controller
         
         $groupsInfo = $this->datamod->groupInfoMultiple($this->session->userdata('id')); //get all relevant group info for that year, and merge it with the rest of the groups
         $data = array_merge(array('groups' => $groupsInfo), $data); //inject it into data array
+        $data['max_groups'] = $this->datamod->getGlobalVar('max_groups');
 
         render('profile', $data);
     }
