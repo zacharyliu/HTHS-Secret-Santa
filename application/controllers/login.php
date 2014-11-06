@@ -2,9 +2,14 @@
     exit('No direct script access allowed');
 }
 
+/**
+ * Class Login
+ */
 class Login extends CI_Controller
 {
-
+    /**
+     * controller index
+     */
     public function index()
     {
         require(APPPATH . 'classes/openid.php');
@@ -66,16 +71,26 @@ class Login extends CI_Controller
         }
     }
 
+    /**
+     * page to render if login fails
+     * @param string $message
+     */
     private function login_failure($message = 'Login failure')
     {
         //echo $message;
         render("landing",array("icon"=>"&#xf071;","header"=>"Login failure","subheader"=>$message));
     }
 
+    /**
+     * login timeout
+     */
     public function timeout(){
         render("landing",array("icon"=>"&#xf071;","header"=>"Oops! You don't have permission to view this page.","subheader"=>"Your session has expired, or you are not logged in. Please <a href='/login'>login</a> to continue."));
     }
 
+    /**
+     * logout
+     */
     public function logout()
     {
         $this->session->sess_destroy();

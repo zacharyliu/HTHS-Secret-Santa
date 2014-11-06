@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * helper to inject additional data and framework views to view to be rendered
+ * @param $view
+ * @param null $data
+ * @param null $title
+ */
 function render($view, $data = null, $title = null)
 {
     $CI = & get_instance();
@@ -16,9 +22,6 @@ function render($view, $data = null, $title = null)
     $CI->load->view('navbar', array('site_name' => $data['site_name']));
     $CI->load->view($view, $data);
     if (!in_array($view,array("index","landing"))){//load extra footer content if not on home page
-        //file_exists('version.php') && include 'version.php';
-        //$vars['app_disp'] = 1;
-        //$vars['version'] = isset($version) ? ('v' . ($version / 1000) . 'a') : ('v0000a');
         $CI->load->view('footer');
     }
     $CI->load->view('footer_global');//always load the global footer (analytics, closing tags, etc)

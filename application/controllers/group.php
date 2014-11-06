@@ -1,8 +1,14 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
+/**
+ * Class Group
+ */
 class Group extends CI_Controller
 {
 
+    /**
+     * class constructor
+     */
     public function __construct() {
         parent::__construct();
 
@@ -14,6 +20,11 @@ class Group extends CI_Controller
         }
     }
 
+    /**
+     * retrieve modal containing list of group members
+     * @param $code
+     * @param null $year
+     */
     public function membersModal($code, $year = null) {
         $groupName = $this->datamod->getGroupName($code, $year);
         $members = $this->datamod->getMemberNames($code, $year);

@@ -2,9 +2,14 @@
     exit('No direct script access allowed');
 }
 
+/**
+ * Class Admin
+ */
 class Admin extends CI_Controller
 {
-
+    /**
+     * Class Constructor
+     */
     public function __construct()
     {
         parent::__construct();
@@ -13,16 +18,22 @@ class Admin extends CI_Controller
         }
         $this->load->model('datamod'); //load the data model
         $this->load->model('adminmod'); //load the admin model
-        //$this->load->model('migrations');//load the migrations model
         $this->load->helper('message'); //load the bootstrap message helper
         $this->load->helper('render_admin');
     }
 
+    /**
+     * Index page for admin controller
+     */
     public function index()
     {
         redirect(base_url("admin/groups"));
     }
 
+    /**
+     * Admin panel for group management
+     * Includes: group pairing, template groups, email whitelist
+     */
     public function groups() {
         $year = $this->datamod->getGlobalVar("first_year");//get the year of the group
         $groups = $this->datamod->listAllGroups();
@@ -34,6 +45,10 @@ class Admin extends CI_Controller
         render_admin('admin/groups', $data);
     }
 
+    /**
+     * General settings
+     * includes: event dates, max groups
+     */
     public function general() {
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
@@ -60,7 +75,10 @@ class Admin extends CI_Controller
         }
     }
 
-
+    /**
+     * Advanced settings
+     * Includes: site name, domain restriction, admin emails
+     */
     public function advanced() {
         $this->load->library('form_validation');
         $this->load->helper('email'); //email validation
@@ -90,6 +108,9 @@ class Admin extends CI_Controller
         }
     }
 
+    /**
+     * Form submit for email whitelisting
+     */
     public function addAllowedEmail()
     {
         $this->load->library('form_validation');
@@ -111,6 +132,9 @@ class Admin extends CI_Controller
         redirect('admin/groups');
     }
 
+    /**
+     * Form submit for group pairing
+     */
     public function pairCustom()
     {
         if ($this->input->post('code') != '') {
@@ -129,7 +153,7 @@ class Admin extends CI_Controller
     }
 
     /**
-     * ajax function for adding a new template group to the groups_template table
+     * ajax post for adding a new template group to the groups_template table
      * Accepts post to the following variables:
      * n            group nane
      * c            group code
@@ -145,16 +169,30 @@ class Admin extends CI_Controller
         echo $group_code;
     }
 
+    /**
+     * ajax post for deleting a template group
+     * c            group code
+     */
     public function deleteTemplateGroup() {
         $code = $this->input->post('c');
         $this->adminmod->deleteTemplateGroup($code);
         echo true;
     }
 
+    /**
+     * ajax get for retrieving all template groups
+     */
     public function loadAllTemplateGroups() {
         echo json_encode($this->adminmod->loadAllTemplateGroups());
     }
 
+    /**
+     * ajax post for editing a template group
+     * c            group code
+     * n            group name
+     * d            group description
+     * p            group privacy
+     */
     public function editTemplateGroup() {
         $code = $this->input->post("c");//code of group
         $name = $this->input->post("n");//name of group
@@ -163,12 +201,21 @@ class Admin extends CI_Controller
         echo $this->adminmod->editTemplateGroup($code,$name,$description,$privacy);
     }
 
+    /**
+     * ajax post for creating a group that people can join from the template group
+     * c            group code
+     */
     public function createTemplateGroup() {
         $code = $this->input->post("c");
         echo $this->adminmod->createTemplateGroup($code);
     }
 
 
+    /**
+     * sends an email to all members of a group
+     * @param string $code
+     * @param int $year
+     */
     public function sendBulkMail($code = null, $year = null)
     {
         $this->load->library('form_validation');
@@ -203,8 +250,9 @@ class Admin extends CI_Controller
     }
 
     //
-    //form validation callback functions (public)
+    //form validation callback functions
     //
+
     /**
      * checks input is valid date in form MM/DD
      * @param $str

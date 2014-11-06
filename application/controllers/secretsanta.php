@@ -1,22 +1,13 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
+/**
+ * Class Secretsanta
+ * contains the main page
+ */
 class Secretsanta extends CI_Controller
 {
-
     /**
-     * Index Page for this controller.
-     *
-     * Maps to the following URL
-     *        http://example.com/index.php/welcome
-     *    - or -
-     *        http://example.com/index.php/welcome/index
-     *    - or -
-     * Since this controller is set as the default controller in
-     * config/routes.php, it's displayed at http://example.com/
-     *
-     * So any other public methods not prefixed with an underscore will
-     * map to /index.php/welcome/<method_name>
-     * @see http://codeigniter.com/user_guide/general/urls.html
+     * home page
      */
     public function index()
     {
@@ -28,11 +19,17 @@ class Secretsanta extends CI_Controller
         render('index', $vars);
     }
 
+    /**
+     * about page
+     */
     public function about()
     {
         render('about');
     }
 
+    /**
+     * @deprecated new user survey
+     */
     public function survey()
     {
         $this->load->model('datamod');
@@ -65,6 +62,9 @@ class Secretsanta extends CI_Controller
         }
     }
 
+    /**
+     * 404 landing page
+     */
     public function notfound() {
         render("landing",array("icon"=>"&#xf071;","header"=>"404 Page not Found","subheader"=>"The page you requested does not exist."));
     }

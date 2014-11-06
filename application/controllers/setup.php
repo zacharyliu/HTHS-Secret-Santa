@@ -25,7 +25,6 @@ class Setup extends CI_Controller
             die('Setup script must be run in development environment.');
         }
 
-
     }
 
     /**
@@ -50,7 +49,7 @@ class Setup extends CI_Controller
         else {
             if (!$this->migration->version((1))) {
                 show_error($this->migration->error_string());
-                exit('Aborting...');
+                exit('Setup fauled. Aborting...');
             }
 
             $this->adminmod->setGlobalVar('admin_users', array(set_value('admin-email')));
@@ -59,12 +58,6 @@ class Setup extends CI_Controller
 
             render("setup/success");
         }
-        /*
-        if ( ! $this->migration->version((1)))
-        {
-            show_error($this->migration->error_string());
-        }
-        */
     }
 
     public function setup() {

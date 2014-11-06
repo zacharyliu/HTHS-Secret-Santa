@@ -1,5 +1,12 @@
-<?
+<?php
 
+/**
+ * helper to inject additional data and framework views to view to be rendered
+ * includes an additional admin sitebar
+ * @param $view
+ * @param null $data
+ * @param null $title
+ */
 function render_admin($view, $data = null, $title = null)
 {
     $CI = & get_instance();
