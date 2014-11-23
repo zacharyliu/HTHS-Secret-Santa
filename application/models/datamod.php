@@ -24,7 +24,7 @@ class Datamod extends CI_Model
      * Gets global vars based on string or array of keys
      * val will be unserialized if serialized
      * @param null|string|array $keys       null will retrieve all global vars
-     * @return array|bool                   array of vars in [key,value] or false if not found
+     * @return array|mixed|bool             array of vars in [key,value] if array of keys, else single value if single key, or false if not found
      */
     public function getGlobalVar($keys = NULL){
         $this->db->select('*');
@@ -38,12 +38,15 @@ class Datamod extends CI_Model
         }
         $query = $this->db->get('globalvars');
         $output = array();
-        //echo $this->db->last_query();
 
-        if ($query->num_rows == 1) { //if only one var requested, return val
+        //catch edge case where only one global var available
+        if ($query->num_rows() == 1 && $keys != NULL) { //if only one var requested, return val
             $row = $query->row();
             if ($this->__isSerialized($row->val)){ //unserialize serialized data
                 $row->val = unserialize($row->val);
+            }
+            else if ($this->__isBoolean($row->val)) {
+                $row->val = filter_var($row->val, FILTER_VALIDATE_BOOLEAN);
             }
             return $row->val;
         }
@@ -52,6 +55,9 @@ class Datamod extends CI_Model
             foreach ($query->result() as $var) {
                 if ($this->__isSerialized($var->val)){ //unserialize serialized data
                     $var->val = unserialize($var->val);
+                }
+                else if ($this->__isBoolean($var->val)) {
+                    $var->val = filter_var($var->val, FILTER_VALIDATE_BOOLEAN);
                 }
                 $output[$var->key] = $var->val; //normalize output
             }
@@ -74,6 +80,13 @@ class Datamod extends CI_Model
         } else {
             return false;
         }
+    }
+
+    private function __isBoolean($str) {
+        $str = strtolower($str);
+        if ($str == "true" || $str == "false")
+            return true;
+        else return false;
     }
 
     /////////////////////////

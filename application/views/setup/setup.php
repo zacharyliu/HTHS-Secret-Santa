@@ -14,11 +14,11 @@
 
     <form role="form" method="post">
         <div class="row form-group">
-            <label for="site-name">Admin Email</label>
+            <label for="admin-email">Admin Email</label>
             <p class="help-block">Enter the email address of the first user that will have admin privileges. Ensure this is correct, as this email address must be used to access the admin panel to add other admins and make site-wide changes.</p>
-            <input required type="email" value="<?= set_value('admin-email'); ?>" class="form-control" id="site-name" name="site-name" placeholder="example@example.com">
+            <input required type="email" value="<?= set_value('admin-email'); ?>" class="form-control" id="admin-email" name="admin-email" placeholder="example@example.com">
             <p class="help-block">Confirm the admin email address.</p>
-            <input required type="email" value="<?= set_value('admin-email-confirm'); ?>" class="form-control" id="site-name" name="site-name" placeholder="example@example.com">
+            <input required type="email" value="<?= set_value('admin-email-confirm'); ?>" class="form-control" id="admin-email-confirm" name="admin-email-confirm" placeholder="example@example.com">
 
         </div>
         <div class="row form-group">
@@ -27,7 +27,7 @@
             <input required type="text" value="<?= set_value('site-name'); ?>" class="form-control" id="site-name" name="site-name" placeholder="HTHS Secret Santa">
         </div>
         <div class="row form-group">
-            <label for="domain-restriction">Domain Restriction</label>
+            <label for="domain-restriction">Domain Restriction (Optional)</label>
             <p class="help-block">Define a regex to only allow users from certain email domains to sign in. For example, use <code class="varName">/^[^@]+@example\.com$/</code> to only allow users from "example.com" to sign in. Exceptions can be manually set later.</p>
             <input type="text" value="<?= set_value('domain-restriction'); ?>" class="form-control" id="domain-restriction" name="domain-restriction" placeholder="/^[^@]+@example\.com$/">
         </div>

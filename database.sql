@@ -43,6 +43,8 @@ CREATE TABLE IF NOT EXISTS `globalvars` (
   UNIQUE KEY `key` (`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='secretsanta global variables';
 
+INSERT INTO `hthssecretsanta`.`globalvars` (`key`, `val`) VALUES ('setup', 'false');
+
 -- --------------------------------------------------------
 
 --

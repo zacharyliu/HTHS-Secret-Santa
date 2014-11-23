@@ -20,9 +20,14 @@ class Setup extends CI_Controller
         $this->load->library('form_validation'); //form validation helper
         $this->load->library('migration');
         $this->load->model('datamod');
+        $this->load->model('adminmod');
 
         if (ENVIRONMENT != 'development') {
             die('Setup script must be run in development environment.');
+        }
+
+        if ($this->datamod->getGlobalVar('setup') == true) {
+            redirect(base_url('secretsanta'));
         }
 
     }
@@ -49,7 +54,7 @@ class Setup extends CI_Controller
         else {
             if (!$this->migration->version((1))) {
                 show_error($this->migration->error_string());
-                exit('Setup fauled. Aborting...');
+                exit('Setup failed. Aborting...');
             }
 
             $this->adminmod->setGlobalVar('admin_users', array(set_value('admin-email')));
@@ -71,5 +76,20 @@ class Setup extends CI_Controller
 
     public function runUpdate() {
 
+    }
+
+    /**
+     * sloppily checks whether regex is valid
+     * @param $str
+     * @return bool
+     */
+    public function validRegex($str) {
+        if (strlen($str) == 0) return true;
+        $subject = 'test1@example.com';
+        if (@preg_match($str, $subject) === false) { //suppress errors
+            $this->form_validation->set_message('validRegex', 'Invalid regex was inputted');
+            return false;
+        }
+        return true;
     }
 }

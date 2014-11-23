@@ -1,6 +1,8 @@
 HTHS-Secret-Santa
 =================
-HTHS Secret Santa is a convenient and fully integrated gift exchange web application designed to facilitate the coordination of gift exchanges during the holiday season. Features include:
+HTHS Secret Santa is a convenient and fully integrated gift exchange web application designed to facilitate the coordination of gift exchanges during the holiday season.
+
+###Features:
 * Support for custom groups, predefined as part of an event or userdefined.
 * Automatic random gift exchange partner assignments.
 * Fully automated support for multiple years. No changes in configuration are required for the next year.
