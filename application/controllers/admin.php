@@ -302,6 +302,7 @@ class Admin extends CI_Controller
                 return false;
             }
         }
+
         return true;
     }
 
@@ -313,7 +314,8 @@ class Admin extends CI_Controller
     public function checkCurrentAdmin($str)
     {
         $admin = $this->session->userdata('email');
-        if (strpos($admin, $str) === FALSE) {
+
+        if (strpos($str, $admin) === FALSE) {
             $this->form_validation->set_message("checkCurrentAdmin", 'Current user must be in admin emails.');
             return false;
         }

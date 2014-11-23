@@ -23,7 +23,7 @@
         </div>
         <div class="row form-group">
             <label for="domain-restriction">Admin Emails</label>
-            <p class="help-block">Insert each admin user's email on a new line. Make sure not to delete yourself!</p>
+            <p class="help-block">Insert each admin user's email on a new line. Make sure not to delete yourself! <br/>Note: If the user you wish to add has an email that's outside of the domain restriction, you must first add the email to the Email Login Whitelist on the <a href="<?=base_url("admin/groups");?>">Group Settings</a> page.</p>
             <textarea class="form-control emails" id="admin-users" name="admin-users"><?php
                 $admin_users = set_value('admin-users',$admin_users);
                 if (is_string($admin_users)) {
