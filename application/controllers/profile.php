@@ -146,29 +146,7 @@ class Profile extends CI_Controller
         }
 
     }
-
-    /**
-     * @deprecated reset pin form
-     */
-    public function resetPin()
-    {
-
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
-
-        $this->form_validation->set_rules('pin', 'Pin', 'trim|required|min_length[4]|max_length[4]|numeric');
-        $this->form_validation->set_rules('pinconf', 'Pin Confirmation', 'trim|required|min_length[4]|max_length[4]|numeric|matches[pin]');
-
-        if ($this->form_validation->run() == FALSE) {
-            render('survey', array('reset' => 1));
-        } else {
-            $this->load->library('crypt'); //load the crypting library
-            $keys = $this->crypt->create_key(md5($this->session->userdata('email') . set_value('pin'))); //key array: [private, public]
-
-            $this->datamod->storeKeyPair($this->session->userdata('id'), $keys);
-            $this->session->set_flashdata('result', message('Pin reset to <strong>' . set_value('pin') . '</strong>. Don\'t forget it again!', 1));
-            redirect(base_url('profile'));
-        }
-    }
+    
 
     //
     //form validation callback functions

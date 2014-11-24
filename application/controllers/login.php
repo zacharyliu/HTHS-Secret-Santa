@@ -13,7 +13,6 @@ class Login extends CI_Controller
     public function index()
     {
         require(APPPATH . 'classes/openid.php');
-        //require(APPPATH . 'config/admin_settings.php'); //retrieve the list of admin users
 
         $openid = new LightOpenID($_SERVER['HTTP_HOST']);
         if (!$openid->mode) {
