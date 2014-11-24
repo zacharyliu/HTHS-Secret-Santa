@@ -38,11 +38,12 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 CREATE TABLE IF NOT EXISTS `globalvars` (
-  `firstyear` smallint(4) NOT NULL COMMENT 'The first year that data exists for',
-  `registration` tinyint(1) NOT NULL,
-  `maxgroups` int(2) NOT NULL,
-  UNIQUE KEY `firstyear` (`firstyear`)
+  `key` varchar(20) NOT NULL,
+  `val` text NOT NULL,
+  UNIQUE KEY `key` (`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='secretsanta global variables';
+
+INSERT INTO `hthssecretsanta`.`globalvars` (`key`, `val`) VALUES ('setup', 'false');
 
 -- --------------------------------------------------------
 
@@ -115,12 +116,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
+  `interests` text NOT NULL,
   `pubkey` text NOT NULL,
   `privkey` text NOT NULL,
   `year_join` smallint(4) NOT NULL,
   `class` tinyint(4) unsigned DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=105 ;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
 
 -- --------------------------------------------------------
 

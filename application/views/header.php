@@ -3,8 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title><?php
-        $string = 'HTHS Secret Santa';
-        echo (isset($title) && $title != '') ? ($title . ' - ' . $string) : $string;
+        echo (isset($title) && $title != '') ? ($title . ' - ' . $site_name) : $site_name;
         ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -18,6 +17,7 @@
             padding-bottom: 40px;
         }
     </style>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="<?php echo base_url('css/main.css')?>" rel="stylesheet">
 
     <!-- Fav and touch icons -->

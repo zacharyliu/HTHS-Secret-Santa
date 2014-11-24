@@ -1,6 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * Migrations from old database schemas
+ * Do not use this model in production.
  */
 
 
@@ -14,6 +15,7 @@ class Migrations extends CI_Model
     {
         // Call the Model constructor
         parent::__construct();
+        if (ENVIRONMENT != 'development') die("Must be run in development environment.");
     }
 
     /**

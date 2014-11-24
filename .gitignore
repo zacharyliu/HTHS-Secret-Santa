@@ -6,15 +6,18 @@
 
 *.idea
 
+/application/config/admin_settings.php
 /application/config/database.php
 /application/config/config.php
 /application/config/email.php
 /css/main.css
 /css/home.css
+/css/admin.css
 /js/admin.js
 /js/home.js
 /js/memberlist.js
 /js/profile.js
+/js/admin/groups.js
 *.map
 
 /phpmyadmin

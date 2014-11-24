@@ -1,8 +1,15 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
+
+/**
+ * Class Adminmod
+ */
 class Adminmod extends CI_Model
 {
 
+    /**
+     * class constructor
+     */
     function __construct()
     {
         // Call the Model constructor
@@ -10,19 +17,31 @@ class Adminmod extends CI_Model
         $this->current_year = intval(date('Y'));
     }
 
-    public function addGroupHTHS()
-    { //postfix: make sure all members are in HTHS global group
-        $sql = "SELECT `name` FROM `users`";
-        $resultSet = $this->db->query($sql);
-        $total = $resultSet->num_rows();
-        for ($i = 0; $i < $total; $i++) {
-            $row = $resultSet->row_array($i);
-            if (!$this->datamod->inGroup($row['name'], 'hths')) //prevent duplicate additions to hths group
-                $this->datamod->addgroup($row['name'], 'hths');
+    /**
+     * set global variable
+     * prevents setting variable if it doesn't exist
+     * must be passed in one pair at a time
+     * @param string $key
+     * @param mixed $val
+     * @return bool
+     */
+    public function setGlobalVar($key,$val) {
+        if (is_array($val) || is_object($val)){
+            $val = serialize($val);
         }
+        //check if var exists
+        $query = $this->db->get_where('globalvars', array("key" => $key));
+        if ($query->num_rows() == 0) return false;
 
+        $this->db->where('key', $key)->update('globalvars', array('val' => $val));
+        return true;
     }
 
+    /**
+     * runs group pairing for group
+     * @param $code     group code
+     * @return int
+     */
     public function pairCustom($code)
     {
         $this->db->trans_start();
@@ -49,6 +68,14 @@ class Adminmod extends CI_Model
         return $total;
     }
 
+    /**
+     * add a new pair to pairs table
+     * @param string    $code     group code
+     * @param int       $give     user id of giver
+     * @param int       $receive  user id of receiver
+     * @param int       $year     year of exchange
+     * @return bool
+     */
     public function addPair($code, $give, $receive, $year)
     {
         $data = array('code' => $code, 'give' => $give, 'receive' => $receive, 'year' => $year);
@@ -64,78 +91,67 @@ class Adminmod extends CI_Model
         }
     }
 
-    /**
-     * @deprecated
-     * lock groups from previous year:
-     * sets leaveable = 0 in the groups table
-     * advances current_year global variable to this year
-     */
-    public function lockold()
-    {
-        $this->db->where('year', getPrevYear())->update("groups", array("leaveable", 0));
-    }
 
     /**
-     * @deprecated
-     * gets the previous year based on whether christmas has passed or not
-     * Returns previous year if (current year) < x < (christmas)
-     * Returns current year if (christmas) < x < (end of current year)
+     * list all template groups
+     * @return array|bool
      */
-    public function getPrevYear()
-    {
-        $month = intval(date('n'));
-        $day = intval(date('j'));
-        $year = intval(date('Y'));
-        if ($month == 12)
-            if ($day <= 25) //before or on christmas
-                return $year - 1;
-            else return $year;
-        else return $year - 1;
-    }
-
-    /**
-     * get oldest year of data
-     */
-    public function getFirstYear()
-    {
-        $query = $this->db->get('globalvars');
-        $row = $query->row();
-        return $row->firstyear;
-    }
-
-
     public function listTemplateGroups()
     {
         $data = false;
         foreach ($this->db->get('groups_template')->result() as $row) {
-            $row->exists = $this->checkGroupExists($row->code);
+            $row->exists = $this->__checkGroupExists($row->code);
             $data[] = $row;
         }
         return $data;
     }
 
+    /**
+     * insert a new template group into the template groups table
+     * @param string $code
+     * @param string $name
+     * @param string $description
+     * @param bool   $privacy
+     * @return string
+     */
     public function newTemplateGroup($code, $name, $description, $privacy)
     {
         $this->db->insert('groups_template', array('code' => $code, 'name' => $name, 'description' => $description, 'private' => $privacy));
         return $code; //$this->db->insert_id();
     }
 
-
+    /**
+     * delete a template group
+     * @param string $code
+     * @return bool
+     */
     public function deleteTemplateGroup($code)
     {
         $this->db->delete('groups_template', array('code' => $code));
         return true;
     }
 
+    /**
+     * edit a template group
+     * @param string $code
+     * @param string $name
+     * @param string $description
+     * @param bool   $privacy
+     * @return bool
+     */
     public function editTemplateGroup($code, $name, $description, $privacy)
     {
         $this->db->update('groups_template', array('name' => $name, 'description' => $description, 'private' => $privacy), array('code' => $code));
-        if ($this->checkGroupExists($code)) {
-            $this->editGroup($code, $name, $description, $privacy);
+        if ($this->__checkGroupExists($code)) {
+            $this->__editGroup($code, $name, $description, $privacy);
         }
         return true;
     }
 
+    /**
+     * create a joinable group from template
+     * @param string $code
+     */
     public function createTemplateGroup($code)
     {
         $template = $this->db->get_where('groups_template', array('code' => $code))->result();
@@ -143,7 +159,13 @@ class Adminmod extends CI_Model
         $this->db->insert('groups', array('code' => $template->code, 'name' => $template->name, 'description' => $template->description, 'private' => $template->private, 'deleteable' => 0, 'year' => $this->current_year));
     }
 
-    private function checkGroupExists($code, $year = NULL)
+    /**
+     * check if a group exists
+     * @param string $code
+     * @param int    $year      current year
+     * @return bool
+     */
+    private function __checkGroupExists($code, $year = NULL)
     {
         if ($year == null) $year = $this->current_year;
         $query = $this->db->get_where('groups', array('code' => $code, 'year' => $year));
@@ -152,12 +174,25 @@ class Adminmod extends CI_Model
         else return true;
     }
 
-    private function editGroup($code, $name, $description, $privacy, $year = NULL)
+    /**
+     * edit a group
+     * @param string $code
+     * @param string $name
+     * @param string $description
+     * @param string $privacy
+     * @param int $year
+     * @return mixed
+     */
+    private function __editGroup($code, $name, $description, $privacy, $year = NULL)
     {
         if ($year == null) $year = $this->current_year;
         return $this->db->update('groups', array('name' => $name, 'description' => $description, 'private' => $privacy), array('code' => $code, 'year' => $year));
     }
 
+    /**
+     * retrieve a list of whitelisted emails
+     * @return array
+     */
     public function getAllowedEmails()
     {
         $results = $this->db->get('allowed_emails')->result();
@@ -168,16 +203,33 @@ class Adminmod extends CI_Model
         return $array;
     }
 
+    /**
+     * add a new whitelisted email
+     * @param $email
+     * @return mixed
+     */
     public function addAllowedEmail($email)
     {
         return $this->db->insert('allowed_emails', array('email' => $email));
     }
 
+    /**
+     * process a string for email sending
+     * @param $string
+     * @return mixed
+     */
     private function addSlashesDoubleQuote($string)
     {
         return str_replace('"', '\"', $string);
     }
 
+    /**
+     * send a new email
+     * @param string $to
+     * @param string $subjectTemplate
+     * @param string $messageTemplate
+     * @param $vars
+     */
     public function sendMail($to, $subjectTemplate, $messageTemplate, $vars)
     {
         $this->load->library('email');

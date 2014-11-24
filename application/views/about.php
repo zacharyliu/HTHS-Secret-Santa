@@ -4,7 +4,7 @@
         <br/>
         <dl>
             <dt> What is HTHS Secret Santa?</dt>
-            <dd>Currently in its second year of operations, <i>HTHS Secret Santa</i> is a web app built by and for HTHS
+            <dd>In operation since <?=$first_year?>, <i>HTHS Secret Santa</i> is a web app built by and for HTHS
                 students.
                 Our goal is to foster community and giving in the High Tech community by organizing an intuitive
                 <a href="http://www.wikihow.com/Do-a-Secret-Santa"> Secret Santa</a>
@@ -38,8 +38,7 @@
             </dd>
 
             <dt>What do I do if I don't want to participate anymore?</dt>
-            <dd>You can remove yourself from any group as long as you do so before <i> Sunday, 12/8 (when registration
-                    ends). </i> Otherwise, don't back out of your commitments, or there will be repercussions. Don't be
+            <dd>You can remove yourself from any group as long as you do so before <i> <?= date_format($partner_date,"m/d"); ?> (when partners are assigned). </i> Otherwise, don't back out of your commitments, or there will be repercussions. Don't be
                 <i> that </i> guy.
             </dd>
         </dl>
@@ -50,7 +49,8 @@
         <h2> Special thanks... </h2>
 
         <ul>
-            <li><b> Developers:</b> Vincent Chen (Sr.); Matt Hsu (Sr.); Zachary Liu(Sr.)</li>
+            <li>Made with <3 by the Class of 2014</li>
+            <li><b> Developers:</b> Matthew Hsu (2014); Zachary Liu(2014); Vincent Chen (2014);</li>
         </ul>
     </div>
 

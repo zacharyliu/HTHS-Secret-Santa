@@ -49,9 +49,9 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'hthssecretsanta';
-$db['default']['password'] = '*****************';
-$db['default']['database'] = 'hthssecretsanta';
+$db['default']['username'] = 'your_username';
+$db['default']['password'] = 'your_password';
+$db['default']['database'] = 'your_database';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

@@ -2,13 +2,17 @@
     exit('No direct script access allowed');
 }
 
+/**
+ * Class Login
+ */
 class Login extends CI_Controller
 {
-
+    /**
+     * controller index
+     */
     public function index()
     {
         require(APPPATH . 'classes/openid.php');
-        //require(APPPATH . 'config/admin_settings.php'); //retrieve the list of admin users
 
         $openid = new LightOpenID($_SERVER['HTTP_HOST']);
         if (!$openid->mode) {
@@ -32,7 +36,8 @@ class Login extends CI_Controller
 
                 // Check to make sure that the user is logging in using a @ctemc.org account or email exception:
                 $this->load->model('datamod');
-                if ($this->config->item('domain_restriction') == '' || (preg_match($this->config->item('domain_restriction'), $user_data['contact/email'])) || $this->datamod->checkAllowedEmailException($user_data['contact/email'])) {
+                $domain_restriction = $this->datamod->getGlobalVar('domain_restriction');
+                if ($domain_restriction == '' || (preg_match($domain_restriction, $user_data['contact/email'])) || $this->datamod->checkAllowedEmailException($user_data['contact/email'])) {
                     //echo "Welcome, " . " ` . $user_data['namePerson/first'] . ' ' . $user_data['namePerson/last'];
 
                     $fname = $user_data['namePerson/first'];
@@ -46,7 +51,7 @@ class Login extends CI_Controller
                         $user_id = $this->datamod->getUserId($email);//@todo addUser should return id
                     }
                     //check for admin permissions
-                    if (in_array($user_data['contact/email'],$this->config->item('admin_users'))) //check against imported admin_users.config file
+                    if (in_array($user_data['contact/email'],$this->datamod->getGlobalVar('admin_users'))) //check against imported admin_users.config file
                         $admin = 'true';
                     else
                         $admin = 'false';
@@ -58,23 +63,33 @@ class Login extends CI_Controller
                         //redirect(base_url('secretsanta/survey'));
                     redirect(base_url('/profile'));
                 } else {
-                    $this->login_failure('Please log in using an @ctemc.org account or contact an administrator.');
+                    $this->login_failure('Please log in using an authorized email account or contact an administrator.');
                 }
 
             }
         }
     }
 
+    /**
+     * page to render if login fails
+     * @param string $message
+     */
     private function login_failure($message = 'Login failure')
     {
         //echo $message;
         render("landing",array("icon"=>"&#xf071;","header"=>"Login failure","subheader"=>$message));
     }
 
+    /**
+     * login timeout
+     */
     public function timeout(){
         render("landing",array("icon"=>"&#xf071;","header"=>"Oops! You don't have permission to view this page.","subheader"=>"Your session has expired, or you are not logged in. Please <a href='/login'>login</a> to continue."));
     }
 
+    /**
+     * logout
+     */
     public function logout()
     {
         $this->session->sess_destroy();

@@ -122,25 +122,24 @@
                 <div class="subsection-icon">&#xF017;</div>
                 <div class="subsection-header">Important Dates are coming up.</div>
                 <div class="subsection-text">
-                    Registration ends: <i> Sunday, 12/8</i><br/>
-                    Partner Assignments: <i> Sunday, 12/8 </i><br/>
-                    Gift Exchange: <i> Thursday, 12/19 </i><br/>
+                    Partner Assignments: <i> <?= date_format($partner_date,"l, n/j")?> </i><br/>
+                    Gift Exchange: <i> <?= date_format($gift_date,"l, n/j")?> </i><br/>
                 </div>
             </div>
 
         </div>
     </div>
 </div>
-<div class="home-footer slide container" data-slide="3" data-stellar-background-ratio="0.5">
+<div class="home-footer slide container-fluid" data-slide="3" data-stellar-background-ratio="0.5">
 
     <div class="row">
         <div class="col-md-12">
             <h1 style="text-align:center;color:#FFFFFF;">Time Until Gift Exchange</h1>
 
             <div style="margin:0 auto 0 auto;"><?php echo $timer; ?></div>
-            <div class="section-header register-header">There are
-                currently <?php $total = $this->datamod->countUsersYear();
-                echo $total ?> secret santas.
+            <div class="section-header register-header">Join
+                <?php $total = $this->datamod->countUsersYear();
+                echo $total ?> other secret santas this year.
             </div>
 
             <div class="section-subheader register-subheader">

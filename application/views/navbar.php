@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
     </button>
-       <a class="navbar-brand" href="<?=base_url('/')?>"><img id="title-icon" src="<?php echo base_url('img/ico/apple-touch-icon-57-precomposed.png')?>" height="45px" width="45px" /><span id="title">HTHS Secret Santa</span></a>
+       <a class="navbar-brand" href="<?=base_url('/')?>"><img id="title-icon" src="<?php echo base_url('img/ico/apple-touch-icon-57-precomposed.png')?>" height="45px" width="45px" /><span id="title"><?=$site_name?></span></a>
     </div>
 
     <div class="navbar-collapse collapse" style="overflow: hidden;">
@@ -39,7 +39,7 @@
 
         foreach ($navbar as $item) {
             // Check if current route matches item
-            $current = ($this->router->uri->uri_string == $item['route']);
+            $current = ($this->router->uri->segment(1) == $item['route']);
 
             // Check auth and admin constraints
             if ((!$item['auth'] || $is_logged_in)          // require either no login, or user is logged in

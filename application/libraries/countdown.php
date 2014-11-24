@@ -1,7 +1,17 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+
+/**
+ * Class Countdown
+ */
 class Countdown
 {
 
+    /**
+     * generate a new countdown timer
+     * @param int[] $targetDate
+     * @param string $theme
+     * @return string
+     */
     function generate($targetDate, $theme)
     {
         $now = time();
@@ -86,7 +96,5 @@ class Countdown
         return $out;
     }
 }
-
-?>
 
 
