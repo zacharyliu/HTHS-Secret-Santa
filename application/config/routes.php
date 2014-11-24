@@ -47,6 +47,8 @@ $route['about'] = 'secretsanta/about';
 $route['group/(:any)/(:num)/(:any)'] = 'group/$3/$1/$2';
 $route['group/(:any)/(:num)'] = 'group/index/$1/$2';
 
+//flip the user interests routing structure
+$route['profile/(:any)/(:num)/userinterests'] = 'profile/userinterests/$1/$2';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

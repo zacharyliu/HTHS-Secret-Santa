@@ -146,7 +146,42 @@ class Profile extends CI_Controller
         }
 
     }
-    
+
+    public function userinterests($code,$year) {
+        $partner = $this->datamod->getPair($code,$this->session->userdata('id'),$year); //[id,name]
+        if ($partner == false) {
+            $title = "No partner assigned yet.";
+            $body = "Check back later when partners are assigned!";
+        }
+        else {
+            $title = "$partner[1]'s Interests";
+            $body = $this->datamod->getUserInterests($partner[0]);
+        }
+
+
+        ?>
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        </head>
+        <body>
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title"><?=$title?></h4>
+        </div>
+        <div class="modal-body">
+            <?=$body?>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+        </body>
+        </html>
+        <?
+    }
+
 
     //
     //form validation callback functions

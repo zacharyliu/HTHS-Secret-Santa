@@ -39,7 +39,7 @@
 
         foreach ($navbar as $item) {
             // Check if current route matches item
-            $current = ($this->router->uri->uri_string == $item['route']);
+            $current = ($this->router->uri->segment(1) == $item['route']);
 
             // Check auth and admin constraints
             if ((!$item['auth'] || $is_logged_in)          // require either no login, or user is logged in

@@ -427,20 +427,23 @@ class Datamod extends CI_Model
 
     /**
      * get a user's partner for a group(assuming user is "give")
-     * @param $code         group code
-     * @param $id           user id
-     * @param int $year     year to check (default: $this->current_year)
-     * @return string       user's partner ('pending' unpaired)
+     * @param $code                     group code
+     * @param $id                       user id
+     * @param int $year                 year to check (default: $this->current_year)
+     * @return mixed[]|boolean          [id,name] (false unpaired)
      */
     public function getPair($code, $id, $year = NULL)
     { //get a person's partner for a group
+        $data = array();
         if ($year == NULL) $year = $this->current_year;
         $this->db->select('receive');
         $query = $this->db->get_where('pairs', array('code' => $code, 'give' => $id, 'year' => $year));
         if ($query->num_rows() > 0) {
             $row = $query->row();
-            return $this->getUserName($row->receive);
-        } else return '[pending]';
+            $data[] = $row->receive;
+            $data[] =  $this->getUserName($row->receive);
+            return $data;
+        } else return false;
     }
 
     /**

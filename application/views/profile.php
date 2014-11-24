@@ -79,7 +79,8 @@ $userStats = $this->datamod->userStats($id); //get user stats
                                    href="<?= base_url('group/' . $group->code . '/' . $group->year . '/membersModal') ?>"
                                    data-target="#modal-member-list"><?= $this->datamod->countMembers($group->code, $group->year) ?></a>
                             </td>
-                            <td><?= $this->datamod->getPair($group->code, $id, $group->year) ?></td>
+                            <? $partner = $this->datamod->getPair($group->code, $id, $group->year)//[id,name] ?>
+                            <td><?= $partner == false ? '[pending]' : '<a data-toggle="modal" data-target="#modal-user-interests" href="' .base_url('profile/'.$group->code. '/' .$group->year.'/userinterests').'">'.$partner[1].'</a>'?></td>
                             <td class="description"><?= $group->description ?></td>
                             <td>
                                 <?
@@ -217,4 +218,14 @@ $userStats = $this->datamod->userStats($id); //get user stats
     </div>
     <!-- /.modal-dialog -->
 </div>
+
+<div class="modal fade" id="modal-user-interests" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
 </div>
