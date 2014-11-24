@@ -116,6 +116,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
+  `interests` text NOT NULL,
   `pubkey` text NOT NULL,
   `privkey` text NOT NULL,
   `year_join` smallint(4) NOT NULL,

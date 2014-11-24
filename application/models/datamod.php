@@ -82,6 +82,11 @@ class Datamod extends CI_Model
         }
     }
 
+    /**
+     * check if a string is a boolean value
+     * @param $str      str to check
+     * @return bool
+     */
     private function __isBoolean($str) {
         $str = strtolower($str);
         if ($str == "true" || $str == "false")
@@ -162,6 +167,25 @@ class Datamod extends CI_Model
         $query = $this->db->select('year_join')->where('id', $id)->get('users');
         $row = $query->row();
         return $row->year_join;
+    }
+
+    /**
+     * sets user interests text
+     * @param int $id           user id
+     * @param String $text      text to set
+     */
+    public function setUserInterests($id, $text) {
+        $this->db->where('id',$id)->update('users',array('interests'=>$text));
+    }
+
+    /**
+     * gets user interests text
+     * @param $id       user id
+     */
+    public function getUserInterests($id) {
+        $query = $this->db->select('interests')->where('id', $id)->get('users');
+        $row = $query->row();
+        return $row->interests;
     }
 
     ////////////////////////////

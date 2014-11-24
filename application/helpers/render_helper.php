@@ -15,7 +15,8 @@ function render($view, $data = null, $title = null)
     //consolidate data from admin_config file
     $g_vars = $CI->datamod->getGlobalVar();
 
-    if ($g_vars['setup'] == true){ //setup script has been run
+    //ensure that setup script has been run
+    if ($g_vars['setup'] == true){
         $data['first_year'] = $g_vars['first_year'];
         $data['site_name'] = $g_vars['site_name'];
         $data['partner_date'] = new DateTime(date('Y') . '-' . $g_vars['evt_partner_date'][0] . "-" . $g_vars['evt_partner_date'][1]); //generate partner assignment date

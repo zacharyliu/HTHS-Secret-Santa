@@ -13,7 +13,8 @@ $userStats = $this->datamod->userStats($id); //get user stats
     echo form_error('edit-grp-code');
     echo form_error('edit-grp-name');
     echo form_error('edit-grp-description');
-    echo form_error('checkGroupPaired');?>
+    echo form_error('checkGroupPaired');
+    echo form_error('interests-textarea');?>
     <br/>
 
     <div class="col-md-2 col-sm-12">
@@ -145,13 +146,23 @@ $userStats = $this->datamod->userStats($id); //get user stats
                 </form>
                 <br/>
             </div>
-            <div class="row">
-                <!--<h3>Settings</h3>-->
-                <div class="container">
 
-                    <!--settings here-->
+            <h3>My Interests</h3>
+            <p>Tell others about your interests, or keep it blank to make it a surprise! <a href="" id="interests-edit">(Edit)</a></p>
+            <div class="container">
+                <blockquote id="interests-text"><p><?php echo $interests?></p></blockquote>
+                <form method="post" action="<?php echo base_url('profile/editinterests');?>" style="display:none" id="interests-form">
+                    <div class="row form-group">
+                        <textarea class="form-control" id="interests-textarea" name="interests-textarea"><?php echo $interests?></textarea>
+                        <p id="char-count"></p>
+                    </div>
+                    <div class="row form-group">
+                        <button type="submit" class="btn btn-primary" id="interests-save">Save</button>
+                    </div>
+
+                </form>
                     <br/>
-                </div>
+
             </div>
         </div>
     </div>

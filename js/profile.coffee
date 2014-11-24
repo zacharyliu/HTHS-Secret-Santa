@@ -25,3 +25,37 @@ $('document').ready () ->
       $("#modal-edit-grp-btn-save").removeClass("disabled")
     else $("#modal-edit-grp-btn-save").addClass("disabled")
   )
+
+
+  #Edit Interests
+  $("#interests-edit").on('click', (e) ->
+    e.preventDefault();
+    $("#interests-form").toggle();
+  )
+
+  #count characters
+  max = 300;
+  len = $('#interests-textarea').val().length;
+  diff = max-len
+  $('#char-count').text(diff + ' characters left');
+  $('#interests-textarea').keyup( ()->
+    len = $('#interests-textarea').val().length;
+    diff = max-len
+    if (diff < 0)
+      $('#char-count').text((len-max) + ' characters over');
+    else
+      $('#char-count').text((max-len) + ' characters left');
+
+  );
+
+  setInterval( ()->
+    if ($("#interests-textarea").val().length <=300)
+      $("#interests-submit").removeClass("disabled");
+    else
+      $("#interests-submit").addClass("disabled");
+
+  , 200)
+
+
+
+  #Get user interests

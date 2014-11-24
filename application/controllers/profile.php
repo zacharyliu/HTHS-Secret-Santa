@@ -46,6 +46,7 @@ class Profile extends CI_Controller
         $groupsInfo = $this->datamod->groupInfoMultiple($this->session->userdata('id')); //get all relevant group info for that year, and merge it with the rest of the groups
         $data = array_merge(array('groups' => $groupsInfo), $data); //inject it into data array
         $data['max_groups'] = $this->datamod->getGlobalVar('max_groups');
+        $data['interests'] = $this->datamod->getUserInterests($this->session->userdata('id'));
 
         render('profile', $data);
     }
@@ -126,6 +127,23 @@ class Profile extends CI_Controller
                 $this->session->set_flashdata('result', message('Successfully left the group <strong>' . $groupname . '</strong>.', 0));
             else $this->session->set_flashdata('result', message('<strong>Error!</strong> You can\'t leave this group!', 3));
         redirect(base_url('profile'));
+
+    }
+
+    /**
+     * edit user interests
+     */
+    public function editInterests() {
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
+        $this->form_validation->set_rules('interests-textarea', 'Interests', 'trim|max_length[300]|strip_tags|xss_clean');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->_render();
+        } else {
+            $this->datamod->setUserInterests($this->session->userdata('id'),set_value('interests-textarea'));
+            $this->session->set_flashdata('result', message("Successfully updated interests!"));
+            redirect(base_url('profile'));
+        }
 
     }
 
