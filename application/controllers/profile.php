@@ -147,8 +147,8 @@ class Profile extends CI_Controller
 
     }
 
-    public function userinterests($code,$year) {
-        $partner = $this->datamod->getPair($code,$this->session->userdata('id'),$year); //[id,name]
+    public function userinterests($code) {
+        $partner = $this->datamod->getPair($code,$this->session->userdata('id'),intval(date('Y'))); //[id,name]
         if ($partner == false) {
             $title = "No partner assigned yet.";
             $body = "Check back later when partners are assigned!";
@@ -156,6 +156,7 @@ class Profile extends CI_Controller
         else {
             $title = "$partner[1]'s Interests";
             $body = $this->datamod->getUserInterests($partner[0]);
+            if ($body == "") $body = "Nothing to show here...";
         }
 
 

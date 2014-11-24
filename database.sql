@@ -121,8 +121,9 @@ CREATE TABLE IF NOT EXISTS `users` (
   `privkey` text NOT NULL,
   `year_join` smallint(4) NOT NULL,
   `class` tinyint(4) unsigned DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=105 ;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
 
 -- --------------------------------------------------------
 

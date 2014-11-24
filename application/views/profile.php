@@ -79,8 +79,14 @@ $userStats = $this->datamod->userStats($id); //get user stats
                                    href="<?= base_url('group/' . $group->code . '/' . $group->year . '/membersModal') ?>"
                                    data-target="#modal-member-list"><?= $this->datamod->countMembers($group->code, $group->year) ?></a>
                             </td>
-                            <? $partner = $this->datamod->getPair($group->code, $id, $group->year)//[id,name] ?>
-                            <td><?= $partner == false ? '[pending]' : '<a data-toggle="modal" data-target="#modal-user-interests" href="' .base_url('profile/'.$group->code. '/' .$group->year.'/userinterests').'">'.$partner[1].'</a>'?></td>
+                            <? $partner = $this->datamod->getPair($group->code, $id, $group->year);//[id,name]
+                            //prevent seeing interests from previous years
+                            if ($year != $current_year) {
+                                $partner_name = $partner[1];
+                            }
+                            else $partner_name = '<a data-toggle="modal" data-target="#modal-user-interests" href="' .base_url('profile/userinterests/'.$group->code).'">'.$partner[1].'</a>';
+                            ?>
+                            <td><?= $partner == false ? '[pending]' : $partner_name?></td>
                             <td class="description"><?= $group->description ?></td>
                             <td>
                                 <?
