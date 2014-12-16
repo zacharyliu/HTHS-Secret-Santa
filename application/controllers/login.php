@@ -31,10 +31,16 @@ class Login extends CI_Controller
                 // Authentication was successful
 
                 // Get user attributes:
+                $netID = phpCAS::getUser();
+                $ds = ldap_connect("ldap.princeton.edu");
+                $r = ldap_bind($ds);
+                $sr = ldap_search($ds, "uid=$netID,o=Princeton University,c=US", "sn=*");
+                $info = ldap_get_entries($ds, $sr);
+
                 $user_data = array(
-                    "namePerson/first" => phpCAS::getUser(),
-                    "namePerson/last" => phpCAS::getUser(),
-                    "contact/email" => phpCAS::getUser() . "@princeton.edu"
+                    "namePerson/first" => $info[0]["givenname"][0],
+                    "namePerson/last" => $info[0]["sn"][0],
+                    "contact/email" => $netID . "@princeton.edu"
                 );
 
                 // Check to make sure that the user is logging in using a @ctemc.org account or email exception:
